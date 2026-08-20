@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ARC TRANS - Input Unit Mobil</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2196F3;
+            box-shadow: 0 0 5px rgba(33,150,243,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2196F3;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1976D2;
+        }
+
+        button:disabled {
+            background: #90CAF9;
+            cursor: not-allowed;
+        }
+
+        .link-kembali {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: white;
+            color: #2196F3;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        .preview {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        #preview {
+            display: none;
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+
+            .container {
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="home.html" class="home-btn">Home</a>
+
+    <div class="container">
+
+        <h3>FORM INPUT UNIT MOBIL</h3>
+
+        <label for="nama">Nama</label>
+        <input type="text" id="nama" placeholder="Masukkan nama">
+
+        <label for="plat">Plat Nomor</label>
+        <input type="text" id="plat" placeholder="Contoh: B 1234 ABC">
+
+        <label for="pajakstnk">Masa Berlaku Pajak STNK</label>
+        <input type="date" id="pajakstnk">
+
+        <label for="pajakbpkb">Masa Berlaku BPKB</label>
+        <input type="date" id="pajakbpkb">
+
+        <label for="status">Status</label>
+        <input type="text" id="status" placeholder="Contoh: Aktif">
+
+        <label for="value">Value</label>
+        <input
+            type="text"
+            id="value"
+            inputmode="numeric"
+            placeholder="Rp 0"
+        >
+
+        <label for="imageFile">Klik tombol untuk ambil foto</label>
+
+        <input
+            type="file"
+            id="imageFile"
+            accept="image/*"
+            capture="environment"
+        >
+
+        <div class="preview">
+            <img id="preview" alt="Preview Foto">
+        </div>
+
+        <button id="btnProses" type="button">
+            Proses
+        </button>
+
+        <a href="home.html" class="link-kembali">
+            ← Kembali
+        </a>
+
+    </div>
+
+
+    <script type="module">
+
+        import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+        import {
+            getDatabase,
+            ref,
+            set
+        }
+        from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+        // =========================
+        // KONFIGURASI FIREBASE
+        // =========================
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+            authDomain: "arctrans.firebaseapp.com",
+            databaseURL:
+                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "arctrans",
+            storageBucket: "arctrans.firebasestorage.app",
+            messagingSenderId: "60781918601",
+            appId: "1:60781918601:web:c85d6131207f8a8958"
+        };
+
+
+        // =========================
+        // INISIALISASI FIREBASE
+        // =========================
+
+        const app = initializeApp(firebaseConfig);
+
+        const db = getDatabase(app);
+
+
+        // =========================
+        // ELEMEN HTML
+        // =========================
+
+        const namaInput = document.getElementById("nama");
+        const platInput = document.getElementById("plat");
+        const stnkInput = document.getElementById("pajakstnk");
+        const bpkbInput = document.getElementById("pajakbpkb");
+        const statusInput = document.getElementById("status");
+        const valueInput = document.getElementById("value");
+        const imageInput = document.getElementById("imageFile");
+        const preview = document.getElementById("preview");
+        const btnProses = document.getElementById("btnProses");
+
+
+        // =========================
+        // FORMAT RUPIAH
+        // =========================
+
+        valueInput.addEventListener("input", function () {
+
+            let angka = this.value.replace(/\D/g, "");
+
+            if (angka === "") {
+                this.value = "";
+                return;
+            }
+
+            this.value =
+                "Rp " +
+                angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        });
+
+
+        // =========================
+        // FORMAT PLAT NOMOR
+        // =========================
+
+        platInput.addEventListener("input", function () {
+
+            this.value = this.value.toUpperCase();
+
+        });
+
+
+        // =========================
+        // PREVIEW FOTO
+        // =========================
+
+        imageInput.addEventListener("change", function () {
+
+            const file = this.files[0];
+
+            if (!file) {
+                preview.src = "";
+                preview.style.display = "none";
+                return;
+            }
+
+            if (!file.type.startsWith("image/")) {
+                alert("File yang dipilih bukan gambar!");
+
+                this.value = "";
+
+                preview.src = "";
+                preview.style.display = "none";
+
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+
+                preview.src = event.target.result;
+
+                preview.style.display = "block";
+
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+        // =========================
+        // TOMBOL PROSES
+        // =========================
+
+        btnProses.addEventListener("click", kirimData);
+
+
+        // =========================
+        // KIRIM DATA
+        // =========================
+
+        async function kirimData() {
+
+            const nama = namaInput.value.trim();
+
+            const plat = platInput.value.trim();
+
+            const stnk = stnkInput.value;
+
+            const bpkb = bpkbInput.value;
+
+            const status = statusInput.value.trim();
+
+            // Ubah "Rp 1.500.000"
+            // menjadi angka 1500000
+            const value = Number(
+                valueInput.value.replace(/\D/g, "")
+            ) || 0;
+
+
+            const file = imageInput.files[0];
+
+
+            // =========================
+            // VALIDASI
+            // =========================
+
+            if (!nama) {
+
+                alert("Nama wajib diisi!");
+
+                namaInput.focus();
+
+                return;
+
+            }
+
+
+            if (!plat) {
+
+                alert("Plat nomor wajib diisi!");
+
+                platInput.focus();
+
+                return;
+
+            }
+
+
+            if (!file) {
+
+                alert("Pilih foto terlebih dahulu!");
+
+                return;
+
+            }
+
+
+            // Nonaktifkan tombol
+            btnProses.disabled = true;
+
+            btnProses.textContent = "Sedang Memproses...";
+
+
+            try {
+
+                // =========================
+                // UPLOAD KE CLOUDINARY
+                // =========================
+
+                const formData = new FormData();
+
+                formData.append("file", file);
+
+                formData.append(
+                    "upload_preset",
+                    "arctrans"
+                );
+
+                // ID unik
+                const uniqueId =
+                    "foto_" +
+                    Date.now() +
+                    "_" +
+                    Math.floor(Math.random() * 10000);
+
+                formData.append(
+                    "public_id",
+                    uniqueId
+                );
+
+
+                const response = await fetch(
+                    "https://api.cloudinary.com/v1_1/cesiolzm/image/upload",
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+
+                const uploadData =
+                    await response.json();
+
+
+                // Cek error Cloudinary
+                if (!response.ok) {
+
+                    console.error(
+                        "Cloudinary Error:",
+                        uploadData
+                    );
+
+                    throw new Error(
+                        uploadData.error?.message ||
+                        "Upload foto ke Cloudinary gagal"
+                    );
+
+                }
+
+
+                const imageUrl =
+                    uploadData.secure_url;
+
+
+                console.log(
+                    "Foto berhasil:",
+                    imageUrl
+                );
+
+
+                // =========================
+                // MEMBUAT ID FIREBASE
+                // =========================
+
+                const id = plat
+                    .replace(/[.#$[\]/]/g, "_")
+                    .replace(/\s+/g, "_")
+                    .toUpperCase();
+
+
+                // =========================
+                // DATA FIREBASE
+                // =========================
+
+                const dataUnit = {
+
+                    nama: nama,
+
+                    plat: plat,
+
+                    stnk: stnk,
+
+                    bpkb: bpkb,
+
+                    status: status,
+
+                    // Angka asli
+                    value: value,
+
+                    // Format untuk tampilan
+                    valueFormat:
+                        "Rp " +
+                        value.toLocaleString("id-ID"),
+
+                    photo: imageUrl,
+
+                    timestamp: Date.now(),
+
+                    tanggalInput:
+                        new Date().toISOString()
+
+                };
+
+
+                // =========================
+                // SIMPAN FIREBASE
+                // =========================
+
+                await set(
+                    ref(db, "unit/" + id),
+                    dataUnit
+                );
+
+
+                alert(
+                    "Data berhasil disimpan!"
+                );
+
+
+                // =========================
+                // RESET FORM
+                // =========================
+
+                namaInput.value = "";
+
+                platInput.value = "";
+
+                stnkInput.value = "";
+
+                bpkbInput.value = "";
+
+                statusInput.value = "";
+
+                valueInput.value = "";
+
+                imageInput.value = "";
+
+                preview.src = "";
+
+                preview.style.display = "none";
+
+
+            } catch (error) {
+
+                console.error(
+                    "ERROR:",
+                    error
+                );
+
+
+                alert(
+                    "Gagal memproses data!\n\n" +
+                    error.message
+                );
+
+            } finally {
+
+                // Tombol aktif kembali
+                btnProses.disabled = false;
+
+                btnProses.textContent = "Proses";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

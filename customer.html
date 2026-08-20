@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARC TRANS</title>
+
+<style>
+*{
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    margin:0;
+    background: linear-gradient(135deg, #2196F3, #21CBF3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    width:100%;
+    max-width:400px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    animation:fadeIn 0.5s ease;
+}
+
+h3{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+label{
+    font-size:14px;
+    font-weight:bold;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    outline:none;
+    transition:0.3s;
+}
+
+input:focus, select:focus, textarea:focus{
+    border-color:#2196F3;
+    box-shadow:0 0 5px rgba(33,150,243,0.5);
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2196F3;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1976D2;
+}
+
+a{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    text-decoration:none;
+    color:#2196F3;
+    font-weight:bold;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+/* Animasi */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Responsive tambahan */
+@media (max-width:500px){
+    body{
+        padding:10px;
+        height:auto;
+    }
+    .container{
+        margin-top:30px;
+    }
+}
+
+.home-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:white;
+    color:#2196F3;
+    padding:8px 15px;
+    border-radius:20px;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.home-btn:hover{
+    background:#2196F3;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+    <a href="home.html" class="home-btn">Home</a>
+<div class="container">
+    <h3>FORM CUSTOMER</h3>
+
+    <label>Nama</label>
+    <input type="text" id="nama">
+
+     <label>N I K</label>
+    <input type="number" id="nik">
+
+     <label>Alamat KTP</label>
+    <input type="text" id="alamatktp">
+
+    <label>Alamat Domisili Saat Ini</label>
+    <input type="text" id="domisili">
+
+    <label>No.HP</label>
+    <input type="number" id="hp">
+
+       
+    <button onclick="kirimData()">Proses</button>
+
+    <a href="home.html">← Kembali</a>
+</div>
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import { 
+    getDatabase, 
+    ref, 
+    set 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+    authDomain: "arctrans.firebaseapp.com",
+    databaseURL: "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "arctrans",
+    storageBucket: "arctrans.firebasestorage.app",
+    messagingSenderId: "60781918601",
+    appId: "1:60781918601:web:c85d6131207f8a8958"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+function formatRupiah(input) {
+
+    // Ambil hanya angka
+    let angka = input.value.replace(/\D/g, "");
+
+    // Jika kosong
+    if (angka === "") {
+        input.value = "";
+        return;
+    }
+
+    // Format 3 digit
+    let format = angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Tampilkan Rp
+    input.value = "Rp " + format;
+}
+
+
+window.kirimData = async function(){
+
+    const nama = document.getElementById("nama").value.trim();
+
+    const nik = document.getElementById("nik").value.trim();
+
+    const alamatktp = document.getElementById("alamatktp").value.trim();
+
+    const domisili = document.getElementById("domisili").value.trim();
+
+    const hp = document.getElementById("hp").value.trim();
+
+    
+    if(!nama || !nik){
+
+        alert("Nama dan nik Nomor wajib diisi!");
+
+        return;
+    }
+
+
+    // Membuat ID aman untuk Firebase
+    const id = nik
+        .replace(/[.#$[\]/]/g, "_")
+        .toUpperCase();
+
+
+    try{
+
+        const data = {
+
+            nama: nama,
+
+            nik: nik,
+
+            alamatktp: alamatktp,
+
+            domisili: domisili,
+
+            hp: hp,
+
+            timestamp: Date.now()
+
+        };
+
+
+        // Simpan ke backup
+        await set(
+            ref(db, "customer/" + id),
+            data
+        );
+
+
+      
+        alert("Data berhasil disimpan!");
+
+        // Kosongkan form
+        document.getElementById("nama").value = "";
+        document.getElementById("nik").value = "";
+        document.getElementById("alamatktp").value = "";
+        document.getElementById("domisili").value = "";
+        document.getElementById("hp").value = "";
+      
+
+    }catch(error){
+
+        console.error("Firebase Error:", error);
+
+        alert(
+            "Gagal menyimpan data:\n\n" +
+            error.code + "\n" +
+            error.message
+        );
+
+    }
+
+};
+
+
+
+</script>
+
+</body>
+</html>

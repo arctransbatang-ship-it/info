@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ARC TRANS - Input Unit & KTP</title>
+
+
+    <!-- TESSERACT OCR -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js">
+    </script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2196F3,
+                    #21CBF3
+                );
+
+            padding: 20px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: flex-start;
+        }
+
+
+        .container {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 600px;
+
+            margin-top: 30px;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.2);
+
+        }
+
+
+        h3 {
+
+            text-align: center;
+
+            margin-top: 0;
+
+            color: #2196F3;
+
+        }
+
+
+        h4 {
+
+            background: #2196F3;
+
+            color: white;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            margin-top: 30px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            margin-bottom: 15px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+
+        }
+
+
+        input:focus,
+        textarea:focus {
+
+            border-color: #2196F3;
+
+            box-shadow:
+                0 0 5px
+                rgba(33,150,243,0.4);
+
+        }
+
+
+        textarea {
+
+            resize: vertical;
+
+            min-height: 80px;
+
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2196F3;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: 0.3s;
+
+        }
+
+
+        button:hover {
+
+            background: #1976D2;
+
+        }
+
+
+        button:disabled {
+
+            background: #90CAF9;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .btn-scan {
+
+            background: #FF9800;
+
+        }
+
+
+        .btn-scan:hover {
+
+            background: #F57C00;
+
+        }
+
+
+        .preview {
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .preview img {
+
+            display: none;
+
+            width: 100%;
+
+            max-height: 350px;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+
+            border: 1px solid #ddd;
+
+            margin-top: 10px;
+
+        }
+
+
+        .loading {
+
+            text-align: center;
+
+            font-weight: bold;
+
+            color: #2196F3;
+
+            margin-top: 10px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .link-kembali {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #2196F3;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+        }
+
+
+        .home-btn {
+
+            position: fixed;
+
+            top: 15px;
+
+            left: 15px;
+
+            background: white;
+
+            color: #2196F3;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 5px 10px
+                rgba(0,0,0,0.2);
+
+            z-index: 100;
+
+        }
+
+
+        .status-box {
+
+            background: #f5f5f5;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 10px;
+
+            }
+
+
+            .container {
+
+                padding: 18px;
+
+                margin-top: 45px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <a
+        href="home.html"
+        class="home-btn"
+    >
+        Home
+    </a>
+
+
+    <div class="container">
+
+
+        <h3>
+            FORM INPUT UNIT & DATA KTP
+        </h3>
+
+
+        <!-- ============================= -->
+        <!-- DATA UNIT MOBIL -->
+        <!-- ============================= -->
+
+        <h4>
+            DATA UNIT MOBIL
+        </h4>
+
+
+        <label for="nama">
+            Nama
+        </label>
+
+        <input
+            type="text"
+            id="nama"
+            placeholder="Masukkan nama"
+        >
+
+
+        <label for="plat">
+            Plat Nomor
+        </label>
+
+        <input
+            type="text"
+            id="plat"
+            placeholder="Contoh: B 1234 ABC"
+        >
+
+
+        <label for="pajakstnk">
+            Masa Berlaku Pajak STNK
+        </label>
+
+        <input
+            type="date"
+            id="pajakstnk"
+        >
+
+
+        <label for="pajakbpkb">
+            Masa Berlaku BPKB
+        </label>
+
+        <input
+            type="date"
+            id="pajakbpkb"
+        >
+
+
+        <label for="status">
+            Status
+        </label>
+
+        <input
+            type="text"
+            id="status"
+            placeholder="Contoh: Aktif"
+        >
+
+
+        <label for="value">
+            Value
+        </label>
+
+        <input
+            type="text"
+            id="value"
+            inputmode="numeric"
+            placeholder="Rp 0"
+        >
+
+
+        <!-- ============================= -->
+        <!-- FOTO UNIT -->
+        <!-- ============================= -->
+
+        <h4>
+            FOTO UNIT MOBIL
+        </h4>
+
+
+        <label for="imageFile">
+            Ambil Foto Unit
+        </label>
+
+
+        <input
+            type="file"
+            id="imageFile"
+            accept="image/*"
+            capture="environment"
+        >
+
+
+        <div class="preview">
+
+            <img
+                id="previewUnit"
+                alt="Preview Unit"
+            >
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- FOTO KTP -->
+        <!-- ============================= -->
+
+        <h4>
+            FOTO KTP
+        </h4>
+
+
+        <label for="ktpFile">
+            Ambil Foto KTP
+        </label>
+
+
+        <input
+            type="file"
+            id="ktpFile"
+            accept="image/*"
+            capture="environment"
+        >
+
+
+        <div class="preview">
+
+            <img
+                id="previewKTP"
+                alt="Preview KTP"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            id="btnScanKTP"
+            class="btn-scan"
+        >
+            SCAN DATA KTP
+        </button>
+
+
+        <div
+            id="loadingKTP"
+            class="loading"
+        >
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- HASIL KTP -->
+        <!-- ============================= -->
+
+        <h4>
+            INFORMASI HASIL SCAN KTP
+        </h4>
+
+
+        <label for="nik">
+            NIK
+        </label>
+
+        <input
+            type="text"
+            id="nik"
+            inputmode="numeric"
+            maxlength="16"
+        >
+
+
+        <label for="namaKTP">
+            Nama Sesuai KTP
+        </label>
+
+        <input
+            type="text"
+            id="namaKTP"
+        >
+
+
+        <label for="tempatTanggalLahir">
+            Tempat / Tanggal Lahir
+        </label>
+
+        <input
+            type="text"
+            id="tempatTanggalLahir"
+        >
+
+
+        <label for="jenisKelamin">
+            Jenis Kelamin
+        </label>
+
+        <input
+            type="text"
+            id="jenisKelamin"
+        >
+
+
+        <label for="alamat">
+            Alamat
+        </label>
+
+        <textarea
+            id="alamat"
+        ></textarea>
+
+
+        <label for="rtrw">
+            RT / RW
+        </label>
+
+        <input
+            type="text"
+            id="rtrw"
+        >
+
+
+        <label for="kelurahan">
+            Kelurahan / Desa
+        </label>
+
+        <input
+            type="text"
+            id="kelurahan"
+        >
+
+
+        <label for="kecamatan">
+            Kecamatan
+        </label>
+
+        <input
+            type="text"
+            id="kecamatan"
+        >
+
+
+        <label for="agama">
+            Agama
+        </label>
+
+        <input
+            type="text"
+            id="agama"
+        >
+
+
+        <label for="statusKawin">
+            Status Perkawinan
+        </label>
+
+        <input
+            type="text"
+            id="statusKawin"
+        >
+
+
+        <label for="pekerjaan">
+            Pekerjaan
+        </label>
+
+        <input
+            type="text"
+            id="pekerjaan"
+        >
+
+
+        <label for="kewarganegaraan">
+            Kewarganegaraan
+        </label>
+
+        <input
+            type="text"
+            id="kewarganegaraan"
+        >
+
+
+        <!-- ============================= -->
+        <!-- SIMPAN -->
+        <!-- ============================= -->
+
+        <button
+            type="button"
+            id="btnProses"
+        >
+            SIMPAN DATA
+        </button>
+
+
+        <a
+            href="home.html"
+            class="link-kembali"
+        >
+            ← Kembali
+        </a>
+
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================= -->
+
+    <script type="module">
+
+
+        /* =================================
+           FIREBASE IMPORT
+        ================================= */
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            set
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+        /* =================================
+           FIREBASE CONFIG
+        ================================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+            authDomain:
+                "arctrans.firebaseapp.com",
+
+            databaseURL:
+                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+            projectId:
+                "arctrans",
+
+            storageBucket:
+                "arctrans.firebasestorage.app",
+
+            messagingSenderId:
+                "60781918601",
+
+            appId:
+                "1:60781918601:web:c85d6131207f8a8958"
+
+        };
+
+
+        /* =================================
+           INIT FIREBASE
+        ================================= */
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getDatabase(app);
+
+
+        /* =================================
+           ELEMEN
+        ================================= */
+
+        const nama =
+            document.getElementById("nama");
+
+        const plat =
+            document.getElementById("plat");
+
+        const pajakstnk =
+            document.getElementById("pajakstnk");
+
+        const pajakbpkb =
+            document.getElementById("pajakbpkb");
+
+        const status =
+            document.getElementById("status");
+
+        const value =
+            document.getElementById("value");
+
+        const imageFile =
+            document.getElementById("imageFile");
+
+        const previewUnit =
+            document.getElementById("previewUnit");
+
+
+        const ktpFile =
+            document.getElementById("ktpFile");
+
+        const previewKTP =
+            document.getElementById("previewKTP");
+
+        const btnScanKTP =
+            document.getElementById("btnScanKTP");
+
+        const loadingKTP =
+            document.getElementById("loadingKTP");
+
+        const btnProses =
+            document.getElementById("btnProses");
+
+
+        /* =================================
+           FORMAT RUPIAH
+        ================================= */
+
+        value.addEventListener(
+            "input",
+            function () {
+
+                let angka =
+                    this.value.replace(
+                        /\D/g,
+                        ""
+                    );
+
+
+                if (angka === "") {
+
+                    this.value = "";
+
+                    return;
+
+                }
+
+
+                this.value =
+                    "Rp " +
+                    angka.replace(
+                        /\B(?=(\d{3})+(?!\d))/g,
+                        "."
+                    );
+
+            }
+        );
+
+
+        /* =================================
+           PLAT NOMOR HURUF BESAR
+        ================================= */
+
+        plat.addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value.toUpperCase();
+
+            }
+        );
+
+
+        /* =================================
+           PREVIEW FOTO
+        ================================= */
+
+        function previewFoto(
+            input,
+            image
+        ) {
+
+            input.addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        this.files[0];
+
+
+                    if (!file) {
+
+                        image.src = "";
+
+                        image.style.display =
+                            "none";
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !file.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        alert(
+                            "File harus berupa gambar!"
+                        );
+
+                        input.value = "";
+
+                        return;
+
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            image.src =
+                                event.target.result;
+
+                            image.style.display =
+                                "block";
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+
+        }
+
+
+        previewFoto(
+            imageFile,
+            previewUnit
+        );
+
+
+        previewFoto(
+            ktpFile,
+            previewKTP
+        );
+
+
+        /* =================================
+           SCAN KTP
+        ================================= */
+
+        btnScanKTP.addEventListener(
+            "click",
+            async function () {
+
+
+                const file =
+                    ktpFile.files[0];
+
+
+                if (!file) {
+
+                    alert(
+                        "Pilih foto KTP terlebih dahulu!"
+                    );
+
+                    return;
+
+                }
+
+
+                try {
+
+                    btnScanKTP.disabled =
+                        true;
+
+
+                    loadingKTP.innerHTML =
+                        "Menyiapkan OCR...";
+
+
+                    const result =
+                        await Tesseract.recognize(
+                            file,
+                            "eng",
+                            {
+
+                                logger:
+                                    function (m) {
+
+                                        console.log(m);
+
+
+                                        if (
+                                            m.status ===
+                                            "recognizing text"
+                                        ) {
+
+                                            const persen =
+                                                Math.round(
+                                                    m.progress * 100
+                                                );
+
+
+                                            loadingKTP.innerHTML =
+                                                "Membaca KTP: " +
+                                                persen +
+                                                "%";
+
+                                        }
+
+                                    }
+
+                            }
+                        );
+
+
+                    const hasilOCR =
+                        result.data.text;
+
+
+                    console.log(
+                        "HASIL OCR:",
+                        hasilOCR
+                    );
+
+
+                    loadingKTP.innerHTML =
+                        "Mengambil data KTP...";
+
+
+                    bacaDataKTP(
+                        hasilOCR
+                    );
+
+
+                    loadingKTP.innerHTML =
+                        "✓ KTP berhasil dibaca";
+
+
+                    alert(
+                        "Scan selesai. Silakan periksa kembali data yang terbaca."
+                    );
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        error
+                    );
+
+
+                    loadingKTP.innerHTML =
+                        "Gagal membaca KTP";
+
+
+                    alert(
+                        "Gagal membaca KTP:\n" +
+                        error.message
+                    );
+
+
+                } finally {
+
+                    btnScanKTP.disabled =
+                        false;
+
+                }
+
+            }
+        );
+
+
+        /* =================================
+           FUNGSI BACA DATA KTP
+        ================================= */
+
+        function bacaDataKTP(text) {
+
+
+            // Normalisasi teks
+
+            text =
+                text
+                .replace(/\r/g, "")
+                .replace(/O/g, "0");
+
+
+            const lines =
+                text
+                .split("\n")
+                .map(
+                    line =>
+                        line.trim()
+                )
+                .filter(
+                    line =>
+                        line.length > 0
+                );
+
+
+            console.log(
+                "BARIS OCR:",
+                lines
+            );
+
+
+            // =============================
+            // NIK
+            // =============================
+
+            let nikMatch =
+                text.match(
+                    /\b\d{16}\b/
+                );
+
+
+            if (!nikMatch) {
+
+                nikMatch =
+                    text.match(
+                        /\d[\d\s]{14,20}/
+                    );
+
+            }
+
+
+            if (nikMatch) {
+
+                const nik =
+                    nikMatch[0]
+                    .replace(
+                        /\D/g,
+                        ""
+                    )
+                    .substring(
+                        0,
+                        16
+                    );
+
+
+                document
+                    .getElementById("nik")
+                    .value =
+                    nik;
+
+            }
+
+
+            // =============================
+            // NAMA
+            // =============================
+
+            const namaMatch =
+                text.match(
+                    /Nama\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (namaMatch) {
+
+                document
+                    .getElementById("namaKTP")
+                    .value =
+                    namaMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // TEMPAT TGL LAHIR
+            // =============================
+
+            const lahirMatch =
+                text.match(
+                    /(Tempat\s*\/?\s*Tgl\.?\s*Lahir|Tempat\s*Tanggal\s*Lahir)\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (lahirMatch) {
+
+                document
+                    .getElementById(
+                        "tempatTanggalLahir"
+                    )
+                    .value =
+                    lahirMatch[2]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // JENIS KELAMIN
+            // =============================
+
+            const kelaminMatch =
+                text.match(
+                    /Jenis\s*Kelamin\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (kelaminMatch) {
+
+                document
+                    .getElementById(
+                        "jenisKelamin"
+                    )
+                    .value =
+                    kelaminMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // ALAMAT
+            // =============================
+
+            const alamatMatch =
+                text.match(
+                    /Alamat\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (alamatMatch) {
+
+                document
+                    .getElementById(
+                        "alamat"
+                    )
+                    .value =
+                    alamatMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // RT RW
+            // =============================
+
+            const rtrwMatch =
+                text.match(
+                    /RT\s*\/?\s*RW\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (rtrwMatch) {
+
+                document
+                    .getElementById(
+                        "rtrw"
+                    )
+                    .value =
+                    rtrwMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // KELURAHAN DESA
+            // =============================
+
+            const kelurahanMatch =
+                text.match(
+                    /(Kel\s*\/?\s*Desa|Kelurahan|Desa)\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (kelurahanMatch) {
+
+                document
+                    .getElementById(
+                        "kelurahan"
+                    )
+                    .value =
+                    kelurahanMatch[2]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // KECAMATAN
+            // =============================
+
+            const kecamatanMatch =
+                text.match(
+                    /Kecamatan\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (kecamatanMatch) {
+
+                document
+                    .getElementById(
+                        "kecamatan"
+                    )
+                    .value =
+                    kecamatanMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // AGAMA
+            // =============================
+
+            const agamaMatch =
+                text.match(
+                    /Agama\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (agamaMatch) {
+
+                document
+                    .getElementById(
+                        "agama"
+                    )
+                    .value =
+                    agamaMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // STATUS KAWIN
+            // =============================
+
+            const statusMatch =
+                text.match(
+                    /Status\s*Perkawinan\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (statusMatch) {
+
+                document
+                    .getElementById(
+                        "statusKawin"
+                    )
+                    .value =
+                    statusMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // PEKERJAAN
+            // =============================
+
+            const pekerjaanMatch =
+                text.match(
+                    /Pekerjaan\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (pekerjaanMatch) {
+
+                document
+                    .getElementById(
+                        "pekerjaan"
+                    )
+                    .value =
+                    pekerjaanMatch[1]
+                    .trim();
+
+            }
+
+
+            // =============================
+            // KEWARGANEGARAAN
+            // =============================
+
+            const wargaMatch =
+                text.match(
+                    /Kewarganegaraan\s*[:\-]?\s*([^\n]+)/i
+                );
+
+
+            if (wargaMatch) {
+
+                document
+                    .getElementById(
+                        "kewarganegaraan"
+                    )
+                    .value =
+                    wargaMatch[1]
+                    .trim();
+
+            }
+
+
+        }
+
+
+        /* =================================
+           UPLOAD CLOUDINARY
+        ================================= */
+
+        async function uploadCloudinary(
+            file,
+            folder
+        ) {
+
+
+            if (!file) {
+
+                return "";
+
+            }
+
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "file",
+                file
+            );
+
+
+            formData.append(
+                "upload_preset",
+                "arctrans"
+            );
+
+
+            formData.append(
+                "folder",
+                folder
+            );
+
+
+            const uniqueId =
+                Date.now() +
+                "_" +
+                Math.floor(
+                    Math.random() * 100000
+                );
+
+
+            formData.append(
+                "public_id",
+                uniqueId
+            );
+
+
+            const response =
+                await fetch(
+
+                    "https://api.cloudinary.com/v1_1/cesiolzm/image/upload",
+
+                    {
+
+                        method:
+                            "POST",
+
+                        body:
+                            formData
+
+                    }
+
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+
+                    data.error?.message ||
+                    "Upload foto gagal"
+
+                );
+
+            }
+
+
+            return data.secure_url;
+
+        }
+
+
+        /* =================================
+           SIMPAN DATA
+        ================================= */
+
+        btnProses.addEventListener(
+            "click",
+            kirimData
+        );
+
+
+        async function kirimData() {
+
+
+            const namaValue =
+                nama.value.trim();
+
+
+            const platValue =
+                plat.value.trim();
+
+
+            const fileUnit =
+                imageFile.files[0];
+
+
+            const fileKTP =
+                ktpFile.files[0];
+
+
+            // VALIDASI
+
+            if (!namaValue) {
+
+                alert(
+                    "Nama wajib diisi!"
+                );
+
+                nama.focus();
+
+                return;
+
+            }
+
+
+            if (!platValue) {
+
+                alert(
+                    "Plat nomor wajib diisi!"
+                );
+
+                plat.focus();
+
+                return;
+
+            }
+
+
+            if (!fileUnit) {
+
+                alert(
+                    "Foto unit wajib dipilih!"
+                );
+
+                return;
+
+            }
+
+
+            if (!fileKTP) {
+
+                alert(
+                    "Foto KTP wajib dipilih!"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+
+                btnProses.disabled =
+                    true;
+
+
+                btnProses.innerHTML =
+                    "Mengupload Foto...";
+
+
+                // =========================
+                // UPLOAD FOTO UNIT
+                // =========================
+
+                const fotoUnit =
+                    await uploadCloudinary(
+
+                        fileUnit,
+
+                        "arctrans/unit"
+
+                    );
+
+
+                // =========================
+                // UPLOAD FOTO KTP
+                // =========================
+
+                const fotoKTP =
+                    await uploadCloudinary(
+
+                        fileKTP,
+
+                        "arctrans/ktp"
+
+                    );
+
+
+                btnProses.innerHTML =
+                    "Menyimpan Data...";
+
+
+                // =========================
+                // VALUE RUPIAH
+                // =========================
+
+                const valueAngka =
+                    Number(
+
+                        value.value.replace(
+                            /\D/g,
+                            ""
+                        )
+
+                    ) || 0;
+
+
+                // =========================
+                // ID FIREBASE
+                // =========================
+
+                const id =
+                    platValue
+
+                    .replace(
+                        /[.#$[\]/]/g,
+                        "_"
+                    )
+
+                    .replace(
+                        /\s+/g,
+                        "_"
+                    )
+
+                    .toUpperCase();
+
+
+                // =========================
+                // DATA
+                // =========================
+
+                const dataSimpan = {
+
+
+                    // DATA UNIT
+
+                    nama:
+                        namaValue,
+
+                    plat:
+                        platValue,
+
+                    stnk:
+                        pajakstnk.value,
+
+                    bpkb:
+                        pajakbpkb.value,
+
+                    status:
+                        status.value.trim(),
+
+                    value:
+                        valueAngka,
+
+                    valueFormat:
+                        "Rp " +
+                        valueAngka
+                        .toLocaleString(
+                            "id-ID"
+                        ),
+
+                    photoUnit:
+                        fotoUnit,
+
+
+                    // DATA KTP
+
+                    nik:
+                        document
+                        .getElementById("nik")
+                        .value
+                        .trim(),
+
+                    namaKTP:
+                        document
+                        .getElementById("namaKTP")
+                        .value
+                        .trim(),
+
+                    tempatTanggalLahir:
+                        document
+                        .getElementById(
+                            "tempatTanggalLahir"
+                        )
+                        .value
+                        .trim(),
+
+                    jenisKelamin:
+                        document
+                        .getElementById(
+                            "jenisKelamin"
+                        )
+                        .value
+                        .trim(),
+
+                    alamat:
+                        document
+                        .getElementById(
+                            "alamat"
+                        )
+                        .value
+                        .trim(),
+
+                    rtrw:
+                        document
+                        .getElementById(
+                            "rtrw"
+                        )
+                        .value
+                        .trim(),
+
+                    kelurahan:
+                        document
+                        .getElementById(
+                            "kelurahan"
+                        )
+                        .value
+                        .trim(),
+
+                    kecamatan:
+                        document
+                        .getElementById(
+                            "kecamatan"
+                        )
+                        .value
+                        .trim(),
+
+                    agama:
+                        document
+                        .getElementById(
+                            "agama"
+                        )
+                        .value
+                        .trim(),
+
+                    statusPerkawinan:
+                        document
+                        .getElementById(
+                            "statusKawin"
+                        )
+                        .value
+                        .trim(),
+
+                    pekerjaan:
+                        document
+                        .getElementById(
+                            "pekerjaan"
+                        )
+                        .value
+                        .trim(),
+
+                    kewarganegaraan:
+                        document
+                        .getElementById(
+                            "kewarganegaraan"
+                        )
+                        .value
+                        .trim(),
+
+                    photoKTP:
+                        fotoKTP,
+
+
+                    // WAKTU
+
+                    timestamp:
+                        Date.now(),
+
+                    tanggalInput:
+                        new Date()
+                        .toISOString()
+
+                };
+
+
+                // =========================
+                // SIMPAN FIREBASE
+                // =========================
+
+                await set(
+
+                    ref(
+                        db,
+                        "unit/" + id
+                    ),
+
+                    dataSimpan
+
+                );
+
+
+                alert(
+                    "✓ Data berhasil disimpan!"
+                );
+
+
+                // =========================
+                // RESET FORM
+                // =========================
+
+                document
+                    .querySelector(
+                        "form"
+                    );
+
+
+                nama.value = "";
+
+                plat.value = "";
+
+                pajakstnk.value = "";
+
+                pajakbpkb.value = "";
+
+                status.value = "";
+
+                value.value = "";
+
+
+                imageFile.value = "";
+
+                ktpFile.value = "";
+
+
+                previewUnit.src = "";
+
+                previewKTP.src = "";
+
+
+                previewUnit.style.display =
+                    "none";
+
+                previewKTP.style.display =
+                    "none";
+
+
+                document
+                    .getElementById("nik")
+                    .value = "";
+
+
+                document
+                    .getElementById("namaKTP")
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "tempatTanggalLahir"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "jenisKelamin"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "alamat"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "rtrw"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "kelurahan"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "kecamatan"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "agama"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "statusKawin"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "pekerjaan"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "kewarganegaraan"
+                    )
+                    .value = "";
+
+
+                loadingKTP.innerHTML =
+                    "";
+
+
+            } catch (error) {
+
+
+                console.error(
+                    error
+                );
+
+
+                alert(
+
+                    "Gagal menyimpan data:\n\n" +
+                    error.message
+
+                );
+
+
+            } finally {
+
+
+                btnProses.disabled =
+                    false;
+
+
+                btnProses.innerHTML =
+                    "SIMPAN DATA";
+
+            }
+
+
+        }
+
+
+    </script>
+
+
+</body>
+</html>

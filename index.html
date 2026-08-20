@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ARC TRANS</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2196F3,
+                    #21CBF3
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 500px;
+
+            background: white;
+
+            padding: 30px 25px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.25);
+
+            text-align: center;
+
+            animation:
+                fadeIn 0.5s ease;
+
+        }
+
+
+        .logo {
+
+            width: 90px;
+
+            height: 90px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2196F3,
+                    #21CBF3
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 40px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        h1 {
+
+            margin: 0;
+
+            color: #2196F3;
+
+            font-size: 28px;
+
+        }
+
+
+        .subtitle {
+
+            margin-top: 8px;
+
+            margin-bottom: 30px;
+
+            color: #777;
+
+            font-size: 14px;
+
+        }
+
+
+        .menu {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap: 15px;
+
+        }
+
+
+        .menu-item {
+
+            text-decoration: none;
+
+            color: #333;
+
+            border:
+                1px solid
+                #e0e0e0;
+
+            border-radius: 15px;
+
+            padding: 20px 10px;
+
+            transition: 0.3s;
+
+            background: white;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .menu-item:hover {
+
+            transform:
+                translateY(-5px);
+
+            background:
+                #f3f9ff;
+
+            border-color:
+                #2196F3;
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    33,
+                    150,
+                    243,
+                    0.25
+                );
+
+        }
+
+
+        .menu-icon {
+
+            font-size: 42px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .menu-text {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+        }
+
+
+        .footer {
+
+            margin-top: 30px;
+
+            color: #999;
+
+            font-size: 12px;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .container {
+
+                padding:
+                    25px 15px;
+
+            }
+
+
+            .menu {
+
+                grid-template-columns:
+                    repeat(
+                        1,
+                        1fr
+                    );
+
+            }
+
+
+            .menu-item {
+
+                flex-direction: row;
+
+                justify-content:
+                    flex-start;
+
+                padding: 18px;
+
+            }
+
+
+            .menu-icon {
+
+                margin-bottom: 0;
+
+                margin-right: 15px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            🚐
+
+        </div>
+
+
+        <!-- JUDUL -->
+
+        <h1>
+
+            ARC TRANS
+
+        </h1>
+
+
+        <div class="subtitle">
+
+            Sistem Manajemen Unit & Customer
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <div class="menu">
+
+
+            <!-- INPUT UNIT -->
+
+            <a
+                href="input-unit.html"
+                class="menu-item"
+            >
+
+                <div class="menu-icon">
+
+                    🚗
+
+                </div>
+
+                <div class="menu-text">
+
+                    Input Unit
+
+                </div>
+
+            </a>
+
+
+            <!-- INPUT CUSTOMER -->
+
+            <a
+                href="input-customer.html"
+                class="menu-item"
+            >
+
+                <div class="menu-icon">
+
+                    👤
+
+                </div>
+
+                <div class="menu-text">
+
+                    Input Customer
+
+                </div>
+
+            </a>
+
+
+            <!-- KTP -->
+
+            <a
+                href="ktp.html"
+                class="menu-item"
+            >
+
+                <div class="menu-icon">
+
+                    🪪
+
+                </div>
+
+                <div class="menu-text">
+
+                    KTP
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            © 2026 ARC TRANS
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
