@@ -14,6 +14,7 @@
 
 
     <!-- LIBRARY EXCEL -->
+
     <script
         src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
     ></script>
@@ -39,6 +40,7 @@
         ========================= */
 
         .home-btn {
+
             position: fixed;
 
             top: 12px;
@@ -60,11 +62,14 @@
             box-shadow:
                 0 3px 10px
                 rgba(0, 0, 0, 0.2);
+
         }
 
 
         .home-btn:hover {
+
             background: #f0f8ff;
+
         }
 
 
@@ -73,6 +78,7 @@
         ========================= */
 
         .navbar {
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,12 +94,15 @@
             box-shadow:
                 0 2px 6px
                 rgba(0, 0, 0, 0.1);
+
         }
 
 
         .logo {
+
             font-size: 18px;
             font-weight: bold;
+
         }
 
 
@@ -102,8 +111,10 @@
         ========================= */
 
         .container {
+
             width: 100%;
             padding: 15px;
+
         }
 
 
@@ -112,6 +123,7 @@
         ========================= */
 
         .toolbar {
+
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -121,10 +133,12 @@
             margin-bottom: 15px;
 
             flex-wrap: wrap;
+
         }
 
 
         #searchInput {
+
             width: 100%;
             max-width: 320px;
 
@@ -135,11 +149,14 @@
             border-radius: 6px;
 
             outline: none;
+
         }
 
 
         #searchInput:focus {
+
             border-color: #2196F3;
+
         }
 
 
@@ -148,6 +165,7 @@
         ========================= */
 
         button {
+
             border: none;
 
             padding: 10px 16px;
@@ -162,23 +180,32 @@
             font-weight: bold;
 
             transition: 0.2s;
+
         }
 
 
         button:hover {
+
             opacity: 0.85;
+
         }
 
 
         button:disabled {
+
             background: #ccc !important;
+
             cursor: not-allowed;
+
         }
 
 
         #btnDownload {
+
             background: #4CAF50;
+
             display: none;
+
         }
 
 
@@ -187,6 +214,7 @@
         ========================= */
 
         .table-container {
+
             width: 100%;
 
             overflow-x: auto;
@@ -198,19 +226,23 @@
             box-shadow:
                 0 2px 8px
                 rgba(0, 0, 0, 0.08);
+
         }
 
 
         table {
+
             width: 100%;
 
             border-collapse: collapse;
 
-            min-width: 950px;
+            min-width: 1050px;
+
         }
 
 
         th {
+
             background: #87CEFA;
 
             color: white;
@@ -220,10 +252,12 @@
             text-align: center;
 
             white-space: nowrap;
+
         }
 
 
         td {
+
             padding: 10px;
 
             border-bottom:
@@ -234,11 +268,14 @@
             text-align: center;
 
             vertical-align: middle;
+
         }
 
 
         tbody tr:hover {
+
             background: #f9f9f9;
+
         }
 
 
@@ -247,11 +284,14 @@
         ========================= */
 
         .photo-cell {
+
             min-width: 130px;
+
         }
 
 
         .vehicle-photo {
+
             display: block;
 
             width: 110px;
@@ -273,30 +313,36 @@
             transition:
                 transform 0.2s,
                 box-shadow 0.2s;
+
         }
 
 
         .vehicle-photo:hover {
+
             transform: scale(1.08);
 
             box-shadow:
                 0 3px 10px
                 rgba(0, 0, 0, 0.25);
+
         }
 
 
         .no-photo {
+
             color: #999;
 
             font-size: 12px;
+
         }
 
 
         /* =========================
-           BADGE STATUS
+           BADGE
         ========================= */
 
         .badge {
+
             display: inline-block;
 
             padding: 6px 10px;
@@ -309,26 +355,35 @@
             color: white;
 
             min-width: 80px;
+
         }
 
 
         .badge-masuk {
+
             background: #4CAF50;
+
         }
 
 
         .badge-pulang {
+
             background: #f44336;
+
         }
 
 
         .badge-sewa {
+
             background: #ff9800;
+
         }
 
 
         .badge-default {
+
             background: #777;
+
         }
 
 
@@ -337,26 +392,35 @@
         ========================= */
 
         #pagination {
+
             margin-top: 15px;
+
             text-align: center;
+
         }
 
 
         .btn-prev {
+
             background: #ff9800;
+
         }
 
 
         .btn-next {
+
             background: #4CAF50;
+
         }
 
 
         .page-info {
+
             margin: 0 10px;
 
             font-size: 13px;
             font-weight: bold;
+
         }
 
 
@@ -365,11 +429,13 @@
         ========================= */
 
         .empty-data {
+
             padding: 30px;
 
             text-align: center;
 
             color: #777;
+
         }
 
 
@@ -378,6 +444,7 @@
         ========================= */
 
         .photo-modal {
+
             display: none;
 
             position: fixed;
@@ -397,10 +464,12 @@
             align-items: center;
 
             padding: 20px;
+
         }
 
 
         .photo-modal img {
+
             max-width: 90%;
             max-height: 85%;
 
@@ -409,10 +478,12 @@
             box-shadow:
                 0 5px 30px
                 rgba(0, 0, 0, 0.5);
+
         }
 
 
         .close-modal {
+
             position: absolute;
 
             top: 15px;
@@ -425,10 +496,12 @@
             cursor: pointer;
 
             line-height: 1;
+
         }
 
 
         .modal-caption {
+
             position: absolute;
 
             bottom: 20px;
@@ -440,6 +513,7 @@
             text-align: center;
 
             width: 100%;
+
         }
 
 
@@ -450,38 +524,53 @@
         @media (max-width: 600px) {
 
             .navbar {
+
                 min-height: 60px;
+
             }
 
 
             .logo {
+
                 font-size: 16px;
+
             }
 
 
             .container {
+
                 padding: 10px;
+
             }
 
 
             .toolbar {
+
                 align-items: stretch;
+
             }
 
 
             #searchInput {
+
                 max-width: none;
+
             }
 
 
             #btnDownload {
+
                 width: 100%;
+
             }
 
 
             .home-btn {
+
                 font-size: 12px;
+
                 padding: 7px 10px;
+
             }
 
         }
@@ -569,6 +658,8 @@
 
                         <th>Status</th>
 
+                        <th>Keterangan</th>
+
                         <th>Value</th>
 
                         <th>Photo</th>
@@ -583,7 +674,7 @@
                     <tr>
 
                         <td
-                            colspan="8"
+                            colspan="9"
                             class="empty-data"
                         >
 
@@ -677,26 +768,20 @@
             apiKey:
                 "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
 
-
             authDomain:
                 "arctrans.firebaseapp.com",
-
 
             databaseURL:
                 "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
 
-
             projectId:
                 "arctrans",
-
 
             storageBucket:
                 "arctrans.firebasestorage.app",
 
-
             messagingSenderId:
                 "60781918601",
-
 
             appId:
                 "1:60781918601:web:c85d6131207f8a8958"
@@ -794,6 +879,7 @@
 
             filteredData =
                 allData.filter(
+
                     item => {
 
 
@@ -811,6 +897,13 @@
                             .toLowerCase();
 
 
+                        const keterangan =
+                            String(
+                                item.keterangan || ""
+                            )
+                            .toLowerCase();
+
+
                         return (
 
                             nama.includes(
@@ -823,15 +916,20 @@
                                 keyword
                             )
 
+                            ||
+
+                            keterangan.includes(
+                                keyword
+                            )
+
                         );
 
-
                     }
+
                 );
 
 
             currentPage = 1;
-
 
             renderTable();
 
@@ -843,8 +941,11 @@
                 "searchInput"
             )
             .addEventListener(
+
                 "input",
+
                 applySearch
+
             );
 
 
@@ -896,13 +997,18 @@
 
 
                 /*
-                   Ambil semua data:
+                   Data otomatis membaca:
 
                    unit/
-                     G_1122_RR/
-                       plat
-                       nama
-                       photo
+                       ID_UNIT/
+                           nama
+                           plat
+                           stnk
+                           bpkb
+                           status
+                           keterangan
+                           value
+                           photo
                 */
 
                 allData =
@@ -912,7 +1018,6 @@
 
 
                 applySearch();
-
 
             },
 
@@ -929,7 +1034,6 @@
                 showEmptyData(
                     "Gagal mengambil data kendaraan"
                 );
-
 
             }
 
@@ -954,7 +1058,7 @@
                 <tr>
 
                     <td
-                        colspan="8"
+                        colspan="9"
                         class="empty-data"
                     >
 
@@ -1022,12 +1126,14 @@
 
 
             return (
+
                 "Rp " +
 
                 numberValue
                 .toLocaleString(
                     "id-ID"
                 )
+
             );
 
         }
@@ -1150,20 +1256,24 @@
                         item.status || "-";
 
 
+                    /*
+                       KETERANGAN
+
+                       Sumber Firebase:
+
+                       unit/
+                           ID_UNIT/
+                               keterangan:
+                                   "Ready"
+                    */
+
+                    const keterangan =
+                        item.keterangan || "-";
+
+
                     const value =
                         item.value;
 
-
-                    /*
-                       SUMBER FOTO FIREBASE:
-
-                       unit/
-                         G_1122_RR/
-                           photo
-
-                       KODE:
-                       item.photo
-                    */
 
                     const urlphoto =
                         item.photo || "";
@@ -1172,6 +1282,12 @@
                     const statusClass =
                         getStatusClass(
                             status
+                        );
+
+
+                    const keteranganClass =
+                        getKeteranganClass(
+                            keterangan
                         );
 
 
@@ -1225,31 +1341,42 @@
 
                     html +=
                         `
+
                         <tr>
 
 
                             <td>
+
                                 ${no}
+
                             </td>
 
 
                             <td>
+
                                 ${escapeHtml(plat)}
+
                             </td>
 
 
                             <td>
+
                                 ${escapeHtml(nama)}
+
                             </td>
 
 
                             <td>
+
                                 ${escapeHtml(stnk)}
+
                             </td>
 
 
                             <td>
+
                                 ${escapeHtml(bpkb)}
+
                             </td>
 
 
@@ -1267,7 +1394,22 @@
 
 
                             <td>
+
+                                <span
+                                    class="badge ${keteranganClass}"
+                                >
+
+                                    ${escapeHtml(keterangan)}
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
                                 ${formatRupiah(value)}
+
                             </td>
 
 
@@ -1281,11 +1423,11 @@
 
 
                         </tr>
+
                         `;
 
 
                     no++;
-
 
                 }
 
@@ -1340,7 +1482,7 @@
 
             const text =
                 String(
-                    status
+                    status || ""
                 )
                 .toLowerCase();
 
@@ -1392,6 +1534,94 @@
             ) {
 
                 return "badge-sewa";
+
+            }
+
+
+            return "badge-default";
+
+        }
+
+
+        /* =========================
+           KETERANGAN COLOR
+        ========================= */
+
+        function getKeteranganClass(
+            keterangan
+        ) {
+
+
+            const text =
+                String(
+                    keterangan || ""
+                )
+                .toLowerCase()
+                .trim();
+
+
+            /*
+               READY = HIJAU
+            */
+
+            if (
+                text === "ready"
+            ) {
+
+                return "badge-masuk";
+
+            }
+
+
+            /*
+               RENTAL / SEWA = ORANYE
+            */
+
+            if (
+
+                text.includes(
+                    "sewa"
+                )
+
+                ||
+
+                text.includes(
+                    "rental"
+                )
+
+            ) {
+
+                return "badge-sewa";
+
+            }
+
+
+            /*
+               TIDAK READY / MAINTENANCE
+               = MERAH
+            */
+
+            if (
+
+                text.includes(
+                    "tidak"
+                )
+
+                ||
+
+                text.includes(
+                    "maintenance"
+                )
+
+                ||
+
+                text.includes(
+                    "perbaikan"
+                )
+
+            ) {
+
+                return "badge-pulang";
 
             }
 
@@ -1520,7 +1750,6 @@
 
                     currentPage++;
 
-
                     renderTable();
 
                 }
@@ -1542,7 +1771,6 @@
 
 
                     currentPage--;
-
 
                     renderTable();
 
@@ -1758,6 +1986,10 @@
                                     item.status || "-",
 
 
+                                "Keterangan":
+                                    item.keterangan || "-",
+
+
                                 "Value":
                                     formatRupiah(
                                         item.value
@@ -1768,7 +2000,6 @@
                                     item.photo || "-"
 
                             };
-
 
                         }
 
@@ -1794,6 +2025,10 @@
 
                     {
                         wch: 25
+                    },
+
+                    {
+                        wch: 18
                     },
 
                     {
