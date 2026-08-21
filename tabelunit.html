@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ARC TRANS - Data Kendaraan</title>
+
+    <!-- Library Export Excel -->
+   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f6f8;
+            color: #333;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 12px 20px;
+
+            background: #87CEFA;
+            color: white;
+
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: 100%;
+            padding: 15px;
+        }
+
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        #searchInput {
+
+            width: 100%;
+
+            max-width: 300px;
+
+            padding: 9px 12px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 6px;
+
+            outline: none;
+
+        }
+
+        #searchInput:focus {
+
+            border-color: #2196F3;
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        button {
+
+            border: none;
+
+            padding: 9px 16px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+
+        }
+
+        button:hover {
+
+            opacity: 0.85;
+
+        }
+
+        button:disabled {
+
+            background: #ccc !important;
+
+            cursor: not-allowed;
+
+        }
+
+
+        #btnDownload {
+
+            background: #4CAF50;
+
+            display: none;
+
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 750px;
+
+        }
+
+
+        th {
+
+            background: #87CEFA;
+
+            color: white;
+
+            padding: 12px 10px;
+
+            text-align: center;
+
+            white-space: nowrap;
+
+        }
+
+
+        td {
+
+            padding: 10px;
+
+            border-bottom: 1px solid #eee;
+
+            text-align: center;
+
+        }
+
+
+        tr:hover {
+
+            background: #f9f9f9;
+
+        }
+
+
+        /* =========================
+           BADGE STATUS
+        ========================= */
+
+        .badge {
+
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            color: white;
+
+            min-width: 80px;
+
+        }
+
+
+        .badge-masuk {
+
+            background: #4CAF50;
+
+        }
+
+
+        .badge-pulang {
+
+            background: #f44336;
+
+        }
+
+
+        .badge-sewa {
+
+            background: #ff9800;
+
+        }
+
+
+        .badge-default {
+
+            background: #777;
+
+        }
+
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        #pagination {
+
+            margin-top: 15px;
+
+            text-align: center;
+
+        }
+
+
+        .btn-prev {
+
+            background: #ff9800;
+
+        }
+
+
+        .btn-next {
+
+            background: #4CAF50;
+
+        }
+
+
+        .page-info {
+
+            margin: 0 10px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================
+           EMPTY DATA
+        ========================= */
+
+        .empty-data {
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #777;
+
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                padding: 12px 15px;
+
+            }
+
+            .logo {
+
+                font-size: 15px;
+
+            }
+
+            .container {
+
+                padding: 10px;
+
+            }
+
+            .toolbar {
+
+                align-items: stretch;
+
+            }
+
+            #searchInput {
+
+                max-width: none;
+
+            }
+
+            #btnDownload {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        DATA KENDARAAN
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     CONTAINER
+========================= -->
+
+<div class="container">
+
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari nama atau plat nomor..."
+        >
+
+
+        <button
+            id="btnDownload"
+            onclick="downloadExcel()"
+        >
+
+            Download Excel
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- TABLE -->
+
+    <div class="table-container">
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>No.</th>
+
+                    <th>Plat Nomor</th>
+
+                    <th>Nama</th>
+
+                    <th>Pajak STNK</th>
+
+                    <th>BPKB</th>
+
+                    <th>Status</th>
+
+                    <th>Value</th>
+
+                </tr>
+
+            </thead>
+
+
+
+            <tbody id="isiData">
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="empty-data"
+                    >
+
+                        Memuat data...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+    <!-- PAGINATION -->
+
+    <div id="pagination">
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+
+    import {
+
+        initializeApp
+
+    }
+
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+
+    import {
+
+        getDatabase,
+        ref,
+        onValue
+
+    }
+
+    from
+
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+
+
+    /* =========================
+       FIREBASE CONFIG
+    ========================= */
+
+    const firebaseConfig = {
+
+        apiKey:
+        "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+
+        authDomain:
+        "arctrans.firebaseapp.com",
+
+
+        databaseURL:
+        "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+
+        projectId:
+        "arctrans",
+
+
+        storageBucket:
+        "arctrans.firebasestorage.app",
+
+
+        messagingSenderId:
+        "60781918601",
+
+
+        appId:
+        "1:60781918601:web:c85d6131207f8a8958"
+
+    };
+
+
+
+    /* =========================
+       INITIALIZE FIREBASE
+    ========================= */
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase(app);
+
+
+
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    let allData = [];
+
+    let filteredData = [];
+
+    let currentPage = 1;
+
+    const rowsPerPage = 10;
+
+
+
+    /* =========================
+       USERNAME
+    ========================= */
+
+    const username = localStorage.getItem("username");
+
+
+
+    /* =========================
+       USER YANG BOLEH DOWNLOAD
+    ========================= */
+
+    const allowedUsers = [
+
+        "Nurhakiki",
+
+        "Henri Yuliansyah",
+
+        "Sultan"
+
+    ];
+
+
+
+    if (allowedUsers.includes(username)) {
+
+        document
+            .getElementById("btnDownload")
+            .style
+            .display = "inline-block";
+
+    }
+
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+   function applySearch() {
+
+    const keyword = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    filteredData = allData.filter(item => {
+
+        const nama = String(
+            item.nama || ""
+        ).toLowerCase();
+
+        const plat = String(
+            item.plat || ""
+        ).toLowerCase();
+
+        return (
+            nama.includes(keyword) ||
+            plat.includes(keyword)
+        );
+
+    });
+
+    currentPage = 1;
+
+    renderTable();
+}
+
+
+document
+    .getElementById("searchInput")
+    .addEventListener("input", applySearch);
+
+
+    /* =========================
+       FIREBASE LISTENER
+    ========================= */
+
+    const dbRef =
+        ref(db, "unit");
+
+
+
+    onValue(dbRef, (snapshot) => {
+
+    const data = snapshot.val();
+
+    if (!data) {
+
+        allData = [];
+        filteredData = [];
+
+        document
+            .getElementById("isiData")
+            .innerHTML = `
+                <tr>
+                    <td colspan="7" class="empty-data">
+                        Data kendaraan belum tersedia
+                    </td>
+                </tr>
+            `;
+
+        document
+            .getElementById("pagination")
+            .innerHTML = "";
+
+        return;
+    }
+
+
+    allData = Object.values(data);
+
+
+    /* Jalankan search */
+    applySearch();
+
+
+}, (error) => {
+
+    console.error("Firebase Error:", error);
+
+    document
+        .getElementById("isiData")
+        .innerHTML = `
+            <tr>
+                <td colspan="7" class="empty-data">
+                    Gagal mengambil data
+                </td>
+            </tr>
+        `;
+
+});
+
+
+function formatRupiah(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+        return "-";
+    }
+
+    return "Rp" +
+        Number(value).toLocaleString(
+            "id-ID",
+            {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }
+        );
+}
+
+    /* =========================
+       RENDER TABLE
+    ========================= */
+
+    function renderTable() {
+
+
+        if (filteredData.length === 0) {
+
+
+            document
+                .getElementById("isiData")
+                .innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="empty-data"
+                    >
+
+                        Data tidak ditemukan
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            document
+                .getElementById("pagination")
+                .innerHTML = "";
+
+
+            return;
+
+        }
+
+
+
+        const start =
+            (currentPage - 1)
+            * rowsPerPage;
+
+
+
+        const end =
+            start
+            + rowsPerPage;
+
+
+
+        const paginatedData =
+            filteredData.slice(
+                start,
+                end
+            );
+
+
+
+        let html = "";
+
+
+        let no =
+            start + 1;
+
+
+
+       paginatedData.forEach(item => {
+
+    const plat = item.plat || "-";
+    const nama = item.nama || "-";
+    const stnk = item.stnk || "-";
+    const bpkb = item.bpkb || "-";
+    const status = item.status || "-";
+    const value = item.value || 0;
+
+    const statusClass =
+        getStatusClass(status);
+
+    html += `
+        <tr>
+
+            <td>${no}</td>
+
+            <td>${plat}</td>
+
+            <td>${nama}</td>
+
+            <td>${stnk}</td>
+
+            <td>${bpkb}</td>
+
+            <td>
+                <span class="badge ${statusClass}">
+                    ${status}
+                </span>
+            </td>
+
+            <td>
+                ${formatRupiah(value)}
+            </td>
+
+        </tr>
+    `;
+
+    no++;
+
+});
+
+
+
+        document
+            .getElementById("isiData")
+            .innerHTML =
+            html;
+
+
+
+        renderPagination();
+
+
+    }
+
+
+
+
+    /* =========================
+       STATUS COLOR
+    ========================= */
+
+    function getStatusClass(status) {
+
+
+        const text =
+            String(status)
+            .toLowerCase();
+
+
+
+        if (
+
+            text.includes("masuk")
+
+            ||
+
+            text.includes("tersedia")
+
+            ||
+
+            text.includes("aktif")
+
+        ) {
+
+            return "badge-masuk";
+
+        }
+
+
+
+        if (
+
+            text.includes("pulang")
+
+            ||
+
+            text.includes("tidak aktif")
+
+        ) {
+
+            return "badge-pulang";
+
+        }
+
+
+
+        if (
+
+            text.includes("sewa")
+
+            ||
+
+            text.includes("rental")
+
+        ) {
+
+            return "badge-sewa";
+
+        }
+
+
+
+        return "badge-default";
+
+
+    }
+
+
+
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
+    function renderPagination() {
+
+
+        const totalPages =
+            Math.ceil(
+                filteredData.length
+                / rowsPerPage
+            );
+
+
+
+        if (totalPages <= 1) {
+
+
+            document
+                .getElementById("pagination")
+                .innerHTML =
+                "";
+
+
+            return;
+
+        }
+
+
+
+        document
+            .getElementById("pagination")
+            .innerHTML = `
+
+
+            <button
+
+                class="btn-prev"
+
+                onclick="prevPage()"
+
+                ${
+
+                    currentPage === 1
+
+                    ?
+
+                    "disabled"
+
+                    :
+
+                    ""
+
+                }
+
+            >
+
+                Prev
+
+            </button>
+
+
+
+            <span class="page-info">
+
+                Halaman
+                ${currentPage}
+                dari
+                ${totalPages}
+
+            </span>
+
+
+
+            <button
+
+                class="btn-next"
+
+                onclick="nextPage()"
+
+                ${
+
+                    currentPage === totalPages
+
+                    ?
+
+                    "disabled"
+
+                    :
+
+                    ""
+
+                }
+
+            >
+
+                Next
+
+            </button>
+
+
+        `;
+
+
+    }
+
+
+
+
+    /* =========================
+       NEXT PAGE
+    ========================= */
+
+    window.nextPage =
+        function () {
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredData.length
+                    / rowsPerPage
+                );
+
+
+
+            if (
+
+                currentPage
+                < totalPages
+
+            ) {
+
+
+                currentPage++;
+
+
+                renderTable();
+
+
+            }
+
+
+        };
+
+
+
+
+    /* =========================
+       PREVIOUS PAGE
+    ========================= */
+
+    window.prevPage =
+        function () {
+
+
+            if (
+
+                currentPage > 1
+
+            ) {
+
+
+                currentPage--;
+
+
+                renderTable();
+
+
+            }
+
+
+        };
+
+
+
+
+    /* =========================
+       DOWNLOAD EXCEL
+    ========================= */
+
+    window.downloadExcel =
+        function () {
+
+
+            if (
+
+                filteredData.length === 0
+
+            ) {
+
+
+                alert(
+                    "Tidak ada data untuk di-download!"
+                );
+
+
+                return;
+
+
+            }
+
+
+
+            const dataExcel =
+                filteredData.map(
+                    (
+                        item,
+                        index
+                    ) => {
+
+
+                        return {
+
+
+                            "No":
+                                index + 1,
+
+
+                            "Plat Nomor":
+                                item.plat || "-",
+
+
+                            "Nama":
+                                item.nama || "-",
+
+
+                            "Pajak STNK":
+                                item.stnk || "-",
+
+
+                            "BPKB":
+                                item.bpkb || "-",
+
+
+                            "Status":
+                                item.status || "-",
+
+
+                           "Value":
+                                item.value
+                                    ? formatRupiah(item.value)
+                                    : "-"
+
+
+                        };
+
+
+                    }
+                );
+
+
+
+            const worksheet =
+                XLSX.utils
+                .json_to_sheet(
+                    dataExcel
+                );
+
+
+
+            worksheet["!cols"] = [
+
+                { wch: 8 },
+
+                { wch: 18 },
+
+                { wch: 25 },
+
+                { wch: 18 },
+
+                { wch: 18 },
+
+                { wch: 18 },
+
+                { wch: 20 }
+
+            ];
+
+
+
+            const workbook =
+                XLSX.utils
+                .book_new();
+
+
+
+            XLSX.utils
+                .book_append_sheet(
+
+                    workbook,
+
+                    worksheet,
+
+                    "Data Kendaraan"
+
+                );
+
+
+
+            XLSX.writeFile(
+
+                workbook,
+
+                "Data_Kendaraan.xlsx"
+
+            );
+
+
+        };
+
+
+</script>
+
+
+</body>
+</html>
