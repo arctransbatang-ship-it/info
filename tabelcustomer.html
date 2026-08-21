@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ARC TRANS - Data Customer</title>
+
+
+    <!-- LIBRARY EXCEL -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
+    ></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            margin: 0;
+            background: #f5f6f8;
+            color: #333;
+        }
+
+
+        /* =========================
+           HOME BUTTON
+        ========================= */
+
+        .home-btn {
+            position: fixed;
+
+            top: 12px;
+            left: 15px;
+
+            z-index: 1000;
+
+            background: white;
+            color: #2196F3;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0, 0, 0, 0.2);
+        }
+
+
+        .home-btn:hover {
+            background: #f0f8ff;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 55px;
+
+            padding: 12px 20px;
+
+            background: #87CEFA;
+
+            color: white;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0, 0, 0, 0.1);
+        }
+
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: 100%;
+            padding: 15px;
+        }
+
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+            flex-wrap: wrap;
+        }
+
+
+        #searchInput {
+            width: 100%;
+            max-width: 320px;
+
+            padding: 10px 12px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 6px;
+
+            outline: none;
+        }
+
+
+        #searchInput:focus {
+            border-color: #2196F3;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        button {
+            border: none;
+
+            padding: 10px 16px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+
+        button:disabled {
+            background: #ccc !important;
+            cursor: not-allowed;
+        }
+
+
+        #btnDownload {
+            background: #4CAF50;
+            display: none;
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+            width: 100%;
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 2px 8px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 950px;
+        }
+
+
+        th {
+            background: #87CEFA;
+
+            color: white;
+
+            padding: 12px 10px;
+
+            text-align: center;
+
+            white-space: nowrap;
+        }
+
+
+        td {
+            padding: 10px;
+
+            border-bottom:
+                1px
+                solid
+                #eee;
+
+            text-align: center;
+
+            vertical-align: middle;
+        }
+
+
+        tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .photo-cell {
+            min-width: 130px;
+        }
+
+
+        .customer-photo {
+            display: block;
+
+            width: 110px;
+            height: 80px;
+
+            margin: auto;
+
+            object-fit: cover;
+
+            border-radius: 8px;
+
+            border:
+                1px
+                solid
+                #ddd;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .customer-photo:hover {
+            transform: scale(1.08);
+
+            box-shadow:
+                0 3px 10px
+                rgba(0, 0, 0, 0.25);
+        }
+
+
+        .no-photo {
+            color: #999;
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        #pagination {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+
+        .btn-prev {
+            background: #ff9800;
+        }
+
+
+        .btn-next {
+            background: #4CAF50;
+        }
+
+
+        .page-info {
+            margin: 0 10px;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           EMPTY DATA
+        ========================= */
+
+        .empty-data {
+            padding: 30px;
+
+            text-align: center;
+
+            color: #777;
+        }
+
+
+        /* =========================
+           PHOTO MODAL
+        ========================= */
+
+        .photo-modal {
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background:
+                rgba(0, 0, 0, 0.88);
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+
+        .photo-modal img {
+            max-width: 90%;
+            max-height: 85%;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 5px 30px
+                rgba(0, 0, 0, 0.5);
+        }
+
+
+        .close-modal {
+            position: absolute;
+
+            top: 15px;
+            right: 25px;
+
+            color: white;
+
+            font-size: 42px;
+
+            cursor: pointer;
+
+            line-height: 1;
+        }
+
+
+        .modal-caption {
+            position: absolute;
+
+            bottom: 20px;
+
+            color: white;
+
+            font-size: 15px;
+
+            text-align: center;
+
+            width: 100%;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                min-height: 60px;
+            }
+
+
+            .logo {
+                font-size: 16px;
+            }
+
+
+            .container {
+                padding: 10px;
+            }
+
+
+            .toolbar {
+                align-items: stretch;
+            }
+
+
+            #searchInput {
+                max-width: none;
+            }
+
+
+            #btnDownload {
+                width: 100%;
+            }
+
+
+            .home-btn {
+                font-size: 12px;
+                padding: 7px 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+    <!-- HOME -->
+
+    <a
+        href="index.html"
+        class="home-btn"
+    >
+        🏠 Home
+    </a>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            DATA CUSTOMER
+
+        </div>
+
+    </nav>
+
+
+    <!-- CONTAINER -->
+
+    <div class="container">
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Cari ID / NIK atau nama..."
+            >
+
+
+            <button
+                id="btnDownload"
+                onclick="downloadExcel()"
+            >
+                Download Excel
+            </button>
+
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>No.</th>
+
+                        <th>ID / NIK</th>
+
+                        <th>Nama</th>
+
+                        <th>Alamat KTP</th>
+
+                        <th>Domisili</th>
+
+                        <th>Photo</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="isiData">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty-data"
+                        >
+                            Memuat data customer...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        <!-- PAGINATION -->
+
+        <div id="pagination"></div>
+
+
+    </div>
+
+
+    <!-- PHOTO MODAL -->
+
+    <div
+        id="photoModal"
+        class="photo-modal"
+    >
+
+
+        <span
+            class="close-modal"
+            onclick="closePhoto()"
+        >
+            &times;
+        </span>
+
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Foto KTP"
+        >
+
+
+        <div
+            id="modalCaption"
+            class="modal-caption"
+        >
+        </div>
+
+
+    </div>
+
+
+
+    <script type="module">
+
+
+        /* =========================
+           FIREBASE IMPORT
+        ========================= */
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            onValue
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+        /* =========================
+           FIREBASE CONFIG
+        ========================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+
+            authDomain:
+                "arctrans.firebaseapp.com",
+
+
+            databaseURL:
+                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+
+            projectId:
+                "arctrans",
+
+
+            storageBucket:
+                "arctrans.firebasestorage.app",
+
+
+            messagingSenderId:
+                "60781918601",
+
+
+            appId:
+                "1:60781918601:web:c85d6131207f8a8958"
+
+        };
+
+
+        /* =========================
+           INITIALIZE FIREBASE
+        ========================= */
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getDatabase(
+                app
+            );
+
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        let allData = [];
+
+        let filteredData = [];
+
+        let currentPage = 1;
+
+        const rowsPerPage = 10;
+
+
+        /* =========================
+           USERNAME
+        ========================= */
+
+        const username =
+            localStorage.getItem(
+                "username"
+            );
+
+
+        /* =========================
+           USER DOWNLOAD EXCEL
+        ========================= */
+
+        const allowedUsers = [
+
+            "Nurhakiki",
+
+            "Henri Yuliansyah",
+
+            "Sultan"
+
+        ];
+
+
+        if (
+            allowedUsers.includes(
+                username
+            )
+        ) {
+
+            document
+                .getElementById(
+                    "btnDownload"
+                )
+                .style
+                .display =
+                "inline-block";
+
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        function applySearch() {
+
+
+            const keyword =
+                document
+                .getElementById(
+                    "searchInput"
+                )
+                .value
+                .toLowerCase()
+                .trim();
+
+
+            filteredData =
+                allData.filter(
+
+                    item => {
+
+
+                        const id =
+                            String(
+                                item.id || ""
+                            )
+                            .toLowerCase();
+
+
+                        const nik =
+                            String(
+                                item.nik || ""
+                            )
+                            .toLowerCase();
+
+
+                        const nama =
+                            String(
+                                item.nama || ""
+                            )
+                            .toLowerCase();
+
+
+                        return (
+
+                            id.includes(
+                                keyword
+                            )
+
+                            ||
+
+                            nik.includes(
+                                keyword
+                            )
+
+                            ||
+
+                            nama.includes(
+                                keyword
+                            )
+
+                        );
+
+
+                    }
+
+                );
+
+
+            currentPage = 1;
+
+
+            renderTable();
+
+        }
+
+
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .addEventListener(
+                "input",
+                applySearch
+            );
+
+
+        /* =========================
+           FIREBASE DATA
+
+           STRUKTUR:
+
+           customer/
+               1234540797076494/
+                   alamatktp
+                   domisili
+                   nama
+                   nik
+                   photoKTP
+        ========================= */
+
+        const dbRef =
+            ref(
+                db,
+                "customer"
+            );
+
+
+        onValue(
+
+            dbRef,
+
+
+            (snapshot) => {
+
+
+                const data =
+                    snapshot.val();
+
+
+                console.log(
+                    "Data customer Firebase:",
+                    data
+                );
+
+
+                if (!data) {
+
+
+                    allData = [];
+
+                    filteredData = [];
+
+
+                    showEmptyData(
+                        "Data customer belum tersedia"
+                    );
+
+
+                    return;
+
+                }
+
+
+                /*
+                   Object.entries digunakan
+                   agar KEY Firebase ikut diambil.
+
+                   Contoh:
+
+                   customer/
+                     1234540797076494/
+
+                   Maka:
+
+                   firebaseId =
+                   1234540797076494
+                */
+
+                allData =
+                    Object.entries(
+                        data
+                    )
+                    .map(
+
+                        (
+                            [
+                                firebaseId,
+                                item
+                            ]
+                        ) => {
+
+                            return {
+
+                                ...item,
+
+                                id:
+                                    firebaseId
+
+                            };
+
+                        }
+
+                    );
+
+
+                applySearch();
+
+
+            },
+
+
+            (error) => {
+
+
+                console.error(
+                    "Firebase Error:",
+                    error
+                );
+
+
+                showEmptyData(
+                    "Gagal mengambil data customer"
+                );
+
+
+            }
+
+        );
+
+
+        /* =========================
+           EMPTY DATA
+        ========================= */
+
+        function showEmptyData(
+            message
+        ) {
+
+
+            document
+                .getElementById(
+                    "isiData"
+                )
+                .innerHTML =
+                `
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="empty-data"
+                    >
+
+                        ${escapeHtml(message)}
+
+                    </td>
+
+                </tr>
+                `;
+
+
+            document
+                .getElementById(
+                    "pagination"
+                )
+                .innerHTML =
+                "";
+
+        }
+
+
+        /* =========================
+           ESCAPE HTML
+        ========================= */
+
+        function escapeHtml(
+            value
+        ) {
+
+
+            return String(
+                value ?? ""
+            )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+        }
+
+
+        /* =========================
+           RENDER TABLE
+        ========================= */
+
+        function renderTable() {
+
+
+            if (
+                filteredData.length === 0
+            ) {
+
+
+                showEmptyData(
+                    "Data tidak ditemukan"
+                );
+
+
+                return;
+
+            }
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredData.length
+                    /
+                    rowsPerPage
+                );
+
+
+            /*
+               Pengaman jika halaman
+               melebihi jumlah halaman
+            */
+
+            if (
+                currentPage > totalPages
+            ) {
+
+                currentPage =
+                    totalPages;
+
+            }
+
+
+            const start =
+                (
+                    currentPage - 1
+                )
+                *
+                rowsPerPage;
+
+
+            const end =
+                start
+                +
+                rowsPerPage;
+
+
+            const paginatedData =
+                filteredData.slice(
+                    start,
+                    end
+                );
+
+
+            let html =
+                "";
+
+
+            let no =
+                start + 1;
+
+
+            paginatedData.forEach(
+
+                item => {
+
+
+                    /*
+                       ID dari Firebase Key
+
+                       Jika ingin menampilkan
+                       NIK dari field,
+                       item.nik diprioritaskan.
+                    */
+
+                    const id =
+                        item.nik
+                        ||
+                        item.id
+                        ||
+                        "-";
+
+
+                    const nama =
+                        item.nama
+                        ||
+                        "-";
+
+
+                    const alamatktp =
+                        item.alamatktp
+                        ||
+                        "-";
+
+
+                    const domisili =
+                        item.domisili
+                        ||
+                        "-";
+
+
+                    /*
+                       SUMBER FOTO:
+
+                       customer/
+                         id/
+                           photoKTP
+
+                       KODE:
+                       item.photoKTP
+                    */
+
+                    const urlphoto =
+                        item.photoKTP
+                        ||
+                        "";
+
+
+                    /* =========================
+                       PHOTO HTML
+                    ========================= */
+
+                    let photoHtml =
+                        `
+                        <span
+                            class="no-photo"
+                        >
+
+                            Tidak ada foto
+
+                        </span>
+                        `;
+
+
+                    if (
+                        urlphoto
+                        &&
+                        typeof urlphoto ===
+                        "string"
+                    ) {
+
+
+                        const safeUrl =
+                            escapeHtml(
+                                urlphoto
+                            );
+
+
+                        photoHtml =
+                            `
+                            <img
+                                src="${safeUrl}"
+
+                                alt="Foto KTP ${escapeHtml(nama)}"
+
+                                class="customer-photo"
+
+                                data-url="${safeUrl}"
+
+                                onclick="openPhotoFromElement(this)"
+
+                                onerror="photoError(this)"
+                            >
+                            `;
+
+                    }
+
+
+                    html +=
+                        `
+                        <tr>
+
+
+                            <td>
+
+                                ${no}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(id)}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(nama)}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(alamatktp)}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(domisili)}
+
+                            </td>
+
+
+                            <td
+                                class="photo-cell"
+                            >
+
+                                ${photoHtml}
+
+                            </td>
+
+
+                        </tr>
+                        `;
+
+
+                    no++;
+
+
+                }
+
+            );
+
+
+            document
+                .getElementById(
+                    "isiData"
+                )
+                .innerHTML =
+                html;
+
+
+            renderPagination();
+
+        }
+
+
+        /* =========================
+           PHOTO ERROR
+        ========================= */
+
+        window.photoError =
+            function (
+                image
+            ) {
+
+
+                image.outerHTML =
+                    `
+                    <span
+                        class="no-photo"
+                    >
+
+                        Foto gagal dimuat
+
+                    </span>
+                    `;
+
+            };
+
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        function renderPagination() {
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredData.length
+                    /
+                    rowsPerPage
+                );
+
+
+            if (
+                totalPages <= 1
+            ) {
+
+
+                document
+                    .getElementById(
+                        "pagination"
+                    )
+                    .innerHTML =
+                    "";
+
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "pagination"
+                )
+                .innerHTML =
+                `
+
+                <button
+                    class="btn-prev"
+
+                    onclick="prevPage()"
+
+                    ${
+                        currentPage === 1
+                        ?
+                        "disabled"
+                        :
+                        ""
+                    }
+                >
+
+                    Prev
+
+                </button>
+
+
+                <span
+                    class="page-info"
+                >
+
+                    Halaman
+                    ${currentPage}
+                    dari
+                    ${totalPages}
+
+                </span>
+
+
+                <button
+                    class="btn-next"
+
+                    onclick="nextPage()"
+
+                    ${
+                        currentPage === totalPages
+                        ?
+                        "disabled"
+                        :
+                        ""
+                    }
+                >
+
+                    Next
+
+                </button>
+
+                `;
+
+        }
+
+
+        /* =========================
+           NEXT PAGE
+        ========================= */
+
+        window.nextPage =
+            function () {
+
+
+                const totalPages =
+                    Math.ceil(
+                        filteredData.length
+                        /
+                        rowsPerPage
+                    );
+
+
+                if (
+                    currentPage
+                    <
+                    totalPages
+                ) {
+
+
+                    currentPage++;
+
+
+                    renderTable();
+
+                }
+
+            };
+
+
+        /* =========================
+           PREVIOUS PAGE
+        ========================= */
+
+        window.prevPage =
+            function () {
+
+
+                if (
+                    currentPage > 1
+                ) {
+
+
+                    currentPage--;
+
+
+                    renderTable();
+
+                }
+
+            };
+
+
+        /* =========================
+           OPEN PHOTO
+        ========================= */
+
+        window.openPhotoFromElement =
+            function (
+                image
+            ) {
+
+
+                const url =
+                    image.getAttribute(
+                        "data-url"
+                    );
+
+
+                openPhoto(
+                    url,
+                    image.alt
+                );
+
+            };
+
+
+        window.openPhoto =
+            function (
+                url,
+                title = ""
+            ) {
+
+
+                const modal =
+                    document.getElementById(
+                        "photoModal"
+                    );
+
+
+                const image =
+                    document.getElementById(
+                        "modalImage"
+                    );
+
+
+                const caption =
+                    document.getElementById(
+                        "modalCaption"
+                    );
+
+
+                image.src =
+                    url;
+
+
+                caption.textContent =
+                    title;
+
+
+                modal.style.display =
+                    "flex";
+
+            };
+
+
+        /* =========================
+           CLOSE PHOTO
+        ========================= */
+
+        window.closePhoto =
+            function () {
+
+
+                const modal =
+                    document.getElementById(
+                        "photoModal"
+                    );
+
+
+                modal.style.display =
+                    "none";
+
+
+                document
+                    .getElementById(
+                        "modalImage"
+                    )
+                    .src =
+                    "";
+
+            };
+
+
+        /* =========================
+           CLOSE CLICK OUTSIDE
+        ========================= */
+
+        document
+            .getElementById(
+                "photoModal"
+            )
+            .addEventListener(
+
+                "click",
+
+                function (
+                    event
+                ) {
+
+
+                    if (
+                        event.target ===
+                        this
+                    ) {
+
+                        closePhoto();
+
+                    }
+
+                }
+
+            );
+
+
+        /* =========================
+           CLOSE ESC
+        ========================= */
+
+        document.addEventListener(
+
+            "keydown",
+
+            function (
+                event
+            ) {
+
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closePhoto();
+
+                }
+
+            }
+
+        );
+
+
+        /* =========================
+           DOWNLOAD EXCEL
+        ========================= */
+
+        window.downloadExcel =
+            function () {
+
+
+                if (
+                    filteredData.length === 0
+                ) {
+
+
+                    alert(
+                        "Tidak ada data untuk di-download!"
+                    );
+
+
+                    return;
+
+                }
+
+
+                const dataExcel =
+                    filteredData.map(
+
+                        (
+                            item,
+                            index
+                        ) => {
+
+
+                            return {
+
+
+                                "No":
+                                    index + 1,
+
+
+                                "ID / NIK":
+                                    item.nik
+                                    ||
+                                    item.id
+                                    ||
+                                    "-",
+
+
+                                "Nama":
+                                    item.nama
+                                    ||
+                                    "-",
+
+
+                                "Alamat KTP":
+                                    item.alamatktp
+                                    ||
+                                    "-",
+
+
+                                "Domisili":
+                                    item.domisili
+                                    ||
+                                    "-",
+
+
+                                "URL Photo KTP":
+                                    item.photoKTP
+                                    ||
+                                    "-"
+
+
+                            };
+
+
+                        }
+
+                    );
+
+
+                const worksheet =
+                    XLSX.utils
+                    .json_to_sheet(
+                        dataExcel
+                    );
+
+
+                worksheet["!cols"] = [
+
+                    {
+                        wch: 8
+                    },
+
+                    {
+                        wch: 22
+                    },
+
+                    {
+                        wch: 25
+                    },
+
+                    {
+                        wch: 45
+                    },
+
+                    {
+                        wch: 35
+                    },
+
+                    {
+                        wch: 60
+                    }
+
+                ];
+
+
+                const workbook =
+                    XLSX.utils
+                    .book_new();
+
+
+                XLSX.utils
+                    .book_append_sheet(
+
+                        workbook,
+
+                        worksheet,
+
+                        "Data Customer"
+
+                    );
+
+
+                XLSX.writeFile(
+
+                    workbook,
+
+                    "Data_Customer.xlsx"
+
+                );
+
+            };
+
+
+    </script>
+
+
+</body>
+
+</html>
