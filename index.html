@@ -11,7 +11,6 @@
 
     <title>ARC TRANS</title>
 
-
     <style>
 
         * {
@@ -27,51 +26,52 @@
             background:
                 linear-gradient(
                     135deg,
-                    #2196F3,
-                    #21CBF3
+                    #2196F3 0%,
+                    #21CBF3 100%
                 );
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             padding: 20px;
         }
 
 
+        /* =========================
+           CONTAINER
+        ========================= */
+
         .container {
-
             width: 100%;
+            max-width: 850px;
 
-            max-width: 500px;
+            background: #ffffff;
 
-            background: white;
+            padding: 35px 30px;
 
-            padding: 30px 25px;
-
-            border-radius: 20px;
+            border-radius: 24px;
 
             box-shadow:
-                0 15px 35px
-                rgba(0,0,0,0.25);
+                0 20px 45px
+                rgba(0, 0, 0, 0.25);
 
             text-align: center;
 
             animation:
                 fadeIn 0.5s ease;
-
         }
 
 
+        /* =========================
+           LOGO
+        ========================= */
+
         .logo {
+            width: 95px;
+            height: 95px;
 
-            width: 90px;
-
-            height: 90px;
-
-            margin: auto;
+            margin: 0 auto 15px;
 
             border-radius: 50%;
 
@@ -83,58 +83,60 @@
                 );
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
-            font-size: 40px;
+            font-size: 48px;
 
-            margin-bottom: 15px;
-
+            box-shadow:
+                0 8px 20px
+                rgba(33, 150, 243, 0.35);
         }
 
 
-        h1 {
+        /* =========================
+           TITLE
+        ========================= */
 
+        h1 {
             margin: 0;
 
             color: #2196F3;
 
-            font-size: 28px;
+            font-size: 30px;
 
+            font-weight: 700;
+
+            letter-spacing: 1px;
         }
 
 
         .subtitle {
-
             margin-top: 8px;
-
-            margin-bottom: 30px;
+            margin-bottom: 32px;
 
             color: #777;
 
             font-size: 14px;
-
         }
 
 
-        .menu {
+        /* =========================
+           MENU
+        ========================= */
 
+        .menu {
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    3,
-                    1fr
-                );
+                repeat(4, 1fr);
 
             gap: 15px;
-
         }
 
 
         .menu-item {
+            min-height: 160px;
 
             text-decoration: none;
 
@@ -142,31 +144,33 @@
 
             border:
                 1px solid
-                #e0e0e0;
+                #e5e7eb;
 
-            border-radius: 15px;
+            border-radius: 18px;
 
-            padding: 20px 10px;
+            padding: 20px 12px;
 
-            transition: 0.3s;
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
 
-            background: white;
+            background: #ffffff;
 
             display: flex;
-
             flex-direction: column;
 
             align-items: center;
-
             justify-content: center;
 
+            cursor: pointer;
         }
 
 
         .menu-item:hover {
-
             transform:
-                translateY(-5px);
+                translateY(-6px);
 
             background:
                 #f3f9ff;
@@ -175,108 +179,159 @@
                 #2196F3;
 
             box-shadow:
-                0 8px 20px
+                0 12px 25px
                 rgba(
                     33,
                     150,
                     243,
-                    0.25
+                    0.22
                 );
-
         }
 
 
         .menu-icon {
+            width: 70px;
+            height: 70px;
 
-            font-size: 42px;
+            margin-bottom: 15px;
 
-            margin-bottom: 10px;
+            border-radius: 50%;
 
+            background:
+                linear-gradient(
+                    135deg,
+                    #e3f2fd,
+                    #f1fbff
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 35px;
         }
 
 
         .menu-text {
-
             font-size: 14px;
 
-            font-weight: bold;
+            font-weight: 700;
 
+            line-height: 1.4;
         }
 
 
-        .footer {
+        /* =========================
+           FOOTER
+        ========================= */
 
+        .footer {
             margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid #eeeeee;
 
             color: #999;
 
             font-size: 12px;
-
         }
 
+
+        /* =========================
+           ANIMATION
+        ========================= */
 
         @keyframes fadeIn {
 
             from {
-
                 opacity: 0;
 
                 transform:
                     translateY(20px);
-
             }
 
             to {
-
                 opacity: 1;
 
                 transform:
                     translateY(0);
-
             }
 
         }
 
 
-        @media (max-width: 450px) {
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 700px) {
 
             .container {
+                max-width: 600px;
+            }
 
+            .menu {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 450px) {
+
+            body {
+                padding: 12px;
+            }
+
+
+            .container {
                 padding:
                     25px 15px;
+            }
 
+
+            h1 {
+                font-size: 26px;
             }
 
 
             .menu {
-
                 grid-template-columns:
-                    repeat(
-                        1,
-                        1fr
-                    );
-
+                    1fr;
             }
 
 
             .menu-item {
+                min-height: auto;
 
                 flex-direction: row;
 
                 justify-content:
                     flex-start;
 
-                padding: 18px;
+                text-align: left;
 
+                padding: 15px 18px;
             }
 
 
             .menu-icon {
+                width: 55px;
+                height: 55px;
+
+                min-width: 55px;
 
                 margin-bottom: 0;
-
                 margin-right: 15px;
 
+                font-size: 27px;
             }
 
         }
@@ -335,9 +390,33 @@
 
                 </div>
 
+
                 <div class="menu-text">
 
                     Input Unit
+
+                </div>
+
+            </a>
+
+
+            <!-- TABEL UNIT KENDARAAN -->
+
+            <a
+                href="tabelunit.html"
+                class="menu-item"
+            >
+
+                <div class="menu-icon">
+
+                    📋
+
+                </div>
+
+
+                <div class="menu-text">
+
+                    Tabel Unit Kendaraan
 
                 </div>
 
@@ -357,6 +436,7 @@
 
                 </div>
 
+
                 <div class="menu-text">
 
                     Input Customer
@@ -366,7 +446,7 @@
             </a>
 
 
-            <!-- KTP -->
+            <!-- RENT OUT -->
 
             <a
                 href="outrent.html"
@@ -375,9 +455,10 @@
 
                 <div class="menu-icon">
 
-                    🪪
+                    📝
 
                 </div>
+
 
                 <div class="menu-text">
 
