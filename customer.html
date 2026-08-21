@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ARC TRANS - Form Customer</title>
 
 
     <style>
+
+        /* =========================
+           GLOBAL
+        ========================= */
 
         * {
             box-sizing: border-box;
@@ -20,59 +26,315 @@
 
         body {
             margin: 0;
-
             min-height: 100vh;
 
             background:
                 linear-gradient(
                     135deg,
-                    #2196F3,
-                    #21CBF3
+                    #0f6edb 0%,
+                    #2196F3 45%,
+                    #21CBF3 100%
                 );
 
+            padding: 30px 20px;
+
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
-            padding: 20px;
         }
 
 
-        .container {
+        /* =========================
+           BACKGROUND EFFECT
+        ========================= */
 
-            background: white;
+        body::before,
+        body::after {
+            content: "";
 
-            padding: 25px;
+            position: fixed;
 
-            border-radius: 15px;
+            border-radius: 50%;
 
-            width: 100%;
+            background:
+                rgba(255, 255, 255, 0.12);
 
-            max-width: 450px;
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+
+        body::before {
+            width: 300px;
+            height: 300px;
+
+            top: -120px;
+            left: -100px;
+        }
+
+
+        body::after {
+            width: 350px;
+            height: 350px;
+
+            right: -150px;
+            bottom: -150px;
+        }
+
+
+        /* =========================
+           HOME BUTTON
+        ========================= */
+
+        .home-btn {
+
+            position: fixed;
+
+            top: 18px;
+            left: 18px;
+
+            z-index: 1000;
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(255, 255, 255, 0.96);
+
+            color: #1683e8;
+
+            text-decoration: none;
+
+            font-size: 22px;
+
+            border-radius: 50%;
 
             box-shadow:
-                0 10px 25px
-                rgba(0,0,0,0.2);
+                0 8px 20px
+                rgba(0, 0, 0, 0.18);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        .home-btn:hover {
+
+            transform:
+                translateY(-3px)
+                scale(1.05);
+
+            background: #ffffff;
+
+            box-shadow:
+                0 12px 25px
+                rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+
+            width: 100%;
+            max-width: 620px;
+
+            background:
+                rgba(255, 255, 255, 0.97);
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 60px
+                rgba(0, 0, 0, 0.22);
 
             animation:
                 fadeIn 0.5s ease;
         }
 
 
-        h3 {
+        /* =========================
+           HEADER
+        ========================= */
+
+        .form-header {
+
+            padding: 30px 25px;
+
             text-align: center;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1976D2,
+                    #2196F3,
+                    #21CBF3
+                );
+
+            position: relative;
+        }
+
+
+        .form-icon {
+
+            width: 72px;
+            height: 72px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 22px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 36px;
+
+            background:
+                rgba(255, 255, 255, 0.18);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.28);
+
+            box-shadow:
+                0 8px 20px
+                rgba(0, 0, 0, 0.15);
+        }
+
+
+        .form-header h1 {
+
+            margin: 0;
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .form-header p {
+
+            margin: 8px 0 0;
+
+            font-size: 13px;
+
+            opacity: 0.9;
+        }
+
+
+        /* =========================
+           FORM BODY
+        ========================= */
+
+        .form-body {
+
+            padding: 30px 28px 32px;
+        }
+
+
+        /* =========================
+           SECTION TITLE
+        ========================= */
+
+        .section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
             margin-bottom: 20px;
-            color: #2196F3;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            color: #1e293b;
+        }
+
+
+        .section-title span {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #e8f4ff;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           FORM GROUP
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 18px;
         }
 
 
         label {
+
             display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
+
+            margin-bottom: 7px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #475569;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 17px;
+
+            pointer-events: none;
+
+            opacity: 0.7;
         }
 
 
@@ -81,136 +343,198 @@
 
             width: 100%;
 
-            padding: 12px;
-
-            margin-bottom: 15px;
-
-            border-radius: 8px;
-
-            border: 1px solid #ccc;
+            border:
+                1px solid
+                #dce3eb;
 
             outline: none;
 
-            transition: 0.3s;
+            background: #f8fafc;
+
+            color: #1e293b;
 
             font-size: 15px;
+
+            border-radius: 12px;
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        input {
+
+            height: 50px;
+
+            padding:
+                0 15px
+                0 45px;
+        }
+
+
+        textarea {
+
+            min-height: 95px;
+
+            padding: 13px 15px;
+
+            resize: vertical;
         }
 
 
         input:focus,
         textarea:focus {
 
+            background: white;
+
             border-color: #2196F3;
 
             box-shadow:
-                0 0 5px
-                rgba(33,150,243,0.5);
+                0 0 0 4px
+                rgba(33, 150, 243, 0.12);
         }
 
 
-        textarea {
+        input::placeholder,
+        textarea::placeholder {
 
-            min-height: 80px;
-
-            resize: vertical;
+            color: #a0a8b3;
         }
 
 
-        button {
+        /* =========================
+           FILE UPLOAD
+        ========================= */
 
-            width: 100%;
+        .upload-box {
 
-            padding: 12px;
+            position: relative;
 
-            border: none;
+            min-height: 150px;
 
-            border-radius: 8px;
+            border:
+                2px dashed
+                #b9d8f5;
 
-            background: #2196F3;
+            border-radius: 16px;
 
-            color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4faff,
+                    #fafdff
+                );
 
-            font-size: 16px;
+            display: flex;
 
-            font-weight: bold;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
 
             cursor: pointer;
 
-            transition: 0.3s;
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease;
         }
 
 
-        button:hover {
-            background: #1976D2;
+        .upload-box:hover {
+
+            border-color: #2196F3;
+
+            background: #eef8ff;
         }
 
 
-        button:disabled {
+        #imageFile {
 
-            background: #90CAF9;
+            position: absolute;
 
-            cursor: not-allowed;
+            width: 100%;
+            height: 100%;
+
+            top: 0;
+            left: 0;
+
+            opacity: 0;
+
+            cursor: pointer;
+
+            z-index: 3;
         }
 
 
-        a {
+        .upload-placeholder {
+
+            text-align: center;
+
+            padding: 20px;
+
+            color: #64748b;
+
+            pointer-events: none;
+        }
+
+
+        .upload-placeholder .camera {
 
             display: block;
 
-            text-align: center;
+            font-size: 38px;
 
-            margin-top: 15px;
+            margin-bottom: 8px;
+        }
 
-            text-decoration: none;
+
+        .upload-placeholder strong {
+
+            display: block;
 
             color: #2196F3;
 
-            font-weight: bold;
+            margin-bottom: 5px;
+
+            font-size: 14px;
         }
 
 
-        a:hover {
-            text-decoration: underline;
+        .upload-placeholder small {
+
+            font-size: 12px;
         }
 
 
-        .home-btn {
-
-            position: fixed;
-
-            top: 15px;
-
-            left: 15px;
-
-            background: white;
-
-            color: #2196F3;
-
-            padding: 8px 15px;
-
-            border-radius: 20px;
-
-            text-decoration: none;
-
-            font-weight: bold;
-
-            box-shadow:
-                0 5px 10px
-                rgba(0,0,0,0.2);
-        }
-
+        /* =========================
+           PREVIEW FOTO
+        ========================= */
 
         .preview {
 
-            text-align: center;
+            display: none;
 
-            margin-bottom: 20px;
+            margin-top: 16px;
+
+            position: relative;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            background: #f1f5f9;
+
+            border:
+                1px solid
+                #dce3eb;
         }
 
 
         #preview {
 
-            display: none;
+            display: block;
 
             width: 100%;
 
@@ -218,35 +542,193 @@
 
             object-fit: contain;
 
-            border-radius: 10px;
-
-            border: 1px solid #ddd;
+            background: #ffffff;
         }
 
+
+        .preview-label {
+
+            position: absolute;
+
+            top: 10px;
+            left: 10px;
+
+            background:
+                rgba(33, 150, 243, 0.92);
+
+            color: white;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .btn-save {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1976D2,
+                    #2196F3
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 22px
+                rgba(33, 150, 243, 0.28);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+
+        .btn-save:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 14px 28px
+                rgba(33, 150, 243, 0.35);
+        }
+
+
+        .btn-save:disabled {
+
+            cursor: not-allowed;
+
+            opacity: 0.7;
+
+            transform: none;
+        }
+
+
+        /* =========================
+           BACK LINK
+        ========================= */
+
+        .back-link {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #64748b;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: color 0.2s;
+        }
+
+
+        .back-link:hover {
+
+            color: #2196F3;
+        }
+
+
+        /* =========================
+           ANIMATION
+        ========================= */
 
         @keyframes fadeIn {
 
             from {
+
                 opacity: 0;
-                transform: translateY(20px);
+
+                transform:
+                    translateY(25px)
+                    scale(0.98);
             }
 
             to {
+
                 opacity: 1;
-                transform: translateY(0);
+
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
 
-        @media (max-width: 500px) {
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
 
             body {
-                padding: 10px;
+
+                padding: 75px 12px 20px;
+
+                align-items: flex-start;
+            }
+
+
+            .home-btn {
+
+                top: 12px;
+                left: 12px;
             }
 
 
             .container {
-                margin-top: 50px;
+
+                border-radius: 20px;
+            }
+
+
+            .form-header {
+
+                padding: 25px 20px;
+            }
+
+
+            .form-header h1 {
+
+                font-size: 21px;
+            }
+
+
+            .form-body {
+
+                padding: 25px 18px;
             }
         }
 
@@ -258,113 +740,263 @@
 <body>
 
 
+    <!-- =========================
+         HOME
+    ========================= -->
+
     <a
         href="index.html"
         class="home-btn"
+        title="Kembali ke Home"
+        aria-label="Home"
     >
-        Home
+        🏠
     </a>
 
+
+
+    <!-- =========================
+         FORM CONTAINER
+    ========================= -->
 
     <div class="container">
 
 
-        <h3>
-            FORM CUSTOMER
-        </h3>
+        <!-- HEADER -->
 
+        <div class="form-header">
 
-        <label for="nama">
-            Nama
-        </label>
+            <div class="form-icon">
+                👤
+            </div>
 
-        <input
-            type="text"
-            id="nama"
-            placeholder="Masukkan nama customer"
-        >
+            <h1>
+                FORM CUSTOMER
+            </h1>
 
-
-        <label for="nik">
-            NIK
-        </label>
-
-        <input
-            type="text"
-            id="nik"
-            inputmode="numeric"
-            maxlength="16"
-            placeholder="16 digit NIK"
-        >
-
-
-        <label for="alamatktp">
-            Alamat KTP
-        </label>
-
-        <textarea
-            id="alamatktp"
-            placeholder="Masukkan alamat sesuai KTP"
-        ></textarea>
-
-
-        <label for="domisili">
-            Alamat Domisili Saat Ini
-        </label>
-
-        <textarea
-            id="domisili"
-            placeholder="Masukkan alamat domisili"
-        ></textarea>
-
-
-        <label for="hp">
-            No. HP
-        </label>
-
-        <input
-            type="tel"
-            id="hp"
-            inputmode="numeric"
-            placeholder="Contoh: 08123456789"
-        >
-
-
-        <label for="imageFile">
-            Ambil / Upload Foto KTP
-        </label>
-
-
-        <input
-            type="file"
-            id="imageFile"
-            accept="image/*"
-            capture="environment"
-        >
-
-
-        <div class="preview">
-
-            <img
-                id="preview"
-                alt="Preview Foto KTP"
-            >
+            <p>
+                Tambahkan data customer dan foto identitas
+            </p>
 
         </div>
 
 
-        <button
-            type="button"
-            id="btnProses"
-        >
-            SIMPAN DATA
-        </button>
+
+        <!-- FORM BODY -->
+
+        <div class="form-body">
 
 
-        <a href="home.html">
-            ← Kembali
-        </a>
+            <div class="section-title">
 
+                <span>
+                    📋
+                </span>
+
+                Data Customer
+
+            </div>
+
+
+
+            <!-- NAMA -->
+
+            <div class="form-group">
+
+                <label for="nama">
+                    Nama Lengkap
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        id="nama"
+                        autocomplete="name"
+                        placeholder="Masukkan nama customer"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NIK -->
+
+            <div class="form-group">
+
+                <label for="nik">
+                    NIK
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        🪪
+                    </span>
+
+                    <input
+                        type="text"
+                        id="nik"
+                        inputmode="numeric"
+                        maxlength="16"
+                        placeholder="Masukkan 16 digit NIK"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ALAMAT KTP -->
+
+            <div class="form-group">
+
+                <label for="alamatktp">
+                    Alamat KTP
+                </label>
+
+                <textarea
+                    id="alamatktp"
+                    placeholder="Masukkan alamat sesuai KTP"
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- DOMISILI -->
+
+            <div class="form-group">
+
+                <label for="domisili">
+                    Alamat Domisili
+                </label>
+
+                <textarea
+                    id="domisili"
+                    placeholder="Masukkan alamat tempat tinggal saat ini"
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- HP -->
+
+            <div class="form-group">
+
+                <label for="hp">
+                    Nomor HP
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        📱
+                    </span>
+
+                    <input
+                        type="tel"
+                        id="hp"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        placeholder="Contoh: 08123456789"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FOTO KTP -->
+
+            <div class="form-group">
+
+                <label>
+                    Foto KTP
+                </label>
+
+
+                <div class="upload-box">
+
+                    <input
+                        type="file"
+                        id="imageFile"
+                        accept="image/*"
+                        capture="environment"
+                    >
+
+
+                    <div class="upload-placeholder">
+
+                        <span class="camera">
+                            📷
+                        </span>
+
+                        <strong>
+                            Ambil atau Upload Foto KTP
+                        </strong>
+
+                        <small>
+                            Klik di sini untuk memilih foto
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="preview"
+                    id="previewContainer"
+                >
+
+                    <img
+                        id="preview"
+                        alt="Preview Foto KTP"
+                    >
+
+                    <div class="preview-label">
+                        PREVIEW KTP
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="button"
+                id="btnProses"
+                class="btn-save"
+            >
+                💾 SIMPAN DATA CUSTOMER
+            </button>
+
+
+
+            <!-- BACK -->
+
+            <a
+                href="index.html"
+                class="back-link"
+            >
+                ← Kembali ke Halaman Utama
+            </a>
+
+
+        </div>
 
     </div>
 
@@ -374,7 +1006,7 @@
 
 
         /* =============================
-           FIREBASE
+           FIREBASE IMPORT
         ============================= */
 
         import {
@@ -391,6 +1023,7 @@
         }
         from
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
 
 
         /* =============================
@@ -419,7 +1052,9 @@
 
             appId:
                 "1:60781918601:web:c85d6131207f8a8958"
+
         };
+
 
 
         /* =============================
@@ -427,15 +1062,20 @@
         ============================= */
 
         const app =
-            initializeApp(firebaseConfig);
+            initializeApp(
+                firebaseConfig
+            );
 
 
         const db =
-            getDatabase(app);
+            getDatabase(
+                app
+            );
+
 
 
         /* =============================
-           ELEMEN
+           ELEMEN HTML
         ============================= */
 
         const namaInput =
@@ -466,8 +1106,17 @@
             document.getElementById("preview");
 
 
+        const previewContainer =
+            document.getElementById(
+                "previewContainer"
+            );
+
+
         const btnProses =
-            document.getElementById("btnProses");
+            document.getElementById(
+                "btnProses"
+            );
+
 
 
         /* =============================
@@ -488,6 +1137,7 @@
         );
 
 
+
         /* =============================
            VALIDASI NO HP
         ============================= */
@@ -506,6 +1156,7 @@
         );
 
 
+
         /* =============================
            PREVIEW FOTO KTP
         ============================= */
@@ -522,7 +1173,7 @@
 
                     preview.src = "";
 
-                    preview.style.display =
+                    previewContainer.style.display =
                         "none";
 
                     return;
@@ -547,7 +1198,7 @@
                     preview.src = "";
 
 
-                    preview.style.display =
+                    previewContainer.style.display =
                         "none";
 
 
@@ -567,7 +1218,7 @@
                             event.target.result;
 
 
-                        preview.style.display =
+                        previewContainer.style.display =
                             "block";
 
                     };
@@ -581,6 +1232,7 @@
         );
 
 
+
         /* =============================
            TOMBOL SIMPAN
         ============================= */
@@ -589,6 +1241,7 @@
             "click",
             kirimData
         );
+
 
 
         /* =============================
@@ -622,6 +1275,7 @@
                 imageInput.files[0];
 
 
+
             /* =========================
                VALIDASI
             ========================= */
@@ -632,9 +1286,7 @@
                     "Nama wajib diisi!"
                 );
 
-
                 namaInput.focus();
-
 
                 return;
 
@@ -647,9 +1299,7 @@
                     "NIK wajib diisi!"
                 );
 
-
                 nikInput.focus();
-
 
                 return;
 
@@ -664,9 +1314,46 @@
                     "NIK harus terdiri dari 16 digit!"
                 );
 
-
                 nikInput.focus();
 
+                return;
+
+            }
+
+
+            if (!alamatktp) {
+
+                alert(
+                    "Alamat KTP wajib diisi!"
+                );
+
+                alamatKTPInput.focus();
+
+                return;
+
+            }
+
+
+            if (!domisili) {
+
+                alert(
+                    "Alamat domisili wajib diisi!"
+                );
+
+                domisiliInput.focus();
+
+                return;
+
+            }
+
+
+            if (!hp) {
+
+                alert(
+                    "Nomor HP wajib diisi!"
+                );
+
+                hpInput.focus();
 
                 return;
 
@@ -679,14 +1366,14 @@
                     "Foto KTP wajib dipilih!"
                 );
 
-
                 return;
 
             }
 
 
+
             /* =========================
-               MULAI PROSES
+               NONAKTIFKAN TOMBOL
             ========================= */
 
             btnProses.disabled =
@@ -694,7 +1381,8 @@
 
 
             btnProses.textContent =
-                "Mengupload Foto KTP...";
+                "⏳ MENGUPLOAD FOTO KTP...";
+
 
 
             try {
@@ -720,9 +1408,7 @@
                 );
 
 
-                /*
-                   Nama file unik
-                */
+                /* ID FOTO UNIK */
 
                 const uniqueId =
                     "ktp_" +
@@ -737,6 +1423,7 @@
                     "public_id",
                     uniqueId
                 );
+
 
 
                 const response =
@@ -757,13 +1444,13 @@
                     );
 
 
+
                 const uploadData =
                     await response.json();
 
 
-                /*
-                   CEK ERROR CLOUDINARY
-                */
+
+                /* CEK ERROR CLOUDINARY */
 
                 if (!response.ok) {
 
@@ -776,6 +1463,7 @@
                     throw new Error(
 
                         uploadData.error?.message ||
+
                         "Upload foto KTP gagal"
 
                     );
@@ -783,30 +1471,19 @@
                 }
 
 
-                /*
-                   URL FOTO KTP
-                */
+
+                /* URL FOTO */
 
                 const photoKTP =
                     uploadData.secure_url;
 
 
+
                 console.log(
-                    "Foto KTP:",
+                    "Foto KTP berhasil:",
                     photoKTP
                 );
 
-
-                /* =========================
-                   MEMBUAT ID FIREBASE
-                ========================= */
-
-                const id =
-                    nik
-                    .replace(
-                        /[.#$[\]/]/g,
-                        "_"
-                    );
 
 
                 /* =========================
@@ -843,24 +1520,27 @@
                 };
 
 
+
                 /* =========================
                    SIMPAN KE FIREBASE
                 ========================= */
 
                 btnProses.textContent =
-                    "Menyimpan Data...";
+                    "💾 MENYIMPAN DATA...";
+
 
 
                 await set(
 
                     ref(
                         db,
-                        "customer/" + id
+                        "customer/" + nik
                     ),
 
                     dataCustomer
 
                 );
+
 
 
                 /* =========================
@@ -870,6 +1550,7 @@
                 alert(
                     "✓ Data customer dan foto KTP berhasil disimpan!"
                 );
+
 
 
                 /* =========================
@@ -890,8 +1571,9 @@
 
                 preview.src = "";
 
-                preview.style.display =
+                previewContainer.style.display =
                     "none";
+
 
 
             } catch (error) {
@@ -919,7 +1601,7 @@
 
 
                 btnProses.textContent =
-                    "SIMPAN DATA";
+                    "💾 SIMPAN DATA CUSTOMER";
 
             }
 
@@ -930,5 +1612,4 @@
 
 
 </body>
-
 </html>
