@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ARC TRANS - Data Rental</title>
+
+
+    <!-- LIBRARY EXCEL -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
+    ></script>
+
+
+    <style>
+
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        * {
+
+            box-sizing: border-box;
+
+            font-family:
+
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #eef6ff,
+                    #f7f9fc
+                );
+
+            color: #263238;
+
+        }
+
+
+        /* =========================
+           HOME BUTTON
+        ========================= */
+
+        .home-btn {
+
+            position: fixed;
+
+            top: 14px;
+            left: 16px;
+
+            z-index: 2000;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            background:
+
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.95
+                );
+
+            color: #1565C0;
+
+            padding:
+
+                9px
+                16px;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            box-shadow:
+
+                0 5px 20px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.12
+                );
+
+            transition:
+
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        .home-btn:hover {
+
+            transform:
+
+                translateY(
+                    -2px
+                );
+
+            box-shadow:
+
+                0 8px 25px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.18
+                );
+
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            position: relative;
+
+            min-height: 150px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding:
+
+                35px
+                20px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #0d47a1,
+                    #2196F3,
+                    #21c6f3
+                );
+
+            color: white;
+
+            overflow: hidden;
+
+            box-shadow:
+
+                0 4px 20px
+                rgba(
+                    33,
+                    150,
+                    243,
+                    0.25
+                );
+
+        }
+
+
+        .navbar::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            top: -180px;
+            right: -80px;
+
+        }
+
+
+        .navbar::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background:
+
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            bottom: -150px;
+            left: 10%;
+
+        }
+
+
+        .logo {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size:
+
+                clamp(
+                    22px,
+                    4vw,
+                    32px
+                );
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-align: center;
+
+            text-shadow:
+
+                0 2px 10px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.15
+                );
+
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 1600px;
+
+            margin: auto;
+
+            padding:
+
+                25px
+                clamp(
+                    15px,
+                    4vw,
+                    40px
+                )
+                40px;
+
+        }
+
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        #searchInput {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            padding:
+
+                14px
+                18px;
+
+            border:
+
+                1px
+                solid
+                #dce6f0;
+
+            border-radius: 14px;
+
+            outline: none;
+
+            background: white;
+
+            font-size: 14px;
+
+            box-shadow:
+
+                0 4px 15px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.04
+                );
+
+            transition:
+
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        #searchInput:focus {
+
+            border-color: #2196F3;
+
+            box-shadow:
+
+                0 0 0 4px
+                rgba(
+                    33,
+                    150,
+                    243,
+                    0.12
+                );
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        button {
+
+            border: none;
+
+            padding:
+
+                12px
+                20px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition:
+
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s;
+
+        }
+
+
+        button:hover {
+
+            transform:
+
+                translateY(
+                    -2px
+                );
+
+            box-shadow:
+
+                0 7px 18px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.15
+                );
+
+        }
+
+
+        button:disabled {
+
+            background: #cfd8dc !important;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            box-shadow: none;
+
+        }
+
+
+        #btnDownload {
+
+            display: none;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #2e7d32,
+                    #4CAF50
+                );
+
+        }
+
+
+        /* =========================
+           TABLE CONTAINER
+        ========================= */
+
+        .table-container {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow:
+
+                0 10px 35px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+
+            border:
+
+                1px
+                solid
+                #edf1f5;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            min-width: 1550px;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+
+        }
+
+
+        /* =========================
+           TABLE HEADER
+        ========================= */
+
+        th {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #1976D2,
+                    #2196F3
+                );
+
+            color: white;
+
+            padding:
+
+                16px
+                14px;
+
+            text-align: center;
+
+            white-space: nowrap;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.2px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+        }
+
+
+        th:first-child {
+
+            border-top-left-radius: 18px;
+
+        }
+
+
+        th:last-child {
+
+            border-top-right-radius: 18px;
+
+        }
+
+
+        /* =========================
+           TABLE BODY
+        ========================= */
+
+        td {
+
+            padding:
+
+                15px
+                14px;
+
+            border-bottom:
+
+                1px
+                solid
+                #edf1f5;
+
+            text-align: center;
+
+            vertical-align: middle;
+
+            white-space: nowrap;
+
+            font-size: 13px;
+
+            transition:
+
+                background 0.2s ease;
+
+        }
+
+
+        tbody tr {
+
+            transition:
+
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: #f5faff;
+
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        /* =========================
+           MONEY STYLE
+        ========================= */
+
+        td:nth-child(9),
+        td:nth-child(10),
+        td:nth-child(11),
+        td:nth-child(12) {
+
+            font-weight: 700;
+
+            color: #1565C0;
+
+        }
+
+
+        /* =========================
+           EMPTY DATA
+        ========================= */
+
+        .empty-data {
+
+            padding: 50px;
+
+            text-align: center;
+
+            color: #78909C;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        #pagination {
+
+            margin-top: 25px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .btn-prev {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #fb8c00,
+                    #ff9800
+                );
+
+        }
+
+
+        .btn-next {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #2e7d32,
+                    #4CAF50
+                );
+
+        }
+
+
+        .page-info {
+
+            padding:
+
+                10px
+                16px;
+
+            background: white;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #546E7A;
+
+            box-shadow:
+
+                0 4px 15px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.06
+                );
+
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media
+        (
+            max-width: 900px
+        ) {
+
+            .navbar {
+
+                min-height: 130px;
+
+            }
+
+
+            .container {
+
+                padding:
+
+                    20px
+                    15px
+                    30px;
+
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE CARD MODE
+        ========================= */
+
+        @media
+        (
+            max-width: 700px
+        ) {
+
+
+            body {
+
+                background: #f4f7fb;
+
+            }
+
+
+            .home-btn {
+
+                top: 10px;
+
+                left: 10px;
+
+                font-size: 12px;
+
+                padding:
+
+                    8px
+                    12px;
+
+            }
+
+
+            .navbar {
+
+                min-height: 120px;
+
+                padding-top: 55px;
+
+            }
+
+
+            .logo {
+
+                font-size: 20px;
+
+            }
+
+
+            .container {
+
+                padding:
+
+                    15px
+                    10px
+                    30px;
+
+            }
+
+
+            .toolbar {
+
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+
+            #searchInput {
+
+                max-width: none;
+
+                width: 100%;
+
+            }
+
+
+            #btnDownload {
+
+                width: 100%;
+
+            }
+
+
+            .table-container {
+
+                background: transparent;
+
+                box-shadow: none;
+
+                border: none;
+
+                overflow: visible;
+
+            }
+
+
+            table {
+
+                min-width: 0;
+
+                width: 100%;
+
+            }
+
+
+            thead {
+
+                display: none;
+
+            }
+
+
+            tbody {
+
+                display: block;
+
+            }
+
+
+            tbody tr {
+
+                display: block;
+
+                width: 100%;
+
+                background: white;
+
+                border-radius: 18px;
+
+                margin-bottom: 15px;
+
+                padding:
+
+                    10px
+                    14px;
+
+                box-shadow:
+
+                    0 6px 20px
+                    rgba(
+                        0,
+                        0,
+                        0,
+                        0.07
+                    );
+
+                border:
+
+                    1px
+                    solid
+                    #edf1f5;
+
+            }
+
+
+            tbody tr:hover {
+
+                background: white;
+
+                transform:
+
+                    translateY(
+                        -2px
+                    );
+
+            }
+
+
+            td {
+
+                display: flex;
+
+                justify-content: space-between;
+
+                align-items: center;
+
+                gap: 15px;
+
+                padding:
+
+                    12px
+                    5px;
+
+                text-align: right;
+
+                white-space: normal;
+
+                border-bottom:
+
+                    1px
+                    solid
+                    #eef2f5;
+
+                font-size: 13px;
+
+            }
+
+
+            td::before {
+
+                content:
+
+                    attr(
+                        data-label
+                    );
+
+                text-align: left;
+
+                font-weight: 700;
+
+                color: #607D8B;
+
+                flex:
+
+                    0 0 45%;
+
+            }
+
+
+            td:last-child {
+
+                border-bottom: none;
+
+            }
+
+
+            .empty-data {
+
+                display: block;
+
+                text-align: center;
+
+                padding: 40px 10px;
+
+            }
+
+
+            .empty-data::before {
+
+                display: none;
+
+            }
+
+
+            #pagination {
+
+                gap: 8px;
+
+            }
+
+
+            #pagination button {
+
+                flex: 1;
+
+                min-width: 100px;
+
+            }
+
+
+            .page-info {
+
+                width: 100%;
+
+                text-align: center;
+
+            }
+
+        }
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media
+        (
+            max-width: 380px
+        ) {
+
+            td {
+
+                font-size: 12px;
+
+            }
+
+
+            td::before {
+
+                flex-basis: 48%;
+
+                font-size: 11px;
+
+            }
+
+
+            .logo {
+
+                font-size: 18px;
+
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HOME -->
+
+    <a
+        href="index.html"
+        class="home-btn"
+    >
+        🏠 Home
+    </a>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            🚐 DATA RENTAL KENDARAAN
+
+        </div>
+
+    </nav>
+
+
+    <!-- CONTAINER -->
+
+    <div class="container">
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Cari ID, nama, unit atau plat..."
+            >
+
+
+            <button
+                id="btnDownload"
+                onclick="downloadExcel()"
+            >
+                📥 Download Excel
+            </button>
+
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>No.</th>
+
+                        <th>ID</th>
+
+                        <th>Nama</th>
+
+                        <th>Nama Unit</th>
+
+                        <th>Plat Kendaraan</th>
+
+                        <th>Tanggal Sewa</th>
+
+                        <th>Estimasi Kembali</th>
+
+                        <th>Durasi Sewa</th>
+
+                        <th>Harga Sewa</th>
+
+                        <th>Total Harga</th>
+
+                        <th>Sudah Dibayar</th>
+
+                        <th>Sisa Bayar</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="isiData">
+
+                    <tr>
+
+                        <td
+                            colspan="12"
+                            class="empty-data"
+                        >
+
+                            Memuat data rental...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        <!-- PAGINATION -->
+
+        <div id="pagination"></div>
+
+
+    </div>
+
+
+
+    <!-- FIREBASE -->
+
+    <script type="module">
+
+
+        /* =========================
+           FIREBASE IMPORT
+        ========================= */
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            onValue
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+        /* =========================
+           FIREBASE CONFIG
+        ========================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+            authDomain:
+                "arctrans.firebaseapp.com",
+
+            databaseURL:
+                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+            projectId:
+                "arctrans",
+
+            storageBucket:
+                "arctrans.firebasestorage.app",
+
+            messagingSenderId:
+                "60781918601",
+
+            appId:
+                "1:60781918601:web:c85d6131207f8a8958"
+
+        };
+
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getDatabase(
+                app
+            );
+
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        let allData = [];
+
+        let filteredData = [];
+
+        let currentPage = 1;
+
+        const rowsPerPage = 10;
+
+
+        /* =========================
+           USERNAME
+        ========================= */
+
+        const username =
+            localStorage.getItem(
+                "username"
+            );
+
+
+        const allowedUsers = [
+
+            "Nurhakiki",
+
+            "Henri Yuliansyah",
+
+            "Sultan"
+
+        ];
+
+
+        if (
+            allowedUsers.includes(
+                username
+            )
+        ) {
+
+            document
+                .getElementById(
+                    "btnDownload"
+                )
+                .style
+                .display =
+                "inline-block";
+
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        function applySearch() {
+
+
+            const keyword =
+                document
+                .getElementById(
+                    "searchInput"
+                )
+                .value
+                .toLowerCase()
+                .trim();
+
+
+            filteredData =
+                allData.filter(
+
+                    item => {
+
+                        const id =
+                            String(
+                                item.id || ""
+                            )
+                            .toLowerCase();
+
+
+                        const customer =
+                            String(
+                                item.customer || ""
+                            )
+                            .toLowerCase();
+
+
+                        const namaUnit =
+                            String(
+                                item.namaUnit || ""
+                            )
+                            .toLowerCase();
+
+
+                        const plat =
+                            String(
+                                item.plat || ""
+                            )
+                            .toLowerCase();
+
+
+                        return (
+
+                            id.includes(keyword)
+
+                            ||
+
+                            customer.includes(keyword)
+
+                            ||
+
+                            namaUnit.includes(keyword)
+
+                            ||
+
+                            plat.includes(keyword)
+
+                        );
+
+                    }
+
+                );
+
+
+            currentPage = 1;
+
+            renderTable();
+
+        }
+
+
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .addEventListener(
+
+                "input",
+
+                applySearch
+
+            );
+
+
+        /* =========================
+           FIREBASE DATA
+        ========================= */
+
+        const dbRef =
+            ref(
+                db,
+                "rentout"
+            );
+
+
+        onValue(
+
+            dbRef,
+
+
+            (snapshot) => {
+
+
+                const data =
+                    snapshot.val();
+
+
+                console.log(
+                    "Data rentout Firebase:",
+                    data
+                );
+
+
+                if (!data) {
+
+
+                    allData = [];
+
+                    filteredData = [];
+
+
+                    showEmptyData(
+                        "Data rental belum tersedia"
+                    );
+
+
+                    return;
+
+                }
+
+
+                allData =
+                    Object.entries(
+                        data
+                    )
+                    .map(
+
+                        (
+                            [
+                                rentId,
+                                item
+                            ]
+                        ) => {
+
+                            return {
+
+                                ...item,
+
+                                id:
+                                    rentId
+
+                            };
+
+                        }
+
+                    );
+
+
+                applySearch();
+
+            },
+
+
+            (error) => {
+
+
+                console.error(
+                    "Firebase Error:",
+                    error
+                );
+
+
+                showEmptyData(
+                    "Gagal mengambil data rental"
+                );
+
+            }
+
+        );
+
+
+        /* =========================
+           EMPTY DATA
+        ========================= */
+
+        function showEmptyData(
+            message
+        ) {
+
+
+            document
+                .getElementById(
+                    "isiData"
+                )
+                .innerHTML =
+                `
+                <tr>
+
+                    <td
+                        colspan="12"
+                        class="empty-data"
+                    >
+
+                        ${escapeHtml(message)}
+
+                    </td>
+
+                </tr>
+                `;
+
+
+            document
+                .getElementById(
+                    "pagination"
+                )
+                .innerHTML =
+                "";
+
+        }
+
+
+        /* =========================
+           ESCAPE HTML
+        ========================= */
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+        }
+
+
+        /* =========================
+           FORMAT RUPIAH
+        ========================= */
+
+        function formatRupiah(
+            value
+        ) {
+
+
+            if (
+
+                value === null
+
+                ||
+
+                value === undefined
+
+                ||
+
+                value === ""
+
+            ) {
+
+                return "-";
+
+            }
+
+
+            const numberValue =
+                Number(
+                    value
+                );
+
+
+            if (
+                isNaN(
+                    numberValue
+                )
+            ) {
+
+                return escapeHtml(
+                    value
+                );
+
+            }
+
+
+            return (
+
+                "Rp " +
+
+                numberValue
+                .toLocaleString(
+                    "id-ID"
+                )
+
+            );
+
+        }
+
+
+        /* =========================
+           RENDER TABLE
+        ========================= */
+
+        function renderTable() {
+
+
+            if (
+                filteredData.length === 0
+            ) {
+
+                showEmptyData(
+                    "Data tidak ditemukan"
+                );
+
+                return;
+
+            }
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredData.length
+                    /
+                    rowsPerPage
+                );
+
+
+            if (
+                currentPage > totalPages
+            ) {
+
+                currentPage =
+                    totalPages;
+
+            }
+
+
+            const start =
+                (
+                    currentPage - 1
+                )
+                *
+                rowsPerPage;
+
+
+            const end =
+                start
+                +
+                rowsPerPage;
+
+
+            const paginatedData =
+                filteredData.slice(
+                    start,
+                    end
+                );
+
+
+            let html =
+                "";
+
+
+            let no =
+                start + 1;
+
+
+            paginatedData.forEach(
+
+                item => {
+
+
+                    const id =
+                        item.id || "-";
+
+
+                    const customer =
+                        item.customer || "-";
+
+
+                    const namaUnit =
+                        item.namaUnit || "-";
+
+
+                    const plat =
+                        item.plat || "-";
+
+
+                    const tanggalsewa =
+                        item.tanggalsewa || "-";
+
+
+                    const selesaisewa =
+                        item.selesaisewa || "-";
+
+
+                    const jumlahHari =
+                        item.jumlahHari ?? "-";
+
+
+                    const harga =
+                        item.harga;
+
+
+                    const total =
+                        item.total;
+
+
+                    const bayar =
+                        item.bayar;
+
+
+                    const sisa =
+                        item.sisa;
+
+
+                    html +=
+                        `
+
+                        <tr>
+
+
+                            <td
+                                data-label="No."
+                            >
+                                ${no}
+                            </td>
+
+
+                            <td
+                                data-label="ID"
+                            >
+                                ${escapeHtml(id)}
+                            </td>
+
+
+                            <td
+                                data-label="Nama"
+                            >
+                                ${escapeHtml(customer)}
+                            </td>
+
+
+                            <td
+                                data-label="Nama Unit"
+                            >
+                                ${escapeHtml(namaUnit)}
+                            </td>
+
+
+                            <td
+                                data-label="Plat Kendaraan"
+                            >
+                                ${escapeHtml(plat)}
+                            </td>
+
+
+                            <td
+                                data-label="Tanggal Sewa"
+                            >
+                                ${escapeHtml(tanggalsewa)}
+                            </td>
+
+
+                            <td
+                                data-label="Estimasi Kembali"
+                            >
+                                ${escapeHtml(selesaisewa)}
+                            </td>
+
+
+                            <td
+                                data-label="Durasi Sewa"
+                            >
+                                ${escapeHtml(jumlahHari)}
+                                Hari
+                            </td>
+
+
+                            <td
+                                data-label="Harga Sewa"
+                            >
+                                ${formatRupiah(harga)}
+                            </td>
+
+
+                            <td
+                                data-label="Total Harga"
+                            >
+                                ${formatRupiah(total)}
+                            </td>
+
+
+                            <td
+                                data-label="Sudah Dibayar"
+                            >
+                                ${formatRupiah(bayar)}
+                            </td>
+
+
+                            <td
+                                data-label="Sisa Bayar"
+                            >
+                                ${formatRupiah(sisa)}
+                            </td>
+
+
+                        </tr>
+
+                        `;
+
+
+                    no++;
+
+                }
+
+            );
+
+
+            document
+                .getElementById(
+                    "isiData"
+                )
+                .innerHTML =
+                html;
+
+
+            renderPagination();
+
+        }
+
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        function renderPagination() {
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredData.length
+                    /
+                    rowsPerPage
+                );
+
+
+            if (
+                totalPages <= 1
+            ) {
+
+                document
+                    .getElementById(
+                        "pagination"
+                    )
+                    .innerHTML =
+                    "";
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "pagination"
+                )
+                .innerHTML =
+                `
+
+                <button
+                    class="btn-prev"
+                    onclick="prevPage()"
+
+                    ${
+                        currentPage === 1
+                        ?
+                        "disabled"
+                        :
+                        ""
+                    }
+                >
+                    ← Sebelumnya
+                </button>
+
+
+                <span
+                    class="page-info"
+                >
+                    Halaman
+                    ${currentPage}
+                    dari
+                    ${totalPages}
+                </span>
+
+
+                <button
+                    class="btn-next"
+                    onclick="nextPage()"
+
+                    ${
+                        currentPage === totalPages
+                        ?
+                        "disabled"
+                        :
+                        ""
+                    }
+                >
+                    Selanjutnya →
+                </button>
+
+                `;
+
+        }
+
+
+        /* =========================
+           NEXT PAGE
+        ========================= */
+
+        window.nextPage =
+            function () {
+
+
+                const totalPages =
+                    Math.ceil(
+                        filteredData.length
+                        /
+                        rowsPerPage
+                    );
+
+
+                if (
+                    currentPage
+                    <
+                    totalPages
+                ) {
+
+                    currentPage++;
+
+                    renderTable();
+
+                }
+
+            };
+
+
+        /* =========================
+           PREVIOUS PAGE
+        ========================= */
+
+        window.prevPage =
+            function () {
+
+
+                if (
+                    currentPage > 1
+                ) {
+
+                    currentPage--;
+
+                    renderTable();
+
+                }
+
+            };
+
+
+        /* =========================
+           DOWNLOAD EXCEL
+        ========================= */
+
+        window.downloadExcel =
+            function () {
+
+
+                if (
+                    filteredData.length === 0
+                ) {
+
+                    alert(
+                        "Tidak ada data untuk di-download!"
+                    );
+
+                    return;
+
+                }
+
+
+                const dataExcel =
+                    filteredData.map(
+
+                        (
+                            item,
+                            index
+                        ) => {
+
+                            return {
+
+                                "No":
+                                    index + 1,
+
+                                "ID":
+                                    item.id || "-",
+
+                                "Nama":
+                                    item.customer || "-",
+
+                                "Nama Unit":
+                                    item.namaUnit || "-",
+
+                                "Plat Kendaraan":
+                                    item.plat || "-",
+
+                                "Tanggal Sewa":
+                                    item.tanggalsewa || "-",
+
+                                "Estimasi Kembali":
+                                    item.selesaisewa || "-",
+
+                                "Durasi Sewa":
+                                    (
+                                        item.jumlahHari
+                                        ??
+                                        "-"
+                                    )
+                                    +
+                                    " Hari",
+
+                                "Harga Sewa":
+                                    formatRupiah(
+                                        item.harga
+                                    ),
+
+                                "Total Harga":
+                                    formatRupiah(
+                                        item.total
+                                    ),
+
+                                "Sudah Dibayar":
+                                    formatRupiah(
+                                        item.bayar
+                                    ),
+
+                                "Sisa Bayar":
+                                    formatRupiah(
+                                        item.sisa
+                                    )
+
+                            };
+
+                        }
+
+                    );
+
+
+                const worksheet =
+                    XLSX.utils
+                    .json_to_sheet(
+                        dataExcel
+                    );
+
+
+                worksheet["!cols"] = [
+
+                    { wch: 8 },
+
+                    { wch: 25 },
+
+                    { wch: 25 },
+
+                    { wch: 25 },
+
+                    { wch: 20 },
+
+                    { wch: 18 },
+
+                    { wch: 20 },
+
+                    { wch: 15 },
+
+                    { wch: 20 },
+
+                    { wch: 20 },
+
+                    { wch: 20 },
+
+                    { wch: 20 }
+
+                ];
+
+
+                const workbook =
+                    XLSX.utils
+                    .book_new();
+
+
+                XLSX.utils
+                .book_append_sheet(
+
+                    workbook,
+
+                    worksheet,
+
+                    "Data Rental"
+
+                );
+
+
+                XLSX.writeFile(
+
+                    workbook,
+
+                    "Data_Rental.xlsx"
+
+                );
+
+            };
+
+
+    </script>
+
+
+</body>
+
+</html>

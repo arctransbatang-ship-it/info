@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 
 <head>
@@ -12,6 +13,7 @@
 
     <title>ARC TRANS</title>
 
+
     <style>
 
         /* =========================
@@ -19,16 +21,21 @@
         ========================= */
 
         * {
+
             box-sizing: border-box;
+
             font-family:
                 "Segoe UI",
                 Arial,
                 sans-serif;
+
         }
 
 
         html {
+
             min-height: 100%;
+
         }
 
 
@@ -47,11 +54,17 @@
             align-items: center;
 
             background:
+
                 linear-gradient(
+
                     135deg,
+
                     #0f4c81 0%,
+
                     #2196F3 45%,
+
                     #21CBF3 100%
+
                 );
 
             overflow-x: hidden;
@@ -72,11 +85,13 @@
             position: fixed;
 
             width: 300px;
+
             height: 300px;
 
             border-radius: 50%;
 
             background:
+
                 rgba(
                     255,
                     255,
@@ -85,6 +100,7 @@
                 );
 
             top: -100px;
+
             left: -100px;
 
             filter: blur(2px);
@@ -99,11 +115,13 @@
             position: fixed;
 
             width: 350px;
+
             height: 350px;
 
             border-radius: 50%;
 
             background:
+
                 rgba(
                     255,
                     255,
@@ -112,6 +130,7 @@
                 );
 
             bottom: -150px;
+
             right: -100px;
 
         }
@@ -134,6 +153,7 @@
             padding: 40px;
 
             background:
+
                 rgba(
                     255,
                     255,
@@ -146,6 +166,7 @@
             box-shadow:
 
                 0 25px 60px
+
                 rgba(
                     0,
                     0,
@@ -187,11 +208,13 @@
         .logo {
 
             width: 100px;
+
             height: 100px;
 
             display: flex;
 
             justify-content: center;
+
             align-items: center;
 
             margin-bottom: 16px;
@@ -203,14 +226,19 @@
             background:
 
                 linear-gradient(
+
                     135deg,
+
                     #2196F3,
+
                     #21CBF3
+
                 );
 
             box-shadow:
 
                 0 12px 25px
+
                 rgba(
                     33,
                     150,
@@ -233,6 +261,7 @@
             margin: 0;
 
             font-size:
+
                 clamp(
                     26px,
                     5vw,
@@ -255,6 +284,7 @@
             color: #78909C;
 
             font-size:
+
                 clamp(
                     13px,
                     3vw,
@@ -306,7 +336,6 @@
             background: #ffffff;
 
             border:
-
                 1px solid
                 #e6edf3;
 
@@ -344,10 +373,7 @@
         .menu-item:hover {
 
             transform:
-
-                translateY(
-                    -7px
-                );
+                translateY(-7px);
 
             border-color:
                 #2196F3;
@@ -358,6 +384,7 @@
             box-shadow:
 
                 0 15px 30px
+
                 rgba(
                     33,
                     150,
@@ -371,10 +398,7 @@
         .menu-item:active {
 
             transform:
-
-                scale(
-                    0.98
-                );
+                scale(0.98);
 
         }
 
@@ -390,17 +414,23 @@
             position: absolute;
 
             top: 0;
+
             left: 0;
 
             width: 100%;
+
             height: 4px;
 
             background:
 
                 linear-gradient(
+
                     90deg,
+
                     #2196F3,
+
                     #21CBF3
+
                 );
 
             transform:
@@ -427,11 +457,13 @@
         .menu-icon {
 
             width: 78px;
+
             height: 78px;
 
             display: flex;
 
             justify-content: center;
+
             align-items: center;
 
             margin-bottom: 16px;
@@ -443,9 +475,13 @@
             background:
 
                 linear-gradient(
+
                     135deg,
+
                     #e3f2fd,
+
                     #f1fbff
+
                 );
 
             transition:
@@ -461,19 +497,20 @@
 
             transform:
 
-                scale(
-                    1.12
-                )
-                rotate(
-                    3deg
-                );
+                scale(1.12)
+
+                rotate(3deg);
 
             background:
 
                 linear-gradient(
+
                     135deg,
+
                     #d7efff,
+
                     #e8faff
+
                 );
 
         }
@@ -486,6 +523,7 @@
         .menu-text {
 
             font-size:
+
                 clamp(
                     13px,
                     2vw,
@@ -512,6 +550,7 @@
             border-top:
 
                 1px solid
+
                 #edf0f2;
 
             text-align: center;
@@ -534,10 +573,7 @@
                 opacity: 0;
 
                 transform:
-
-                    translateY(
-                        30px
-                    );
+                    translateY(30px);
 
             }
 
@@ -547,10 +583,7 @@
                 opacity: 1;
 
                 transform:
-
-                    translateY(
-                        0
-                    );
+                    translateY(0);
 
             }
 
@@ -563,10 +596,7 @@
             100% {
 
                 transform:
-
-                    translateY(
-                        0
-                    );
+                    translateY(0);
 
             }
 
@@ -574,10 +604,7 @@
             50% {
 
                 transform:
-
-                    translateY(
-                        -7px
-                    );
+                    translateY(-7px);
 
             }
 
@@ -588,10 +615,7 @@
            TABLET
         ========================= */
 
-        @media
-        (
-            max-width: 850px
-        ) {
+        @media (max-width: 850px) {
 
             .container {
 
@@ -618,10 +642,7 @@
            MOBILE
         ========================= */
 
-        @media
-        (
-            max-width: 600px
-        ) {
+        @media (max-width: 600px) {
 
             body {
 
@@ -660,6 +681,7 @@
             .logo {
 
                 width: 82px;
+
                 height: 82px;
 
                 border-radius:
@@ -695,6 +717,7 @@
             .menu-icon {
 
                 width: 65px;
+
                 height: 65px;
 
                 border-radius:
@@ -726,10 +749,7 @@
            SMALL MOBILE
         ========================= */
 
-        @media
-        (
-            max-width: 380px
-        ) {
+        @media (max-width: 380px) {
 
             body {
 
@@ -770,6 +790,7 @@
             .menu-icon {
 
                 width: 58px;
+
                 height: 58px;
 
                 font-size:
@@ -792,13 +813,10 @@
 </head>
 
 
-
 <body>
 
 
-
     <main class="container">
-
 
 
         <!-- =========================
@@ -815,13 +833,11 @@
             </div>
 
 
-
             <h1>
 
                 ARC TRANS
 
             </h1>
-
 
 
             <div class="subtitle">
@@ -834,13 +850,11 @@
         </div>
 
 
-
         <!-- =========================
              MENU
         ========================== -->
 
         <div class="menu">
-
 
 
             <!-- INPUT UNIT -->
@@ -866,7 +880,6 @@
             </a>
 
 
-
             <!-- DATA UNIT -->
 
             <a
@@ -888,7 +901,6 @@
                 </div>
 
             </a>
-
 
 
             <!-- INPUT CUSTOMER -->
@@ -914,7 +926,6 @@
             </a>
 
 
-
             <!-- DATA CUSTOMER -->
 
             <a
@@ -936,7 +947,6 @@
                 </div>
 
             </a>
-
 
 
             <!-- RENT OUT -->
@@ -962,9 +972,30 @@
             </a>
 
 
+            <!-- TABEL RENTAL OUT -->
+
+            <a
+                href="tabeloutrent.html"
+                class="menu-item"
+            >
+
+                <div class="menu-icon">
+
+                    📊
+
+                </div>
+
+
+                <div class="menu-text">
+
+                    UPDATE Unit OUT
+
+                </div>
+
+            </a>
+
 
         </div>
-
 
 
         <!-- =========================
@@ -978,9 +1009,7 @@
         </div>
 
 
-
     </main>
-
 
 
 </body>
