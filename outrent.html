@@ -1304,9 +1304,8 @@
 
     <script type="module">
 
-
         /* =================================
-           FIREBASE IMPORT
+        FIREBASE IMPORT
         ================================= */
 
         import {
@@ -1320,10 +1319,13 @@
             getDatabase,
             ref,
             set,
+            remove,
+            update,
             onValue
         }
         from
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
 
 
 
@@ -3529,6 +3531,10 @@
                    SIMPAN FIREBASE
                 ========================== */
 
+              /* =========================
+                SIMPAN DATA RENT OUT
+                ========================= */
+
                 await set(
 
                     ref(
@@ -3545,13 +3551,48 @@
                 );
 
 
+                /* =========================
+                HAPUS UNIT DARI READY
+                ========================= */
+
+                await remove(
+
+                    ref(
+                        db,
+                        "ready/" + unitId
+                    )
+
+                );
+
+
+                /* =========================
+                UPDATE KETERANGAN UNIT
+                ========================= */
+
+                await update(
+
+                    ref(
+                        db,
+                        "unit/" + unitId
+                    ),
+
+                    {
+                        keterangan: "Out"
+                    }
+
+                );
+
+
+                /* =========================
+                STATUS BERHASIL
+                ========================= */
 
                 uploadStatus.textContent =
                     "✓ Data berhasil disimpan";
 
-
                 alert(
-                    "Data RENT OUT berhasil disimpan!"
+                    "Data RENT OUT berhasil disimpan!\n\n" +
+                    "Unit telah dihapus dari READY dan status diubah menjadi OUT."
                 );
 
 
