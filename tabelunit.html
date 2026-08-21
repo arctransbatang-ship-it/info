@@ -575,6 +575,14 @@
 
         }
 
+        .badge-out {
+
+            background: #f44336;
+
+            color: white;
+
+        }
+
     </style>
 
 </head>
@@ -1548,87 +1556,100 @@
         ========================= */
 
         function getKeteranganClass(
-            keterangan
-        ) {
-
-
-            const text =
-                String(
-                    keterangan || ""
-                )
-                .toLowerCase()
-                .trim();
-
-
-            /*
-               READY = HIJAU
-            */
-
-            if (
-                text === "ready"
+                keterangan
             ) {
 
-                return "badge-masuk";
+
+                const text =
+                    String(
+                        keterangan || ""
+                    )
+                    .toLowerCase()
+                    .trim();
+
+
+                /*
+                READY = HIJAU
+                */
+
+                if (
+                    text === "ready"
+                ) {
+
+                    return "badge-masuk";
+
+                }
+
+
+                /*
+                OUT = MERAH
+                */
+
+                if (
+                    text === "out"
+                ) {
+
+                    return "badge-out";
+
+                }
+
+
+                /*
+                RENTAL / SEWA = ORANYE
+                */
+
+                if (
+
+                    text.includes(
+                        "sewa"
+                    )
+
+                    ||
+
+                    text.includes(
+                        "rental"
+                    )
+
+                ) {
+
+                    return "badge-sewa";
+
+                }
+
+
+                /*
+                TIDAK READY / MAINTENANCE
+                = MERAH
+                */
+
+                if (
+
+                    text.includes(
+                        "tidak"
+                    )
+
+                    ||
+
+                    text.includes(
+                        "maintenance"
+                    )
+
+                    ||
+
+                    text.includes(
+                        "perbaikan"
+                    )
+
+                ) {
+
+                    return "badge-pulang";
+
+                }
+
+
+                return "badge-default";
 
             }
-
-
-            /*
-               RENTAL / SEWA = ORANYE
-            */
-
-            if (
-
-                text.includes(
-                    "sewa"
-                )
-
-                ||
-
-                text.includes(
-                    "rental"
-                )
-
-            ) {
-
-                return "badge-sewa";
-
-            }
-
-
-            /*
-               TIDAK READY / MAINTENANCE
-               = MERAH
-            */
-
-            if (
-
-                text.includes(
-                    "tidak"
-                )
-
-                ||
-
-                text.includes(
-                    "maintenance"
-                )
-
-                ||
-
-                text.includes(
-                    "perbaikan"
-                )
-
-            ) {
-
-                return "badge-pulang";
-
-            }
-
-
-            return "badge-default";
-
-        }
 
 
         /* =========================
