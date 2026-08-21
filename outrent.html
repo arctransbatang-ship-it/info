@@ -1,0 +1,2458 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ARC TRANS - Input RENT OUT</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2196F3,
+                    #21CBF3
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+
+        .container {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            width: 100%;
+
+            max-width: 450px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.2);
+
+            animation:
+                fadeIn
+                0.5s
+                ease;
+
+        }
+
+
+        h3 {
+
+            text-align: center;
+
+            margin-top: 0;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            margin-bottom: 15px;
+
+            border-radius: 8px;
+
+            border:
+                1px
+                solid
+                #ccc;
+
+            outline: none;
+
+            font-size: 15px;
+
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: #2196F3;
+
+            box-shadow:
+                0 0 5px
+                rgba(
+                    33,
+                    150,
+                    243,
+                    0.5
+                );
+
+        }
+
+
+        input[readonly] {
+
+            background: #f5f5f5;
+
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2196F3;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        button:hover {
+
+            background: #1976D2;
+
+        }
+
+
+        button:disabled {
+
+            background: #90CAF9;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .link-kembali {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            text-decoration: none;
+
+            color: #2196F3;
+
+            font-weight: bold;
+
+        }
+
+
+        .home-btn {
+
+            position: fixed;
+
+            top: 15px;
+
+            left: 15px;
+
+            background: white;
+
+            color: #2196F3;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 5px 10px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.2
+                );
+
+        }
+
+
+        /* =========================
+           PREVIEW FOTO JAMINAN
+        ========================= */
+
+        .preview-container {
+
+            width: 100%;
+
+            margin-top: 5px;
+
+            margin-bottom: 15px;
+
+            text-align: center;
+
+        }
+
+
+        #previewFoto {
+
+            display: none;
+
+            width: 100%;
+
+            max-height: 250px;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+
+            border:
+                2px
+                dashed
+                #2196F3;
+
+            padding: 5px;
+
+        }
+
+
+        #uploadStatus {
+
+            text-align: center;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+
+            color: #555;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(
+                        20px
+                    );
+
+            }
+
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(
+                        0
+                    );
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+    <a href="index.html"
+       class="home-btn">
+
+        Home
+
+    </a>
+
+
+
+    <div class="container">
+
+
+        <h3>
+            FORM RENT OUT
+        </h3>
+
+
+
+        <!-- =========================
+             ID UNIT
+        ========================= -->
+
+        <label for="plat">
+
+            ID Unit / Plat Nomor
+
+        </label>
+
+
+        <select id="plat">
+
+            <option value="">
+                Memuat data unit...
+            </option>
+
+        </select>
+
+
+
+        <!-- =========================
+             NAMA UNIT
+        ========================= -->
+
+        <label for="nama">
+
+            Nama Unit Kendaraan
+
+        </label>
+
+
+        <input
+            type="text"
+            id="nama"
+            readonly
+        >
+
+
+
+        <!-- =========================
+             ID CUSTOMER
+        ========================= -->
+
+        <label for="idcustomer">
+
+            ID Customer
+
+        </label>
+
+
+        <select id="idcustomer">
+
+            <option value="">
+                Memuat data customer...
+            </option>
+
+        </select>
+
+
+
+        <!-- =========================
+             NAMA CUSTOMER
+        ========================= -->
+
+        <label for="customer">
+
+            Nama Customer
+
+        </label>
+
+
+        <input
+            type="text"
+            id="customer"
+            readonly
+        >
+
+
+
+        <!-- =========================
+             RENTAL TYPE
+        ========================= -->
+
+        <label for="rentaltype">
+
+            Rental Type
+
+        </label>
+
+
+        <select id="rentaltype">
+
+            <option value="">
+                -- Pilih Rental Type --
+            </option>
+
+            <option value="setengahhari">
+                Setengah Hari
+            </option>
+
+            <option value="harian">
+                Harian
+            </option>
+
+            <option value="mingguan">
+                Mingguan
+            </option>
+
+            <option value="bulanan">
+                Bulanan
+            </option>
+
+        </select>
+
+
+
+        <!-- =========================
+             HARGA
+        ========================= -->
+
+        <label for="harga">
+
+            Harga
+
+        </label>
+
+
+        <input
+            type="text"
+            id="harga"
+            inputmode="numeric"
+            placeholder="Rp 0"
+        >
+
+
+
+        <!-- =========================
+             TANGGAL SEWA
+        ========================= -->
+
+        <label for="tanggalsewa">
+
+            Tanggal Sewa
+
+        </label>
+
+
+        <input
+            type="date"
+            id="tanggalsewa"
+        >
+
+
+
+        <!-- =========================
+             TANGGAL SELESAI
+        ========================= -->
+
+        <label for="selesaisewa">
+
+            Estimasi Tanggal Selesai Sewa
+
+        </label>
+
+
+        <input
+            type="date"
+            id="selesaisewa"
+        >
+
+
+
+        <!-- =========================
+             TOTAL
+        ========================= -->
+
+        <label for="total">
+
+            Total Biaya
+
+        </label>
+
+
+        <input
+            type="text"
+            id="total"
+            readonly
+            placeholder="Total akan dihitung otomatis"
+        >
+
+
+        <!-- =========================
+             BAYAR
+        ========================= -->
+
+        <label for="bayar">
+
+            Bayar / DP
+
+        </label>
+
+
+        <input
+            type="text"
+            id="bayar"
+            inputmode="numeric"
+            placeholder="Rp 0"
+        >
+
+
+
+        <!-- =========================
+             SISA
+        ========================= -->
+
+        <label for="sisa">
+
+            Sisa
+
+        </label>
+
+
+        <input
+            type="text"
+            id="sisa"
+            readonly
+        >
+
+
+
+        <!-- =========================
+             JAMINAN
+        ========================= -->
+
+        <label for="jaminan">
+
+            Jaminan
+
+        </label>
+
+
+        <input
+            type="text"
+            id="jaminan"
+            placeholder="Contoh: KTP Asli"
+        >
+
+
+
+        <!-- =========================
+             FOTO JAMINAN
+        ========================= -->
+
+        <label for="fotoJaminan">
+
+            Upload Foto Jaminan
+
+        </label>
+
+
+        <input
+            type="file"
+            id="fotoJaminan"
+            accept="image/*"
+        >
+
+
+
+        <div class="preview-container">
+
+            <img
+                id="previewFoto"
+                alt="Preview Foto Jaminan"
+            >
+
+
+            <div id="uploadStatus">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             BUTTON
+        ========================= -->
+
+        <button
+            id="btnProses"
+            type="button"
+        >
+
+            Proses
+
+        </button>
+
+
+
+        <a
+            href="home.html"
+            class="link-kembali"
+        >
+
+            ← Kembali
+
+        </a>
+
+
+    </div>
+
+
+
+    <script type="module">
+
+
+        /* =========================
+           FIREBASE IMPORT
+        ========================= */
+
+        import {
+
+            initializeApp
+
+        }
+
+        from
+
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+
+        import {
+
+            getDatabase,
+            ref,
+            set,
+            onValue
+
+        }
+
+        from
+
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+
+
+        /* =========================
+           FIREBASE CONFIG
+        ========================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+            authDomain:
+                "arctrans.firebaseapp.com",
+
+            databaseURL:
+                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+            projectId:
+                "arctrans",
+
+            storageBucket:
+                "arctrans.firebasestorage.app",
+
+            messagingSenderId:
+                "60781918601",
+
+            appId:
+                "1:60781918601:web:c85d6131207f8a8958"
+
+        };
+
+
+
+
+        /* =========================
+           CLOUDINARY CONFIG
+
+           GANTI SESUAI DATA ANDA
+        ========================= */
+
+        const CLOUDINARY_CLOUD_NAME =
+            "ISI_CLOUD_NAME_ANDA";
+
+
+        const CLOUDINARY_UPLOAD_PRESET =
+            "ISI_UPLOAD_PRESET_ANDA";
+
+
+
+
+        /* =========================
+           INIT FIREBASE
+        ========================= */
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getDatabase(
+                app
+            );
+
+
+
+
+        /* =========================
+           ELEMEN HTML
+        ========================= */
+
+        const platInput =
+            document.getElementById(
+                "plat"
+            );
+
+
+        const namaInput =
+            document.getElementById(
+                "nama"
+            );
+
+
+        const idCustomerInput =
+            document.getElementById(
+                "idcustomer"
+            );
+
+
+        const customerInput =
+            document.getElementById(
+                "customer"
+            );
+
+
+        const rentalTypeInput =
+            document.getElementById(
+                "rentaltype"
+            );
+
+
+        const hargaInput =
+            document.getElementById(
+                "harga"
+            );
+
+
+        const tanggalSewaInput =
+            document.getElementById(
+                "tanggalsewa"
+            );
+
+
+        const selesaiSewaInput =
+            document.getElementById(
+                "selesaisewa"
+            );
+
+
+        const totalInput =
+            document.getElementById(
+                "total"
+            );
+
+
+        const bayarInput =
+            document.getElementById(
+                "bayar"
+            );
+
+
+        const sisaInput =
+            document.getElementById(
+                "sisa"
+            );
+
+
+        const jaminanInput =
+            document.getElementById(
+                "jaminan"
+            );
+
+
+        const fotoJaminanInput =
+            document.getElementById(
+                "fotoJaminan"
+            );
+
+
+        const previewFoto =
+            document.getElementById(
+                "previewFoto"
+            );
+
+
+        const uploadStatus =
+            document.getElementById(
+                "uploadStatus"
+            );
+
+
+        const btnProses =
+            document.getElementById(
+                "btnProses"
+            );
+
+
+
+
+        /* =========================
+           DATA
+        ========================= */
+
+        let daftarUnit = {};
+
+
+        let daftarCustomer = {};
+
+
+
+
+        /* =========================
+           PREVIEW FOTO
+        ========================= */
+
+        fotoJaminanInput.addEventListener(
+
+            "change",
+
+            function () {
+
+
+                const file =
+                    this.files[0];
+
+
+                if (!file) {
+
+                    previewFoto.style.display =
+                        "none";
+
+
+                    previewFoto.src =
+                        "";
+
+
+                    return;
+
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function (event) {
+
+
+                        previewFoto.src =
+                            event.target.result;
+
+
+                        previewFoto.style.display =
+                            "block";
+
+                    };
+
+
+                reader.readAsDataURL(
+                    file
+                );
+
+
+            }
+
+        );
+
+
+
+
+        /* =========================
+           AMBIL DATA UNIT
+        ========================= */
+
+        const unitRef =
+            ref(
+                db,
+                "unit/"
+            );
+
+
+
+        onValue(
+
+            unitRef,
+
+            (snapshot) => {
+
+
+                const data =
+                    snapshot.val();
+
+
+                daftarUnit =
+                    data || {};
+
+
+                platInput.innerHTML =
+
+                    '<option value="">' +
+                    '-- Pilih ID Unit --' +
+                    '</option>';
+
+
+
+                if (!data) {
+
+                    platInput.innerHTML +=
+
+                        '<option value="" disabled>' +
+                        'Data unit belum tersedia' +
+                        '</option>';
+
+
+                    return;
+
+                }
+
+
+
+                Object.entries(
+                    data
+                )
+
+                .forEach(
+
+                    ([id, unit]) => {
+
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            id;
+
+
+                        option.textContent =
+
+                            (unit.plat || id) +
+
+                            " - " +
+
+                            (unit.nama ||
+                            "Tanpa Nama");
+
+
+
+                        platInput.appendChild(
+                            option
+                        );
+
+
+                    }
+
+                );
+
+
+            },
+
+            (error) => {
+
+
+                console.error(
+                    error
+                );
+
+
+                platInput.innerHTML =
+
+                    '<option value="">' +
+                    'Gagal memuat data unit' +
+                    '</option>';
+
+
+            }
+
+        );
+
+
+
+
+        /* =========================
+           SAAT UNIT DIPILIH
+        ========================= */
+
+        platInput.addEventListener(
+
+            "change",
+
+            function () {
+
+
+                const id =
+                    this.value;
+
+
+                if (!id) {
+
+
+                    namaInput.value =
+                        "";
+
+
+                    return;
+
+                }
+
+
+                const unit =
+                    daftarUnit[id];
+
+
+                if (!unit) {
+
+                    return;
+
+                }
+
+
+                namaInput.value =
+                    unit.nama || "";
+
+
+                /* Harga tetap manual */
+
+                hargaInput.value =
+                    "";
+
+
+                totalInput.value =
+                    "";
+
+
+                bayarInput.value =
+                    "";
+
+
+                sisaInput.value =
+                    "";
+
+
+            }
+
+        );
+
+
+
+
+        /* =========================
+           AMBIL DATA CUSTOMER
+        ========================= */
+
+        const customerRef =
+            ref(
+                db,
+                "customer/"
+            );
+
+
+
+        onValue(
+
+            customerRef,
+
+            (snapshot) => {
+
+
+                const data =
+                    snapshot.val();
+
+
+                daftarCustomer =
+                    data || {};
+
+
+                idCustomerInput.innerHTML =
+
+                    '<option value="">' +
+                    '-- Pilih ID Customer --' +
+                    '</option>';
+
+
+
+                if (!data) {
+
+
+                    idCustomerInput.innerHTML +=
+
+                        '<option value="" disabled>' +
+
+                        'Data customer belum tersedia' +
+
+                        '</option>';
+
+
+                    return;
+
+                }
+
+
+
+                Object.entries(
+                    data
+                )
+
+                .forEach(
+
+                    ([id, customer]) => {
+
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            id;
+
+
+                        option.textContent =
+
+                            (customer.nik || id) +
+
+                            " - " +
+
+                            (customer.nama ||
+                            "Tanpa Nama");
+
+
+
+                        idCustomerInput.appendChild(
+                            option
+                        );
+
+
+                    }
+
+                );
+
+
+            },
+
+            (error) => {
+
+
+                console.error(
+                    error
+                );
+
+
+                idCustomerInput.innerHTML =
+
+                    '<option value="">' +
+                    'Gagal memuat customer' +
+                    '</option>';
+
+
+            }
+
+        );
+
+
+
+
+        /* =========================
+           SAAT CUSTOMER DIPILIH
+        ========================= */
+
+        idCustomerInput.addEventListener(
+
+            "change",
+
+            function () {
+
+
+                const id =
+                    this.value;
+
+
+                if (!id) {
+
+
+                    customerInput.value =
+                        "";
+
+
+                    return;
+
+                }
+
+
+                const dataCustomer =
+                    daftarCustomer[id];
+
+
+                customerInput.value =
+
+                    dataCustomer?.nama ||
+
+                    "";
+
+
+            }
+
+        );
+
+
+
+
+       /* =========================
+   FORMAT RUPIAH
+========================= */
+
+function formatRupiah(angka) {
+
+    const nilai = Number(angka) || 0;
+
+    return "Rp " +
+        nilai.toLocaleString("id-ID");
+
+}
+
+
+
+        /* =========================
+           AMBIL ANGKA
+        ========================= */
+
+        function angkaDariRupiah(
+            nilai
+        ) {
+
+
+            return Number(
+
+                String(
+                    nilai || ""
+                )
+
+                .replace(
+                    /\D/g,
+                    ""
+                )
+
+            ) || 0;
+
+
+        }
+
+
+
+
+        /* =========================
+           INPUT HARGA
+        ========================= */
+
+        hargaInput.addEventListener(
+
+            "input",
+
+            function () {
+
+
+                const angka =
+                    angkaDariRupiah(
+                        this.value
+                    );
+
+
+                this.value =
+
+                    angka > 0
+
+                    ? formatRupiah(
+                        angka
+                    )
+
+                    : "";
+
+
+                hitungTotal();
+
+
+            }
+
+        );
+
+
+
+
+        /* =========================
+           INPUT BAYAR
+        ========================= */
+
+        bayarInput.addEventListener(
+
+            "input",
+
+            function () {
+
+
+                const angka =
+                    angkaDariRupiah(
+                        this.value
+                    );
+
+
+                this.value =
+
+                    angka > 0
+
+                    ? formatRupiah(
+                        angka
+                    )
+
+                    : "";
+
+
+                hitungSisa();
+
+
+            }
+
+        );
+
+
+/* =========================
+   INPUT TOTAL MANUAL
+========================= */
+
+totalInput.addEventListener(
+
+    "input",
+
+    function () {
+
+        /*
+        Total hanya bisa manual
+        jika Rental Type Setengah Hari
+        */
+
+        if (
+            rentalTypeInput.value ===
+            "setengahhari"
+        ) {
+
+            const angka =
+                angkaDariRupiah(
+                    this.value
+                );
+
+            this.value =
+
+                angka > 0
+
+                ? formatRupiah(
+                    angka
+                )
+
+                : "";
+
+        }
+
+
+        hitungSisa();
+
+    }
+
+);
+
+        /* =========================
+           HITUNG JUMLAH HARI
+        ========================= */
+
+        function hitungJumlahHari() {
+
+
+            const tanggalSewa =
+                tanggalSewaInput.value;
+
+
+            const selesaiSewa =
+                selesaiSewaInput.value;
+
+
+            if (
+
+                !tanggalSewa ||
+
+                !selesaiSewa
+
+            ) {
+
+                return 0;
+
+            }
+
+
+            const mulai =
+                new Date(
+                    tanggalSewa +
+                    "T00:00:00"
+                );
+
+
+            const selesai =
+                new Date(
+                    selesaiSewa +
+                    "T00:00:00"
+                );
+
+
+            const selisih =
+                selesai -
+                mulai;
+
+
+            return Math.ceil(
+
+                selisih /
+
+                (
+                    1000 *
+                    60 *
+                    60 *
+                    24
+                )
+
+            );
+
+
+        }
+
+
+
+
+        /* =========================
+           HITUNG TOTAL
+        ========================= */
+
+      function hitungTotal() {
+
+    const harga =
+        angkaDariRupiah(
+            hargaInput.value
+        );
+
+    const rentalType =
+        rentalTypeInput.value;
+
+    const jumlahHari =
+        hitungJumlahHari();
+
+
+    /* =========================
+       SETENGAH HARI
+       TOTAL INPUT MANUAL
+    ========================= */
+
+    if (
+        rentalType ===
+        "setengahhari"
+    ) {
+
+        totalInput.readOnly =
+            false;
+
+        totalInput.placeholder =
+            "Input total biaya manual";
+
+        /*
+        Jangan hitung otomatis.
+        Nilai total tetap sesuai input user.
+        */
+
+        hitungSisa();
+
+        return;
+    }
+
+
+    /* =========================
+       RENTAL TYPE LAIN
+       TOTAL OTOMATIS
+    ========================= */
+
+    totalInput.readOnly =
+        true;
+
+    totalInput.placeholder =
+        "Total dihitung otomatis";
+
+
+    if (
+
+        harga <= 0 ||
+
+        !rentalType ||
+
+        jumlahHari <= 0
+
+    ) {
+
+        totalInput.value =
+            "";
+
+        hitungSisa();
+
+        return;
+
+    }
+
+
+    let jumlahPeriode =
+        0;
+
+
+    /* =====================
+       HARIAN
+    ===================== */
+
+    if (
+        rentalType ===
+        "harian"
+    ) {
+
+        jumlahPeriode =
+            jumlahHari;
+
+    }
+
+
+    /* =====================
+       MINGGUAN
+    ===================== */
+
+    else if (
+        rentalType ===
+        "mingguan"
+    ) {
+
+        jumlahPeriode =
+            Math.ceil(
+                jumlahHari / 7
+            );
+
+    }
+
+
+    /* =====================
+       BULANAN
+    ===================== */
+
+    else if (
+        rentalType ===
+        "bulanan"
+    ) {
+
+        jumlahPeriode =
+            Math.ceil(
+                jumlahHari / 30
+            );
+
+    }
+
+
+    const total =
+        harga *
+        jumlahPeriode;
+
+
+    totalInput.value =
+        formatRupiah(
+            total
+        );
+
+
+    hitungSisa();
+
+}
+
+
+
+        /* =========================
+           HITUNG SISA
+        ========================= */
+
+        function hitungSisa() {
+
+
+            const total =
+                angkaDariRupiah(
+                    totalInput.value
+                );
+
+
+            const bayar =
+                angkaDariRupiah(
+                    bayarInput.value
+                );
+
+
+            const sisa =
+                total -
+                bayar;
+
+
+            sisaInput.value =
+                formatRupiah(
+
+                    Math.max(
+                        0,
+                        sisa
+                    )
+
+                );
+
+
+        }
+
+
+
+
+        /* =========================
+           EVENT PERHITUNGAN
+        ========================= */
+
+       rentalTypeInput.addEventListener(
+
+    "change",
+
+    function () {
+
+        /*
+        Jika memilih Setengah Hari
+        hapus total lama agar
+        diinput manual
+        */
+
+        if (
+            this.value ===
+            "setengahhari"
+        ) {
+
+            totalInput.value =
+                "";
+
+            totalInput.readOnly =
+                false;
+
+            totalInput.placeholder =
+                "Input total biaya manual";
+
+        }
+
+        else {
+
+            totalInput.readOnly =
+                true;
+
+            totalInput.placeholder =
+                "Total dihitung otomatis";
+
+        }
+
+
+        hitungTotal();
+
+    }
+
+);
+
+        tanggalSewaInput.addEventListener(
+
+            "change",
+
+            hitungTotal
+
+        );
+
+
+        selesaiSewaInput.addEventListener(
+
+            "change",
+
+            hitungTotal
+
+        );
+
+
+
+
+        /* =========================
+           UPLOAD FOTO CLOUDINARY
+        ========================= */
+
+        async function uploadFotoJaminan() {
+
+
+            const file =
+                fotoJaminanInput.files[0];
+
+
+            if (!file) {
+
+                return {
+
+                    url: "",
+
+                    publicId: ""
+
+                };
+
+            }
+
+
+
+            if (
+                CLOUDINARY_CLOUD_NAME ===
+                "ISI_CLOUD_NAME_ANDA"
+            ) {
+
+
+                throw new Error(
+
+                    "Cloud Name belum diisi!"
+
+                );
+
+            }
+
+
+
+            if (
+                CLOUDINARY_UPLOAD_PRESET ===
+                "ISI_UPLOAD_PRESET_ANDA"
+            ) {
+
+
+                throw new Error(
+
+                    "Upload Preset belum diisi!"
+
+                );
+
+            }
+
+
+
+            uploadStatus.textContent =
+
+                "Mengupload foto jaminan...";
+
+
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+
+                "file",
+
+                file
+
+            );
+
+
+            formData.append(
+
+                "upload_preset",
+
+                CLOUDINARY_UPLOAD_PRESET
+
+            );
+
+
+            formData.append(
+
+                "folder",
+
+                "arctrans/jaminan"
+
+            );
+
+
+
+            formData.append(
+
+                "public_id",
+
+                "JAMINAN_" +
+                Date.now()
+
+            );
+
+
+
+            const response =
+                await fetch(
+
+                    "https://api.cloudinary.com/v1_1/" +
+
+                    CLOUDINARY_CLOUD_NAME +
+
+                    "/image/upload",
+
+                    {
+
+                        method:
+                            "POST",
+
+                        body:
+                            formData
+
+                    }
+
+                );
+
+
+            const hasil =
+                await response.json();
+
+
+
+            if (!response.ok) {
+
+
+                throw new Error(
+
+                    hasil.error?.message ||
+
+                    "Gagal upload foto"
+
+                );
+
+            }
+
+
+
+            uploadStatus.textContent =
+
+                "Foto berhasil diupload";
+
+
+
+            return {
+
+                url:
+                    hasil.secure_url,
+
+
+                publicId:
+                    hasil.public_id
+
+            };
+
+
+        }
+
+
+
+
+        /* =========================
+           TOMBOL PROSES
+        ========================= */
+
+        btnProses.addEventListener(
+
+            "click",
+
+            kirimData
+
+        );
+
+
+
+
+        /* =========================
+           SIMPAN DATA
+        ========================= */
+
+        async function kirimData() {
+
+
+            const unitId =
+                platInput.value;
+
+
+            const unit =
+                daftarUnit[unitId];
+
+
+            const idcustomer =
+                idCustomerInput.value;
+
+
+            const dataCustomer =
+                daftarCustomer[idcustomer];
+
+
+            const nama =
+                namaInput.value.trim();
+
+
+            const customer =
+                customerInput.value.trim();
+
+
+            const rentaltype =
+                rentalTypeInput.value;
+
+
+            const harga =
+                angkaDariRupiah(
+                    hargaInput.value
+                );
+
+
+            const tanggalsewa =
+                tanggalSewaInput.value;
+
+
+            const selesaisewa =
+                selesaiSewaInput.value;
+
+
+            const total =
+                angkaDariRupiah(
+                    totalInput.value
+                );
+
+
+            const bayar =
+                angkaDariRupiah(
+                    bayarInput.value
+                );
+
+
+            const sisa =
+                angkaDariRupiah(
+                    sisaInput.value
+                );
+
+
+            const jaminan =
+                jaminanInput.value.trim();
+
+
+            const foto =
+                fotoJaminanInput.files[0];
+
+
+
+            /* =====================
+               VALIDASI
+            ===================== */
+
+            if (!unitId) {
+
+                alert(
+                    "Pilih ID Unit!"
+                );
+
+                return;
+
+            }
+
+
+            if (!idcustomer) {
+
+                alert(
+                    "Pilih ID Customer!"
+                );
+
+                return;
+
+            }
+
+
+            if (!rentaltype) {
+
+                alert(
+                    "Pilih Rental Type!"
+                );
+
+                return;
+
+            }
+
+
+            if (harga <= 0) {
+
+                alert(
+                    "Harga harus diisi!"
+                );
+
+                return;
+
+            }
+
+
+            if (!tanggalsewa) {
+
+                alert(
+                    "Pilih Tanggal Sewa!"
+                );
+
+                return;
+
+            }
+
+
+            if (!selesaisewa) {
+
+                alert(
+                    "Pilih Estimasi Tanggal Selesai!"
+                );
+
+                return;
+
+            }
+
+
+            if (total <= 0) {
+
+                alert(
+                    "Total biaya belum valid!"
+                );
+
+                return;
+
+            }
+
+
+            if (bayar > total) {
+
+                alert(
+                    "Pembayaran tidak boleh lebih besar dari total!"
+                );
+
+                return;
+
+            }
+
+
+            if (!jaminan) {
+
+                alert(
+                    "Data jaminan wajib diisi!"
+                );
+
+                return;
+
+            }
+
+
+            if (!foto) {
+
+                alert(
+                    "Foto jaminan wajib diupload!"
+                );
+
+                return;
+
+            }
+
+
+
+            /* =====================
+               DISABLE BUTTON
+            ===================== */
+
+            btnProses.disabled =
+                true;
+
+
+            btnProses.textContent =
+                "Menyimpan...";
+
+
+
+            try {
+
+
+                /* =====================
+                   UPLOAD FOTO
+                ===================== */
+
+                const hasilUpload =
+                    await uploadFotoJaminan();
+
+
+
+                /* =====================
+                   ID TRANSAKSI
+                ===================== */
+
+                const transaksiId =
+
+                    "RENT_" +
+
+                    Date.now();
+
+
+
+                /* =====================
+                   JUMLAH HARI
+                ===================== */
+
+                const jumlahHari =
+                    hitungJumlahHari();
+
+
+
+                /* =====================
+                   DATA RENT
+                ===================== */
+
+                const dataRent = {
+
+
+                    transaksiId:
+                        transaksiId,
+
+
+                    /* UNIT */
+
+                    unitId:
+                        unitId,
+
+
+                    plat:
+                        unit?.plat ||
+                        unitId,
+
+
+                    namaUnit:
+                        nama,
+
+
+                    /* CUSTOMER */
+
+                    idcustomer:
+                        idcustomer,
+
+
+                    nik:
+                        dataCustomer?.nik ||
+                        idcustomer,
+
+
+                    customer:
+                        customer,
+
+
+                    alamatktp:
+                        dataCustomer?.alamatktp ||
+                        "",
+
+
+                    hp:
+                        dataCustomer?.hp ||
+                        "",
+
+
+                    /* RENTAL */
+
+                    rentaltype:
+                        rentaltype,
+
+
+                    harga:
+                        harga,
+
+
+                    hargaFormat:
+                        formatRupiah(
+                            harga
+                        ),
+
+
+                    tanggalsewa:
+                        tanggalsewa,
+
+
+                    selesaisewa:
+                        selesaisewa,
+
+
+                    jumlahHari:
+                        jumlahHari,
+
+
+                    total:
+                        total,
+
+
+                    totalFormat:
+                        formatRupiah(
+                            total
+                        ),
+
+
+                    bayar:
+                        bayar,
+
+
+                    bayarFormat:
+                        formatRupiah(
+                            bayar
+                        ),
+
+
+                    sisa:
+                        sisa,
+
+
+                    sisaFormat:
+                        formatRupiah(
+                            sisa
+                        ),
+
+
+                    /* JAMINAN */
+
+                    jaminan:
+                        jaminan,
+
+
+                    fotoJaminan:
+                        hasilUpload.url,
+
+
+                    fotoJaminanPublicId:
+                        hasilUpload.publicId,
+
+
+                    /* STATUS */
+
+                    status:
+                        "RENT OUT",
+
+
+                    timestamp:
+                        Date.now(),
+
+
+                    tanggalInput:
+                        new Date()
+                        .toISOString()
+
+
+                };
+
+
+
+                /* =====================
+                   SIMPAN FIREBASE
+                ===================== */
+
+                await set(
+
+                    ref(
+
+                        db,
+
+                        "rentout/" +
+
+                        transaksiId
+
+                    ),
+
+                    dataRent
+
+                );
+
+
+
+                alert(
+
+                    "Data RENT OUT berhasil disimpan!"
+
+                );
+
+
+
+                /* =====================
+                   RESET FORM
+                ===================== */
+
+                platInput.value =
+                    "";
+
+
+                namaInput.value =
+                    "";
+
+
+                idCustomerInput.value =
+                    "";
+
+
+                customerInput.value =
+                    "";
+
+
+                rentalTypeInput.value =
+                    "";
+
+
+                hargaInput.value =
+                    "";
+
+
+                tanggalSewaInput.value =
+                    "";
+
+
+                selesaiSewaInput.value =
+                    "";
+
+
+                totalInput.value =
+                    "";
+
+
+                bayarInput.value =
+                    "";
+
+
+                sisaInput.value =
+                    "";
+
+
+                jaminanInput.value =
+                    "";
+
+
+                fotoJaminanInput.value =
+                    "";
+
+
+                previewFoto.src =
+                    "";
+
+
+                previewFoto.style.display =
+                    "none";
+
+
+                uploadStatus.textContent =
+                    "";
+
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(
+                    error
+                );
+
+
+                alert(
+
+                    "Gagal menyimpan data:\n\n" +
+
+                    error.message
+
+                );
+
+
+            }
+
+
+            finally {
+
+
+                btnProses.disabled =
+                    false;
+
+
+                btnProses.textContent =
+                    "Proses";
+
+
+            }
+
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
