@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ARC TRANS - Selesai Rental
+    </title>
+
+
+    <style>
+
+        * {
+
+            box-sizing:
+                border-box;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        :root {
+
+            --primary:
+                #2196F3;
+
+            --primary-dark:
+                #1976D2;
+
+            --secondary:
+                #21CBF3;
+
+            --success:
+                #16a34a;
+
+            --danger:
+                #dc2626;
+
+            --warning:
+                #f59e0b;
+
+            --text:
+                #1e293b;
+
+            --muted:
+                #64748b;
+
+            --border:
+                #dbe3ee;
+
+        }
+
+
+        body {
+
+            margin:
+                0;
+
+            min-height:
+                100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e0f2fe,
+                    #f8fafc
+                );
+
+            color:
+                var(--text);
+
+            padding:
+                20px;
+
+        }
+
+
+        /* =============================
+           HEADER
+        ============================== */
+
+        .topbar {
+
+            width:
+                100%;
+
+            max-width:
+                850px;
+
+            margin:
+                0 auto 20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+        }
+
+
+        .brand {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+        }
+
+
+        .brand-icon {
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            border-radius:
+                14px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color:
+                white;
+
+            font-size:
+                22px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    33,
+                    150,
+                    243,
+                    0.25
+                );
+
+        }
+
+
+        .brand-text h1 {
+
+            margin:
+                0;
+
+            font-size:
+                20px;
+
+        }
+
+
+        .brand-text p {
+
+            margin:
+                3px 0 0;
+
+            font-size:
+                12px;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        .home-btn {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                10px 16px;
+
+            border-radius:
+                12px;
+
+            text-decoration:
+                none;
+
+            background:
+                white;
+
+            color:
+                var(--primary);
+
+            font-weight:
+                700;
+
+            box-shadow:
+                0 4px 15px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .home-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+        }
+
+
+        /* =============================
+           CONTAINER
+        ============================== */
+
+        .container {
+
+            width:
+                100%;
+
+            max-width:
+                850px;
+
+            margin:
+                auto;
+
+            background:
+                white;
+
+            border-radius:
+                24px;
+
+            padding:
+                32px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.12
+                );
+
+            animation:
+                fadeIn
+                0.4s
+                ease;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(15px);
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .form-title {
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .form-title h2 {
+
+            margin:
+                0 0 6px;
+
+            font-size:
+                25px;
+
+        }
+
+
+        .form-title p {
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                14px;
+
+        }
+
+
+        /* =============================
+           LOADING
+        ============================== */
+
+        .loading {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                15px;
+
+            margin-bottom:
+                20px;
+
+            border-radius:
+                12px;
+
+            background:
+                #eff6ff;
+
+            color:
+                #1d4ed8;
+
+            font-weight:
+                600;
+
+        }
+
+
+        .loading.hidden {
+
+            display:
+                none;
+
+        }
+
+
+        .error-box {
+
+            display:
+                none;
+
+            padding:
+                15px;
+
+            margin-bottom:
+                20px;
+
+            border-radius:
+                12px;
+
+            background:
+                #fef2f2;
+
+            color:
+                #dc2626;
+
+            font-weight:
+                600;
+
+        }
+
+
+        .error-box.active {
+
+            display:
+                block;
+
+        }
+
+
+        /* =============================
+           FORM
+        ============================== */
+
+        .form-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap:
+                20px;
+
+        }
+
+
+        .form-group {
+
+            width:
+                100%;
+
+        }
+
+
+        .full-width {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        label {
+
+            display:
+                block;
+
+            margin-bottom:
+                8px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            color:
+                #334155;
+
+        }
+
+
+        input {
+
+            width:
+                100%;
+
+            min-height:
+                48px;
+
+            padding:
+                12px 14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                12px;
+
+            background:
+                #f8fafc;
+
+            font-size:
+                14px;
+
+            outline:
+                none;
+
+            color:
+                #334155;
+
+        }
+
+
+        input:focus {
+
+            border-color:
+                var(--primary);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(
+                    33,
+                    150,
+                    243,
+                    0.12
+                );
+
+        }
+
+
+        /* =============================
+           STATUS PEMBAYARAN
+        ============================== */
+
+        .status-box {
+
+            display:
+                none;
+
+            padding:
+                14px;
+
+            margin-top:
+                10px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .status-box.active {
+
+            display:
+                block;
+
+        }
+
+
+        .status-lunas {
+
+            background:
+                #dcfce7;
+
+            color:
+                #15803d;
+
+        }
+
+
+        .status-belum {
+
+            background:
+                #fef3c7;
+
+            color:
+                #92400e;
+
+        }
+
+
+        .status-lebih {
+
+            background:
+                #dbeafe;
+
+            color:
+                #1d4ed8;
+
+        }
+
+
+        /* =============================
+           FOTO JAMINAN
+        ============================== */
+
+        .preview-container {
+
+            width:
+                100%;
+
+            margin-top:
+                10px;
+
+            text-align:
+                center;
+
+        }
+
+
+        #previewFoto {
+
+            display:
+                none;
+
+            width:
+                100%;
+
+            max-height:
+                450px;
+
+            object-fit:
+                contain;
+
+            border-radius:
+                15px;
+
+            border:
+                2px dashed
+                var(--primary);
+
+            padding:
+                8px;
+
+            background:
+                #f8fafc;
+
+        }
+
+
+        #fotoStatus {
+
+            min-height:
+                20px;
+
+            margin-top:
+                10px;
+
+            font-size:
+                13px;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        /* =============================
+           BUTTON
+        ============================== */
+
+        .action-area {
+
+            margin-top:
+                30px;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap:
+                15px;
+
+        }
+
+
+        button {
+
+            width:
+                100%;
+
+            min-height:
+                52px;
+
+            border:
+                none;
+
+            border-radius:
+                14px;
+
+            color:
+                white;
+
+            font-size:
+                15px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .btn-kembali {
+
+            background:
+                #64748b;
+
+        }
+
+
+        .btn-kembali:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                #475569;
+
+        }
+
+
+        .btn-selesai {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #16a34a,
+                    #22c55e
+                );
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    34,
+                    197,
+                    94,
+                    0.25
+                );
+
+        }
+
+
+        .btn-selesai:hover {
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        @media (
+            max-width: 700px
+        ) {
+
+            body {
+
+                padding:
+                    12px;
+
+            }
+
+
+            .container {
+
+                padding:
+                    22px 16px;
+
+                border-radius:
+                    20px;
+
+            }
+
+
+            .form-grid {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    16px;
+
+            }
+
+
+            .full-width {
+
+                grid-column:
+                    auto;
+
+            }
+
+
+            input {
+
+                min-height:
+                    50px;
+
+                font-size:
+                    16px;
+
+            }
+
+
+            .action-area {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =============================
+         HEADER
+    ============================== -->
+
+    <div class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+
+                🚐
+
+            </div>
+
+
+            <div class="brand-text">
+
+                <h1>
+                    ARC TRANS
+                </h1>
+
+                <p>
+                    Vehicle Rental Management
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="tabeloutrent.html"
+            class="home-btn"
+        >
+
+            ⌂ Home
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =============================
+         CONTAINER
+    ============================== -->
+
+    <div class="container">
+
+
+        <div class="form-title">
+
+            <h2>
+                Detail Selesai Rental
+            </h2>
+
+            <p>
+                Data transaksi RENT OUT
+            </p>
+
+        </div>
+
+
+
+        <!-- LOADING -->
+
+        <div
+            id="loading"
+            class="loading"
+        >
+
+            ⏳ Memuat data transaksi...
+
+        </div>
+
+
+
+        <!-- ERROR -->
+
+        <div
+            id="errorBox"
+            class="error-box"
+        >
+        </div>
+
+
+
+        <!-- =============================
+             FORM
+        ============================== -->
+
+        <div
+            id="formData"
+            class="form-grid"
+        >
+
+
+            <!-- ID UNIT -->
+
+            <div class="form-group">
+
+                <label for="plat">
+
+                    ID Unit / Plat Nomor
+
+                </label>
+
+                <input
+                    type="text"
+                    id="plat"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- NAMA UNIT -->
+
+            <div class="form-group">
+
+                <label for="nama">
+
+                    Nama Unit Kendaraan
+
+                </label>
+
+                <input
+                    type="text"
+                    id="nama"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- ID CUSTOMER -->
+
+            <div class="form-group">
+
+                <label for="idcustomer">
+
+                    ID Customer
+
+                </label>
+
+                <input
+                    type="text"
+                    id="idcustomer"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- NAMA CUSTOMER -->
+
+            <div class="form-group">
+
+                <label for="customer">
+
+                    Nama Customer
+
+                </label>
+
+                <input
+                    type="text"
+                    id="customer"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- RENTAL TYPE -->
+
+            <div class="form-group">
+
+                <label for="rentaltype">
+
+                    Rental Type
+
+                </label>
+
+                <input
+                    type="text"
+                    id="rentaltype"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- HARGA -->
+
+            <div class="form-group">
+
+                <label for="harga">
+
+                    Harga
+
+                </label>
+
+                <input
+                    type="text"
+                    id="harga"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- TANGGAL SEWA -->
+
+            <div class="form-group">
+
+                <label for="tanggalsewa">
+
+                    Tanggal Sewa
+
+                </label>
+
+                <input
+                    type="date"
+                    id="tanggalsewa"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- TANGGAL SELESAI -->
+
+            <div class="form-group">
+
+                <label for="selesaisewa">
+
+                    Estimasi Tanggal Selesai
+
+                </label>
+
+                <input
+                    type="date"
+                    id="selesaisewa"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- TOTAL -->
+
+            <div class="form-group">
+
+                <label for="total">
+
+                    Total Biaya
+
+                </label>
+
+                <input
+                    type="text"
+                    id="total"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- BAYAR -->
+
+            <div class="form-group">
+
+                <label for="bayar">
+
+                    Bayar / DP
+
+                </label>
+
+                <input
+                    type="text"
+                    id="bayar"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- SISA -->
+
+            <div class="form-group full-width">
+
+                <label for="sisa">
+
+                    Sisa Pembayaran
+
+                </label>
+
+                <input
+                    type="text"
+                    id="sisa"
+                    readonly
+                >
+
+
+                <div
+                    id="statusPembayaran"
+                    class="status-box"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- JAMINAN -->
+
+            <div class="form-group full-width">
+
+                <label for="jaminan">
+
+                    Jaminan
+
+                </label>
+
+                <input
+                    type="text"
+                    id="jaminan"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- FOTO JAMINAN -->
+
+            <div class="form-group full-width">
+
+                <label>
+
+                    Foto Jaminan
+
+                </label>
+
+
+                <div class="preview-container">
+
+                    <img
+                        id="previewFoto"
+                        alt="Foto Jaminan"
+                    >
+
+
+                    <div
+                        id="fotoStatus"
+                    >
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- BUTTON -->
+
+        <div class="action-area">
+
+
+            <button
+                type="button"
+                class="btn-kembali"
+                onclick="window.location.href='tabeloutrent.html'"
+            >
+
+                ← Kembali
+
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-selesai"
+                id="btnSelesai"
+            >
+
+                ✓ Selesaikan Rental
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =============================
+         FIREBASE SCRIPT
+    ============================== -->
+
+    <script type="module">
+
+
+        /* =================================
+           FIREBASE IMPORT
+        ================================= */
+
+        import {
+
+            initializeApp
+
+        }
+
+        from
+
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+        import {
+
+            getDatabase,
+            ref,
+            get,
+            update,
+            remove,
+            set
+
+        }
+
+        from
+
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+
+        /* =================================
+           FIREBASE CONFIG
+        ================================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+            authDomain:
+                "arctrans.firebaseapp.com",
+
+            databaseURL:
+                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+            projectId:
+                "arctrans",
+
+            storageBucket:
+                "arctrans.firebasestorage.app",
+
+            messagingSenderId:
+                "60781918601",
+
+            appId:
+                "1:60781918601:web:c85d6131207f8a8958"
+
+        };
+
+
+
+        /* =================================
+           INIT FIREBASE
+        ================================= */
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getDatabase(
+                app
+            );
+
+
+
+        /* =================================
+           ELEMEN HTML
+        ================================= */
+
+        const platInput =
+            document.getElementById(
+                "plat"
+            );
+
+
+        const namaInput =
+            document.getElementById(
+                "nama"
+            );
+
+
+        const idCustomerInput =
+            document.getElementById(
+                "idcustomer"
+            );
+
+
+        const customerInput =
+            document.getElementById(
+                "customer"
+            );
+
+
+        const rentalTypeInput =
+            document.getElementById(
+                "rentaltype"
+            );
+
+
+        const hargaInput =
+            document.getElementById(
+                "harga"
+            );
+
+
+        const tanggalSewaInput =
+            document.getElementById(
+                "tanggalsewa"
+            );
+
+
+        const selesaiSewaInput =
+            document.getElementById(
+                "selesaisewa"
+            );
+
+
+        const totalInput =
+            document.getElementById(
+                "total"
+            );
+
+
+        const bayarInput =
+            document.getElementById(
+                "bayar"
+            );
+
+
+        const sisaInput =
+            document.getElementById(
+                "sisa"
+            );
+
+
+        const jaminanInput =
+            document.getElementById(
+                "jaminan"
+            );
+
+
+        const previewFoto =
+            document.getElementById(
+                "previewFoto"
+            );
+
+
+        const fotoStatus =
+            document.getElementById(
+                "fotoStatus"
+            );
+
+
+        const statusPembayaran =
+            document.getElementById(
+                "statusPembayaran"
+            );
+
+
+        const loading =
+            document.getElementById(
+                "loading"
+            );
+
+
+        const errorBox =
+            document.getElementById(
+                "errorBox"
+            );
+
+
+        const btnSelesai =
+            document.getElementById(
+                "btnSelesai"
+            );
+
+
+
+        /* =================================
+           AMBIL ID DARI URL
+
+           CONTOH:
+
+           selesai.html?id=RENT_1787335266937
+        ================================= */
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const transaksiId =
+            urlParams.get(
+                "id"
+            );
+
+
+
+        /* =================================
+           DATA TRANSAKSI
+        ================================= */
+
+        let dataTransaksi =
+            null;
+
+
+
+        /* =================================
+           FORMAT RUPIAH
+        ================================= */
+
+        function formatRupiah(
+            angka
+        ) {
+
+            const nilai =
+                Number(
+                    angka
+                ) || 0;
+
+
+            return (
+                "Rp " +
+                nilai.toLocaleString(
+                    "id-ID"
+                )
+            );
+
+        }
+
+
+
+        /* =================================
+           FORMAT RENTAL TYPE
+        ================================= */
+
+        function formatRentalType(
+            rentaltype
+        ) {
+
+            const dataFormat = {
+
+                setengahhari:
+                    "Setengah Hari",
+
+                harian:
+                    "Harian",
+
+                mingguan:
+                    "Mingguan",
+
+                bulanan:
+                    "Bulanan"
+
+            };
+
+
+            return (
+                dataFormat[
+                    rentaltype
+                ]
+                ||
+                rentaltype
+                ||
+                "-"
+            );
+
+        }
+
+
+
+        /* =================================
+           TAMPIL ERROR
+        ================================= */
+
+        function tampilError(
+            pesan
+        ) {
+
+            errorBox.textContent =
+                "⚠ " +
+                pesan;
+
+
+            errorBox.className =
+                "error-box active";
+
+
+            loading.classList.add(
+                "hidden"
+            );
+
+
+        }
+
+
+
+        /* =================================
+           VALIDASI ID URL
+        ================================= */
+
+        if (
+            !transaksiId
+        ) {
+
+            tampilError(
+                "ID transaksi tidak ditemukan pada URL."
+            );
+
+
+            btnSelesai.disabled =
+                true;
+
+
+            btnSelesai.textContent =
+                "Data Tidak Ditemukan";
+
+        }
+
+        else {
+
+            ambilDataRentOut();
+
+        }
+
+
+
+        /* =================================
+           AMBIL DATA RENT OUT
+        ================================= */
+
+        async function ambilDataRentOut() {
+
+            try {
+
+
+                /* =========================
+                   REFERENSI FIREBASE
+                ========================== */
+
+                const rentRef =
+                    ref(
+
+                        db,
+
+                        "rentout/" +
+                        transaksiId
+
+                    );
+
+
+
+                /* =========================
+                   AMBIL DATA
+                ========================== */
+
+                const snapshot =
+                    await get(
+                        rentRef
+                    );
+
+
+
+                /* =========================
+                   DATA TIDAK ADA
+                ========================== */
+
+                if (
+                    !snapshot.exists()
+                ) {
+
+                    tampilError(
+                        "Data RENT OUT dengan ID " +
+                        transaksiId +
+                        " tidak ditemukan."
+                    );
+
+
+                    btnSelesai.disabled =
+                        true;
+
+
+                    btnSelesai.textContent =
+                        "Data Tidak Ditemukan";
+
+
+                    return;
+
+                }
+
+
+
+                /* =========================
+                   SIMPAN DATA
+                ========================== */
+
+                const data =
+                    snapshot.val();
+
+
+                dataTransaksi =
+                    data;
+
+
+
+                /* =========================
+                   ID UNIT / PLAT NOMOR
+
+                   Menampilkan PLAT
+                   Jika tidak ada,
+                   gunakan UNIT ID
+                ========================== */
+
+                platInput.value =
+                    data.plat ||
+                    data.unitId ||
+                    "";
+
+
+
+                /* =========================
+                   NAMA UNIT
+                ========================== */
+
+                namaInput.value =
+                    data.namaUnit ||
+                    "";
+
+
+
+                /* =========================
+                   ID CUSTOMER
+
+                   Menggunakan ID Customer
+                ========================== */
+
+                idCustomerInput.value =
+                    data.idcustomer ||
+                    "";
+
+
+
+                /* =========================
+                   NAMA CUSTOMER
+                ========================== */
+
+                customerInput.value =
+                    data.customer ||
+                    "";
+
+
+
+                /* =========================
+                   RENTAL TYPE
+                ========================== */
+
+                rentalTypeInput.value =
+                    formatRentalType(
+                        data.rentaltype
+                    );
+
+
+
+                /* =========================
+                   HARGA
+                ========================== */
+
+                hargaInput.value =
+                    data.hargaFormat ||
+
+                    formatRupiah(
+                        data.harga
+                    );
+
+
+
+                /* =========================
+                   TANGGAL SEWA
+                ========================== */
+
+                tanggalSewaInput.value =
+                    data.tanggalsewa ||
+                    "";
+
+
+
+                /* =========================
+                   TANGGAL SELESAI
+                ========================== */
+
+                selesaiSewaInput.value =
+                    data.selesaisewa ||
+                    "";
+
+
+
+                /* =========================
+                   TOTAL BIAYA
+                ========================== */
+
+                totalInput.value =
+                    data.totalFormat ||
+
+                    formatRupiah(
+                        data.total
+                    );
+
+
+
+                /* =========================
+                   BAYAR / DP
+                ========================== */
+
+                bayarInput.value =
+                    data.bayarFormat ||
+
+                    formatRupiah(
+                        data.bayar
+                    );
+
+
+
+                /* =========================
+                   SISA PEMBAYARAN
+                ========================== */
+
+                if (
+
+                    data.statusPembayaran ===
+                    "LUNAS"
+
+                ) {
+
+                    sisaInput.value =
+                        "LUNAS";
+
+
+                    statusPembayaran.className =
+                        "status-box active status-lunas";
+
+
+                    statusPembayaran.textContent =
+                        "✓ Status Pembayaran: LUNAS";
+
+                }
+
+
+                else if (
+
+                    data.statusPembayaran ===
+                    "LEBIH BAYAR"
+
+                ) {
+
+                    const lebihBayar =
+                        data.kelebihanBayar || 0;
+
+
+                    sisaInput.value =
+                        "+ " +
+                        formatRupiah(
+                            lebihBayar
+                        );
+
+
+                    statusPembayaran.className =
+                        "status-box active status-lebih";
+
+
+                    statusPembayaran.textContent =
+                        "＋ Kelebihan pembayaran: " +
+                        formatRupiah(
+                            lebihBayar
+                        );
+
+                }
+
+
+                else {
+
+                    sisaInput.value =
+                        data.sisaFormat ||
+
+                        formatRupiah(
+                            data.sisa
+                        );
+
+
+                    statusPembayaran.className =
+                        "status-box active status-belum";
+
+
+                    statusPembayaran.textContent =
+                        "Sisa pembayaran: " +
+
+                        (
+                            data.sisaFormat ||
+
+                            formatRupiah(
+                                data.sisa
+                            )
+                        );
+
+                }
+
+
+
+                /* =========================
+                   JAMINAN
+                ========================== */
+
+                jaminanInput.value =
+                    data.jaminan ||
+                    "";
+
+
+
+                /* =========================
+                   FOTO JAMINAN
+                ========================== */
+
+                if (
+                    data.fotoJaminan
+                ) {
+
+                    previewFoto.src =
+                        data.fotoJaminan;
+
+
+                    previewFoto.style.display =
+                        "block";
+
+
+                    fotoStatus.textContent =
+                        "✓ Foto jaminan berhasil dimuat";
+
+                }
+
+                else {
+
+                    previewFoto.style.display =
+                        "none";
+
+
+                    fotoStatus.textContent =
+                        "Foto jaminan tidak tersedia";
+
+                }
+
+
+
+                /* =========================
+                   HILANGKAN LOADING
+                ========================== */
+
+                loading.classList.add(
+                    "hidden"
+                );
+
+
+                console.log(
+                    "Data RENT OUT berhasil dimuat:",
+                    data
+                );
+
+            }
+
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Gagal mengambil data:",
+                    error
+                );
+
+
+                tampilError(
+                    "Gagal mengambil data: " +
+                    error.message
+                );
+
+
+                btnSelesai.disabled =
+                    true;
+
+
+                btnSelesai.textContent =
+                    "Terjadi Kesalahan";
+
+            }
+
+        }
+
+
+
+        /* =================================
+           TOMBOL SELESAIKAN RENTAL
+
+           Bagian ini dapat digunakan
+           untuk proses pengembalian
+           kendaraan.
+        ================================= */
+
+        btnSelesai.addEventListener(
+
+            "click",
+
+            async function () {
+
+
+                if (
+                    !dataTransaksi
+                ) {
+
+                    alert(
+                        "Data transaksi belum tersedia."
+                    );
+
+
+                    return;
+
+                }
+
+
+                const konfirmasi =
+                    confirm(
+
+                        "Apakah Anda yakin ingin menyelesaikan rental ini?\n\n" +
+
+                        "Unit: " +
+                        (
+                            dataTransaksi.plat ||
+                            dataTransaksi.unitId
+                        ) +
+                        "\n\n" +
+
+                        "Unit akan dikembalikan ke status tersedia."
+
+                    );
+
+
+                if (
+                    !konfirmasi
+                ) {
+
+                    return;
+
+                }
+
+
+                try {
+
+
+                    btnSelesai.disabled =
+                        true;
+
+
+                    btnSelesai.textContent =
+                        "Memproses...";
+
+
+                    /*
+                    =================================
+
+                    UPDATE STATUS TRANSAKSI
+
+                    =================================
+                    */
+
+                    await update(
+
+                        ref(
+
+                            db,
+
+                            "rentout/" +
+                            transaksiId
+
+                        ),
+
+                        {
+
+                            status:
+                                "SELESAI RENTAL",
+
+                            tanggalSelesaiRental:
+                                new Date()
+                                .toISOString(),
+
+                            timestampSelesai:
+                                Date.now()
+
+                        }
+
+                    );
+
+
+                    /*
+                    =================================
+
+                    UPDATE STATUS UNIT
+
+                    UNIT KEMBALI MENJADI READY
+
+                    =================================
+                    */
+
+                    await update(
+
+                        ref(
+
+                            db,
+
+                            "unit/" +
+                            dataTransaksi.unitId
+
+                        ),
+
+                        {
+
+                            keterangan:
+                                "Ready"
+
+                        }
+
+                    );
+
+
+                    /*
+                    =================================
+
+                    KEMBALIKAN UNIT KE READY
+
+                    Struktur dibuat berdasarkan
+                    data yang tersedia pada
+                    transaksi.
+
+                    =================================
+                    */
+
+                    await set(
+
+                        ref(
+
+                            db,
+
+                            "ready/" +
+                            dataTransaksi.unitId
+
+                        ),
+
+                        {
+
+                            plat:
+                                dataTransaksi.plat ||
+                                dataTransaksi.unitId,
+
+                            nama:
+                                dataTransaksi.namaUnit ||
+                                "",
+
+                            keterangan:
+                                "Ready",
+
+                            timestamp:
+                                Date.now()
+
+                        }
+
+                    );
+
+
+                    /*
+                    =================================
+
+                    BERHASIL
+
+                    =================================
+                    */
+
+                    alert(
+
+                        "Rental berhasil diselesaikan!\n\n" +
+
+                        "Unit " +
+
+                        (
+                            dataTransaksi.plat ||
+                            dataTransaksi.unitId
+                        ) +
+
+                        " telah dikembalikan ke READY."
+
+                    );
+
+
+                    /*
+                    =================================
+
+                    KEMBALI KE TABEL RENT OUT
+
+                    =================================
+                    */
+
+                    window.location.href =
+                        "tabeloutrent.html";
+
+
+                }
+
+
+                catch (
+                    error
+                ) {
+
+                    console.error(
+                        "Gagal menyelesaikan rental:",
+                        error
+                    );
+
+
+                    alert(
+
+                        "Gagal menyelesaikan rental:\n\n" +
+
+                        error.message
+
+                    );
+
+
+                    btnSelesai.disabled =
+                        false;
+
+
+                    btnSelesai.textContent =
+                        "✓ Selesaikan Rental";
+
+                }
+
+            }
+
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
