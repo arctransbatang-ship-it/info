@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
 
 <head>
@@ -13,7 +12,6 @@
 
     <title>ARC TRANS</title>
 
-
     <style>
 
         /* =========================
@@ -21,56 +19,38 @@
         ========================= */
 
         * {
-
             box-sizing: border-box;
-
             font-family:
                 "Segoe UI",
                 Arial,
                 sans-serif;
-
         }
 
 
         html {
-
             min-height: 100%;
-
         }
 
 
         body {
-
             margin: 0;
-
             min-height: 100vh;
-
             padding: 20px;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             background:
-
                 linear-gradient(
-
                     135deg,
-
                     #0f4c81 0%,
-
                     #2196F3 45%,
-
                     #21CBF3 100%
-
                 );
 
             overflow-x: hidden;
-
             position: relative;
-
         }
 
 
@@ -79,19 +59,16 @@
         ========================= */
 
         body::before {
-
             content: "";
 
             position: fixed;
 
             width: 300px;
-
             height: 300px;
 
             border-radius: 50%;
 
             background:
-
                 rgba(
                     255,
                     255,
@@ -100,28 +77,23 @@
                 );
 
             top: -100px;
-
             left: -100px;
 
             filter: blur(2px);
-
         }
 
 
         body::after {
-
             content: "";
 
             position: fixed;
 
             width: 350px;
-
             height: 350px;
 
             border-radius: 50%;
 
             background:
-
                 rgba(
                     255,
                     255,
@@ -130,9 +102,7 @@
                 );
 
             bottom: -150px;
-
             right: -100px;
-
         }
 
 
@@ -141,19 +111,15 @@
         ========================= */
 
         .container {
-
             position: relative;
-
             z-index: 2;
 
             width: 100%;
-
             max-width: 980px;
 
             padding: 40px;
 
             background:
-
                 rgba(
                     255,
                     255,
@@ -164,9 +130,7 @@
             border-radius: 28px;
 
             box-shadow:
-
                 0 25px 60px
-
                 rgba(
                     0,
                     0,
@@ -176,7 +140,6 @@
 
             animation:
                 fadeIn 0.6s ease;
-
         }
 
 
@@ -185,19 +148,15 @@
         ========================= */
 
         .header {
-
             display: flex;
-
             flex-direction: column;
 
             align-items: center;
-
             justify-content: center;
 
             text-align: center;
 
             margin-bottom: 35px;
-
         }
 
 
@@ -206,15 +165,12 @@
         ========================= */
 
         .logo {
-
             width: 100px;
-
             height: 100px;
 
             display: flex;
 
             justify-content: center;
-
             align-items: center;
 
             margin-bottom: 16px;
@@ -224,21 +180,14 @@
             font-size: 50px;
 
             background:
-
                 linear-gradient(
-
                     135deg,
-
                     #2196F3,
-
                     #21CBF3
-
                 );
 
             box-shadow:
-
                 0 12px 25px
-
                 rgba(
                     33,
                     150,
@@ -247,8 +196,10 @@
                 );
 
             animation:
-                floatLogo 3s ease-in-out infinite;
-
+                floatLogo
+                3s
+                ease-in-out
+                infinite;
         }
 
 
@@ -257,11 +208,9 @@
         ========================= */
 
         h1 {
-
             margin: 0;
 
             font-size:
-
                 clamp(
                     26px,
                     5vw,
@@ -273,24 +222,20 @@
             letter-spacing: 2px;
 
             color: #1565C0;
-
         }
 
 
         .subtitle {
-
             margin-top: 8px;
 
             color: #78909C;
 
             font-size:
-
                 clamp(
                     13px,
                     3vw,
                     16px
                 );
-
         }
 
 
@@ -299,11 +244,9 @@
         ========================= */
 
         .menu {
-
             display: grid;
 
             grid-template-columns:
-
                 repeat(
                     3,
                     minmax(
@@ -313,7 +256,6 @@
                 );
 
             gap: 18px;
-
         }
 
 
@@ -322,12 +264,13 @@
         ========================= */
 
         .menu-item {
-
             position: relative;
 
             min-height: 185px;
 
-            padding: 22px 15px;
+            padding:
+                22px
+                15px;
 
             text-decoration: none;
 
@@ -346,7 +289,6 @@
             flex-direction: column;
 
             justify-content: center;
-
             align-items: center;
 
             text-align: center;
@@ -354,15 +296,10 @@
             overflow: hidden;
 
             transition:
-
                 transform 0.25s ease,
-
                 box-shadow 0.25s ease,
-
                 border-color 0.25s ease,
-
                 background 0.25s ease;
-
         }
 
 
@@ -371,7 +308,6 @@
         ========================= */
 
         .menu-item:hover {
-
             transform:
                 translateY(-7px);
 
@@ -382,24 +318,19 @@
                 #f7fbff;
 
             box-shadow:
-
                 0 15px 30px
-
                 rgba(
                     33,
                     150,
                     243,
                     0.20
                 );
-
         }
 
 
         .menu-item:active {
-
             transform:
                 scale(0.98);
-
         }
 
 
@@ -408,29 +339,21 @@
         ========================= */
 
         .menu-item::before {
-
             content: "";
 
             position: absolute;
 
             top: 0;
-
             left: 0;
 
             width: 100%;
-
             height: 4px;
 
             background:
-
                 linear-gradient(
-
                     90deg,
-
                     #2196F3,
-
                     #21CBF3
-
                 );
 
             transform:
@@ -438,15 +361,12 @@
 
             transition:
                 0.25s ease;
-
         }
 
 
         .menu-item:hover::before {
-
             transform:
                 scaleX(1);
-
         }
 
 
@@ -455,15 +375,12 @@
         ========================= */
 
         .menu-icon {
-
             width: 78px;
-
             height: 78px;
 
             display: flex;
 
             justify-content: center;
-
             align-items: center;
 
             margin-bottom: 16px;
@@ -473,46 +390,29 @@
             font-size: 38px;
 
             background:
-
                 linear-gradient(
-
                     135deg,
-
                     #e3f2fd,
-
                     #f1fbff
-
                 );
 
             transition:
-
                 transform 0.25s ease,
-
                 background 0.25s ease;
-
         }
 
 
         .menu-item:hover .menu-icon {
-
             transform:
-
                 scale(1.12)
-
                 rotate(3deg);
 
             background:
-
                 linear-gradient(
-
                     135deg,
-
                     #d7efff,
-
                     #e8faff
-
                 );
-
         }
 
 
@@ -521,9 +421,7 @@
         ========================= */
 
         .menu-text {
-
             font-size:
-
                 clamp(
                     13px,
                     2vw,
@@ -533,7 +431,6 @@
             font-weight: 700;
 
             line-height: 1.5;
-
         }
 
 
@@ -542,15 +439,12 @@
         ========================= */
 
         .footer {
-
             margin-top: 32px;
 
             padding-top: 22px;
 
             border-top:
-
                 1px solid
-
                 #edf0f2;
 
             text-align: center;
@@ -558,7 +452,6 @@
             color: #90A4AE;
 
             font-size: 13px;
-
         }
 
 
@@ -569,22 +462,18 @@
         @keyframes fadeIn {
 
             from {
-
                 opacity: 0;
 
                 transform:
                     translateY(30px);
-
             }
 
 
             to {
-
                 opacity: 1;
 
                 transform:
                     translateY(0);
-
             }
 
         }
@@ -594,18 +483,14 @@
 
             0%,
             100% {
-
                 transform:
                     translateY(0);
-
             }
 
 
             50% {
-
                 transform:
                     translateY(-7px);
-
             }
 
         }
@@ -618,21 +503,16 @@
         @media (max-width: 850px) {
 
             .container {
-
                 max-width: 700px;
-
             }
 
 
             .menu {
-
                 grid-template-columns:
-
                     repeat(
                         2,
                         1fr
                     );
-
             }
 
         }
@@ -645,43 +525,34 @@
         @media (max-width: 600px) {
 
             body {
-
                 padding: 14px;
 
                 align-items:
                     flex-start;
-
             }
 
 
             .container {
-
                 margin-top: 10px;
 
                 padding:
-
                     28px
                     16px
                     20px;
 
                 border-radius:
                     24px;
-
             }
 
 
             .header {
-
                 margin-bottom:
                     25px;
-
             }
 
 
             .logo {
-
                 width: 82px;
-
                 height: 82px;
 
                 border-radius:
@@ -689,35 +560,29 @@
 
                 font-size:
                     42px;
-
             }
 
 
             .menu {
-
                 gap: 12px;
-
             }
 
 
             .menu-item {
-
                 min-height:
                     155px;
 
                 padding:
-                    16px 10px;
+                    16px
+                    10px;
 
                 border-radius:
                     18px;
-
             }
 
 
             .menu-icon {
-
                 width: 65px;
-
                 height: 65px;
 
                 border-radius:
@@ -728,18 +593,15 @@
 
                 margin-bottom:
                     10px;
-
             }
 
 
             .footer {
-
                 margin-top:
                     24px;
 
                 padding-top:
                     18px;
-
             }
 
         }
@@ -752,58 +614,45 @@
         @media (max-width: 380px) {
 
             body {
-
                 padding: 10px;
-
             }
 
 
             .container {
-
                 padding:
-
                     22px
                     12px
                     18px;
-
             }
 
 
             .menu {
-
                 gap: 10px;
-
             }
 
 
             .menu-item {
-
                 min-height:
                     140px;
 
                 padding:
-                    12px 6px;
-
+                    12px
+                    6px;
             }
 
 
             .menu-icon {
-
                 width: 58px;
-
                 height: 58px;
 
                 font-size:
                     28px;
-
             }
 
 
             .menu-text {
-
                 font-size:
                     12px;
-
             }
 
         }
@@ -825,29 +674,22 @@
 
         <div class="header">
 
-
             <div class="logo">
-
                 🚐
-
             </div>
 
 
             <h1>
-
                 ARC TRANS
-
             </h1>
 
 
             <div class="subtitle">
-
                 Sistem Manajemen Unit & Customer
-
             </div>
 
-
         </div>
+
 
 
         <!-- =========================
@@ -865,19 +707,15 @@
             >
 
                 <div class="menu-icon">
-
                     🚗
-
                 </div>
 
-
                 <div class="menu-text">
-
                     Input Unit
-
                 </div>
 
             </a>
+
 
 
             <!-- DATA UNIT -->
@@ -888,19 +726,15 @@
             >
 
                 <div class="menu-icon">
-
                     📋
-
                 </div>
 
-
                 <div class="menu-text">
-
                     Data Unit Kendaraan
-
                 </div>
 
             </a>
+
 
 
             <!-- INPUT CUSTOMER -->
@@ -911,19 +745,15 @@
             >
 
                 <div class="menu-icon">
-
                     👤
-
                 </div>
 
-
                 <div class="menu-text">
-
                     Input Customer
-
                 </div>
 
             </a>
+
 
 
             <!-- DATA CUSTOMER -->
@@ -934,19 +764,15 @@
             >
 
                 <div class="menu-icon">
-
                     👥
-
                 </div>
 
-
                 <div class="menu-text">
-
                     Data Customer
-
                 </div>
 
             </a>
+
 
 
             <!-- RENT OUT -->
@@ -957,19 +783,15 @@
             >
 
                 <div class="menu-icon">
-
                     📝
-
                 </div>
 
-
                 <div class="menu-text">
-
                     RENT OUT
-
                 </div>
 
             </a>
+
 
 
             <!-- TABEL RENTAL OUT -->
@@ -980,16 +802,32 @@
             >
 
                 <div class="menu-icon">
-
                     📊
-
                 </div>
 
+                <div class="menu-text">
+                    UPDATE Unit OUT
+                </div>
+
+            </a>
+
+
+
+            <!-- =========================
+                 REVENUE
+            ========================== -->
+
+            <a
+                href="tabelrevenue.html"
+                class="menu-item"
+            >
+
+                <div class="menu-icon">
+                    💰
+                </div>
 
                 <div class="menu-text">
-
-                    UPDATE Unit OUT
-
+                    Revenue
                 </div>
 
             </a>
@@ -998,14 +836,13 @@
         </div>
 
 
+
         <!-- =========================
              FOOTER
         ========================== -->
 
         <div class="footer">
-
             © 2026 ARC TRANS
-
         </div>
 
 

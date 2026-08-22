@@ -21,46 +21,21 @@
                 sans-serif;
         }
 
-
         :root {
-
-            --primary:
-                #2196F3;
-
-            --primary-dark:
-                #1976D2;
-
-            --secondary:
-                #21CBF3;
-
-            --success:
-                #16a34a;
-
-            --danger:
-                #dc2626;
-
-            --warning:
-                #f59e0b;
-
-            --text:
-                #1e293b;
-
-            --muted:
-                #64748b;
-
-            --border:
-                #dbe3ee;
-
-            --background:
-                #f1f5f9;
-
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --secondary: #21CBF3;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #dbe3ee;
+            --background: #f1f5f9;
         }
 
-
         body {
-
             margin: 0;
-
             min-height: 100vh;
 
             background:
@@ -70,74 +45,35 @@
                     #f8fafc
                 );
 
-            color:
-                var(--text);
-
-            padding:
-                20px;
-
+            color: var(--text);
+            padding: 20px;
         }
-
-
-        /* =============================
-           HEADER
-        ============================== */
 
         .topbar {
-
             width: 100%;
+            max-width: 850px;
+            margin: 0 auto 20px;
 
-            max-width:
-                850px;
-
-            margin:
-                0 auto 20px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-
 
         .brand {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                12px;
-
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-
         .brand-icon {
+            width: 45px;
+            height: 45px;
 
-            width:
-                45px;
+            border-radius: 14px;
 
-            height:
-                45px;
-
-            border-radius:
-                14px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             background:
                 linear-gradient(
@@ -146,216 +82,107 @@
                     var(--secondary)
                 );
 
-            color:
-                white;
-
-            font-size:
-                22px;
+            color: white;
+            font-size: 22px;
 
             box-shadow:
                 0 8px 20px
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.25
-                );
-
+                rgba(33, 150, 243, 0.25);
         }
-
 
         .brand-text h1 {
-
             margin: 0;
-
-            font-size:
-                20px;
-
+            font-size: 20px;
         }
-
 
         .brand-text p {
-
-            margin:
-                3px 0 0;
-
-            font-size:
-                12px;
-
-            color:
-                var(--muted);
-
+            margin: 3px 0 0;
+            font-size: 12px;
+            color: var(--muted);
         }
 
-
         .home-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
 
-            display:
-                inline-flex;
+            padding: 10px 16px;
 
-            align-items:
-                center;
+            border-radius: 12px;
 
-            justify-content:
-                center;
+            text-decoration: none;
 
-            gap:
-                7px;
+            background: white;
+            color: var(--primary);
 
-            padding:
-                10px 16px;
-
-            border-radius:
-                12px;
-
-            text-decoration:
-                none;
-
-            background:
-                white;
-
-            color:
-                var(--primary);
-
-            font-weight:
-                700;
+            font-weight: 700;
 
             box-shadow:
                 0 4px 15px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.08
-                );
+                rgba(0, 0, 0, 0.08);
 
-            transition:
-                0.2s;
-
+            transition: 0.2s;
         }
-
 
         .home-btn:hover {
-
-            transform:
-                translateY(-2px);
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
+            transform: translateY(-2px);
+            background: var(--primary);
+            color: white;
         }
 
-
-        /* =============================
-           CONTAINER
-        ============================== */
-
         .container {
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
 
-            width:
-                100%;
+            background: white;
 
-            max-width:
-                850px;
+            border-radius: 24px;
 
-            margin:
-                auto;
-
-            background:
-                white;
-
-            border-radius:
-                24px;
-
-            padding:
-                32px;
+            padding: 32px;
 
             box-shadow:
                 0 15px 45px
-                rgba(
-                    15,
-                    23,
-                    42,
-                    0.12
-                );
+                rgba(15, 23, 42, 0.12);
 
             animation:
                 fadeIn
                 0.4s
                 ease;
-
         }
-
 
         @keyframes fadeIn {
 
             from {
-
-                opacity:
-                    0;
-
-                transform:
-                    translateY(15px);
-
+                opacity: 0;
+                transform: translateY(15px);
             }
 
             to {
-
-                opacity:
-                    1;
-
-                transform:
-                    translateY(0);
-
+                opacity: 1;
+                transform: translateY(0);
             }
 
         }
 
-
         .form-title {
-
-            margin-bottom:
-                30px;
-
+            margin-bottom: 30px;
         }
-
 
         .form-title h2 {
-
-            margin:
-                0 0 6px;
-
-            font-size:
-                25px;
-
+            margin: 0 0 6px;
+            font-size: 25px;
         }
-
 
         .form-title p {
-
-            margin:
-                0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                14px;
-
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
         }
 
-
-        /* =============================
-           FORM GRID
-        ============================== */
-
         .form-grid {
-
-            display:
-                grid;
+            display: grid;
 
             grid-template-columns:
                 repeat(
@@ -363,315 +190,159 @@
                     minmax(0, 1fr)
                 );
 
-            gap:
-                20px;
-
+            gap: 20px;
         }
-
 
         .form-group {
-
-            width:
-                100%;
-
+            width: 100%;
         }
-
 
         .full-width {
-
-            grid-column:
-                1 / -1;
-
+            grid-column: 1 / -1;
         }
-
 
         label {
+            display: block;
+            margin-bottom: 8px;
 
-            display:
-                block;
+            font-size: 13px;
+            font-weight: 700;
 
-            margin-bottom:
-                8px;
-
-            font-size:
-                13px;
-
-            font-weight:
-                700;
-
-            color:
-                #334155;
-
+            color: #334155;
         }
-
 
         input,
         select {
+            width: 100%;
+            min-height: 48px;
 
-            width:
-                100%;
-
-            min-height:
-                48px;
-
-            padding:
-                12px 14px;
+            padding: 12px 14px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius:
-                12px;
+            border-radius: 12px;
 
-            background:
-                white;
+            background: white;
 
-            font-size:
-                14px;
+            font-size: 14px;
 
-            outline:
-                none;
+            outline: none;
 
-            transition:
-                0.2s;
-
+            transition: 0.2s;
         }
-
 
         input:focus,
         select:focus {
-
-            border-color:
-                var(--primary);
+            border-color: var(--primary);
 
             box-shadow:
                 0 0 0 4px
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.12
-                );
-
+                rgba(33, 150, 243, 0.12);
         }
-
 
         input[readonly] {
-
-            background:
-                #f8fafc;
-
-            color:
-                #475569;
-
+            background: #f8fafc;
+            color: #475569;
         }
-
-
-        /* =============================
-           INFO DURASI
-        ============================== */
 
         .durasi-info {
+            display: none;
 
-            display:
-                none;
+            margin-top: 10px;
+            padding: 12px 15px;
 
-            margin-top:
-                10px;
+            border-radius: 10px;
 
-            padding:
-                12px 15px;
+            background: #eff6ff;
+            color: #1d4ed8;
 
-            border-radius:
-                10px;
-
-            background:
-                #eff6ff;
-
-            color:
-                #1d4ed8;
-
-            font-size:
-                13px;
-
-            font-weight:
-                600;
-
+            font-size: 13px;
+            font-weight: 600;
         }
-
 
         .durasi-info.active {
-
-            display:
-                block;
-
+            display: block;
         }
-
 
         .durasi-info.error {
-
-            background:
-                #fef2f2;
-
-            color:
-                #dc2626;
-
+            background: #fef2f2;
+            color: #dc2626;
         }
-
-
-        /* =============================
-           STATUS SISA
-        ============================== */
 
         .sisa-info {
+            display: none;
 
-            display:
-                none;
+            margin-top: 10px;
+            padding: 12px 15px;
 
-            margin-top:
-                10px;
+            border-radius: 10px;
 
-            padding:
-                12px 15px;
-
-            border-radius:
-                10px;
-
-            font-size:
-                14px;
-
-            font-weight:
-                700;
-
+            font-size: 14px;
+            font-weight: 700;
         }
-
 
         .sisa-info.active {
-
-            display:
-                block;
-
+            display: block;
         }
-
 
         .sisa-lunas {
-
-            background:
-                #dcfce7;
-
-            color:
-                #15803d;
-
+            background: #dcfce7;
+            color: #15803d;
         }
-
 
         .sisa-kurang {
-
-            background:
-                #fef3c7;
-
-            color:
-                #92400e;
-
+            background: #fef3c7;
+            color: #92400e;
         }
-
 
         .sisa-lebih {
-
-            background:
-                #dbeafe;
-
-            color:
-                #1d4ed8;
-
+            background: #dbeafe;
+            color: #1d4ed8;
         }
-
-
-        /* =============================
-           UPLOAD FOTO
-        ============================== */
 
         .preview-container {
-
-            margin-top:
-                10px;
-
-            text-align:
-                center;
-
+            margin-top: 10px;
+            text-align: center;
         }
 
-
         #previewFoto {
+            display: none;
 
-            display:
-                none;
+            width: 100%;
+            max-height: 280px;
 
-            width:
-                100%;
+            object-fit: contain;
 
-            max-height:
-                280px;
-
-            object-fit:
-                contain;
-
-            border-radius:
-                15px;
+            border-radius: 15px;
 
             border:
                 2px dashed
                 var(--primary);
 
-            padding:
-                8px;
-
+            padding: 8px;
         }
-
 
         #uploadStatus {
+            min-height: 20px;
 
-            min-height:
-                20px;
+            margin-top: 10px;
 
-            margin-top:
-                10px;
-
-            font-size:
-                13px;
-
-            color:
-                var(--muted);
-
+            font-size: 13px;
+            color: var(--muted);
         }
-
-
-        /* =============================
-           BUTTON
-        ============================== */
 
         .action-area {
-
-            margin-top:
-                30px;
-
+            margin-top: 30px;
         }
 
-
         #btnProses {
+            width: 100%;
+            min-height: 52px;
 
-            width:
-                100%;
-
-            min-height:
-                52px;
-
-            border:
-                none;
-
-            border-radius:
-                14px;
+            border: none;
+            border-radius: 14px;
 
             background:
                 linear-gradient(
@@ -680,235 +351,93 @@
                     var(--secondary)
                 );
 
-            color:
-                white;
+            color: white;
 
-            font-size:
-                16px;
+            font-size: 16px;
+            font-weight: 700;
 
-            font-weight:
-                700;
+            cursor: pointer;
 
-            cursor:
-                pointer;
-
-            transition:
-                0.2s;
+            transition: 0.2s;
 
             box-shadow:
                 0 8px 20px
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.25
-                );
-
+                rgba(33, 150, 243, 0.25);
         }
 
-
         #btnProses:hover {
-
-            transform:
-                translateY(-2px);
+            transform: translateY(-2px);
 
             box-shadow:
                 0 12px 25px
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.35
-                );
-
+                rgba(33, 150, 243, 0.35);
         }
-
 
         #btnProses:disabled {
-
-            opacity:
-                0.7;
-
-            cursor:
-                not-allowed;
-
-            transform:
-                none;
-
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
-
 
         .link-kembali {
+            display: block;
 
-            display:
-                block;
+            text-align: center;
 
-            text-align:
-                center;
+            margin-top: 20px;
 
-            margin-top:
-                20px;
+            text-decoration: none;
 
-            text-decoration:
-                none;
+            color: var(--muted);
 
-            color:
-                var(--muted);
-
-            font-size:
-                14px;
-
-            font-weight:
-                600;
-
+            font-size: 14px;
+            font-weight: 600;
         }
 
-
-        /* =============================
-           RESPONSIVE HP
-        ============================== */
-
-        @media (
-            max-width: 700px
-        ) {
+        @media (max-width: 700px) {
 
             body {
-
-                padding:
-                    12px;
-
+                padding: 12px;
             }
-
 
             .topbar {
-
-                margin-bottom:
-                    12px;
-
+                margin-bottom: 12px;
             }
-
 
             .brand-text h1 {
-
-                font-size:
-                    17px;
-
+                font-size: 17px;
             }
-
 
             .brand-text p {
-
-                display:
-                    none;
-
+                display: none;
             }
-
 
             .home-btn {
-
-                padding:
-                    9px 12px;
-
+                padding: 9px 12px;
             }
-
 
             .container {
-
-                padding:
-                    22px 16px;
-
-                border-radius:
-                    20px;
-
+                padding: 22px 16px;
+                border-radius: 20px;
             }
-
 
             .form-title h2 {
-
-                font-size:
-                    21px;
-
+                font-size: 21px;
             }
-
 
             .form-grid {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    16px;
-
+                grid-template-columns: 1fr;
+                gap: 16px;
             }
-
 
             .full-width {
-
-                grid-column:
-                    auto;
-
+                grid-column: auto;
             }
-
 
             input,
             select {
-
-                min-height:
-                    50px;
-
-                font-size:
-                    16px;
-
-            }
-
-        }
-
-
-        @media (
-            max-width: 420px
-        ) {
-
-            .brand-icon {
-
-                width:
-                    40px;
-
-                height:
-                    40px;
-
-            }
-
-
-            .brand-text h1 {
-
-                font-size:
-                    15px;
-
-            }
-
-
-            .home-btn {
-
-                font-size:
-                    0;
-
-                width:
-                    42px;
-
-                height:
-                    42px;
-
-                padding:
-                    0;
-
-            }
-
-
-            .home-btn span {
-
-                font-size:
-                    19px;
-
+                min-height: 50px;
+                font-size: 16px;
             }
 
         }
@@ -917,13 +446,7 @@
 
 </head>
 
-
 <body>
-
-
-    <!-- =============================
-         HEADER
-    ============================== -->
 
     <div class="topbar">
 
@@ -947,31 +470,18 @@
 
         </div>
 
-
         <a
             href="index.html"
             class="home-btn"
-            title="Home"
         >
-
-            <span>
-                ⌂
-            </span>
-
+            <span>⌂</span>
             Home
-
         </a>
 
     </div>
 
 
-
-    <!-- =============================
-         FORM
-    ============================== -->
-
     <div class="container">
-
 
         <div class="form-title">
 
@@ -986,11 +496,8 @@
         </div>
 
 
-
         <div class="form-grid">
 
-
-            <!-- UNIT -->
 
             <div class="form-group">
 
@@ -1009,7 +516,6 @@
             </div>
 
 
-
             <div class="form-group">
 
                 <label for="nama">
@@ -1024,9 +530,6 @@
 
             </div>
 
-
-
-            <!-- CUSTOMER -->
 
             <div class="form-group">
 
@@ -1045,7 +548,6 @@
             </div>
 
 
-
             <div class="form-group">
 
                 <label for="customer">
@@ -1060,9 +562,6 @@
 
             </div>
 
-
-
-            <!-- RENTAL -->
 
             <div class="form-group">
 
@@ -1097,7 +596,6 @@
             </div>
 
 
-
             <div class="form-group">
 
                 <label for="harga">
@@ -1114,9 +612,6 @@
             </div>
 
 
-
-            <!-- TANGGAL -->
-
             <div class="form-group">
 
                 <label for="tanggalsewa">
@@ -1129,7 +624,6 @@
                 >
 
             </div>
-
 
 
             <div class="form-group">
@@ -1146,14 +640,10 @@
                 <div
                     id="durasiInfo"
                     class="durasi-info"
-                >
-                </div>
+                ></div>
 
             </div>
 
-
-
-            <!-- BIAYA -->
 
             <div class="form-group">
 
@@ -1169,7 +659,6 @@
                 >
 
             </div>
-
 
 
             <div class="form-group">
@@ -1188,7 +677,6 @@
             </div>
 
 
-
             <div class="form-group full-width">
 
                 <label for="sisa">
@@ -1205,14 +693,10 @@
                 <div
                     id="sisaInfo"
                     class="sisa-info"
-                >
-                </div>
+                ></div>
 
             </div>
 
-
-
-            <!-- JAMINAN -->
 
             <div class="form-group">
 
@@ -1227,7 +711,6 @@
                 >
 
             </div>
-
 
 
             <div class="form-group">
@@ -1245,9 +728,6 @@
             </div>
 
 
-
-            <!-- PREVIEW FOTO -->
-
             <div class="form-group full-width">
 
                 <div class="preview-container">
@@ -1257,21 +737,14 @@
                         alt="Preview Foto Jaminan"
                     >
 
-                    <div
-                        id="uploadStatus"
-                    >
-                    </div>
+                    <div id="uploadStatus"></div>
 
                 </div>
 
             </div>
 
-
         </div>
 
-
-
-        <!-- BUTTON -->
 
         <div class="action-area">
 
@@ -1279,33 +752,26 @@
                 id="btnProses"
                 type="button"
             >
-
                 Proses Rent Out
-
             </button>
 
         </div>
-
 
 
         <a
             href="home.html"
             class="link-kembali"
         >
-
             ← Kembali
-
         </a>
 
-
     </div>
-
 
 
     <script type="module">
 
         /* =================================
-        FIREBASE IMPORT
+           FIREBASE IMPORT
         ================================= */
 
         import {
@@ -1325,8 +791,6 @@
         }
         from
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-
 
 
         /* =================================
@@ -1359,7 +823,6 @@
         };
 
 
-
         /* =================================
            CLOUDINARY CONFIG
         ================================= */
@@ -1370,7 +833,6 @@
 
         const CLOUDINARY_UPLOAD_PRESET =
             "arctrans";
-
 
 
         /* =================================
@@ -1389,118 +851,63 @@
             );
 
 
-
         /* =================================
            ELEMEN HTML
         ================================= */
 
         const platInput =
-            document.getElementById(
-                "plat"
-            );
-
+            document.getElementById("plat");
 
         const namaInput =
-            document.getElementById(
-                "nama"
-            );
-
+            document.getElementById("nama");
 
         const idCustomerInput =
-            document.getElementById(
-                "idcustomer"
-            );
-
+            document.getElementById("idcustomer");
 
         const customerInput =
-            document.getElementById(
-                "customer"
-            );
-
+            document.getElementById("customer");
 
         const rentalTypeInput =
-            document.getElementById(
-                "rentaltype"
-            );
-
+            document.getElementById("rentaltype");
 
         const hargaInput =
-            document.getElementById(
-                "harga"
-            );
-
+            document.getElementById("harga");
 
         const tanggalSewaInput =
-            document.getElementById(
-                "tanggalsewa"
-            );
-
+            document.getElementById("tanggalsewa");
 
         const selesaiSewaInput =
-            document.getElementById(
-                "selesaisewa"
-            );
-
+            document.getElementById("selesaisewa");
 
         const durasiInfo =
-            document.getElementById(
-                "durasiInfo"
-            );
-
+            document.getElementById("durasiInfo");
 
         const totalInput =
-            document.getElementById(
-                "total"
-            );
-
+            document.getElementById("total");
 
         const bayarInput =
-            document.getElementById(
-                "bayar"
-            );
-
+            document.getElementById("bayar");
 
         const sisaInput =
-            document.getElementById(
-                "sisa"
-            );
-
+            document.getElementById("sisa");
 
         const sisaInfo =
-            document.getElementById(
-                "sisaInfo"
-            );
-
+            document.getElementById("sisaInfo");
 
         const jaminanInput =
-            document.getElementById(
-                "jaminan"
-            );
-
+            document.getElementById("jaminan");
 
         const fotoJaminanInput =
-            document.getElementById(
-                "fotoJaminan"
-            );
-
+            document.getElementById("fotoJaminan");
 
         const previewFoto =
-            document.getElementById(
-                "previewFoto"
-            );
-
+            document.getElementById("previewFoto");
 
         const uploadStatus =
-            document.getElementById(
-                "uploadStatus"
-            );
-
+            document.getElementById("uploadStatus");
 
         const btnProses =
-            document.getElementById(
-                "btnProses"
-            );
-
+            document.getElementById("btnProses");
 
 
         /* =================================
@@ -1512,7 +919,6 @@
         let daftarCustomer = {};
 
 
-
         /* =================================
            FORMAT TANGGAL HARI INI
         ================================= */
@@ -1522,30 +928,18 @@
             const sekarang =
                 new Date();
 
-
             const tahun =
                 sekarang.getFullYear();
-
 
             const bulan =
                 String(
                     sekarang.getMonth() + 1
-                )
-                .padStart(
-                    2,
-                    "0"
-                );
-
+                ).padStart(2, "0");
 
             const hari =
                 String(
                     sekarang.getDate()
-                )
-                .padStart(
-                    2,
-                    "0"
-                );
-
+                ).padStart(2, "0");
 
             return (
                 tahun +
@@ -1562,18 +956,11 @@
             getTanggalHariIni();
 
 
-
-        /* =================================
-           BATASI TANGGAL SEWA
-        ================================= */
-
         tanggalSewaInput.min =
             tanggalHariIni;
 
-
         selesaiSewaInput.min =
             tanggalHariIni;
-
 
 
         /* =================================
@@ -1587,7 +974,6 @@
             const nilai =
                 Number(angka) || 0;
 
-
             return (
                 "Rp " +
                 nilai.toLocaleString(
@@ -1597,6 +983,48 @@
 
         }
 
+
+        /* =================================
+           FORMAT SISA PEMBAYARAN
+        ================================= */
+
+        function formatSisaPembayaran(
+            nilai
+        ) {
+
+            if (
+                nilai === 0
+            ) {
+
+                return "0";
+
+            }
+
+
+            if (
+                nilai > 0
+            ) {
+
+                return (
+                    "+ " +
+                    formatRupiah(
+                        nilai
+                    )
+                );
+
+            }
+
+
+            return (
+                "- " +
+                formatRupiah(
+                    Math.abs(
+                        nilai
+                    )
+                )
+            );
+
+        }
 
 
         /* =================================
@@ -1623,7 +1051,6 @@
         }
 
 
-
         /* =================================
            PREVIEW FOTO
         ================================= */
@@ -1637,16 +1064,12 @@
                 const file =
                     this.files[0];
 
-
                 if (!file) {
 
-                    previewFoto.src =
-                        "";
-
+                    previewFoto.src = "";
 
                     previewFoto.style.display =
                         "none";
-
 
                     return;
 
@@ -1663,10 +1086,8 @@
                         "File harus berupa gambar!"
                     );
 
-
                     fotoJaminanInput.value =
                         "";
-
 
                     return;
 
@@ -1678,13 +1099,10 @@
 
 
                 reader.onload =
-                    function (
-                        event
-                    ) {
+                    function(event) {
 
                         previewFoto.src =
                             event.target.result;
-
 
                         previewFoto.style.display =
                             "block";
@@ -1699,7 +1117,6 @@
             }
 
         );
-
 
 
         /* =================================
@@ -1717,17 +1134,13 @@
 
             unitRef,
 
-            function (
-                snapshot
-            ) {
+            function(snapshot) {
 
                 const data =
                     snapshot.val();
 
-
                 daftarUnit =
                     data || {};
-
 
                 platInput.innerHTML =
                     `
@@ -1749,7 +1162,6 @@
                         </option>
                         `;
 
-
                     return;
 
                 }
@@ -1761,19 +1173,15 @@
 
                 .forEach(
 
-                    function (
-                        [id, unit]
-                    ) {
+                    function([id, unit]) {
 
                         const option =
                             document.createElement(
                                 "option"
                             );
 
-
                         option.value =
                             id;
-
 
                         option.textContent =
                             (
@@ -1788,7 +1196,6 @@
                                 "Tanpa Nama"
                             );
 
-
                         platInput.appendChild(
                             option
                         );
@@ -1799,15 +1206,12 @@
 
             },
 
-            function (
-                error
-            ) {
+            function(error) {
 
                 console.error(
                     "Error Unit:",
                     error
                 );
-
 
                 platInput.innerHTML =
                     `
@@ -1821,7 +1225,6 @@
         );
 
 
-
         /* =================================
            SAAT UNIT DIPILIH
         ================================= */
@@ -1830,17 +1233,15 @@
 
             "change",
 
-            function () {
+            function() {
 
                 const id =
                     this.value;
-
 
                 if (!id) {
 
                     namaInput.value =
                         "";
-
 
                     return;
 
@@ -1849,7 +1250,6 @@
 
                 const unit =
                     daftarUnit[id];
-
 
                 if (!unit) {
 
@@ -1861,22 +1261,17 @@
                 namaInput.value =
                     unit.nama || "";
 
-
                 hargaInput.value =
                     "";
-
 
                 totalInput.value =
                     "";
 
-
                 bayarInput.value =
                     "";
 
-
                 sisaInput.value =
                     "";
-
 
                 sisaInfo.className =
                     "sisa-info";
@@ -1884,7 +1279,6 @@
             }
 
         );
-
 
 
         /* =================================
@@ -1902,17 +1296,13 @@
 
             customerRef,
 
-            function (
-                snapshot
-            ) {
+            function(snapshot) {
 
                 const data =
                     snapshot.val();
 
-
                 daftarCustomer =
                     data || {};
-
 
                 idCustomerInput.innerHTML =
                     `
@@ -1934,7 +1324,6 @@
                         </option>
                         `;
 
-
                     return;
 
                 }
@@ -1946,19 +1335,15 @@
 
                 .forEach(
 
-                    function (
-                        [id, customer]
-                    ) {
+                    function([id, customer]) {
 
                         const option =
                             document.createElement(
                                 "option"
                             );
 
-
                         option.value =
                             id;
-
 
                         option.textContent =
                             (
@@ -1973,7 +1358,6 @@
                                 "Tanpa Nama"
                             );
 
-
                         idCustomerInput.appendChild(
                             option
                         );
@@ -1984,27 +1368,16 @@
 
             },
 
-            function (
-                error
-            ) {
+            function(error) {
 
                 console.error(
                     "Error Customer:",
                     error
                 );
 
-
-                idCustomerInput.innerHTML =
-                    `
-                    <option value="">
-                        Gagal memuat customer
-                    </option>
-                    `;
-
             }
 
         );
-
 
 
         /* =================================
@@ -2015,17 +1388,15 @@
 
             "change",
 
-            function () {
+            function() {
 
                 const id =
                     this.value;
-
 
                 if (!id) {
 
                     customerInput.value =
                         "";
-
 
                     return;
 
@@ -2035,15 +1406,12 @@
                 const dataCustomer =
                     daftarCustomer[id];
 
-
                 customerInput.value =
-                    dataCustomer?.nama ||
-                    "";
+                    dataCustomer?.nama || "";
 
             }
 
         );
-
 
 
         /* =================================
@@ -2055,10 +1423,8 @@
             const tanggalSewa =
                 tanggalSewaInput.value;
 
-
             const selesaiSewa =
                 selesaiSewaInput.value;
-
 
             if (
                 !tanggalSewa ||
@@ -2076,18 +1442,14 @@
                     "T00:00:00"
                 );
 
-
             const selesai =
                 new Date(
                     selesaiSewa +
                     "T00:00:00"
                 );
 
-
             const selisih =
-                selesai -
-                mulai;
-
+                selesai - mulai;
 
             return Math.ceil(
 
@@ -2105,16 +1467,14 @@
         }
 
 
-
         /* =================================
-           TAMPILKAN DURASI SEWA
+           TAMPILKAN DURASI
         ================================= */
 
         function updateDurasiInfo() {
 
             const tanggalSewa =
                 tanggalSewaInput.value;
-
 
             const selesaiSewa =
                 selesaiSewaInput.value;
@@ -2128,10 +1488,8 @@
                 durasiInfo.className =
                     "durasi-info";
 
-
                 durasiInfo.textContent =
                     "";
-
 
                 return;
 
@@ -2149,10 +1507,8 @@
                 durasiInfo.className =
                     "durasi-info active error";
 
-
                 durasiInfo.textContent =
                     "⚠ Estimasi tanggal selesai tidak boleh sebelum tanggal sewa.";
-
 
                 return;
 
@@ -2167,10 +1523,8 @@
                 durasiInfo.className =
                     "durasi-info active";
 
-
                 durasiInfo.textContent =
                     "🕒 Durasi sewa: Setengah Hari";
-
 
                 return;
 
@@ -2180,7 +1534,6 @@
             durasiInfo.className =
                 "durasi-info active";
 
-
             durasiInfo.textContent =
                 "📅 Durasi sewa: " +
                 jumlahHari +
@@ -2189,20 +1542,18 @@
         }
 
 
-
         /* =================================
-           VALIDASI TANGGAL SEWA
+           TANGGAL SEWA
         ================================= */
 
         tanggalSewaInput.addEventListener(
 
             "change",
 
-            function () {
+            function() {
 
                 const tanggalDipilih =
                     this.value;
-
 
                 const hariIni =
                     getTanggalHariIni();
@@ -2217,36 +1568,14 @@
                         "Tanggal sewa tidak boleh sebelum hari ini!"
                     );
 
+                    this.value = "";
 
-                    this.value =
-                        "";
-
-
-                    selesaiSewaInput.value =
-                        "";
-
-
-                    durasiInfo.className =
-                        "durasi-info";
-
-
-                    totalInput.value =
-                        "";
-
-
-                    sisaInput.value =
-                        "";
-
+                    selesaiSewaInput.value = "";
 
                     return;
 
                 }
 
-
-                /*
-                   Tanggal selesai minimal
-                   sama dengan tanggal sewa
-                */
 
                 selesaiSewaInput.min =
                     tanggalDipilih ||
@@ -2259,11 +1588,6 @@
                     tanggalDipilih
                 ) {
 
-                    alert(
-                        "Estimasi tanggal selesai tidak boleh sebelum tanggal sewa!"
-                    );
-
-
                     selesaiSewaInput.value =
                         "";
 
@@ -2279,32 +1603,25 @@
         );
 
 
-
         /* =================================
-           VALIDASI ESTIMASI SELESAI
+           TANGGAL SELESAI
         ================================= */
 
         selesaiSewaInput.addEventListener(
 
             "change",
 
-            function () {
+            function() {
 
                 const tanggalSelesai =
                     this.value;
 
-
                 const tanggalSewa =
                     tanggalSewaInput.value;
-
 
                 const hariIni =
                     getTanggalHariIni();
 
-
-                /*
-                   TIDAK BOLEH SEBELUM HARI INI
-                */
 
                 if (
                     tanggalSelesai &&
@@ -2315,47 +1632,25 @@
                         "Estimasi tanggal selesai tidak boleh sebelum hari ini!"
                     );
 
-
-                    this.value =
-                        "";
-
-
-                    updateDurasiInfo();
-
+                    this.value = "";
 
                     return;
 
                 }
 
 
-                /*
-                   HARUS PILIH TANGGAL SEWA
-                */
-
-                if (
-                    !tanggalSewa
-                ) {
+                if (!tanggalSewa) {
 
                     alert(
                         "Silakan pilih tanggal sewa terlebih dahulu!"
                     );
 
-
-                    this.value =
-                        "";
-
-
-                    updateDurasiInfo();
-
+                    this.value = "";
 
                     return;
 
                 }
 
-
-                /*
-                   TIDAK BOLEH SEBELUM TANGGAL SEWA
-                */
 
                 if (
                     tanggalSelesai <
@@ -2366,13 +1661,7 @@
                         "Estimasi tanggal selesai tidak boleh sebelum tanggal sewa!"
                     );
 
-
-                    this.value =
-                        "";
-
-
-                    updateDurasiInfo();
-
+                    this.value = "";
 
                     return;
 
@@ -2388,7 +1677,6 @@
         );
 
 
-
         /* =================================
            INPUT HARGA
         ================================= */
@@ -2397,28 +1685,23 @@
 
             "input",
 
-            function () {
+            function() {
 
                 const angka =
                     angkaDariRupiah(
                         this.value
                     );
 
-
                 this.value =
                     angka > 0
-                    ? formatRupiah(
-                        angka
-                    )
+                    ? formatRupiah(angka)
                     : "";
-
 
                 hitungTotal();
 
             }
 
         );
-
 
 
         /* =================================
@@ -2429,28 +1712,23 @@
 
             "input",
 
-            function () {
+            function() {
 
                 const angka =
                     angkaDariRupiah(
                         this.value
                     );
 
-
                 this.value =
                     angka > 0
-                    ? formatRupiah(
-                        angka
-                    )
+                    ? formatRupiah(angka)
                     : "";
-
 
                 hitungSisa();
 
             }
 
         );
-
 
 
         /* =================================
@@ -2461,7 +1739,7 @@
 
             "input",
 
-            function () {
+            function() {
 
                 if (
                     rentalTypeInput.value ===
@@ -2473,23 +1751,18 @@
                             this.value
                         );
 
-
                     this.value =
                         angka > 0
-                        ? formatRupiah(
-                            angka
-                        )
+                        ? formatRupiah(angka)
                         : "";
 
                 }
-
 
                 hitungSisa();
 
             }
 
         );
-
 
 
         /* =================================
@@ -2503,18 +1776,12 @@
                     hargaInput.value
                 );
 
-
             const rentalType =
                 rentalTypeInput.value;
-
 
             const jumlahHari =
                 hitungJumlahHari();
 
-
-            /*
-               SETENGAH HARI
-            */
 
             if (
                 rentalType ===
@@ -2524,26 +1791,18 @@
                 totalInput.readOnly =
                     false;
 
-
                 totalInput.placeholder =
                     "Input total biaya manual";
 
-
                 hitungSisa();
-
 
                 return;
 
             }
 
 
-            /*
-               RENTAL TYPE LAIN
-            */
-
             totalInput.readOnly =
                 true;
-
 
             totalInput.placeholder =
                 "Total dihitung otomatis";
@@ -2555,25 +1814,17 @@
                 jumlahHari <= 0
             ) {
 
-                totalInput.value =
-                    "";
-
+                totalInput.value = "";
 
                 hitungSisa();
-
 
                 return;
 
             }
 
 
-            let jumlahPeriode =
-                0;
+            let jumlahPeriode = 0;
 
-
-            /*
-               HARIAN
-            */
 
             if (
                 rentalType ===
@@ -2584,11 +1835,6 @@
                     jumlahHari;
 
             }
-
-
-            /*
-               MINGGUAN
-            */
 
             else if (
                 rentalType ===
@@ -2601,11 +1847,6 @@
                     );
 
             }
-
-
-            /*
-               BULANAN
-            */
 
             else if (
                 rentalType ===
@@ -2636,7 +1877,6 @@
         }
 
 
-
         /* =================================
            HITUNG SISA PEMBAYARAN
         ================================= */
@@ -2648,81 +1888,53 @@
                     totalInput.value
                 );
 
-
             const bayar =
                 angkaDariRupiah(
                     bayarInput.value
                 );
 
 
-            /*
-               RESET STATUS
-            */
-
             sisaInfo.className =
                 "sisa-info";
 
-
-            /*
-               BELUM ADA TOTAL
-            */
 
             if (
                 total <= 0
             ) {
 
-                sisaInput.value =
-                    "";
+                sisaInput.value = "";
 
-
-                sisaInfo.textContent =
-                    "";
-
+                sisaInfo.textContent = "";
 
                 return;
 
             }
 
-
-            /*
-               BAYAR = TOTAL
-               STATUS LUNAS
-            */
 
             if (
                 bayar === total
             ) {
 
                 sisaInput.value =
-                    "LUNAS";
-
+                    "0";
 
                 sisaInfo.className =
                     "sisa-info active sisa-lunas";
 
-
                 sisaInfo.textContent =
                     "✓ Pembayaran LUNAS";
-
 
                 return;
 
             }
 
 
-            /*
-               BAYAR > TOTAL
-               TAMPILKAN SELISIH +
-            */
-
             if (
                 bayar > total
             ) {
 
                 const lebihBayar =
-                    bayar -
-                    total;
-
+                    bayar - total;
 
                 sisaInput.value =
                     "+ " +
@@ -2730,10 +1942,8 @@
                         lebihBayar
                     );
 
-
                 sisaInfo.className =
                     "sisa-info active sisa-lebih";
-
 
                 sisaInfo.textContent =
                     "＋ Kelebihan pembayaran: " +
@@ -2741,22 +1951,17 @@
                         lebihBayar
                     );
 
-
                 return;
 
             }
 
 
-            /*
-               BAYAR < TOTAL
-            */
-
             const sisa =
-                total -
-                bayar;
+                total - bayar;
 
 
             sisaInput.value =
+                "- " +
                 formatRupiah(
                     sisa
                 );
@@ -2764,7 +1969,6 @@
 
             sisaInfo.className =
                 "sisa-info active sisa-kurang";
-
 
             sisaInfo.textContent =
                 "Sisa pembayaran: " +
@@ -2775,37 +1979,31 @@
         }
 
 
-
         /* =================================
-           EVENT RENTAL TYPE
+           RENTAL TYPE
         ================================= */
 
         rentalTypeInput.addEventListener(
 
             "change",
 
-            function () {
+            function() {
 
                 if (
                     this.value ===
                     "setengahhari"
                 ) {
 
-                    totalInput.value =
-                        "";
-
+                    totalInput.value = "";
 
                     totalInput.readOnly =
                         false;
 
-
                     totalInput.placeholder =
                         "Input total biaya manual";
 
-
                     durasiInfo.className =
                         "durasi-info active";
-
 
                     durasiInfo.textContent =
                         "🕒 Durasi sewa: Setengah Hari";
@@ -2814,17 +2012,13 @@
 
                 else {
 
-                    totalInput.value =
-                        "";
-
+                    totalInput.value = "";
 
                     totalInput.readOnly =
                         true;
 
-
                     totalInput.placeholder =
                         "Total dihitung otomatis";
-
 
                     updateDurasiInfo();
 
@@ -2836,7 +2030,6 @@
             }
 
         );
-
 
 
         /* =================================
@@ -2853,11 +2046,8 @@
 
                 return {
 
-                    url:
-                        "",
-
-                    publicId:
-                        ""
+                    url: "",
+                    publicId: ""
 
                 };
 
@@ -2877,18 +2067,15 @@
                 file
             );
 
-
             formData.append(
                 "upload_preset",
                 CLOUDINARY_UPLOAD_PRESET
             );
 
-
             formData.append(
                 "folder",
                 "arctrans/jaminan"
             );
-
 
             formData.append(
                 "public_id",
@@ -2905,13 +2092,8 @@
                     "/image/upload",
 
                     {
-
-                        method:
-                            "POST",
-
-                        body:
-                            formData
-
+                        method: "POST",
+                        body: formData
                     }
 
                 );
@@ -2921,9 +2103,7 @@
                 await response.json();
 
 
-            if (
-                !response.ok
-            ) {
+            if (!response.ok) {
 
                 throw new Error(
 
@@ -2953,7 +2133,6 @@
         }
 
 
-
         /* =================================
            TOMBOL PROSES
         ================================= */
@@ -2967,163 +2146,107 @@
         );
 
 
-
         /* =================================
            SIMPAN DATA
         ================================= */
 
         async function kirimData() {
 
-
             const unitId =
                 platInput.value;
-
 
             const unit =
                 daftarUnit[unitId];
 
-
             const idcustomer =
                 idCustomerInput.value;
-
 
             const dataCustomer =
                 daftarCustomer[idcustomer];
 
-
             const nama =
                 namaInput.value.trim();
-
 
             const customer =
                 customerInput.value.trim();
 
-
             const rentaltype =
                 rentalTypeInput.value;
-
 
             const harga =
                 angkaDariRupiah(
                     hargaInput.value
                 );
 
-
             const tanggalsewa =
                 tanggalSewaInput.value;
 
-
             const selesaisewa =
                 selesaiSewaInput.value;
-
 
             const total =
                 angkaDariRupiah(
                     totalInput.value
                 );
 
-
             const bayar =
                 angkaDariRupiah(
                     bayarInput.value
                 );
 
-
             const jaminan =
                 jaminanInput.value.trim();
 
-
             const foto =
                 fotoJaminanInput.files[0];
-
 
             const hariIni =
                 getTanggalHariIni();
 
 
-
             /* =============================
-               VALIDASI UNIT
+               VALIDASI
             ============================== */
 
             if (!unitId) {
 
-                alert(
-                    "Pilih ID Unit!"
-                );
+                alert("Pilih ID Unit!");
 
                 return;
 
             }
-
-
-
-            /* =============================
-               VALIDASI CUSTOMER
-            ============================== */
 
             if (!idcustomer) {
 
-                alert(
-                    "Pilih ID Customer!"
-                );
+                alert("Pilih ID Customer!");
 
                 return;
 
             }
-
-
-
-            /* =============================
-               VALIDASI RENTAL TYPE
-            ============================== */
 
             if (!rentaltype) {
 
-                alert(
-                    "Pilih Rental Type!"
-                );
+                alert("Pilih Rental Type!");
 
                 return;
 
             }
 
+            if (harga <= 0) {
 
-
-            /* =============================
-               VALIDASI HARGA
-            ============================== */
-
-            if (
-                harga <= 0
-            ) {
-
-                alert(
-                    "Harga harus diisi!"
-                );
+                alert("Harga harus diisi!");
 
                 return;
 
             }
 
+            if (!tanggalsewa) {
 
-
-            /* =============================
-               VALIDASI TANGGAL SEWA
-            ============================== */
-
-            if (
-                !tanggalsewa
-            ) {
-
-                alert(
-                    "Pilih Tanggal Sewa!"
-                );
+                alert("Pilih Tanggal Sewa!");
 
                 return;
 
             }
-
 
             if (
                 tanggalsewa <
@@ -3134,22 +2257,11 @@
                     "Tanggal sewa tidak boleh lebih kecil dari tanggal hari ini!"
                 );
 
-                tanggalSewaInput.value =
-                    "";
-
                 return;
 
             }
 
-
-
-            /* =============================
-               VALIDASI TANGGAL SELESAI
-            ============================== */
-
-            if (
-                !selesaisewa
-            ) {
+            if (!selesaisewa) {
 
                 alert(
                     "Pilih Estimasi Tanggal Selesai!"
@@ -3158,29 +2270,6 @@
                 return;
 
             }
-
-
-            if (
-                selesaisewa <
-                hariIni
-            ) {
-
-                alert(
-                    "Estimasi tanggal selesai tidak boleh sebelum hari ini!"
-                );
-
-                selesaiSewaInput.value =
-                    "";
-
-                return;
-
-            }
-
-
-            /*
-               SETENGAH HARI
-               BOLEH TANGGAL SAMA
-            */
 
             if (
                 rentaltype !==
@@ -3202,15 +2291,7 @@
 
             }
 
-
-
-            /* =============================
-               VALIDASI TOTAL
-            ============================== */
-
-            if (
-                total <= 0
-            ) {
+            if (total <= 0) {
 
                 alert(
                     "Total biaya belum valid!"
@@ -3220,37 +2301,7 @@
 
             }
 
-
-
-            /*
-               CATAT KELEBIHAN PEMBAYARAN
-            */
-
-            const kelebihanBayar =
-                bayar > total
-                ? bayar - total
-                : 0;
-
-
-            /*
-               SISA NORMAL
-            */
-
-            const sisa =
-                Math.max(
-                    0,
-                    total - bayar
-                );
-
-
-
-            /* =============================
-               VALIDASI JAMINAN
-            ============================== */
-
-            if (
-                !jaminan
-            ) {
+            if (!jaminan) {
 
                 alert(
                     "Data jaminan wajib diisi!"
@@ -3260,15 +2311,7 @@
 
             }
 
-
-
-            /* =============================
-               VALIDASI FOTO
-            ============================== */
-
-            if (
-                !foto
-            ) {
+            if (!foto) {
 
                 alert(
                     "Foto jaminan wajib diupload!"
@@ -3279,6 +2322,50 @@
             }
 
 
+            /* =============================
+               HITUNG SISA
+
+               MINUS = BELUM LUNAS
+               0     = LUNAS
+               PLUS  = LEBIH BAYAR
+            ============================== */
+
+            let sisa = 0;
+
+            let kelebihanBayar = 0;
+
+
+            if (
+                bayar < total
+            ) {
+
+                sisa =
+                    -(
+                        total -
+                        bayar
+                    );
+
+            }
+
+            else if (
+                bayar === total
+            ) {
+
+                sisa = 0;
+
+            }
+
+            else {
+
+                kelebihanBayar =
+                    bayar -
+                    total;
+
+                sisa =
+                    kelebihanBayar;
+
+            }
+
 
             /* =============================
                DISABLE BUTTON
@@ -3286,7 +2373,6 @@
 
             btnProses.disabled =
                 true;
-
 
             btnProses.textContent =
                 "Mengupload Foto...";
@@ -3303,14 +2389,8 @@
                     await uploadFotoJaminan();
 
 
-
-                /* =========================
-                   UPDATE BUTTON
-                ========================== */
-
                 btnProses.textContent =
                     "Menyimpan Data...";
-
 
 
                 /* =========================
@@ -3320,7 +2400,6 @@
                 const transaksiId =
                     "RENT_" +
                     Date.now();
-
 
 
                 /* =========================
@@ -3342,7 +2421,6 @@
                 }
 
 
-
                 /* =========================
                    STATUS PEMBAYARAN
                 ========================== */
@@ -3360,7 +2438,6 @@
 
                 }
 
-
                 else if (
                     bayar > total
                 ) {
@@ -3371,13 +2448,11 @@
                 }
 
 
-
                 /* =========================
-                   DATA RENT
+                   DATA RENT OUT
                 ========================== */
 
                 const dataRent = {
-
 
                     transaksiId:
                         transaksiId,
@@ -3388,11 +2463,9 @@
                     unitId:
                         unitId,
 
-
                     plat:
                         unit?.plat ||
                         unitId,
-
 
                     namaUnit:
                         nama,
@@ -3403,20 +2476,16 @@
                     idcustomer:
                         idcustomer,
 
-
                     nik:
                         dataCustomer?.nik ||
                         idcustomer,
 
-
                     customer:
                         customer,
-
 
                     alamatktp:
                         dataCustomer?.alamatktp ||
                         "",
-
 
                     hp:
                         dataCustomer?.hp ||
@@ -3428,42 +2497,33 @@
                     rentaltype:
                         rentaltype,
 
-
                     harga:
                         harga,
-
 
                     hargaFormat:
                         formatRupiah(
                             harga
                         ),
 
-
                     tanggalsewa:
                         tanggalsewa,
-
 
                     selesaisewa:
                         selesaisewa,
 
-
                     jumlahHari:
                         jumlahHari,
 
-
                     total:
                         total,
-
 
                     totalFormat:
                         formatRupiah(
                             total
                         ),
 
-
                     bayar:
                         bayar,
-
 
                     bayarFormat:
                         formatRupiah(
@@ -3471,25 +2531,29 @@
                         ),
 
 
+                    /* SISA PEMBAYARAN */
+
                     sisa:
                         sisa,
 
-
                     sisaFormat:
-                        formatRupiah(
+                        formatSisaPembayaran(
                             sisa
                         ),
 
 
+                    /* KELEBIHAN */
+
                     kelebihanBayar:
                         kelebihanBayar,
-
 
                     kelebihanBayarFormat:
                         formatRupiah(
                             kelebihanBayar
                         ),
 
+
+                    /* STATUS PEMBAYARAN */
 
                     statusPembayaran:
                         statusPembayaran,
@@ -3500,10 +2564,8 @@
                     jaminan:
                         jaminan,
 
-
                     fotoJaminan:
                         hasilUpload.url,
-
 
                     fotoJaminanPublicId:
                         hasilUpload.publicId,
@@ -3514,10 +2576,8 @@
                     status:
                         "RENT OUT",
 
-
                     timestamp:
                         Date.now(),
-
 
                     tanggalInput:
                         new Date()
@@ -3526,14 +2586,9 @@
                 };
 
 
-
                 /* =========================
-                   SIMPAN FIREBASE
+                   SIMPAN RENT OUT
                 ========================== */
-
-              /* =========================
-                SIMPAN DATA RENT OUT
-                ========================= */
 
                 await set(
 
@@ -3552,152 +2607,204 @@
 
 
                 /* =========================
-                HAPUS UNIT DARI READY
-                ========================= */
+                   DATA REVENUE
+
+                   PATH:
+                   revenue/TANGGAL/IDTRANSAKSI
+                ========================== */
+
+                const tanggalRevenue =
+                    getTanggalHariIni();
+
+
+                const dataRevenue = {
+
+                    ...dataRent,
+
+
+                    keterangan:
+
+                        "DP Mobil - " +
+
+                        (
+                            unit?.plat ||
+                            unitId
+                        )
+
+                        +
+
+                        " - " +
+
+                        (
+                            nama ||
+                            unit?.nama ||
+                            "Tanpa Nama"
+                        )
+
+                };
+
+
+                /* =========================
+                   SIMPAN REVENUE
+                ========================== */
+
+                await set(
+
+                    ref(
+
+                        db,
+
+                        "revenue/" +
+                        tanggalRevenue +
+                        "/" +
+                        transaksiId
+
+                    ),
+
+                    dataRevenue
+
+                );
+
+
+                /* =========================
+                   HAPUS DARI READY
+                ========================== */
 
                 await remove(
 
                     ref(
+
                         db,
-                        "ready/" + unitId
+
+                        "ready/" +
+                        unitId
+
                     )
 
                 );
 
 
                 /* =========================
-                UPDATE KETERANGAN UNIT
-                ========================= */
+                   UPDATE UNIT
+
+                   unit/idUnit/keterangan
+                   VALUE = Out
+                ========================== */
 
                 await update(
 
                     ref(
+
                         db,
-                        "unit/" + unitId
+
+                        "unit/" +
+                        unitId
+
                     ),
 
                     {
-                        keterangan: "Out"
+
+                        keterangan:
+                            "Out"
+
                     }
 
                 );
 
 
                 /* =========================
-                STATUS BERHASIL
-                ========================= */
+                   BERHASIL
+                ========================== */
 
                 uploadStatus.textContent =
                     "✓ Data berhasil disimpan";
 
-                alert(
-                    "Data RENT OUT berhasil disimpan!\n\n" +
-                    "Unit telah dihapus dari READY dan status diubah menjadi OUT."
-                );
 
+                alert(
+
+                    "Data RENT OUT berhasil disimpan!\n\n" +
+
+                    "ID Transaksi: " +
+                    transaksiId +
+
+                    "\n\n" +
+
+                    "Sisa Pembayaran: " +
+                    formatSisaPembayaran(
+                        sisa
+                    ) +
+
+                    "\n\n" +
+
+                    "Unit telah dihapus dari READY\n" +
+
+                    "Status unit diubah menjadi OUT\n" +
+
+                    "Data revenue berhasil dibuat."
+
+                );
 
 
                 /* =========================
                    RESET FORM
                 ========================== */
 
-                platInput.value =
-                    "";
+                platInput.value = "";
 
+                namaInput.value = "";
 
-                namaInput.value =
-                    "";
+                idCustomerInput.value = "";
 
+                customerInput.value = "";
 
-                idCustomerInput.value =
-                    "";
+                rentalTypeInput.value = "";
 
+                hargaInput.value = "";
 
-                customerInput.value =
-                    "";
+                tanggalSewaInput.value = "";
 
+                selesaiSewaInput.value = "";
 
-                rentalTypeInput.value =
-                    "";
+                totalInput.value = "";
 
+                bayarInput.value = "";
 
-                hargaInput.value =
-                    "";
+                sisaInput.value = "";
 
+                jaminanInput.value = "";
 
-                tanggalSewaInput.value =
-                    "";
+                fotoJaminanInput.value = "";
 
-
-                selesaiSewaInput.value =
-                    "";
-
-
-                totalInput.value =
-                    "";
-
-
-                bayarInput.value =
-                    "";
-
-
-                sisaInput.value =
-                    "";
-
-
-                jaminanInput.value =
-                    "";
-
-
-                fotoJaminanInput.value =
-                    "";
-
-
-                previewFoto.src =
-                    "";
-
+                previewFoto.src = "";
 
                 previewFoto.style.display =
                     "none";
 
-
-                durasiInfo.textContent =
-                    "";
-
+                durasiInfo.textContent = "";
 
                 durasiInfo.className =
                     "durasi-info";
 
-
-                sisaInfo.textContent =
-                    "";
-
+                sisaInfo.textContent = "";
 
                 sisaInfo.className =
                     "sisa-info";
 
-
                 totalInput.readOnly =
                     true;
-
 
                 totalInput.placeholder =
                     "Total akan dihitung otomatis";
 
-
                 uploadStatus.textContent =
                     "";
-
 
                 selesaiSewaInput.min =
                     getTanggalHariIni();
 
             }
 
-
-            catch (
-                error
-            ) {
+            catch (error) {
 
                 console.error(
                     "ERROR:",
@@ -3711,18 +2818,18 @@
 
 
                 alert(
+
                     "Gagal menyimpan data:\n\n" +
                     error.message
+
                 );
 
             }
-
 
             finally {
 
                 btnProses.disabled =
                     false;
-
 
                 btnProses.textContent =
                     "Proses Rent Out";
@@ -3731,10 +2838,7 @@
 
         }
 
-
     </script>
 
-
 </body>
-
 </html>
