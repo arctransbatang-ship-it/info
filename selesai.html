@@ -904,6 +904,22 @@
             .modal-actions { grid-template-columns:1fr; }
         }
 
+
+        .pembayaran-status.dp-info {
+            background: #e0f2fe;
+            color: #075985;
+            border: 1px solid #7dd3fc;
+        }
+
+        .rincian-total .baris.dp-row {
+            background: #e0f2fe;
+            color: #075985;
+            border: 1px solid #7dd3fc;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-weight: 700;
+        }
+
     </style>
 
 </head>
@@ -2241,7 +2257,7 @@
                 jumlahDP;
 
             statusSaldoModal.className =
-                "pembayaran-status";
+                "pembayaran-status dp-info";
 
             statusSaldoModal.textContent =
                 "Jumlah DP yang sudah dibayarkan: " +
@@ -2250,7 +2266,7 @@
                 );
 
             rincianPembayaranModal.innerHTML =
-                '<div class="baris">' +
+                '<div class="baris dp-row">' +
                     '<span>Jumlah DP</span>' +
                     '<strong>' +
                         formatRupiah(
