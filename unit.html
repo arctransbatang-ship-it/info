@@ -63,10 +63,10 @@
         ========================= */
 
         .background-decoration {
-
             position: fixed;
 
             width: 300px;
+
             height: 300px;
 
             border-radius: 50%;
@@ -87,7 +87,6 @@
 
 
         .circle-1 {
-
             top: -100px;
 
             left: -100px;
@@ -95,7 +94,6 @@
 
 
         .circle-2 {
-
             bottom: -100px;
 
             right: -100px;
@@ -107,7 +105,6 @@
         ========================= */
 
         .home-btn {
-
             position: fixed;
 
             top: 18px;
@@ -117,6 +114,7 @@
             z-index: 1000;
 
             width: 46px;
+
             height: 46px;
 
             border-radius: 14px;
@@ -157,7 +155,6 @@
 
 
         .home-btn:hover {
-
             transform:
                 translateY(-3px);
 
@@ -180,7 +177,6 @@
         ========================= */
 
         .container {
-
             width: 100%;
 
             max-width: 520px;
@@ -218,7 +214,6 @@
         ========================= */
 
         .form-header {
-
             padding:
                 32px
                 25px;
@@ -238,7 +233,6 @@
 
 
         .header-icon {
-
             width: 78px;
 
             height: 78px;
@@ -285,7 +279,6 @@
 
 
         .form-header h1 {
-
             margin: 0;
 
             font-size: 24px;
@@ -295,7 +288,6 @@
 
 
         .form-header p {
-
             margin:
                 8px
                 0
@@ -312,7 +304,6 @@
         ========================= */
 
         .form-content {
-
             padding:
                 30px
                 25px
@@ -325,13 +316,11 @@
         ========================= */
 
         .form-group {
-
             margin-bottom: 18px;
         }
 
 
         label {
-
             display: flex;
 
             align-items: center;
@@ -350,7 +339,6 @@
 
 
         label i {
-
             color:
                 #2563eb;
 
@@ -359,13 +347,11 @@
 
 
         .input-wrapper {
-
             position: relative;
         }
 
 
         .input-wrapper > i {
-
             position: absolute;
 
             left: 15px;
@@ -383,7 +369,6 @@
 
 
         input {
-
             width: 100%;
 
             height: 50px;
@@ -413,14 +398,12 @@
 
 
         input:hover {
-
             border-color:
                 #cbd5e1;
         }
 
 
         input:focus {
-
             background:
                 white;
 
@@ -439,7 +422,6 @@
 
 
         input::placeholder {
-
             color:
                 #94a3b8;
         }
@@ -450,7 +432,6 @@
         ========================= */
 
         .form-grid {
-
             display: grid;
 
             grid-template-columns:
@@ -465,7 +446,6 @@
         ========================= */
 
         .upload-box {
-
             position: relative;
 
             width: 100%;
@@ -481,8 +461,6 @@
             background:
                 #f8fafc;
 
-            cursor: pointer;
-
             overflow: hidden;
 
             transition:
@@ -491,7 +469,6 @@
 
 
         .upload-box:hover {
-
             border-color:
                 #2563eb;
 
@@ -500,26 +477,14 @@
         }
 
 
-        .upload-box input {
+        /* INPUT FILE DISEMBUNYIKAN */
 
-            position: absolute;
-
-            width: 100%;
-
-            height: 100%;
-
-            opacity: 0;
-
-            cursor: pointer;
-
-            z-index: 10;
-
-            padding: 0;
+        .file-input {
+            display: none;
         }
 
 
         .upload-placeholder {
-
             min-height: 180px;
 
             display: flex;
@@ -534,11 +499,13 @@
 
             color:
                 #64748b;
+
+            padding:
+                20px;
         }
 
 
         .upload-placeholder i {
-
             font-size: 40px;
 
             color:
@@ -547,15 +514,15 @@
 
 
         .upload-placeholder span {
-
             font-size: 14px;
 
             font-weight: 600;
+
+            text-align: center;
         }
 
 
         .upload-placeholder small {
-
             font-size: 12px;
 
             color:
@@ -563,8 +530,76 @@
         }
 
 
-        .preview-container {
+        /* =========================
+           BUTTON CAMERA / GALLERY
+        ========================= */
 
+        .photo-buttons {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            width: 100%;
+
+            margin-top: 8px;
+        }
+
+
+        .btn-photo {
+            height: 45px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition:
+                0.25s;
+        }
+
+
+        .btn-camera {
+            background:
+                #2563eb;
+
+            color:
+                white;
+        }
+
+
+        .btn-gallery {
+            background:
+                #e0e7ff;
+
+            color:
+                #3730a3;
+        }
+
+
+        .btn-photo:hover {
+            transform:
+                translateY(-2px);
+        }
+
+
+        .btn-photo i {
+            margin-right: 6px;
+        }
+
+
+        /* =========================
+           PREVIEW
+        ========================= */
+
+        .preview-container {
             display: none;
 
             position: relative;
@@ -576,7 +611,6 @@
 
 
         #preview {
-
             width: 100%;
 
             height: 100%;
@@ -588,7 +622,6 @@
 
 
         .change-photo {
-
             position: absolute;
 
             bottom: 10px;
@@ -619,11 +652,10 @@
 
 
         /* =========================
-           BUTTON
+           BUTTON SIMPAN
         ========================= */
 
         .btn-proses {
-
             width: 100%;
 
             height: 54px;
@@ -665,13 +697,11 @@
 
 
         .btn-proses i {
-
             margin-right: 8px;
         }
 
 
         .btn-proses:hover {
-
             transform:
                 translateY(-2px);
 
@@ -687,7 +717,6 @@
 
 
         .btn-proses:disabled {
-
             cursor:
                 not-allowed;
 
@@ -704,7 +733,6 @@
         ========================= */
 
         .link-kembali {
-
             display: block;
 
             text-align: center;
@@ -723,7 +751,6 @@
 
 
         .link-kembali:hover {
-
             color:
                 #2563eb;
         }
@@ -736,21 +763,19 @@
         @keyframes fadeIn {
 
             from {
-
                 opacity: 0;
 
                 transform:
                     translateY(30px);
             }
 
-
             to {
-
                 opacity: 1;
 
                 transform:
                     translateY(0);
             }
+
         }
 
 
@@ -761,7 +786,6 @@
         @media (max-width: 600px) {
 
             body {
-
                 padding:
                     75px
                     12px
@@ -773,14 +797,12 @@
 
 
             .container {
-
                 border-radius:
                     22px;
             }
 
 
             .form-header {
-
                 padding:
                     25px
                     20px;
@@ -788,7 +810,6 @@
 
 
             .form-content {
-
                 padding:
                     25px
                     18px;
@@ -796,7 +817,6 @@
 
 
             .form-grid {
-
                 grid-template-columns:
                     1fr;
 
@@ -805,11 +825,11 @@
 
 
             .home-btn {
-
                 top: 15px;
 
                 left: 15px;
             }
+
         }
 
     </style>
@@ -861,7 +881,6 @@
         <!-- HEADER -->
 
         <div class="form-header">
-
 
             <div class="header-icon">
 
@@ -1009,6 +1028,7 @@
 
                 </div>
 
+
             </div>
 
 
@@ -1100,13 +1120,28 @@
                 >
 
 
+                    <!-- GALERI -->
+
                     <input
                         type="file"
-                        id="imageFile"
+                        id="galleryInput"
+                        class="file-input"
+                        accept="image/*"
+                    >
+
+
+                    <!-- KAMERA -->
+
+                    <input
+                        type="file"
+                        id="cameraInput"
+                        class="file-input"
                         accept="image/*"
                         capture="environment"
                     >
 
+
+                    <!-- PLACEHOLDER -->
 
                     <div
                         class="upload-placeholder"
@@ -1114,12 +1149,12 @@
                     >
 
                         <i
-                            class="fa-solid fa-cloud-arrow-up"
+                            class="fa-solid fa-camera"
                         ></i>
 
 
                         <span>
-                            Klik untuk mengambil atau memilih foto
+                            Ambil atau pilih foto kendaraan
                         </span>
 
 
@@ -1127,8 +1162,52 @@
                             JPG, PNG atau WEBP
                         </small>
 
+
+                        <div class="photo-buttons">
+
+
+                            <button
+                                type="button"
+                                class="
+                                    btn-photo
+                                    btn-camera
+                                "
+                                id="btnCamera"
+                            >
+
+                                <i
+                                    class="fa-solid fa-camera"
+                                ></i>
+
+                                Kamera
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="
+                                    btn-photo
+                                    btn-gallery
+                                "
+                                id="btnGallery"
+                            >
+
+                                <i
+                                    class="fa-solid fa-images"
+                                ></i>
+
+                                Galeri
+
+                            </button>
+
+
+                        </div>
+
                     </div>
 
+
+                    <!-- PREVIEW -->
 
                     <div
                         class="preview-container"
@@ -1149,11 +1228,12 @@
                                 class="fa-solid fa-camera"
                             ></i>
 
-                            Ganti Foto
+                            Pilih Foto Lagi
 
                         </div>
 
                     </div>
+
 
                 </div>
 
@@ -1190,6 +1270,7 @@
 
             </a>
 
+
         </div>
 
     </div>
@@ -1205,6 +1286,7 @@
         import {
             initializeApp
         }
+
         from
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
@@ -1214,6 +1296,7 @@
             ref,
             update
         }
+
         from
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
@@ -1265,7 +1348,7 @@
 
 
         /* =========================
-           ELEMENT
+           ELEMENT FORM
         ========================= */
 
         const namaInput =
@@ -1304,9 +1387,31 @@
             );
 
 
-        const imageInput =
+        /* =========================
+           ELEMENT FOTO
+        ========================= */
+
+        const galleryInput =
             document.getElementById(
-                "imageFile"
+                "galleryInput"
+            );
+
+
+        const cameraInput =
+            document.getElementById(
+                "cameraInput"
+            );
+
+
+        const btnCamera =
+            document.getElementById(
+                "btnCamera"
+            );
+
+
+        const btnGallery =
+            document.getElementById(
+                "btnGallery"
             );
 
 
@@ -1328,6 +1433,12 @@
             );
 
 
+        const uploadBox =
+            document.getElementById(
+                "uploadBox"
+            );
+
+
         const btnProses =
             document.getElementById(
                 "btnProses"
@@ -1335,11 +1446,17 @@
 
 
         /* =========================
+           VARIABEL FILE TERPILIH
+        ========================= */
+
+        let selectedFile = null;
+
+
+        /* =========================
            FORMAT PLAT
         ========================= */
 
         platInput.addEventListener(
-
             "input",
 
             function () {
@@ -1357,7 +1474,6 @@
         ========================= */
 
         valueInput.addEventListener(
-
             "input",
 
             function () {
@@ -1375,13 +1491,11 @@
                         "";
 
                     return;
-
                 }
 
 
                 this.value =
                     "Rp " +
-
                     Number(
                         angka
                     )
@@ -1395,81 +1509,132 @@
 
 
         /* =========================
-           PREVIEW FOTO
+           TOMBOL KAMERA
         ========================= */
 
-        imageInput.addEventListener(
-
-            "change",
+        btnCamera.addEventListener(
+            "click",
 
             function () {
 
+                cameraInput.click();
+
+            }
+
+        );
+
+
+        /* =========================
+           TOMBOL GALERI
+        ========================= */
+
+        btnGallery.addEventListener(
+            "click",
+
+            function () {
+
+                galleryInput.click();
+
+            }
+
+        );
+
+
+        /* =========================
+           KLIK PREVIEW
+           PILIH FOTO LAGI
+        ========================= */
+
+        previewContainer.addEventListener(
+            "click",
+
+            function () {
+
+                galleryInput.click();
+
+            }
+
+        );
+
+
+        /* =========================
+           PROSES FILE FOTO
+        ========================= */
+
+        function prosesFoto(
+            file
+        ) {
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            if (
+                !file.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                alert(
+                    "File harus berupa gambar!"
+                );
+
+                return;
+
+            }
+
+
+            selectedFile =
+                file;
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (
+                    event
+                ) {
+
+                    preview.src =
+                        event.target.result;
+
+
+                    previewContainer.style.display =
+                        "block";
+
+
+                    uploadPlaceholder.style.display =
+                        "none";
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+
+
+        /* =========================
+           INPUT GALERI
+        ========================= */
+
+        galleryInput.addEventListener(
+            "change",
+
+            function () {
 
                 const file =
                     this.files[0];
 
 
-                if (!file) {
-
-                    preview.src =
-                        "";
-
-
-                    previewContainer.style.display =
-                        "none";
-
-
-                    uploadPlaceholder.style.display =
-                        "flex";
-
-                    return;
-
-                }
-
-
-                if (
-                    !file.type.startsWith(
-                        "image/"
-                    )
-                ) {
-
-                    alert(
-                        "File harus berupa gambar!"
-                    );
-
-
-                    imageInput.value =
-                        "";
-
-                    return;
-
-                }
-
-
-                const reader =
-                    new FileReader();
-
-
-                reader.onload =
-                    function (
-                        event
-                    ) {
-
-                        preview.src =
-                            event.target.result;
-
-
-                        previewContainer.style.display =
-                            "block";
-
-
-                        uploadPlaceholder.style.display =
-                            "none";
-
-                    };
-
-
-                reader.readAsDataURL(
+                prosesFoto(
                     file
                 );
 
@@ -1479,15 +1644,34 @@
 
 
         /* =========================
-           BUTTON
+           INPUT KAMERA
+        ========================= */
+
+        cameraInput.addEventListener(
+            "change",
+
+            function () {
+
+                const file =
+                    this.files[0];
+
+
+                prosesFoto(
+                    file
+                );
+
+            }
+
+        );
+
+
+        /* =========================
+           BUTTON SIMPAN
         ========================= */
 
         btnProses.addEventListener(
-
             "click",
-
             kirimData
-
         );
 
 
@@ -1524,20 +1708,18 @@
 
             const value =
                 Number(
-
                     valueInput.value
                     .replace(
                         /\D/g,
                         ""
                     )
-
                 )
                 ||
                 0;
 
 
             const file =
-                imageInput.files[0];
+                selectedFile;
 
 
             /* =========================
@@ -1575,7 +1757,7 @@
             if (!file) {
 
                 alert(
-                    "Pilih foto kendaraan terlebih dahulu!"
+                    "Ambil atau pilih foto kendaraan terlebih dahulu!"
                 );
 
                 return;
@@ -1629,15 +1811,12 @@
                 ========================= */
 
                 const uniqueId =
-
                     "unit_" +
-
                     Date.now() +
-
                     "_" +
-
                     Math.floor(
-                        Math.random() * 10000
+                        Math.random() *
+                        10000
                     );
 
 
@@ -1653,13 +1832,11 @@
                         "https://api.cloudinary.com/v1_1/cesiolzm/image/upload",
 
                         {
-
                             method:
                                 "POST",
 
                             body:
                                 formData
-
                         }
 
                     );
@@ -1676,9 +1853,7 @@
                     throw new Error(
 
                         uploadData.error?.message
-
                         ||
-
                         "Upload foto gagal"
 
                     );
@@ -1692,28 +1867,18 @@
 
                 /* =========================
                    BUAT ID FIREBASE
-
-                   Contoh:
-                   B 1234 ABC
-
-                   Menjadi:
-                   B_1234_ABC
                 ========================= */
 
                 const id =
-
                     plat
-
                     .replace(
-                        /[.#$[\]/]/g,
+                        /[.#$[\]]/g,
                         "_"
                     )
-
                     .replace(
                         /\s+/g,
                         "_"
                     )
-
                     .toUpperCase();
 
 
@@ -1743,9 +1908,7 @@
                         status,
 
 
-                    /* =====================
-                       KETERANGAN OTOMATIS
-                    ===================== */
+                    /* KETERANGAN */
 
                     keterangan:
                         "Ready",
@@ -1773,6 +1936,7 @@
 
 
                     tanggalInput:
+
                         new Date()
                         .toISOString()
 
@@ -1781,11 +1945,6 @@
 
                 /* =========================
                    DATA READY
-
-                   Data ini otomatis dibuat
-                   pada:
-
-                   ready/ID_PLAT
                 ========================= */
 
                 const dataReady = {
@@ -1815,6 +1974,7 @@
 
 
                     tanggalInput:
+
                         new Date()
                         .toISOString()
 
@@ -1822,32 +1982,26 @@
 
 
                 /* =========================
-                   SIMPAN DATA SEKALIGUS
+                   SIMPAN SEKALIGUS
                 ========================= */
 
                 const updates = {};
 
 
-                /* =========================
-                   SIMPAN KE:
-
-                   unit/ID_PLAT
-                ========================= */
+                /* UNIT */
 
                 updates[
-                    "unit/" + id
+                    "unit/" +
+                    id
                 ] =
                     dataUnit;
 
 
-                /* =========================
-                   SIMPAN KE:
-
-                   ready/ID_PLAT
-                ========================= */
+                /* READY */
 
                 updates[
-                    "ready/" + id
+                    "ready/" +
+                    id
                 ] =
                     dataReady;
 
@@ -1857,13 +2011,10 @@
                 ========================= */
 
                 await update(
-
                     ref(
                         db
                     ),
-
                     updates
-
                 );
 
 
@@ -1872,10 +2023,17 @@
                 ========================= */
 
                 alert(
+
                     "✓ Data kendaraan berhasil disimpan!\n\n" +
+
                     "Unit: " +
+
                     plat +
-                    "\n\nStatus Keterangan: Ready"
+
+                    "\n\n" +
+
+                    "Status Keterangan: Ready"
+
                 );
 
 
@@ -1907,8 +2065,16 @@
                     "";
 
 
-                imageInput.value =
+                galleryInput.value =
                     "";
+
+
+                cameraInput.value =
+                    "";
+
+
+                selectedFile =
+                    null;
 
 
                 preview.src =
