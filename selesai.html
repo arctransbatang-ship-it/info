@@ -844,6 +844,66 @@
 
         }
 
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.65);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-box {
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.25);
+        }
+
+        .modal-title { margin: 0 0 8px; font-size: 22px; }
+        .modal-subtitle { margin: 0 0 20px; color: var(--muted); font-size: 14px; }
+        .modal-form { display: grid; gap: 16px; }
+
+        .modal-info, .pembayaran-status, .rincian-total, .total-terlambat {
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+        }
+
+        .modal-info { background: #eff6ff; color: #1e40af; }
+        .pembayaran-status { font-weight: 700; }
+        .pembayaran-status.lunas { background: #dcfce7; color: #15803d; }
+        .pembayaran-status.kurang { background: #fef3c7; color: #92400e; }
+        .pembayaran-status.lebih { background: #dbeafe; color: #1d4ed8; }
+        .rincian-total { background: #f8fafc; border: 1px solid var(--border); }
+        .rincian-total .baris { display:flex; justify-content:space-between; gap:15px; margin:8px 0; }
+        .total-akhir { padding-top:12px; border-top:1px solid var(--border); font-size:16px; font-weight:800; }
+        .total-terlambat { background:#fef3c7; color:#92400e; font-weight:700; margin:0; }
+
+        .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .btn-batal-modal { background: #64748b; }
+        .btn-konfirmasi-modal { background: linear-gradient(135deg,#16a34a,#22c55e); }
+
+        @media (max-width:700px) {
+            .modal-box { padding: 22px 16px; }
+            .modal-actions { grid-template-columns:1fr; }
+        }
+
     </style>
 
 </head>
@@ -1261,6 +1321,58 @@
 
     </div>
 
+
+
+
+    <div id="modalSelesai" class="modal-overlay">
+        <div class="modal-box">
+            <h3 class="modal-title">Konfirmasi Selesai Rental</h3>
+            <p class="modal-subtitle">Periksa rincian pembayaran sebelum menyelesaikan rental.</p>
+
+            <div id="infoUnitModal" class="modal-info"></div>
+
+            <div class="modal-form">
+                <div class="form-group">
+                    <label for="jumlahHariSelesai">Jumlah Hari Rental</label>
+                    <input type="number" id="jumlahHariSelesai" min="1" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="hargaSewaHarian">Harga Sewa Harian</label>
+                    <input
+                        type="text"
+                        id="hargaSewaHarian"
+                        value="Rp 0"
+                        disabled
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="jamKeterlambatan">Jumlah Jam Keterlambatan</label>
+                    <input type="number" id="jamKeterlambatan" min="0" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="biayaPerJam">Biaya Keterlambatan per Jam</label>
+                    <input
+                        type="text"
+                        id="biayaPerJam"
+                        inputmode="numeric"
+                        value="Rp 0"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div id="statusSaldoModal" class="pembayaran-status"></div>
+                <div id="rincianPembayaranModal" class="rincian-total"></div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" id="btnBatalModal" class="btn-batal-modal">Batal</button>
+                <button type="button" id="btnKonfirmasiSelesai" class="btn-konfirmasi-modal">✓ Konfirmasi Selesai</button>
+            </div>
+        </div>
+    </div>
 
 
     <!-- =============================
@@ -1983,254 +2095,500 @@
 
 
 
-        /* =================================
-           TOMBOL SELESAIKAN RENTAL
 
-           Bagian ini dapat digunakan
-           untuk proses pengembalian
-           kendaraan.
+        /* =================================
+           ELEMEN POPUP SELESAI RENTAL
         ================================= */
 
+        const modalSelesai = document.getElementById("modalSelesai");
+        const jumlahHariSelesai = document.getElementById("jumlahHariSelesai");
+        const hargaSewaHarian = document.getElementById("hargaSewaHarian");
+        const jamKeterlambatan = document.getElementById("jamKeterlambatan");
+        const biayaPerJam = document.getElementById("biayaPerJam");
+        const statusSaldoModal = document.getElementById("statusSaldoModal");
+        const rincianPembayaranModal = document.getElementById("rincianPembayaranModal");
+        const infoUnitModal = document.getElementById("infoUnitModal");
+        const btnBatalModal = document.getElementById("btnBatalModal");
+        const btnKonfirmasiSelesai = document.getElementById("btnKonfirmasiSelesai");
+
+
+        function hitungJumlahHariRental() {
+
+            if (!dataTransaksi?.tanggalsewa) return 1;
+
+            const mulai = new Date(
+                dataTransaksi.tanggalsewa + "T00:00:00"
+            );
+
+            const hariIni = new Date();
+            hariIni.setHours(0, 0, 0, 0);
+
+            return Math.max(
+                1,
+                Math.floor(
+                    (hariIni - mulai) /
+                    (1000 * 60 * 60 * 24)
+                ) + 1
+            );
+
+        }
+
+
+        /* Sisa pembayaran memakai sumber data transaksi asli:
+           0 = lunas
+           negatif = kurang bayar (sesuai data rentout)
+           positif = kelebihan bayar
+        */
+        function ambilSaldoPembayaran() {
+
+            if (!dataTransaksi) return 0;
+
+            if (dataTransaksi.statusPembayaran === "LUNAS") {
+                return 0;
+            }
+
+            if (dataTransaksi.statusPembayaran === "LEBIH BAYAR") {
+                return Math.abs(
+                    Number(dataTransaksi.kelebihanBayar) || 0
+                );
+            }
+
+            return Number(dataTransaksi.sisa) || 0;
+
+        }
+
+
+        /* BIAYA SEWA = JUMLAH HARI RENTAL x HARGA HARIAN */
+        function hitungBiayaSewa() {
+
+            const jumlahHari = Math.max(
+                1,
+                Number(jumlahHariSelesai.value) || 1
+            );
+
+            const hargaHarian = Math.max(
+                0,
+                Number(dataTransaksi?.harga) || 0
+            );
+
+            return jumlahHari * hargaHarian;
+
+        }
+
+
+        function angkaDariRupiah(nilai) {
+
+            return Number(
+                String(nilai || "")
+                .replace(/[^\d]/g, "")
+            ) || 0;
+
+        }
+
+
+        function formatInputRupiah(input) {
+
+            const angka =
+                angkaDariRupiah(
+                    input.value
+                );
+
+            input.value =
+                "Rp " +
+                angka.toLocaleString(
+                    "id-ID"
+                );
+
+        }
+
+
+        function hitungTotalKeterlambatan() {
+
+            const jam = Math.max(
+                0,
+                Number(jamKeterlambatan.value) || 0
+            );
+
+            const biaya =
+                angkaDariRupiah(
+                    biayaPerJam.value
+                );
+
+            return (
+                jam *
+                biaya
+            );
+
+        }
+
+
+        function updateRincianPembayaran() {
+
+            const saldo = ambilSaldoPembayaran();
+            const biayaSewa = hitungBiayaSewa();
+            const totalTerlambat = hitungTotalKeterlambatan();
+
+            /* Kekurangan pembayaran ditambahkan.
+               Kelebihan pembayaran menjadi pengurang. */
+            let sisaKurang = 0;
+            let kelebihanBayar = 0;
+
+            if (saldo < 0) {
+                sisaKurang = Math.abs(saldo);
+            }
+            else if (saldo > 0) {
+                kelebihanBayar = saldo;
+            }
+
+            const totalTagihan =
+                biayaSewa +
+                totalTerlambat +
+                sisaKurang;
+
+            const totalAkhir =
+                totalTagihan -
+                kelebihanBayar;
+
+            if (saldo === 0) {
+
+                statusSaldoModal.className =
+                    "pembayaran-status lunas";
+
+                statusSaldoModal.textContent =
+                    "✓ Status Pembayaran: LUNAS — Sisa Pembayaran Rp 0";
+
+            }
+            else if (saldo < 0) {
+
+                statusSaldoModal.className =
+                    "pembayaran-status kurang";
+
+                statusSaldoModal.textContent =
+                    "⚠ Status Pembayaran: KURANG BAYAR — " +
+                    formatRupiah(sisaKurang);
+
+            }
+            else {
+
+                statusSaldoModal.className =
+                    "pembayaran-status lebih";
+
+                statusSaldoModal.textContent =
+                    "＋ Status Pembayaran: KELEBIHAN BAYAR — " +
+                    formatRupiah(kelebihanBayar);
+
+            }
+
+            rincianPembayaranModal.innerHTML =
+                '<div class="baris">' +
+                    '<span>Sisa Pembayaran</span>' +
+                    '<strong>' +
+                        (
+                            saldo < 0
+                                ? "- " + formatRupiah(sisaKurang)
+                                : saldo > 0
+                                    ? "+ " + formatRupiah(kelebihanBayar)
+                                    : formatRupiah(0)
+                        ) +
+                    '</strong>' +
+                '</div>' +
+
+                '<div class="baris">' +
+                    '<span>Biaya Sewa</span>' +
+                    '<strong>' + formatRupiah(biayaSewa) + '</strong>' +
+                '</div>' +
+
+                '<div class="baris">' +
+                    '<span>Biaya Keterlambatan</span>' +
+                    '<strong>' + formatRupiah(totalTerlambat) + '</strong>' +
+                '</div>' +
+
+                '<div class="baris total-akhir">' +
+                    '<span>' +
+                        (
+                            totalAkhir > 0
+                                ? "Total Harus Dibayar"
+                                : totalAkhir < 0
+                                    ? "Sisa Kelebihan Bayar"
+                                    : "Status Akhir"
+                        ) +
+                    '</span>' +
+                    '<strong>' +
+                        (
+                            totalAkhir === 0
+                                ? "LUNAS"
+                                : formatRupiah(Math.abs(totalAkhir))
+                        ) +
+                    '</strong>' +
+                '</div>';
+
+            return {
+                saldo,
+                sisaKurang,
+                kelebihanBayar,
+                biayaSewa,
+                totalTerlambat,
+                totalTagihan,
+                totalAkhir
+            };
+
+        }
+
+
+        function updateSemuaPerhitungan() {
+            updateRincianPembayaran();
+        }
+
+        jumlahHariSelesai.addEventListener("input", updateSemuaPerhitungan);
+        jamKeterlambatan.addEventListener("input", updateSemuaPerhitungan);
+        biayaPerJam.addEventListener(
+            "input",
+            function () {
+
+                formatInputRupiah(
+                    biayaPerJam
+                );
+
+                updateSemuaPerhitungan();
+
+            }
+        );
+
+
         btnSelesai.addEventListener(
-
             "click",
+            function () {
 
+                if (!dataTransaksi) {
+                    alert("Data transaksi belum tersedia.");
+                    return;
+                }
+
+                jumlahHariSelesai.value = hitungJumlahHariRental();
+
+                hargaSewaHarian.value =
+                    formatRupiah(
+                        Math.max(
+                            0,
+                            Number(dataTransaksi.harga) || 0
+                        )
+                    );
+
+                jamKeterlambatan.value = 0;
+                biayaPerJam.value = "Rp 0";
+
+                infoUnitModal.innerHTML =
+                    "<strong>Unit:</strong> " +
+                    (dataTransaksi.plat || dataTransaksi.unitId || "-") +
+                    "<br><strong>Customer:</strong> " +
+                    (dataTransaksi.customer || "-") +
+                    "<br><strong>Harga Harian:</strong> " +
+                    formatRupiah(Number(dataTransaksi.harga) || 0);
+
+                updateSemuaPerhitungan();
+
+                modalSelesai.classList.add("active");
+
+            }
+        );
+
+
+        btnBatalModal.addEventListener(
+            "click",
+            function () {
+                modalSelesai.classList.remove("active");
+            }
+        );
+
+
+        modalSelesai.addEventListener(
+            "click",
+            function (event) {
+                if (event.target === modalSelesai) {
+                    modalSelesai.classList.remove("active");
+                }
+            }
+        );
+
+
+        btnKonfirmasiSelesai.addEventListener(
+            "click",
             async function () {
 
+                if (!dataTransaksi) return;
 
-                if (
-                    !dataTransaksi
-                ) {
-
-                    alert(
-                        "Data transaksi belum tersedia."
+                const jumlahHari =
+                    Math.max(
+                        1,
+                        Number(jumlahHariSelesai.value) || 1
                     );
 
-
-                    return;
-
-                }
-
-
-                const konfirmasi =
-                    confirm(
-
-                        "Apakah Anda yakin ingin menyelesaikan rental ini?\n\n" +
-
-                        "Unit: " +
-                        (
-                            dataTransaksi.plat ||
-                            dataTransaksi.unitId
-                        ) +
-                        "\n\n" +
-
-                        "Unit akan dikembalikan ke status tersedia."
-
+                const jamTerlambat =
+                    Math.max(
+                        0,
+                        Number(jamKeterlambatan.value) || 0
                     );
 
+                const biayaTerlambatPerJam =
+                    Math.max(
+                        0,
+                        angkaDariRupiah(
+                            biayaPerJam.value
+                        )
+                    );
 
-                if (
-                    !konfirmasi
-                ) {
+                const ringkasan =
+                    updateRincianPembayaran();
 
-                    return;
+                const konfirmasi = confirm(
+                    "Konfirmasi penyelesaian rental?\n\n" +
+                    "Jumlah Hari Rental: " + jumlahHari + " hari\n" +
+                    "Biaya Sewa: " +
+                    formatRupiah(ringkasan.biayaSewa) + "\n" +
+                    "Keterlambatan: " + jamTerlambat + " jam\n" +
+                    "Biaya Keterlambatan: " +
+                    formatRupiah(ringkasan.totalTerlambat) + "\n" +
+                    "Sisa Pembayaran: " +
+                    (
+                        ringkasan.saldo < 0
+                            ? "- " + formatRupiah(ringkasan.sisaKurang)
+                            : ringkasan.saldo > 0
+                                ? "+ " + formatRupiah(ringkasan.kelebihanBayar)
+                                : formatRupiah(0)
+                    ) +
+                    "\n\nTotal Akhir: " +
+                    (
+                        ringkasan.totalAkhir === 0
+                            ? "LUNAS"
+                            : formatRupiah(
+                                Math.abs(ringkasan.totalAkhir)
+                            )
+                    )
+                );
 
-                }
-
+                if (!konfirmasi) return;
 
                 try {
 
-
-                    btnSelesai.disabled =
-                        true;
-
-
-                    btnSelesai.textContent =
-                        "Memproses...";
-
-
-                    /*
-                    =================================
-
-                    UPDATE STATUS TRANSAKSI
-
-                    =================================
-                    */
+                    btnKonfirmasiSelesai.disabled = true;
+                    btnKonfirmasiSelesai.textContent = "Memproses...";
+                    btnSelesai.disabled = true;
 
                     await update(
-
-                        ref(
-
-                            db,
-
-                            "rentout/" +
-                            transaksiId
-
-                        ),
-
+                        ref(db, "rentout/" + transaksiId),
                         {
+                            status: "SELESAI RENTAL",
 
-                            status:
-                                "SELESAI RENTAL",
+                            jumlahHariSelesai: jumlahHari,
+
+                            biayaSewa: ringkasan.biayaSewa,
+
+                            jamKeterlambatan: jamTerlambat,
+
+                            biayaKeterlambatanPerJam:
+                                biayaTerlambatPerJam,
+
+                            totalKeterlambatan:
+                                ringkasan.totalTerlambat,
+
+                            sisaPembayaranSelesai:
+                                ringkasan.saldo,
+
+                            totalTagihanAkhir:
+                                ringkasan.totalAkhir,
+
+                            statusPembayaranAkhir:
+                                ringkasan.totalAkhir === 0
+                                    ? "LUNAS"
+                                    : ringkasan.totalAkhir > 0
+                                        ? "KURANG BAYAR"
+                                        : "KELEBIHAN BAYAR",
 
                             tanggalSelesaiRental:
-                                new Date()
-                                .toISOString(),
+                                new Date().toISOString(),
 
                             timestampSelesai:
                                 Date.now()
-
                         }
-
                     );
 
-
-                    /*
-                    =================================
-
-                    UPDATE STATUS UNIT
-
-                    UNIT KEMBALI MENJADI READY
-
-                    =================================
-                    */
 
                     await update(
-
                         ref(
-
                             db,
-
                             "unit/" +
                             dataTransaksi.unitId
-
                         ),
-
                         {
-
-                            keterangan:
-                                "Ready"
-
+                            keterangan: "Ready"
                         }
-
                     );
 
 
-                    /*
-                    =================================
-
-                    KEMBALIKAN UNIT KE READY
-
-                    Struktur dibuat berdasarkan
-                    data yang tersedia pada
-                    transaksi.
-
-                    =================================
-                    */
-
                     await set(
-
                         ref(
-
                             db,
-
                             "ready/" +
                             dataTransaksi.unitId
-
                         ),
-
                         {
-
                             plat:
                                 dataTransaksi.plat ||
                                 dataTransaksi.unitId,
 
                             nama:
-                                dataTransaksi.namaUnit ||
-                                "",
+                                dataTransaksi.namaUnit || "",
 
-                            keterangan:
-                                "Ready",
+                            keterangan: "Ready",
 
                             timestamp:
                                 Date.now()
-
                         }
-
                     );
 
-
-                    /*
-                    =================================
-
-                    BERHASIL
-
-                    =================================
-                    */
 
                     alert(
-
                         "Rental berhasil diselesaikan!\n\n" +
-
-                        "Unit " +
-
+                        "Biaya Sewa: " +
+                        formatRupiah(ringkasan.biayaSewa) +
+                        "\nBiaya Keterlambatan: " +
+                        formatRupiah(ringkasan.totalTerlambat) +
+                        "\nTotal Akhir: " +
                         (
-                            dataTransaksi.plat ||
-                            dataTransaksi.unitId
-                        ) +
-
-                        " telah dikembalikan ke READY."
-
+                            ringkasan.totalAkhir === 0
+                                ? "LUNAS"
+                                : formatRupiah(
+                                    Math.abs(ringkasan.totalAkhir)
+                                )
+                        )
                     );
-
-
-                    /*
-                    =================================
-
-                    KEMBALI KE TABEL RENT OUT
-
-                    =================================
-                    */
 
                     window.location.href =
                         "tabeloutrent.html";
 
-
                 }
-
-
-                catch (
-                    error
-                ) {
+                catch (error) {
 
                     console.error(
                         "Gagal menyelesaikan rental:",
                         error
                     );
 
-
                     alert(
-
                         "Gagal menyelesaikan rental:\n\n" +
-
                         error.message
-
                     );
 
+                    btnKonfirmasiSelesai.disabled = false;
+                    btnKonfirmasiSelesai.textContent =
+                        "✓ Konfirmasi Selesai";
 
-                    btnSelesai.disabled =
-                        false;
-
-
-                    btnSelesai.textContent =
-                        "✓ Selesaikan Rental";
+                    btnSelesai.disabled = false;
 
                 }
 
             }
-
         );
-
 
     </script>
 
