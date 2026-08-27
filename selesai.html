@@ -2134,26 +2134,25 @@
         }
 
 
-        /* Sisa pembayaran memakai sumber data transaksi asli:
-           0 = lunas
-           negatif = kurang bayar (sesuai data rentout)
-           positif = kelebihan bayar
-        */
-        function ambilSaldoPembayaran() {
+        /* =================================
+           AMBIL JUMLAH DP
 
-            if (!dataTransaksi) return 0;
+           Sumber nilai dari data transaksi:
+           dataTransaksi.bayar
+        ================================= */
 
-            if (dataTransaksi.statusPembayaran === "LUNAS") {
+        function ambilJumlahDP() {
+
+            if (!dataTransaksi) {
                 return 0;
             }
 
-            if (dataTransaksi.statusPembayaran === "LEBIH BAYAR") {
-                return Math.abs(
-                    Number(dataTransaksi.kelebihanBayar) || 0
-                );
-            }
-
-            return Number(dataTransaksi.sisa) || 0;
+            return Math.max(
+                0,
+                Number(
+                    dataTransaksi.bayar
+                ) || 0
+            );
 
         }
 
@@ -2224,83 +2223,58 @@
 
         function updateRincianPembayaran() {
 
-            const saldo = ambilSaldoPembayaran();
-            const biayaSewa = hitungBiayaSewa();
-            const totalTerlambat = hitungTotalKeterlambatan();
+            const jumlahDP =
+                ambilJumlahDP();
 
-            /* Kekurangan pembayaran ditambahkan.
-               Kelebihan pembayaran menjadi pengurang. */
-            let sisaKurang = 0;
-            let kelebihanBayar = 0;
+            const biayaSewa =
+                hitungBiayaSewa();
 
-            if (saldo < 0) {
-                sisaKurang = Math.abs(saldo);
-            }
-            else if (saldo > 0) {
-                kelebihanBayar = saldo;
-            }
+            const totalTerlambat =
+                hitungTotalKeterlambatan();
 
             const totalTagihan =
                 biayaSewa +
-                totalTerlambat +
-                sisaKurang;
+                totalTerlambat;
 
             const totalAkhir =
                 totalTagihan -
-                kelebihanBayar;
+                jumlahDP;
 
-            if (saldo === 0) {
+            statusSaldoModal.className =
+                "pembayaran-status";
 
-                statusSaldoModal.className =
-                    "pembayaran-status lunas";
-
-                statusSaldoModal.textContent =
-                    "✓ Status Pembayaran: LUNAS — Sisa Pembayaran Rp 0";
-
-            }
-            else if (saldo < 0) {
-
-                statusSaldoModal.className =
-                    "pembayaran-status kurang";
-
-                statusSaldoModal.textContent =
-                    "⚠ Status Pembayaran: KURANG BAYAR — " +
-                    formatRupiah(sisaKurang);
-
-            }
-            else {
-
-                statusSaldoModal.className =
-                    "pembayaran-status lebih";
-
-                statusSaldoModal.textContent =
-                    "＋ Status Pembayaran: KELEBIHAN BAYAR — " +
-                    formatRupiah(kelebihanBayar);
-
-            }
+            statusSaldoModal.textContent =
+                "Jumlah DP yang sudah dibayarkan: " +
+                formatRupiah(
+                    jumlahDP
+                );
 
             rincianPembayaranModal.innerHTML =
                 '<div class="baris">' +
-                    '<span>Sisa Pembayaran</span>' +
+                    '<span>Jumlah DP</span>' +
                     '<strong>' +
-                        (
-                            saldo < 0
-                                ? "- " + formatRupiah(sisaKurang)
-                                : saldo > 0
-                                    ? "+ " + formatRupiah(kelebihanBayar)
-                                    : formatRupiah(0)
+                        formatRupiah(
+                            jumlahDP
                         ) +
                     '</strong>' +
                 '</div>' +
 
                 '<div class="baris">' +
                     '<span>Biaya Sewa</span>' +
-                    '<strong>' + formatRupiah(biayaSewa) + '</strong>' +
+                    '<strong>' +
+                        formatRupiah(
+                            biayaSewa
+                        ) +
+                    '</strong>' +
                 '</div>' +
 
                 '<div class="baris">' +
                     '<span>Biaya Keterlambatan</span>' +
-                    '<strong>' + formatRupiah(totalTerlambat) + '</strong>' +
+                    '<strong>' +
+                        formatRupiah(
+                            totalTerlambat
+                        ) +
+                    '</strong>' +
                 '</div>' +
 
                 '<div class="baris total-akhir">' +
@@ -2309,7 +2283,7 @@
                             totalAkhir > 0
                                 ? "Total Harus Dibayar"
                                 : totalAkhir < 0
-                                    ? "Sisa Kelebihan Bayar"
+                                    ? "Kelebihan Pembayaran"
                                     : "Status Akhir"
                         ) +
                     '</span>' +
@@ -2317,15 +2291,17 @@
                         (
                             totalAkhir === 0
                                 ? "LUNAS"
-                                : formatRupiah(Math.abs(totalAkhir))
+                                : formatRupiah(
+                                    Math.abs(
+                                        totalAkhir
+                                    )
+                                )
                         ) +
                     '</strong>' +
                 '</div>';
 
             return {
-                saldo,
-                sisaKurang,
-                kelebihanBayar,
+                jumlahDP,
                 biayaSewa,
                 totalTerlambat,
                 totalTagihan,
@@ -2448,13 +2424,9 @@
                     "Keterlambatan: " + jamTerlambat + " jam\n" +
                     "Biaya Keterlambatan: " +
                     formatRupiah(ringkasan.totalTerlambat) + "\n" +
-                    "Sisa Pembayaran: " +
-                    (
-                        ringkasan.saldo < 0
-                            ? "- " + formatRupiah(ringkasan.sisaKurang)
-                            : ringkasan.saldo > 0
-                                ? "+ " + formatRupiah(ringkasan.kelebihanBayar)
-                                : formatRupiah(0)
+                    "Jumlah DP: " +
+                    formatRupiah(
+                        ringkasan.jumlahDP
                     ) +
                     "\n\nTotal Akhir: " +
                     (
@@ -2491,8 +2463,8 @@
                             totalKeterlambatan:
                                 ringkasan.totalTerlambat,
 
-                            sisaPembayaranSelesai:
-                                ringkasan.saldo,
+                            jumlahDP:
+                                ringkasan.jumlahDP,
 
                             totalTagihanAkhir:
                                 ringkasan.totalAkhir,
