@@ -736,6 +736,20 @@
     }
 
 
+    button:disabled {
+
+        opacity:
+            0.65;
+
+        cursor:
+            not-allowed;
+
+        transform:
+            none;
+
+    }
+
+
     .btn-kembali {
 
         background:
@@ -784,71 +798,8 @@
     }
 
 
-    @media (
-        max-width: 700px
-    ) {
-
-        body {
-
-            padding:
-                12px;
-
-        }
-
-
-        .container {
-
-            padding:
-                22px 16px;
-
-            border-radius:
-                20px;
-
-        }
-
-
-        .form-grid {
-
-            grid-template-columns:
-                1fr;
-
-            gap:
-                16px;
-
-        }
-
-
-        .full-width {
-
-            grid-column:
-                auto;
-
-        }
-
-
-        input {
-
-            min-height:
-                50px;
-
-            font-size:
-                16px;
-
-        }
-
-
-        .action-area {
-
-            grid-template-columns:
-                1fr;
-
-        }
-
-    }
-
-
     /* =============================
-       MODAL SELESAI RENTAL
+       MODAL
     ============================== */
 
     .modal-overlay {
@@ -966,8 +917,7 @@
 
     .modal-info,
     .pembayaran-status,
-    .rincian-total,
-    .total-terlambat {
+    .rincian-total {
 
         padding:
             14px;
@@ -1000,35 +950,17 @@
     }
 
 
-    .pembayaran-status.lunas {
+    .pembayaran-status.dp-info {
 
         background:
-            #dcfce7;
+            #e0f2fe;
 
         color:
-            #15803d;
+            #075985;
 
-    }
-
-
-    .pembayaran-status.kurang {
-
-        background:
-            #fef3c7;
-
-        color:
-            #92400e;
-
-    }
-
-
-    .pembayaran-status.lebih {
-
-        background:
-            #dbeafe;
-
-        color:
-            #1d4ed8;
+        border:
+            1px solid
+            #7dd3fc;
 
     }
 
@@ -1062,6 +994,30 @@
     }
 
 
+    .rincian-total .baris.dp-row {
+
+        background:
+            #e0f2fe;
+
+        color:
+            #075985;
+
+        border:
+            1px solid
+            #7dd3fc;
+
+        border-radius:
+            10px;
+
+        padding:
+            10px 12px;
+
+        font-weight:
+            700;
+
+    }
+
+
     .total-akhir {
 
         padding-top:
@@ -1076,23 +1032,6 @@
 
         font-weight:
             800;
-
-    }
-
-
-    .total-terlambat {
-
-        background:
-            #fef3c7;
-
-        color:
-            #92400e;
-
-        font-weight:
-            700;
-
-        margin:
-            0;
 
     }
 
@@ -1134,49 +1073,70 @@
     }
 
 
-    .pembayaran-status.dp-info {
-
-        background:
-            #e0f2fe;
-
-        color:
-            #075985;
-
-        border:
-            1px solid
-            #7dd3fc;
-
-    }
-
-
-    .rincian-total .baris.dp-row {
-
-        background:
-            #e0f2fe;
-
-        color:
-            #075985;
-
-        border:
-            1px solid
-            #7dd3fc;
-
-        border-radius:
-            10px;
-
-        padding:
-            10px 12px;
-
-        font-weight:
-            700;
-
-    }
-
+    /* =============================
+       RESPONSIVE
+    ============================== */
 
     @media (
-        max-width:
-        700px
+        max-width: 700px
     ) {
+
+        body {
+
+            padding:
+                12px;
+
+        }
+
+
+        .container {
+
+            padding:
+                22px 16px;
+
+            border-radius:
+                20px;
+
+        }
+
+
+        .form-grid {
+
+            grid-template-columns:
+                1fr;
+
+            gap:
+                16px;
+
+        }
+
+
+        .full-width {
+
+            grid-column:
+                auto;
+
+        }
+
+
+        input {
+
+            min-height:
+                50px;
+
+            font-size:
+                16px;
+
+        }
+
+
+        .action-area {
+
+            grid-template-columns:
+                1fr;
+
+        }
+
 
         .modal-box {
 
@@ -1212,9 +1172,7 @@
     <div class="brand">
 
         <div class="brand-icon">
-
             🚐
-
         </div>
 
 
@@ -1237,9 +1195,7 @@
         href="tabeloutrent.html"
         class="home-btn"
     >
-
         ⌂ Home
-
     </a>
 
 </div>
@@ -1299,9 +1255,7 @@
         <div class="form-group">
 
             <label for="plat">
-
                 ID Unit / Plat Nomor
-
             </label>
 
             <input
@@ -1317,9 +1271,7 @@
         <div class="form-group">
 
             <label for="nama">
-
                 Nama Unit Kendaraan
-
             </label>
 
             <input
@@ -1335,9 +1287,7 @@
         <div class="form-group">
 
             <label for="idcustomer">
-
                 ID Customer
-
             </label>
 
             <input
@@ -1353,9 +1303,7 @@
         <div class="form-group">
 
             <label for="customer">
-
                 Nama Customer
-
             </label>
 
             <input
@@ -1371,9 +1319,7 @@
         <div class="form-group">
 
             <label for="rentaltype">
-
                 Rental Type
-
             </label>
 
             <input
@@ -1389,9 +1335,7 @@
         <div class="form-group">
 
             <label for="harga">
-
                 Harga
-
             </label>
 
             <input
@@ -1407,9 +1351,7 @@
         <div class="form-group">
 
             <label for="tanggalsewa">
-
                 Tanggal Sewa
-
             </label>
 
             <input
@@ -1425,9 +1367,7 @@
         <div class="form-group">
 
             <label for="selesaisewa">
-
                 Estimasi Tanggal Selesai
-
             </label>
 
             <input
@@ -1443,9 +1383,7 @@
         <div class="form-group">
 
             <label for="total">
-
                 Total Biaya
-
             </label>
 
             <input
@@ -1461,9 +1399,7 @@
         <div class="form-group">
 
             <label for="bayar">
-
                 Bayar / DP
-
             </label>
 
             <input
@@ -1479,9 +1415,7 @@
         <div class="form-group full-width">
 
             <label for="sisa">
-
                 Sisa Pembayaran
-
             </label>
 
             <input
@@ -1504,9 +1438,7 @@
         <div class="form-group full-width">
 
             <label for="jaminan">
-
                 Jaminan
-
             </label>
 
             <input
@@ -1522,9 +1454,7 @@
         <div class="form-group full-width">
 
             <label>
-
                 Foto Jaminan
-
             </label>
 
 
@@ -1560,11 +1490,12 @@
         <button
             type="button"
             class="btn-kembali"
-            onclick="window.location.href='tabeloutrent.html'"
+            onclick="
+                window.location.href =
+                'tabeloutrent.html'
+            "
         >
-
             ← Kembali
-
         </button>
 
 
@@ -1573,9 +1504,7 @@
             class="btn-selesai"
             id="btnSelesai"
         >
-
             ✓ Selesaikan Rental
-
         </button>
 
 
@@ -1587,7 +1516,7 @@
 
 
 <!-- =============================
-     MODAL KONFIRMASI
+     MODAL SELESAI RENTAL
 ============================== -->
 
 <div
@@ -1597,18 +1526,15 @@
 
     <div class="modal-box">
 
+
         <h3 class="modal-title">
-
             Konfirmasi Selesai Rental
-
         </h3>
 
 
         <p class="modal-subtitle">
-
             Periksa rincian pembayaran sebelum
             menyelesaikan rental.
-
         </p>
 
 
@@ -1619,15 +1545,14 @@
         </div>
 
 
+
         <div class="modal-form">
 
 
             <div class="form-group">
 
                 <label for="jumlahHariSelesai">
-
                     Jumlah Hari Rental
-
                 </label>
 
                 <input
@@ -1644,9 +1569,7 @@
             <div class="form-group">
 
                 <label for="hargaSewaHarian">
-
                     Harga Sewa Harian
-
                 </label>
 
                 <input
@@ -1663,9 +1586,7 @@
             <div class="form-group">
 
                 <label for="jamKeterlambatan">
-
                     Jumlah Jam Keterlambatan
-
                 </label>
 
                 <input
@@ -1682,9 +1603,7 @@
             <div class="form-group">
 
                 <label for="biayaPerJam">
-
                     Biaya Keterlambatan per Jam
-
                 </label>
 
                 <input
@@ -1706,6 +1625,7 @@
             </div>
 
 
+
             <div
                 id="rincianPembayaranModal"
                 class="rincian-total"
@@ -1719,15 +1639,15 @@
 
         <div class="modal-actions">
 
+
             <button
                 type="button"
                 id="btnBatalModal"
                 class="btn-batal-modal"
             >
-
                 Batal
-
             </button>
+
 
 
             <button
@@ -1735,12 +1655,12 @@
                 id="btnKonfirmasiSelesai"
                 class="btn-konfirmasi-modal"
             >
-
                 ✓ Konfirmasi Selesai
-
             </button>
 
+
         </div>
+
 
     </div>
 
@@ -1775,8 +1695,7 @@
         getDatabase,
         ref,
         get,
-        update,
-        set
+        update
 
     }
 
@@ -1946,495 +1865,6 @@
         );
 
 
-
-    /* =================================
-       AMBIL ID DARI URL
-    ================================= */
-
-    const urlParams =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const transaksiId =
-        urlParams.get(
-            "id"
-        );
-
-
-
-    /* =================================
-       DATA TRANSAKSI
-    ================================= */
-
-    let dataTransaksi =
-        null;
-
-
-
-    /* =================================
-       FORMAT RUPIAH
-    ================================= */
-
-    function formatRupiah(
-        angka
-    ) {
-
-        const nilai =
-            Number(
-                angka
-            ) || 0;
-
-
-        return (
-            "Rp " +
-            nilai.toLocaleString(
-                "id-ID"
-            )
-        );
-
-    }
-
-
-
-    /* =================================
-       FORMAT RENTAL TYPE
-    ================================= */
-
-    function formatRentalType(
-        rentaltype
-    ) {
-
-        const dataFormat = {
-
-            setengahhari:
-                "Setengah Hari",
-
-            harian:
-                "Harian",
-
-            mingguan:
-                "Mingguan",
-
-            bulanan:
-                "Bulanan"
-
-        };
-
-
-        return (
-            dataFormat[
-                rentaltype
-            ]
-            ||
-            rentaltype
-            ||
-            "-"
-        );
-
-    }
-
-
-
-    /* =================================
-       FORMAT TANGGAL TRANSAKSI
-    ================================= */
-
-    function getTanggalTransaksi() {
-
-        const sekarang =
-            new Date();
-
-
-        const tahun =
-            sekarang.getFullYear();
-
-
-        const bulan =
-            String(
-                sekarang.getMonth() + 1
-            ).padStart(
-                2,
-                "0"
-            );
-
-
-        const tanggal =
-            String(
-                sekarang.getDate()
-            ).padStart(
-                2,
-                "0"
-            );
-
-
-        return (
-            tahun +
-            "-" +
-            bulan +
-            "-" +
-            tanggal
-        );
-
-    }
-
-
-
-    /* =================================
-       TAMPIL ERROR
-    ================================= */
-
-    function tampilError(
-        pesan
-    ) {
-
-        errorBox.textContent =
-            "⚠ " +
-            pesan;
-
-
-        errorBox.className =
-            "error-box active";
-
-
-        loading.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-
-    /* =================================
-       VALIDASI ID URL
-    ================================= */
-
-    if (
-        !transaksiId
-    ) {
-
-        tampilError(
-            "ID transaksi tidak ditemukan pada URL."
-        );
-
-
-        btnSelesai.disabled =
-            true;
-
-
-        btnSelesai.textContent =
-            "Data Tidak Ditemukan";
-
-    }
-
-    else {
-
-        ambilDataRentOut();
-
-    }
-
-
-
-    /* =================================
-       AMBIL DATA RENT OUT
-    ================================= */
-
-    async function ambilDataRentOut() {
-
-        try {
-
-
-            const rentRef =
-                ref(
-
-                    db,
-
-                    "rentout/" +
-                    transaksiId
-
-                );
-
-
-            const snapshot =
-                await get(
-                    rentRef
-                );
-
-
-            if (
-                !snapshot.exists()
-            ) {
-
-                tampilError(
-                    "Data RENT OUT dengan ID " +
-                    transaksiId +
-                    " tidak ditemukan."
-                );
-
-
-                btnSelesai.disabled =
-                    true;
-
-
-                btnSelesai.textContent =
-                    "Data Tidak Ditemukan";
-
-
-                return;
-
-            }
-
-
-            const data =
-                snapshot.val();
-
-
-            dataTransaksi =
-                data;
-
-
-
-            /* =========================
-               ID UNIT / PLAT
-            ========================== */
-
-            platInput.value =
-                data.plat ||
-                data.unitId ||
-                "";
-
-
-            namaInput.value =
-                data.namaUnit ||
-                "";
-
-
-            idCustomerInput.value =
-                data.idcustomer ||
-                "";
-
-
-            customerInput.value =
-                data.customer ||
-                "";
-
-
-            rentalTypeInput.value =
-                formatRentalType(
-                    data.rentaltype
-                );
-
-
-            hargaInput.value =
-                data.hargaFormat ||
-
-                formatRupiah(
-                    data.harga
-                );
-
-
-            tanggalSewaInput.value =
-                data.tanggalsewa ||
-                "";
-
-
-            selesaiSewaInput.value =
-                data.selesaisewa ||
-                "";
-
-
-            totalInput.value =
-                data.totalFormat ||
-
-                formatRupiah(
-                    data.total
-                );
-
-
-            bayarInput.value =
-                data.bayarFormat ||
-
-                formatRupiah(
-                    data.bayar
-                );
-
-
-
-            /* =========================
-               STATUS PEMBAYARAN
-            ========================== */
-
-            if (
-
-                data.statusPembayaran ===
-                "LUNAS"
-
-            ) {
-
-                sisaInput.value =
-                    "LUNAS";
-
-
-                statusPembayaran.className =
-                    "status-box active status-lunas";
-
-
-                statusPembayaran.textContent =
-                    "✓ Status Pembayaran: LUNAS";
-
-            }
-
-
-            else if (
-
-                data.statusPembayaran ===
-                "LEBIH BAYAR"
-
-            ) {
-
-                const lebihBayar =
-                    data.kelebihanBayar || 0;
-
-
-                sisaInput.value =
-                    "+ " +
-                    formatRupiah(
-                        lebihBayar
-                    );
-
-
-                statusPembayaran.className =
-                    "status-box active status-lebih";
-
-
-                statusPembayaran.textContent =
-                    "＋ Kelebihan pembayaran: " +
-                    formatRupiah(
-                        lebihBayar
-                    );
-
-            }
-
-
-            else {
-
-                sisaInput.value =
-                    data.sisaFormat ||
-
-                    formatRupiah(
-                        data.sisa
-                    );
-
-
-                statusPembayaran.className =
-                    "status-box active status-belum";
-
-
-                statusPembayaran.textContent =
-                    "Sisa pembayaran: " +
-
-                    (
-                        data.sisaFormat ||
-
-                        formatRupiah(
-                            data.sisa
-                        )
-                    );
-
-            }
-
-
-
-            /* =========================
-               JAMINAN
-            ========================== */
-
-            jaminanInput.value =
-                data.jaminan ||
-                "";
-
-
-
-            /* =========================
-               FOTO JAMINAN
-            ========================== */
-
-            if (
-                data.fotoJaminan
-            ) {
-
-                previewFoto.src =
-                    data.fotoJaminan;
-
-
-                previewFoto.style.display =
-                    "block";
-
-
-                fotoStatus.textContent =
-                    "✓ Foto jaminan berhasil dimuat";
-
-            }
-
-            else {
-
-                previewFoto.style.display =
-                    "none";
-
-
-                fotoStatus.textContent =
-                    "Foto jaminan tidak tersedia";
-
-            }
-
-
-            loading.classList.add(
-                "hidden"
-            );
-
-
-            console.log(
-                "Data RENT OUT berhasil dimuat:",
-                data
-            );
-
-        }
-
-
-        catch (
-            error
-        ) {
-
-            console.error(
-                "Gagal mengambil data:",
-                error
-            );
-
-
-            tampilError(
-                "Gagal mengambil data: " +
-                error.message
-            );
-
-
-            btnSelesai.disabled =
-                true;
-
-
-            btnSelesai.textContent =
-                "Terjadi Kesalahan";
-
-        }
-
-    }
-
-
-
-    /* =================================
-       ELEMEN POPUP
-    ================================= */
-
     const modalSelesai =
         document.getElementById(
             "modalSelesai"
@@ -2497,7 +1927,550 @@
 
 
     /* =================================
-       HITUNG JUMLAH HARI
+       AMBIL ID TRANSAKSI DARI URL
+    ================================= */
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const transaksiId =
+        urlParams.get(
+            "id"
+        );
+
+
+
+    /* =================================
+       DATA TRANSAKSI
+    ================================= */
+
+    let dataTransaksi =
+        null;
+
+
+
+    /* =================================
+       FORMAT RUPIAH
+    ================================= */
+
+    function formatRupiah(
+        angka
+    ) {
+
+        const nilai =
+            Number(
+                angka
+            ) || 0;
+
+
+        return (
+            "Rp " +
+
+            nilai.toLocaleString(
+                "id-ID"
+            )
+        );
+
+    }
+
+
+
+    /* =================================
+       FORMAT RENTAL TYPE
+    ================================= */
+
+    function formatRentalType(
+        rentaltype
+    ) {
+
+        const dataFormat = {
+
+            setengahhari:
+                "Setengah Hari",
+
+            harian:
+                "Harian",
+
+            mingguan:
+                "Mingguan",
+
+            bulanan:
+                "Bulanan"
+
+        };
+
+
+        return (
+
+            dataFormat[
+                rentaltype
+            ]
+
+            ||
+
+            rentaltype
+
+            ||
+
+            "-"
+
+        );
+
+    }
+
+
+
+    /* =================================
+       ANGKA DARI FORMAT RUPIAH
+    ================================= */
+
+    function angkaDariRupiah(
+        nilai
+    ) {
+
+        return Number(
+
+            String(
+                nilai || ""
+            )
+
+            .replace(
+                /[^\d]/g,
+                ""
+            )
+
+        ) || 0;
+
+    }
+
+
+
+    /* =================================
+       FORMAT INPUT RUPIAH
+    ================================= */
+
+    function formatInputRupiah(
+        input
+    ) {
+
+        const angka =
+            angkaDariRupiah(
+                input.value
+            );
+
+
+        input.value =
+            formatRupiah(
+                angka
+            );
+
+    }
+
+
+
+    /* =================================
+       BUAT KEY FIREBASE AMAN
+    ================================= */
+
+    function buatFirebaseKey(
+        nilai
+    ) {
+
+        return String(
+            nilai || ""
+        )
+
+        .trim()
+
+        .replace(
+            /[.#$\[\]\/]/g,
+            "_"
+        );
+
+    }
+
+
+
+    /* =================================
+       TAMPIL ERROR
+    ================================= */
+
+    function tampilError(
+        pesan
+    ) {
+
+        errorBox.textContent =
+            "⚠ " +
+            pesan;
+
+
+        errorBox.className =
+            "error-box active";
+
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+
+    /* =================================
+       VALIDASI ID
+    ================================= */
+
+    if (
+        !transaksiId
+    ) {
+
+        tampilError(
+            "ID transaksi tidak ditemukan pada URL."
+        );
+
+
+        btnSelesai.disabled =
+            true;
+
+
+        btnSelesai.textContent =
+            "Data Tidak Ditemukan";
+
+    }
+
+    else {
+
+        ambilDataRentOut();
+
+    }
+
+
+
+    /* =================================
+       AMBIL DATA RENT OUT
+    ================================= */
+
+    async function ambilDataRentOut() {
+
+        try {
+
+
+            const rentRef =
+                ref(
+
+                    db,
+
+                    "rentout/" +
+                    transaksiId
+
+                );
+
+
+            const snapshot =
+                await get(
+                    rentRef
+                );
+
+
+            if (
+                !snapshot.exists()
+            ) {
+
+                tampilError(
+
+                    "Data RENT OUT dengan ID " +
+                    transaksiId +
+                    " tidak ditemukan."
+
+                );
+
+
+                btnSelesai.disabled =
+                    true;
+
+
+                btnSelesai.textContent =
+                    "Data Tidak Ditemukan";
+
+
+                return;
+
+            }
+
+
+
+            const data =
+                snapshot.val();
+
+
+            dataTransaksi =
+                data;
+
+
+
+            /* PLAT */
+
+            platInput.value =
+                data.plat ||
+                data.unitId ||
+                "";
+
+
+
+            /* NAMA UNIT */
+
+            namaInput.value =
+                data.namaUnit ||
+                "";
+
+
+
+            /* ID CUSTOMER */
+
+            idCustomerInput.value =
+                data.idcustomer ||
+                data.customerId ||
+                "";
+
+
+
+            /* CUSTOMER */
+
+            customerInput.value =
+                data.customer ||
+                "";
+
+
+
+            /* RENTAL TYPE */
+
+            rentalTypeInput.value =
+                formatRentalType(
+                    data.rentaltype
+                );
+
+
+
+            /* HARGA */
+
+            hargaInput.value =
+                data.hargaFormat ||
+
+                formatRupiah(
+                    data.harga
+                );
+
+
+
+            /* TANGGAL SEWA */
+
+            tanggalSewaInput.value =
+                data.tanggalsewa ||
+                "";
+
+
+
+            /* ESTIMASI SELESAI */
+
+            selesaiSewaInput.value =
+                data.selesaisewa ||
+                "";
+
+
+
+            /* TOTAL */
+
+            totalInput.value =
+                data.totalFormat ||
+
+                formatRupiah(
+                    data.total
+                );
+
+
+
+            /* BAYAR / DP */
+
+            bayarInput.value =
+                data.bayarFormat ||
+
+                formatRupiah(
+                    data.bayar
+                );
+
+
+
+            /* SISA PEMBAYARAN */
+
+            if (
+
+                data.statusPembayaran ===
+                "LUNAS"
+
+            ) {
+
+                sisaInput.value =
+                    "LUNAS";
+
+
+                statusPembayaran.className =
+                    "status-box active status-lunas";
+
+
+                statusPembayaran.textContent =
+                    "✓ Status Pembayaran: LUNAS";
+
+            }
+
+
+            else if (
+
+                data.statusPembayaran ===
+                "LEBIH BAYAR"
+
+            ) {
+
+                const lebihBayar =
+                    data.kelebihanBayar || 0;
+
+
+                sisaInput.value =
+                    "+ " +
+                    formatRupiah(
+                        lebihBayar
+                    );
+
+
+                statusPembayaran.className =
+                    "status-box active status-lebih";
+
+
+                statusPembayaran.textContent =
+                    "＋ Kelebihan pembayaran: " +
+                    formatRupiah(
+                        lebihBayar
+                    );
+
+            }
+
+
+            else {
+
+                sisaInput.value =
+
+                    data.sisaFormat ||
+
+                    formatRupiah(
+                        data.sisa
+                    );
+
+
+                statusPembayaran.className =
+                    "status-box active status-belum";
+
+
+                statusPembayaran.textContent =
+                    "Sisa pembayaran: " +
+
+                    (
+                        data.sisaFormat ||
+
+                        formatRupiah(
+                            data.sisa
+                        )
+                    );
+
+            }
+
+
+
+            /* JAMINAN */
+
+            jaminanInput.value =
+                data.jaminan ||
+                "";
+
+
+
+            /* FOTO JAMINAN */
+
+            if (
+                data.fotoJaminan
+            ) {
+
+                previewFoto.src =
+                    data.fotoJaminan;
+
+
+                previewFoto.style.display =
+                    "block";
+
+
+                fotoStatus.textContent =
+                    "✓ Foto jaminan berhasil dimuat";
+
+            }
+
+            else {
+
+                previewFoto.style.display =
+                    "none";
+
+
+                fotoStatus.textContent =
+                    "Foto jaminan tidak tersedia";
+
+            }
+
+
+
+            loading.classList.add(
+                "hidden"
+            );
+
+
+            console.log(
+                "Data RENT OUT berhasil dimuat:",
+                data
+            );
+
+        }
+
+
+        catch (
+            error
+        ) {
+
+            console.error(
+                "Gagal mengambil data:",
+                error
+            );
+
+
+            tampilError(
+                "Gagal mengambil data: " +
+                error.message
+            );
+
+
+            btnSelesai.disabled =
+                true;
+
+
+            btnSelesai.textContent =
+                "Terjadi Kesalahan";
+
+        }
+
+    }
+
+
+
+    /* =================================
+       HITUNG JUMLAH HARI RENTAL
     ================================= */
 
     function hitungJumlahHariRental() {
@@ -2513,10 +2486,8 @@
 
         const mulai =
             new Date(
-
                 dataTransaksi.tanggalsewa +
                 "T00:00:00"
-
             );
 
 
@@ -2629,52 +2600,6 @@
 
 
     /* =================================
-       KONVERSI RUPIAH
-    ================================= */
-
-    function angkaDariRupiah(
-        nilai
-    ) {
-
-        return Number(
-
-            String(
-                nilai || ""
-            )
-
-            .replace(
-                /[^\d]/g,
-                ""
-            )
-
-        ) || 0;
-
-    }
-
-
-
-    function formatInputRupiah(
-        input
-    ) {
-
-        const angka =
-            angkaDariRupiah(
-                input.value
-            );
-
-
-        input.value =
-            "Rp " +
-
-            angka.toLocaleString(
-                "id-ID"
-            );
-
-    }
-
-
-
-    /* =================================
        HITUNG KETERLAMBATAN
     ================================= */
 
@@ -2735,6 +2660,7 @@
             jumlahDP;
 
 
+
         statusSaldoModal.className =
             "pembayaran-status dp-info";
 
@@ -2745,6 +2671,7 @@
             formatRupiah(
                 jumlahDP
             );
+
 
 
         rincianPembayaranModal.innerHTML =
@@ -2824,11 +2751,9 @@
                             ? "LUNAS"
 
                             : formatRupiah(
-
                                 Math.abs(
                                     totalAkhir
                                 )
-
                             )
 
                     ) +
@@ -2838,17 +2763,23 @@
             '</div>';
 
 
+
         return {
 
-            jumlahDP,
+            jumlahDP:
+                jumlahDP,
 
-            biayaSewa,
+            biayaSewa:
+                biayaSewa,
 
-            totalTerlambat,
+            totalTerlambat:
+                totalTerlambat,
 
-            totalTagihan,
+            totalTagihan:
+                totalTagihan,
 
-            totalAkhir
+            totalAkhir:
+                totalAkhir
 
         };
 
@@ -2857,7 +2788,7 @@
 
 
     /* =================================
-       EVENT UPDATE PERHITUNGAN
+       UPDATE PERHITUNGAN
     ================================= */
 
     function updateSemuaPerhitungan() {
@@ -2868,20 +2799,14 @@
 
 
     jumlahHariSelesai.addEventListener(
-
         "input",
-
         updateSemuaPerhitungan
-
     );
 
 
     jamKeterlambatan.addEventListener(
-
         "input",
-
         updateSemuaPerhitungan
-
     );
 
 
@@ -2905,7 +2830,7 @@
 
 
     /* =================================
-       BUKA POPUP SELESAI
+       BUKA POPUP SELESAI RENTAL
     ================================= */
 
     btnSelesai.addEventListener(
@@ -2979,11 +2904,9 @@
                 "<strong>Harga Harian:</strong> " +
 
                 formatRupiah(
-
                     Number(
                         dataTransaksi.harga
                     ) || 0
-
                 );
 
 
@@ -3046,6 +2969,16 @@
 
     /* =================================
        KONFIRMASI SELESAI RENTAL
+
+       PROSES:
+
+       1. SIMPAN HISTORI
+       2. SIMPAN OMSET
+       3. SIMPAN REVENUE JIKA
+          MASIH ADA KEKURANGAN
+       4. UBAH UNIT MENJADI READY
+       5. TAMBAH UNIT KE ready
+       6. HAPUS rentout
     ================================= */
 
     btnKonfirmasiSelesai.addEventListener(
@@ -3065,7 +2998,7 @@
 
 
             /* =========================
-               AMBIL INPUT
+               VALIDASI INPUT
             ========================== */
 
             const jumlahHari =
@@ -3105,7 +3038,7 @@
 
 
             /* =========================
-               HITUNG RINGKASAN
+               HITUNG ULANG
             ========================== */
 
             const ringkasan =
@@ -3113,7 +3046,7 @@
 
 
             /* =========================
-               KONFIRMASI USER
+               KONFIRMASI
             ========================== */
 
             const konfirmasi =
@@ -3126,11 +3059,9 @@
                     " hari\n" +
 
                     "Biaya Sewa: " +
-
                     formatRupiah(
                         ringkasan.biayaSewa
                     ) +
-
                     "\n" +
 
                     "Keterlambatan: " +
@@ -3138,19 +3069,15 @@
                     " jam\n" +
 
                     "Biaya Keterlambatan: " +
-
                     formatRupiah(
                         ringkasan.totalTerlambat
                     ) +
-
                     "\n" +
 
                     "Jumlah DP: " +
-
                     formatRupiah(
                         ringkasan.jumlahDP
                     ) +
-
                     "\n\n" +
 
                     "Total Akhir: " +
@@ -3161,13 +3088,21 @@
 
                             ? "LUNAS"
 
-                            : formatRupiah(
+                            : ringkasan.totalAkhir > 0
 
-                                Math.abs(
-                                    ringkasan.totalAkhir
-                                )
+                                ? "KURANG BAYAR " +
 
-                            )
+                                  formatRupiah(
+                                      ringkasan.totalAkhir
+                                  )
+
+                                : "KELEBIHAN BAYAR " +
+
+                                  formatRupiah(
+                                      Math.abs(
+                                          ringkasan.totalAkhir
+                                      )
+                                  )
 
                     )
 
@@ -3183,12 +3118,11 @@
             }
 
 
-
             try {
 
 
                 /* =========================
-                   DISABLE BUTTON
+                   NONAKTIFKAN BUTTON
                 ========================== */
 
                 btnKonfirmasiSelesai.disabled =
@@ -3208,351 +3142,419 @@
                    WAKTU TRANSAKSI
                 ========================== */
 
+                const sekarang =
+                    new Date();
+
+
                 const timestamp =
                     Date.now();
 
 
+
                 const tanggalTransaksi =
-                    getTanggalTransaksi();
+                    sekarang.getFullYear() +
+
+                    "-" +
+
+                    String(
+                        sekarang.getMonth() + 1
+                    ).padStart(
+                        2,
+                        "0"
+                    ) +
+
+                    "-" +
+
+                    String(
+                        sekarang.getDate()
+                    ).padStart(
+                        2,
+                        "0"
+                    );
 
 
 
                 /* =========================
-                   UPDATE RENTOUT
+                   IDENTITAS
                 ========================== */
 
-                await update(
-
-                    ref(
-
-                        db,
-
-                        "rentout/" +
-                        transaksiId
-
-                    ),
-
-                    {
-
-                        status:
-                            "SELESAI RENTAL",
-
-
-                        jumlahHariSelesai:
-                            jumlahHari,
-
-
-                        biayaSewa:
-                            ringkasan.biayaSewa,
-
-
-                        jamKeterlambatan:
-                            jamTerlambat,
-
-
-                        biayaKeterlambatanPerJam:
-                            biayaTerlambatPerJam,
-
-
-                        totalKeterlambatan:
-                            ringkasan.totalTerlambat,
-
-
-                        jumlahDP:
-                            ringkasan.jumlahDP,
-
-
-                        totalTagihanAkhir:
-                            ringkasan.totalAkhir,
-
-
-                        statusPembayaranAkhir:
-
-                            ringkasan.totalAkhir === 0
-
-                                ? "LUNAS"
-
-                                : ringkasan.totalAkhir > 0
-
-                                    ? "KURANG BAYAR"
-
-                                    : "KELEBIHAN BAYAR",
-
-
-                        tanggalSelesaiRental:
-                            new Date().toISOString(),
-
-
-                        timestampSelesai:
-                            timestamp
-
-                    }
-
-                );
-
-
-
-                /* =============================
-                   SIMPAN REVENUE
-
-                   HANYA JIKA NILAI
-                   YANG HARUS DIBAYAR
-                   BERNILAI POSITIF
-                ============================== */
-
-                if (
-                    ringkasan.totalAkhir > 0
-                ) {
-
-
-                    await set(
-
-                        ref(
-
-                            db,
-
-                            "revenue/" +
-                            tanggalTransaksi +
-                            "/" +
-                            transaksiId
-
-                        ),
-
-                        {
-
-                            /* =================
-                               ID TRANSAKSI
-                            ================= */
-
-                            id:
-                                transaksiId,
-
-
-                            idTransaksi:
-                                transaksiId,
-
-
-                            /* =================
-                               TANGGAL
-                            ================= */
-
-                            tanggal:
-                                tanggalTransaksi,
-
-
-                            timestamp:
-                                timestamp,
-
-
-                            /* =================
-                               DATA CUSTOMER
-                            ================= */
-
-                            customer:
-                                dataTransaksi.customer || "",
-
-
-                            idcustomer:
-                                dataTransaksi.idcustomer || "",
-
-
-                            alamatktp:
-                                dataTransaksi.alamatktp || "",
-
-
-                            /* =================
-                               DATA UNIT
-                            ================= */
-
-                            unitId:
-                                dataTransaksi.unitId || "",
-
-
-                            plat:
-                                dataTransaksi.plat ||
-                                dataTransaksi.unitId ||
-                                "",
-
-
-                            namaUnit:
-                                dataTransaksi.namaUnit || "",
-
-
-                            /* =================
-                               NILAI REVENUE
-                            ================= */
-
-                            bayar:
-                                ringkasan.totalAkhir,
-
-
-                            bayarFormat:
-                                formatRupiah(
-                                    ringkasan.totalAkhir
-                                ),
-
-
-                            value:
-                                ringkasan.totalAkhir,
-
-
-                            valueFormat:
-                                formatRupiah(
-                                    ringkasan.totalAkhir
-                                ),
-
-
-                            /* =================
-                               DATA RENTAL
-                            ================= */
-
-                            rentaltype:
-                                dataTransaksi.rentaltype || "",
-
-
-                            harga:
-                                Number(
-                                    dataTransaksi.harga
-                                ) || 0,
-
-
-                            hargaFormat:
-                                formatRupiah(
-
-                                    Number(
-                                        dataTransaksi.harga
-                                    ) || 0
-
-                                ),
-
-
-                            jumlahHariSelesai:
-                                jumlahHari,
-
-
-                            biayaSewa:
-                                ringkasan.biayaSewa,
-
-
-                            totalKeterlambatan:
-                                ringkasan.totalTerlambat,
-
-
-                            totalTagihan:
-                                ringkasan.totalTagihan,
-
-
-                            /* =================
-                               KETERANGAN
-                            ================= */
-
-                            keterangan:
-                                "Pelunasan Selesai Rental",
-
-
-                            jenisTransaksi:
-                                "REVENUE",
-
-
-                            status:
-                                "SELESAI RENTAL"
-
-                        }
-
-                    );
-
-
-                    console.log(
-
-                        "Revenue berhasil ditambahkan:",
-
-                        "revenue/" +
-                        tanggalTransaksi +
-                        "/" +
-                        transaksiId
-
-                    );
-
-                }
-
-
-
-                /* =============================
-                   UPDATE STATUS UNIT
-
-                   unit/{unitId}
-                ============================== */
-
-                if (
-                    dataTransaksi.unitId
-                ) {
-
-                    await update(
-
-                        ref(
-
-                            db,
-
-                            "unit/" +
-                            dataTransaksi.unitId
-
-                        ),
-
-                        {
-
-                            keterangan:
-                                "Ready"
-
-                        }
-
-                    );
-
-                }
-
-
-
-                /* =============================
-                   TAMBAHKAN UNIT KE READY
-
-                   ready/{PLAT NOMOR}
-                ============================== */
-
-                const platKendaraan =
+                const platNomor =
                     dataTransaksi.plat ||
                     dataTransaksi.unitId ||
-                    transaksiId;
+                    "";
 
 
-                await set(
+                const unitId =
+                    dataTransaksi.unitId ||
+                    platNomor;
 
-                    ref(
 
-                        db,
+                const customerId =
+                    dataTransaksi.idcustomer ||
+                    dataTransaksi.customerId ||
+                    "";
 
+
+                const platKey =
+                    buatFirebaseKey(
+                        platNomor
+                    );
+
+
+                const customerKey =
+                    buatFirebaseKey(
+                        customerId
+                    );
+
+
+                /* =========================
+                   OMSET
+
+                   BIAYA SEWA +
+                   BIAYA KETERLAMBATAN
+                ========================== */
+
+                const nilaiOmset =
+                    Number(
+                        ringkasan.biayaSewa
+                    ) +
+
+                    Number(
+                        ringkasan.totalTerlambat
+                    );
+
+
+                /* =========================
+                   NILAI POSITIF
+                   UNTUK REVENUE
+                ========================== */
+
+                const nilaiHarusDibayar =
+                    Math.max(
+
+                        0,
+
+                        Number(
+                            ringkasan.totalAkhir
+                        ) || 0
+
+                    );
+
+
+                /* =========================
+                   STATUS PEMBAYARAN
+                ========================== */
+
+                const statusPembayaranAkhir =
+
+                    ringkasan.totalAkhir === 0
+
+                        ? "LUNAS"
+
+                        : ringkasan.totalAkhir > 0
+
+                            ? "KURANG BAYAR"
+
+                            : "KELEBIHAN BAYAR";
+
+
+
+                /* =========================
+                   DATA HISTORI
+                ========================== */
+
+                const dataHistori = {
+
+
+                    idTransaksi:
+                        transaksiId,
+
+
+                    /* UNIT */
+
+                    unitId:
+                        unitId,
+
+
+                    plat:
+                        platNomor,
+
+
+                    namaUnit:
+                        dataTransaksi.namaUnit || "",
+
+
+                    /* CUSTOMER */
+
+                    idcustomer:
+                        customerId,
+
+
+                    customer:
+                        dataTransaksi.customer || "",
+
+
+                    alamatktp:
+                        dataTransaksi.alamatktp || "",
+
+
+                    /* RENTAL AWAL */
+
+                    rentaltype:
+                        dataTransaksi.rentaltype || "",
+
+
+                    harga:
+                        Number(
+                            dataTransaksi.harga
+                        ) || 0,
+
+
+                    hargaFormat:
+                        dataTransaksi.hargaFormat ||
+
+                        formatRupiah(
+                            Number(
+                                dataTransaksi.harga
+                            ) || 0
+                        ),
+
+
+                    tanggalsewa:
+                        dataTransaksi.tanggalsewa || "",
+
+
+                    estimasiTanggalSelesai:
+                        dataTransaksi.selesaisewa || "",
+
+
+                    total:
+                        Number(
+                            dataTransaksi.total
+                        ) || 0,
+
+
+                    bayar:
+                        Number(
+                            dataTransaksi.bayar
+                        ) || 0,
+
+
+                    bayarFormat:
+                        dataTransaksi.bayarFormat ||
+
+                        formatRupiah(
+                            Number(
+                                dataTransaksi.bayar
+                            ) || 0
+                        ),
+
+
+                    sisa:
+                        Number(
+                            dataTransaksi.sisa
+                        ) || 0,
+
+
+                    jaminan:
+                        dataTransaksi.jaminan || "",
+
+
+                    fotoJaminan:
+                        dataTransaksi.fotoJaminan || "",
+
+
+                    fotoJaminanPublicId:
+                        dataTransaksi.fotoJaminanPublicId || "",
+
+
+                    fotoPengambilan:
+                        dataTransaksi.fotoPengambilan || "",
+
+
+                    /* SELESAI RENTAL */
+
+                    status:
+                        "SELESAI RENTAL",
+
+
+                    jumlahHariSelesai:
+                        jumlahHari,
+
+
+                    biayaSewa:
+                        Number(
+                            ringkasan.biayaSewa
+                        ) || 0,
+
+
+                    biayaSewaFormat:
+                        formatRupiah(
+                            Number(
+                                ringkasan.biayaSewa
+                            ) || 0
+                        ),
+
+
+                    jamKeterlambatan:
+                        jamTerlambat,
+
+
+                    biayaKeterlambatanPerJam:
+                        biayaTerlambatPerJam,
+
+
+                    totalKeterlambatan:
+                        Number(
+                            ringkasan.totalTerlambat
+                        ) || 0,
+
+
+                    totalKeterlambatanFormat:
+                        formatRupiah(
+                            Number(
+                                ringkasan.totalTerlambat
+                            ) || 0
+                        ),
+
+
+                    jumlahDP:
+                        Number(
+                            ringkasan.jumlahDP
+                        ) || 0,
+
+
+                    jumlahDPFormat:
+                        formatRupiah(
+                            Number(
+                                ringkasan.jumlahDP
+                            ) || 0
+                        ),
+
+
+                    totalTagihan:
+                        Number(
+                            ringkasan.totalTagihan
+                        ) || 0,
+
+
+                    totalAkhir:
+                        Number(
+                            ringkasan.totalAkhir
+                        ) || 0,
+
+
+                    totalAkhirFormat:
+
+                        ringkasan.totalAkhir === 0
+
+                            ? "LUNAS"
+
+                            : formatRupiah(
+                                Math.abs(
+                                    ringkasan.totalAkhir
+                                )
+                            ),
+
+
+                    statusPembayaranAkhir:
+                        statusPembayaranAkhir,
+
+
+                    /* OMSET */
+
+                    omset:
+                        nilaiOmset,
+
+
+                    omsetFormat:
+                        formatRupiah(
+                            nilaiOmset
+                        ),
+
+
+                    /* WAKTU */
+
+                    tanggalTransaksi:
+                        tanggalTransaksi,
+
+
+                    tanggalSelesaiRental:
+                        sekarang.toISOString(),
+
+
+                    timestampSelesai:
+                        timestamp
+
+                };
+
+
+
+                /* =========================
+                   MULTI LOCATION UPDATE
+                ========================== */
+
+                const updates = {};
+
+
+
+                /* =========================
+                   1. HAPUS RENTOUT
+                ========================== */
+
+                updates[
+                    "rentout/" +
+                    transaksiId
+                ] = null;
+
+
+
+                /* =========================
+                   2. UNIT READY
+                ========================== */
+
+                if (
+                    unitId
+                ) {
+
+                    updates[
+                        "unit/" +
+                        unitId +
+                        "/keterangan"
+                    ] = "Ready";
+
+                }
+
+
+
+                /* =========================
+                   3. TAMBAH READY
+
+                   BERDASARKAN ID PLAT
+                ========================== */
+
+                if (
+                    platKey
+                ) {
+
+                    updates[
                         "ready/" +
-                        platKendaraan
-
-                    ),
-
-                    {
+                        platKey
+                    ] = {
 
                         id:
-                            dataTransaksi.unitId || "",
+                            platNomor,
 
 
                         unitId:
-                            dataTransaksi.unitId || "",
+                            unitId,
 
 
                         plat:
-                            platKendaraan,
+                            platNomor,
 
 
                         nama:
-                            dataTransaksi.namaUnit || "",
-
-
-                        namaUnit:
                             dataTransaksi.namaUnit || "",
 
 
@@ -3563,110 +3565,301 @@
                         timestamp:
                             timestamp
 
-                    }
+                    };
 
+                }
+
+
+
+                /* =========================
+                   4. HISTORI PER PLAT
+
+                   histori/nomorPlat/idTransaksi
+                ========================== */
+
+                if (
+                    platKey
+                ) {
+
+                    updates[
+                        "histori/" +
+                        platKey +
+                        "/" +
+                        transaksiId
+                    ] = dataHistori;
+
+                }
+
+
+
+                /* =========================
+                   5. HISTORI PER CUSTOMER
+
+                   histori/idCustomer/idTransaksi
+                ========================== */
+
+                if (
+                    customerKey
+                ) {
+
+                    updates[
+                        "histori/" +
+                        customerKey +
+                        "/" +
+                        transaksiId
+                    ] = dataHistori;
+
+                }
+
+
+
+                /* =========================
+                   6. HISTORI PER TRANSAKSI
+
+                   histori/idTransaksi
+                ========================== */
+
+                updates[
+                    "histori/" +
+                    transaksiId
+                ] = dataHistori;
+
+
+
+                /* =========================
+                   7. OMSET
+
+                   omset/idTransaksi
+                ========================== */
+
+                updates[
+                    "omset/" +
+                    transaksiId
+                ] = {
+
+                    idTransaksi:
+                        transaksiId,
+
+
+                    plat:
+                        platNomor,
+
+
+                    unitId:
+                        unitId,
+
+
+                    customer:
+                        dataTransaksi.customer || "",
+
+
+                    tanggal:
+                        tanggalTransaksi,
+
+
+                    biayaSewa:
+                        Number(
+                            ringkasan.biayaSewa
+                        ) || 0,
+
+
+                    biayaKeterlambatan:
+                        Number(
+                            ringkasan.totalTerlambat
+                        ) || 0,
+
+
+                    total:
+                        nilaiOmset,
+
+
+                    totalFormat:
+                        formatRupiah(
+                            nilaiOmset
+                        ),
+
+
+                    timestamp:
+                        timestamp
+
+                };
+
+
+
+                /* =========================
+                   8. REVENUE
+
+                   HANYA JIKA NILAI
+                   MASIH HARUS DIBAYAR
+                   LEBIH DARI 0
+
+                   revenue/tanggal/idTransaksi
+                ========================== */
+
+                if (
+                    nilaiHarusDibayar > 0
+                ) {
+
+                    updates[
+                        "revenue/" +
+                        tanggalTransaksi +
+                        "/" +
+                        transaksiId
+                    ] = {
+
+                        idTransaksi:
+                            transaksiId,
+
+
+                        tanggal:
+                            tanggalTransaksi,
+
+
+                        timestamp:
+                            timestamp,
+
+
+                        unitId:
+                            unitId,
+
+
+                        plat:
+                            platNomor,
+
+
+                        namaUnit:
+                            dataTransaksi.namaUnit || "",
+
+
+                        idcustomer:
+                            customerId,
+
+
+                        customer:
+                            dataTransaksi.customer || "",
+
+
+                        rentaltype:
+                            dataTransaksi.rentaltype || "",
+
+
+                        bayar:
+                            nilaiHarusDibayar,
+
+
+                        bayarFormat:
+                            formatRupiah(
+                                nilaiHarusDibayar
+                            ),
+
+
+                        nilaiHarusDibayar:
+                            nilaiHarusDibayar,
+
+
+                        nilaiHarusDibayarFormat:
+                            formatRupiah(
+                                nilaiHarusDibayar
+                            ),
+
+
+                        keterangan:
+                            "PELUNASAN RENTAL"
+
+                    };
+
+                }
+
+
+
+                /* =========================
+                   JALANKAN SEMUA UPDATE
+                ========================== */
+
+                await update(
+                    ref(
+                        db
+                    ),
+                    updates
                 );
 
 
 
-                /* =============================
+                /* =========================
                    PESAN BERHASIL
-                ============================== */
+                ========================== */
 
-                let pesanBerhasil =
+                let pesanSukses =
 
                     "Rental berhasil diselesaikan!\n\n" +
 
-                    "Biaya Sewa: " +
+                    "Unit: " +
+                    platNomor +
+                    "\n" +
 
+                    "Biaya Sewa: " +
                     formatRupiah(
                         ringkasan.biayaSewa
                     ) +
-
                     "\n" +
 
                     "Biaya Keterlambatan: " +
-
                     formatRupiah(
                         ringkasan.totalTerlambat
                     ) +
-
                     "\n" +
 
-                    "Jumlah DP: " +
-
+                    "Omset Unit: " +
                     formatRupiah(
-                        ringkasan.jumlahDP
-                    ) +
-
-                    "\n\n";
+                        nilaiOmset
+                    );
 
 
                 if (
-                    ringkasan.totalAkhir > 0
+                    nilaiHarusDibayar > 0
                 ) {
 
-                    pesanBerhasil +=
+                    pesanSukses +=
 
-                        "Revenue Ditambahkan: " +
+                        "\n\nPelunasan berhasil masuk ke Revenue:\n" +
 
                         formatRupiah(
-                            ringkasan.totalAkhir
-                        ) +
-
-                        "\nTanggal Transaksi: " +
-
-                        tanggalTransaksi +
-
-                        "\n\n";
+                            nilaiHarusDibayar
+                        );
 
                 }
-
-
-                else if (
-                    ringkasan.totalAkhir === 0
-                ) {
-
-                    pesanBerhasil +=
-
-                        "Status Pembayaran: LUNAS\n\n";
-
-                }
-
 
                 else {
 
-                    pesanBerhasil +=
+                    pesanSukses +=
 
-                        "Kelebihan Pembayaran: " +
-
-                        formatRupiah(
-
-                            Math.abs(
-                                ringkasan.totalAkhir
-                            )
-
-                        ) +
-
-                        "\n\n";
+                        "\n\nTidak ada nilai positif yang dimasukkan ke Revenue.";
 
                 }
 
 
-                pesanBerhasil +=
+                pesanSukses +=
 
-                    "Unit berhasil dikembalikan ke status Ready.";
+                    "\n\n✓ Data dipindahkan ke Histori." +
+
+                    "\n✓ Status unit menjadi Ready." +
+
+                    "\n✓ Unit ditambahkan kembali ke Ready." +
+
+                    "\n✓ Omset transaksi berhasil disimpan." +
+
+                    "\n✓ Data Rentout berhasil dihapus.";
 
 
                 alert(
-                    pesanBerhasil
+                    pesanSukses
                 );
 
 
 
-                /* =============================
-                   KEMBALI KE TABEL
-                ============================== */
+                /* =========================
+                   REDIRECT
+                ========================== */
 
                 window.location.href =
                     "tabeloutrent.html";
@@ -3680,11 +3873,8 @@
 
 
                 console.error(
-
                     "Gagal menyelesaikan rental:",
-
                     error
-
                 );
 
 
@@ -3713,6 +3903,7 @@
         }
 
     );
+
 
 </script>
 ```
