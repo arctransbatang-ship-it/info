@@ -14,10 +14,13 @@
 
 <title>ARC TRANS - Data Kendaraan</title>
 
+
 <!-- LIBRARY EXCEL -->
+
 <script
     src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
 ></script>
+
 
 <style>
 
@@ -26,7 +29,9 @@
         font-family: "Segoe UI", Arial, sans-serif;
     }
 
+
     :root {
+
         --primary: #2196F3;
         --primary-dark: #1976D2;
         --secondary: #21CBF3;
@@ -38,10 +43,14 @@
         --text: #1e293b;
         --muted: #64748b;
         --border: #dbe3ee;
+
     }
 
+
     body {
+
         margin: 0;
+
         min-height: 100vh;
 
         background:
@@ -52,6 +61,7 @@
             );
 
         color: var(--text);
+
     }
 
 
@@ -60,11 +70,15 @@
     ========================= */
 
     .topbar {
+
         width: 100%;
+
         padding: 14px 20px;
 
         display: flex;
+
         align-items: center;
+
         justify-content: space-between;
 
         background: white;
@@ -74,22 +88,35 @@
             rgba(15, 23, 42, 0.08);
 
         position: sticky;
+
         top: 0;
+
         z-index: 1000;
+
     }
+
 
     .brand {
+
         display: flex;
+
         align-items: center;
+
         gap: 10px;
+
     }
 
+
     .brand-icon {
+
         width: 42px;
+
         height: 42px;
 
         display: flex;
+
         align-items: center;
+
         justify-content: center;
 
         border-radius: 12px;
@@ -102,33 +129,48 @@
             );
 
         color: white;
+
         font-size: 20px;
 
         box-shadow:
             0 6px 16px
             rgba(33, 150, 243, 0.25);
+
     }
+
 
     .brand-text h1 {
+
         margin: 0;
+
         font-size: 18px;
+
     }
+
 
     .brand-text p {
+
         margin: 2px 0 0;
+
         font-size: 12px;
+
         color: var(--muted);
+
     }
 
+
     .home-btn {
+
         display: inline-flex;
 
         align-items: center;
+
         justify-content: center;
 
         text-decoration: none;
 
         background: #eff6ff;
+
         color: var(--primary-dark);
 
         font-weight: 700;
@@ -138,12 +180,18 @@
         border-radius: 12px;
 
         transition: 0.2s;
+
     }
 
+
     .home-btn:hover {
+
         background: var(--primary);
+
         color: white;
+
         transform: translateY(-1px);
+
     }
 
 
@@ -152,26 +200,42 @@
     ========================= */
 
     .container {
+
         width: 100%;
-        max-width: 1400px;
+
+        max-width: 1500px;
 
         margin: auto;
+
         padding: 20px;
+
     }
+
 
     .page-title {
+
         margin-bottom: 20px;
+
     }
+
 
     .page-title h2 {
+
         margin: 0 0 5px;
+
         font-size: 24px;
+
     }
 
+
     .page-title p {
+
         margin: 0;
+
         font-size: 14px;
+
         color: var(--muted);
+
     }
 
 
@@ -180,9 +244,11 @@
     ========================= */
 
     .toolbar {
+
         display: flex;
 
         align-items: center;
+
         justify-content: space-between;
 
         gap: 12px;
@@ -190,18 +256,24 @@
         margin-bottom: 18px;
 
         flex-wrap: wrap;
+
     }
 
+
     #searchInput {
+
         flex: 1;
 
         min-width: 220px;
+
         max-width: 450px;
+
         min-height: 48px;
 
         padding: 12px 15px;
 
         border: 1px solid var(--border);
+
         border-radius: 12px;
 
         background: white;
@@ -209,23 +281,31 @@
         font-size: 14px;
 
         outline: none;
+
     }
 
+
     #searchInput:focus {
+
         border-color: var(--primary);
 
         box-shadow:
             0 0 0 4px
             rgba(33, 150, 243, 0.12);
+
     }
 
+
     button {
+
         border: none;
+
         cursor: pointer;
 
         color: white;
 
         font-size: 14px;
+
         font-weight: 700;
 
         border-radius: 12px;
@@ -233,20 +313,30 @@
         padding: 12px 18px;
 
         transition: 0.2s;
+
     }
+
 
     button:hover {
+
         transform: translateY(-1px);
+
     }
 
+
     button:disabled {
+
         background: #cbd5e1 !important;
 
         cursor: not-allowed;
+
         transform: none;
+
     }
 
+
     #btnDownload {
+
         display: inline-block;
 
         background:
@@ -259,6 +349,7 @@
         box-shadow:
             0 6px 15px
             rgba(34, 197, 94, 0.2);
+
     }
 
 
@@ -267,6 +358,7 @@
     ========================= */
 
     .table-container {
+
         width: 100%;
 
         overflow-x: auto;
@@ -278,16 +370,23 @@
         box-shadow:
             0 10px 30px
             rgba(15, 23, 42, 0.08);
+
     }
+
 
     table {
+
         width: 100%;
+
         border-collapse: collapse;
 
-        min-width: 1050px;
+        min-width: 1250px;
+
     }
 
+
     th {
+
         background:
             linear-gradient(
                 135deg,
@@ -300,25 +399,38 @@
         padding: 14px 10px;
 
         text-align: center;
+
         white-space: nowrap;
+
     }
 
+
     td {
+
         padding: 12px 10px;
 
         border-bottom:
-            1px solid #edf2f7;
+            1px solid
+            #edf2f7;
 
         text-align: center;
+
         vertical-align: middle;
+
     }
+
 
     tbody tr {
+
         transition: 0.2s;
+
     }
 
+
     tbody tr:hover {
+
         background: #f8fbff;
+
     }
 
 
@@ -327,13 +439,18 @@
     ========================= */
 
     .photo-cell {
+
         min-width: 130px;
+
     }
 
+
     .vehicle-photo {
+
         display: block;
 
         width: 110px;
+
         height: 80px;
 
         margin: auto;
@@ -343,24 +460,33 @@
         border-radius: 10px;
 
         border:
-            1px solid var(--border);
+            1px solid
+            var(--border);
 
         cursor: pointer;
 
         transition: 0.2s;
+
     }
 
+
     .vehicle-photo:hover {
+
         transform: scale(1.06);
 
         box-shadow:
             0 6px 18px
             rgba(0, 0, 0, 0.2);
+
     }
 
+
     .no-photo {
+
         color: #94a3b8;
+
         font-size: 12px;
+
     }
 
 
@@ -369,6 +495,7 @@
     ========================= */
 
     .badge {
+
         display: inline-block;
 
         padding: 7px 12px;
@@ -376,31 +503,97 @@
         border-radius: 20px;
 
         font-size: 12px;
+
         font-weight: 700;
 
         color: white;
 
         min-width: 80px;
+
     }
+
 
     .badge-masuk {
+
         background: #16a34a;
+
     }
+
 
     .badge-pulang {
+
         background: #dc2626;
+
     }
+
 
     .badge-sewa {
+
         background: #f59e0b;
+
     }
+
 
     .badge-out {
+
         background: #dc2626;
+
     }
 
+
     .badge-default {
+
         background: #64748b;
+
+    }
+
+
+    /* =========================
+       ACTION BUTTON
+    ========================= */
+
+    .action-area {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 8px;
+
+    }
+
+
+    .btn-edit {
+
+        background:
+            linear-gradient(
+                135deg,
+                #f59e0b,
+                #fbbf24
+            );
+
+        padding: 9px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    .btn-delete {
+
+        background:
+            linear-gradient(
+                135deg,
+                #dc2626,
+                #ef4444
+            );
+
+        padding: 9px 12px;
+
+        font-size: 12px;
+
     }
 
 
@@ -409,15 +602,20 @@
     ========================= */
 
     .mobile-list {
+
         display: none;
+
     }
 
+
     .vehicle-card {
+
         background: white;
 
         border-radius: 18px;
 
         padding: 16px;
+
         margin-bottom: 14px;
 
         box-shadow:
@@ -425,39 +623,59 @@
             rgba(15, 23, 42, 0.08);
 
         border:
-            1px solid #eef2f7;
+            1px solid
+            #eef2f7;
+
     }
 
+
     .vehicle-card-header {
+
         display: flex;
 
         align-items: center;
+
         justify-content: space-between;
 
         gap: 12px;
 
         margin-bottom: 14px;
+
         padding-bottom: 12px;
 
         border-bottom:
-            1px solid #edf2f7;
+            1px solid
+            #edf2f7;
+
     }
+
 
     .vehicle-number {
+
         font-size: 12px;
+
         color: var(--muted);
+
         font-weight: 700;
+
     }
 
+
     .vehicle-name {
+
         margin: 3px 0 0;
 
         font-size: 17px;
+
         font-weight: 800;
+
     }
 
+
     .mobile-photo {
+
         width: 100%;
+
         height: 180px;
 
         object-fit: cover;
@@ -467,33 +685,46 @@
         margin-bottom: 14px;
 
         border:
-            1px solid var(--border);
+            1px solid
+            var(--border);
 
         cursor: pointer;
+
     }
 
+
     .card-grid {
+
         display: grid;
 
         grid-template-columns:
             repeat(2, 1fr);
 
         gap: 10px;
+
     }
 
+
     .card-item {
+
         background: #f8fafc;
 
         padding: 10px;
 
         border-radius: 10px;
+
     }
+
 
     .card-item.full {
+
         grid-column: 1 / -1;
+
     }
 
+
     .card-label {
+
         display: block;
 
         font-size: 11px;
@@ -503,9 +734,12 @@
         margin-bottom: 5px;
 
         font-weight: 600;
+
     }
 
+
     .card-value {
+
         font-size: 13px;
 
         font-weight: 700;
@@ -513,9 +747,12 @@
         color: var(--text);
 
         word-break: break-word;
+
     }
 
+
     .card-badge-area {
+
         margin-top: 12px;
 
         display: flex;
@@ -523,6 +760,27 @@
         flex-wrap: wrap;
 
         gap: 8px;
+
+    }
+
+
+    .card-action-area {
+
+        margin-top: 15px;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+    }
+
+
+    .card-action-area button {
+
+        width: 100%;
+
     }
 
 
@@ -531,27 +789,38 @@
     ========================= */
 
     #pagination {
+
         margin: 20px 0;
 
         display: flex;
 
         justify-content: center;
+
         align-items: center;
 
         gap: 10px;
 
         flex-wrap: wrap;
+
     }
+
 
     .btn-prev {
+
         background: var(--warning);
+
     }
+
 
     .btn-next {
+
         background: var(--success);
+
     }
 
+
     .page-info {
+
         font-size: 13px;
 
         font-weight: 700;
@@ -559,19 +828,22 @@
         color: var(--text);
 
         padding: 8px 12px;
+
     }
 
 
     /* =========================
-       EMPTY DATA
+       EMPTY
     ========================= */
 
     .empty-data {
+
         padding: 35px;
 
         text-align: center;
 
         color: var(--muted);
+
     }
 
 
@@ -580,6 +852,7 @@
     ========================= */
 
     .photo-modal {
+
         display: none;
 
         position: fixed;
@@ -592,13 +865,18 @@
             rgba(15, 23, 42, 0.9);
 
         justify-content: center;
+
         align-items: center;
 
         padding: 20px;
+
     }
 
+
     .photo-modal img {
+
         max-width: 95%;
+
         max-height: 85vh;
 
         border-radius: 14px;
@@ -606,12 +884,16 @@
         box-shadow:
             0 10px 40px
             rgba(0, 0, 0, 0.5);
+
     }
 
+
     .close-modal {
+
         position: absolute;
 
         top: 18px;
+
         right: 25px;
 
         color: white;
@@ -621,9 +903,12 @@
         cursor: pointer;
 
         line-height: 1;
+
     }
 
+
     .modal-caption {
+
         position: absolute;
 
         bottom: 20px;
@@ -637,6 +922,193 @@
         width: 100%;
 
         padding: 0 20px;
+
+    }
+
+
+    /* =========================
+       EDIT MODAL
+    ========================= */
+
+    .edit-modal {
+
+        display: none;
+
+        position: fixed;
+
+        z-index: 10000;
+
+        inset: 0;
+
+        background:
+            rgba(15, 23, 42, 0.6);
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 20px;
+
+        overflow-y: auto;
+
+    }
+
+
+    .edit-modal-content {
+
+        width: 100%;
+
+        max-width: 650px;
+
+        background: white;
+
+        border-radius: 20px;
+
+        padding: 24px;
+
+        box-shadow:
+            0 20px 60px
+            rgba(15, 23, 42, 0.25);
+
+        position: relative;
+
+        margin: auto;
+
+    }
+
+
+    .edit-modal-title {
+
+        margin: 0 0 20px;
+
+        font-size: 22px;
+
+    }
+
+
+    .close-edit-modal {
+
+        position: absolute;
+
+        right: 20px;
+
+        top: 15px;
+
+        font-size: 30px;
+
+        cursor: pointer;
+
+        color: var(--muted);
+
+    }
+
+
+    .form-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+
+    }
+
+
+    .form-group {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 6px;
+
+    }
+
+
+    .form-group.full {
+
+        grid-column: 1 / -1;
+
+    }
+
+
+    .form-group label {
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: var(--text);
+
+    }
+
+
+    .form-group input,
+
+    .form-group select {
+
+        width: 100%;
+
+        min-height: 45px;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 10px;
+
+        padding: 10px 12px;
+
+        font-size: 14px;
+
+        outline: none;
+
+    }
+
+
+    .form-group input:focus,
+
+    .form-group select:focus {
+
+        border-color: var(--primary);
+
+        box-shadow:
+            0 0 0 3px
+            rgba(33, 150, 243, 0.12);
+
+    }
+
+
+    .edit-modal-actions {
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 10px;
+
+        margin-top: 22px;
+
+    }
+
+
+    .btn-cancel {
+
+        background: #64748b;
+
+    }
+
+
+    .btn-save {
+
+        background:
+            linear-gradient(
+                135deg,
+                #16a34a,
+                #22c55e
+            );
+
     }
 
 
@@ -647,77 +1119,151 @@
     @media (max-width: 700px) {
 
         body {
+
             padding-bottom: 20px;
+
         }
+
 
         .topbar {
+
             padding: 10px 14px;
+
         }
+
 
         .brand-icon {
+
             width: 38px;
+
             height: 38px;
+
             font-size: 18px;
+
         }
+
 
         .brand-text h1 {
+
             font-size: 16px;
+
         }
+
 
         .brand-text p {
+
             font-size: 10px;
+
         }
+
 
         .home-btn {
+
             padding: 8px 12px;
+
             font-size: 12px;
+
         }
+
 
         .container {
+
             padding: 14px;
+
         }
+
 
         .page-title h2 {
+
             font-size: 21px;
+
         }
+
 
         .toolbar {
+
             display: grid;
+
             grid-template-columns: 1fr;
+
         }
+
 
         #searchInput {
+
             width: 100%;
+
             max-width: none;
+
         }
+
 
         #btnDownload {
+
             width: 100%;
+
             min-height: 48px;
+
         }
+
 
         .table-container {
+
             display: none;
+
         }
+
 
         .mobile-list {
+
             display: block;
+
         }
 
+
         .card-grid {
+
             grid-template-columns: 1fr 1fr;
+
+        }
+
+
+        .form-grid {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column: auto;
+
+        }
+
+
+        .edit-modal-content {
+
+            padding: 20px;
+
         }
 
     }
 
+
     @media (max-width: 380px) {
 
         .card-grid {
+
             grid-template-columns: 1fr;
+
         }
 
+
         .card-item.full {
+
             grid-column: auto;
+
         }
 
     }
@@ -739,8 +1285,11 @@
     <div class="brand">
 
         <div class="brand-icon">
+
             🚐
+
         </div>
+
 
         <div class="brand-text">
 
@@ -761,7 +1310,9 @@
         href="index.html"
         class="home-btn"
     >
+
         🏠 Home
+
     </a>
 
 </div>
@@ -793,18 +1344,23 @@
 
     <div class="toolbar">
 
+
         <input
             type="text"
             id="searchInput"
-            placeholder="🔍 Cari nama, plat nomor, status atau keterangan..."
+            placeholder="🔍 Cari nama, plat nomor atau keterangan..."
         >
+
 
         <button
             id="btnDownload"
             onclick="downloadExcel()"
         >
+
             📥 Download Excel
+
         </button>
+
 
     </div>
 
@@ -823,14 +1379,24 @@
                 <tr>
 
                     <th>No.</th>
+
                     <th>Plat Nomor</th>
+
                     <th>Nama</th>
+
                     <th>Pajak STNK</th>
+
                     <th>BPKB</th>
+
                     <th>Status</th>
+
                     <th>Keterangan</th>
+
                     <th>Value</th>
+
                     <th>Photo</th>
+
+                    <th>Aksi</th>
 
                 </tr>
 
@@ -842,10 +1408,12 @@
                 <tr>
 
                     <td
-                        colspan="9"
+                        colspan="10"
                         class="empty-data"
                     >
+
                         Memuat data kendaraan...
+
                     </td>
 
                 </tr>
@@ -866,7 +1434,9 @@
         id="mobileList"
         class="mobile-list"
     >
+
         Memuat data kendaraan...
+
     </div>
 
 
@@ -893,7 +1463,9 @@
         class="close-modal"
         onclick="closePhoto()"
     >
+
         &times;
+
     </span>
 
 
@@ -907,7 +1479,202 @@
     <div
         id="modalCaption"
         class="modal-caption"
-    ></div>
+    >
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     EDIT MODAL
+========================= -->
+
+<div
+    id="editModal"
+    class="edit-modal"
+>
+
+    <div class="edit-modal-content">
+
+
+        <span
+            class="close-edit-modal"
+            onclick="closeEditModal()"
+        >
+
+            &times;
+
+        </span>
+
+
+        <h2 class="edit-modal-title">
+
+            ✏️ Edit Data Kendaraan
+
+        </h2>
+
+
+        <form id="editForm">
+
+
+            <input
+                type="hidden"
+                id="editFirebaseKey"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Plat Nomor
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editPlat"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Nama Kendaraan
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editNama"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Pajak STNK
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editStnk"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        BPKB
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editBpkb"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editStatus"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Keterangan
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editKeterangan"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Value Kendaraan
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editValue"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        URL Foto
+                    </label>
+
+                    <input
+                        type="url"
+                        id="editPhoto"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="edit-modal-actions">
+
+
+                <button
+                    type="button"
+                    class="btn-cancel"
+                    onclick="closeEditModal()"
+                >
+
+                    Batal
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-save"
+                >
+
+                    💾 Simpan Perubahan
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+    </div>
 
 </div>
 
@@ -925,18 +1692,28 @@
     ========================= */
 
     import {
+
         initializeApp
+
     }
+
     from
+
     "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 
     import {
+
         getDatabase,
         ref,
-        onValue
+        onValue,
+        update,
+        remove
+
     }
+
     from
+
     "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
@@ -1009,6 +1786,7 @@
 
     function applySearch() {
 
+
         const keyword =
             document
             .getElementById(
@@ -1023,6 +1801,7 @@
             allData.filter(
 
                 item => {
+
 
                     const nama =
                         String(
@@ -1053,13 +1832,29 @@
 
 
                     return (
-                        nama.includes(keyword)
+
+                        nama.includes(
+                            keyword
+                        )
+
                         ||
-                        plat.includes(keyword)
+
+                        plat.includes(
+                            keyword
+                        )
+
                         ||
-                        keterangan.includes(keyword)
+
+                        keterangan.includes(
+                            keyword
+                        )
+
                         ||
-                        status.includes(keyword)
+
+                        status.includes(
+                            keyword
+                        )
+
                     );
 
                 }
@@ -1080,8 +1875,11 @@
             "searchInput"
         )
         .addEventListener(
+
             "input",
+
             applySearch
+
         );
 
 
@@ -1103,6 +1901,7 @@
 
         (snapshot) => {
 
+
             const data =
                 snapshot.val();
 
@@ -1113,15 +1912,20 @@
             );
 
 
-            if (!data) {
+            if (
+                !data
+            ) {
+
 
                 allData = [];
 
                 filteredData = [];
 
+
                 showEmptyData(
                     "Data kendaraan belum tersedia"
                 );
+
 
                 return;
 
@@ -1129,18 +1933,24 @@
 
 
             /*
-             * Menambahkan Firebase Key ke setiap data.
-             * Ini berguna jika nanti data ingin diedit
-             * atau dihapus berdasarkan ID Firebase.
-             */
+                PENTING:
+                Object.entries digunakan agar Firebase key
+                tetap tersimpan pada setiap kendaraan.
+            */
 
             allData =
-                Object.entries(data)
+                Object.entries(
+                    data
+                )
                 .map(
 
-                    ([id, item]) => ({
+                    (
+                        [firebaseKey, item]
+                    ) => ({
 
-                        id,
+                        firebaseKey:
+
+                            firebaseKey,
 
                         ...item
 
@@ -1149,45 +1959,13 @@
                 );
 
 
-            /*
-             * Urutkan berdasarkan nama kendaraan
-             * dan plat nomor agar tampilan konsisten.
-             */
-
-            allData.sort(
-
-                (a, b) => {
-
-                    const namaA =
-                        String(
-                            a.nama || ""
-                        )
-                        .toLowerCase();
-
-
-                    const namaB =
-                        String(
-                            b.nama || ""
-                        )
-                        .toLowerCase();
-
-
-                    return namaA.localeCompare(
-                        namaB,
-                        "id"
-                    );
-
-                }
-
-            );
-
-
             applySearch();
 
         },
 
 
         (error) => {
+
 
             console.error(
                 "Firebase Error:",
@@ -1213,6 +1991,7 @@
         message
     ) {
 
+
         document
             .getElementById(
                 "isiData"
@@ -1222,10 +2001,12 @@
             <tr>
 
                 <td
-                    colspan="9"
+                    colspan="10"
                     class="empty-data"
                 >
+
                     ${escapeHtml(message)}
+
                 </td>
 
             </tr>
@@ -1240,8 +2021,12 @@
             `
             <div class="vehicle-card">
 
-                <div class="empty-data">
+                <div
+                    class="empty-data"
+                >
+
                     ${escapeHtml(message)}
+
                 </div>
 
             </div>
@@ -1267,12 +2052,19 @@
         value
     ) {
 
+
         if (
+
             value === null
+
             ||
+
             value === undefined
+
             ||
+
             value === ""
+
         ) {
 
             return "-";
@@ -1287,20 +2079,25 @@
 
 
         if (
-            isNaN(numberValue)
+            isNaN(
+                numberValue
+            )
         ) {
 
-            return escapeHtml(value);
+            return value;
 
         }
 
 
         return (
-            "Rp "
-            +
-            numberValue.toLocaleString(
+
+            "Rp " +
+
+            numberValue
+            .toLocaleString(
                 "id-ID"
             )
+
         );
 
     }
@@ -1315,8 +2112,9 @@
         value
     ) {
 
+
         return String(
-            value ?? ""
+            value || ""
         )
 
         .replace(
@@ -1354,13 +2152,16 @@
 
     function renderTable() {
 
+
         if (
             filteredData.length === 0
         ) {
 
+
             showEmptyData(
                 "Data tidak ditemukan"
             );
+
 
             return;
 
@@ -1374,11 +2175,6 @@
                 rowsPerPage
             );
 
-
-        /*
-         * Jika jumlah data berubah setelah pencarian,
-         * pastikan halaman saat ini tetap valid.
-         */
 
         if (
             currentPage > totalPages
@@ -1411,17 +2207,26 @@
             );
 
 
-        let tableHtml = "";
+        let tableHtml =
+            "";
 
-        let mobileHtml = "";
 
-        let no = start + 1;
+        let mobileHtml =
+            "";
 
+
+        let no =
+            start + 1;
 
 
         paginatedData.forEach(
 
             item => {
+
+
+                const firebaseKey =
+                    item.firebaseKey;
+
 
                 const plat =
                     item.plat || "-";
@@ -1469,26 +2274,39 @@
 
                 let photoHtml =
                     `
-                    <span class="no-photo">
+                    <span
+                        class="no-photo"
+                    >
+
                         Tidak ada foto
+
                     </span>
                     `;
 
 
                 let mobilePhotoHtml =
                     `
-                    <div class="no-photo">
+                    <div
+                        class="no-photo"
+                    >
+
                         Tidak ada foto kendaraan
+
                     </div>
                     `;
 
 
                 if (
+
                     urlphoto
+
                     &&
+
                     typeof urlphoto ===
                     "string"
+
                 ) {
+
 
                     const safeUrl =
                         escapeHtml(
@@ -1496,21 +2314,22 @@
                         );
 
 
-                    const safeNama =
-                        escapeHtml(
-                            nama
-                        );
-
-
                     photoHtml =
                         `
                         <img
+
                             src="${safeUrl}"
-                            alt="Foto ${safeNama}"
+
+                            alt="Foto ${escapeHtml(nama)}"
+
                             class="vehicle-photo"
+
                             data-url="${safeUrl}"
+
                             onclick="openPhotoFromElement(this)"
+
                             onerror="photoError(this)"
+
                         >
                         `;
 
@@ -1518,12 +2337,19 @@
                     mobilePhotoHtml =
                         `
                         <img
+
                             src="${safeUrl}"
-                            alt="Foto ${safeNama}"
+
+                            alt="Foto ${escapeHtml(nama)}"
+
                             class="mobile-photo"
+
                             data-url="${safeUrl}"
+
                             onclick="openPhotoFromElement(this)"
+
                             onerror="photoError(this)"
+
                         >
                         `;
 
@@ -1540,55 +2366,113 @@
 
                     <tr>
 
+
                         <td>
+
                             ${no}
+
                         </td>
 
+
                         <td>
+
                             ${escapeHtml(plat)}
+
                         </td>
 
+
                         <td>
+
                             ${escapeHtml(nama)}
+
                         </td>
 
+
                         <td>
+
                             ${escapeHtml(stnk)}
+
                         </td>
 
+
                         <td>
+
                             ${escapeHtml(bpkb)}
+
                         </td>
+
 
                         <td>
 
                             <span
                                 class="badge ${statusClass}"
                             >
+
                                 ${escapeHtml(status)}
+
                             </span>
 
                         </td>
+
 
                         <td>
 
                             <span
                                 class="badge ${keteranganClass}"
                             >
+
                                 ${escapeHtml(keterangan)}
+
                             </span>
 
                         </td>
 
+
                         <td>
+
                             ${formatRupiah(value)}
+
                         </td>
+
 
                         <td
                             class="photo-cell"
                         >
+
                             ${photoHtml}
+
                         </td>
+
+
+                        <td>
+
+                            <div
+                                class="action-area"
+                            >
+
+                                <button
+                                    class="btn-edit"
+                                    onclick="editVehicle('${firebaseKey}')"
+                                >
+
+                                    ✏️ Edit
+
+                                </button>
+
+
+                                <button
+                                    class="btn-delete"
+                                    onclick="deleteVehicle('${firebaseKey}', '${escapeHtml(plat)}')"
+                                >
+
+                                    🗑️ Hapus
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
 
                     </tr>
 
@@ -1607,23 +2491,32 @@
                         class="vehicle-card"
                     >
 
+
                         <div
                             class="vehicle-card-header"
                         >
 
+
                             <div>
+
 
                                 <div
                                     class="vehicle-number"
                                 >
+
                                     UNIT #${no}
+
                                 </div>
+
 
                                 <div
                                     class="vehicle-name"
                                 >
+
                                     ${escapeHtml(nama)}
+
                                 </div>
+
 
                             </div>
 
@@ -1631,10 +2524,13 @@
                             <div>
 
                                 <strong>
+
                                     ${escapeHtml(plat)}
+
                                 </strong>
 
                             </div>
+
 
                         </div>
 
@@ -1646,6 +2542,7 @@
                             class="card-grid"
                         >
 
+
                             <div
                                 class="card-item"
                             >
@@ -1653,16 +2550,23 @@
                                 <span
                                     class="card-label"
                                 >
+
                                     Pajak STNK
+
                                 </span>
+
 
                                 <div
                                     class="card-value"
                                 >
+
                                     ${escapeHtml(stnk)}
+
                                 </div>
 
+
                             </div>
+
 
 
                             <div
@@ -1672,16 +2576,23 @@
                                 <span
                                     class="card-label"
                                 >
+
                                     BPKB
+
                                 </span>
+
 
                                 <div
                                     class="card-value"
                                 >
+
                                     ${escapeHtml(bpkb)}
+
                                 </div>
 
+
                             </div>
+
 
 
                             <div
@@ -1691,38 +2602,80 @@
                                 <span
                                     class="card-label"
                                 >
+
                                     Value Kendaraan
+
                                 </span>
+
 
                                 <div
                                     class="card-value"
                                 >
+
                                     ${formatRupiah(value)}
+
                                 </div>
+
 
                             </div>
 
+
                         </div>
+
 
 
                         <div
                             class="card-badge-area"
                         >
 
+
                             <span
                                 class="badge ${statusClass}"
                             >
+
                                 ${escapeHtml(status)}
+
                             </span>
 
 
                             <span
                                 class="badge ${keteranganClass}"
                             >
+
                                 ${escapeHtml(keterangan)}
+
                             </span>
 
+
                         </div>
+
+
+
+                        <div
+                            class="card-action-area"
+                        >
+
+                            <button
+                                class="btn-edit"
+                                onclick="editVehicle('${firebaseKey}')"
+                            >
+
+                                ✏️ Edit
+
+                            </button>
+
+
+                            <button
+                                class="btn-delete"
+                                onclick="deleteVehicle('${firebaseKey}', '${escapeHtml(plat)}')"
+                            >
+
+                                🗑️ Hapus
+
+                            </button>
+
+                        </div>
+
 
                     </div>
 
@@ -1759,6 +2712,426 @@
 
 
     /* =========================
+       EDIT VEHICLE
+    ========================= */
+
+    window.editVehicle =
+        function (
+            firebaseKey
+        ) {
+
+
+            const item =
+                allData.find(
+
+                    data =>
+                    data.firebaseKey
+                    ===
+                    firebaseKey
+
+                );
+
+
+            if (
+                !item
+            ) {
+
+                alert(
+                    "Data kendaraan tidak ditemukan!"
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "editFirebaseKey"
+                )
+                .value =
+                firebaseKey;
+
+
+            document
+                .getElementById(
+                    "editPlat"
+                )
+                .value =
+                item.plat || "";
+
+
+            document
+                .getElementById(
+                    "editNama"
+                )
+                .value =
+                item.nama || "";
+
+
+            document
+                .getElementById(
+                    "editStnk"
+                )
+                .value =
+                item.stnk || "";
+
+
+            document
+                .getElementById(
+                    "editBpkb"
+                )
+                .value =
+                item.bpkb || "";
+
+
+            document
+                .getElementById(
+                    "editStatus"
+                )
+                .value =
+                item.status || "";
+
+
+            document
+                .getElementById(
+                    "editKeterangan"
+                )
+                .value =
+                item.keterangan || "";
+
+
+            document
+                .getElementById(
+                    "editValue"
+                )
+                .value =
+                item.value || "";
+
+
+            document
+                .getElementById(
+                    "editPhoto"
+                )
+                .value =
+                item.photo || "";
+
+
+            document
+                .getElementById(
+                    "editModal"
+                )
+                .style.display =
+                "flex";
+
+        };
+
+
+
+    /* =========================
+       CLOSE EDIT MODAL
+    ========================= */
+
+    window.closeEditModal =
+        function () {
+
+
+            document
+                .getElementById(
+                    "editModal"
+                )
+                .style.display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "editForm"
+                )
+                .reset();
+
+        };
+
+
+
+    /* =========================
+       SAVE EDIT
+    ========================= */
+
+    document
+        .getElementById(
+            "editForm"
+        )
+        .addEventListener(
+
+            "submit",
+
+            async function (
+                event
+            ) {
+
+
+                event.preventDefault();
+
+
+                const firebaseKey =
+                    document
+                    .getElementById(
+                        "editFirebaseKey"
+                    )
+                    .value;
+
+
+                if (
+                    !firebaseKey
+                ) {
+
+                    alert(
+                        "Firebase key tidak ditemukan!"
+                    );
+
+                    return;
+
+                }
+
+
+                const button =
+                    event
+                    .submitter;
+
+
+                const originalText =
+                    button.innerHTML;
+
+
+                button.disabled =
+                    true;
+
+
+                button.innerHTML =
+                    "Menyimpan...";
+
+
+                try {
+
+
+                    const updatedData = {
+
+                        plat:
+
+                            document
+                            .getElementById(
+                                "editPlat"
+                            )
+                            .value
+                            .trim(),
+
+
+                        nama:
+
+                            document
+                            .getElementById(
+                                "editNama"
+                            )
+                            .value
+                            .trim(),
+
+
+                        stnk:
+
+                            document
+                            .getElementById(
+                                "editStnk"
+                            )
+                            .value
+                            .trim(),
+
+
+                        bpkb:
+
+                            document
+                            .getElementById(
+                                "editBpkb"
+                            )
+                            .value
+                            .trim(),
+
+
+                        status:
+
+                            document
+                            .getElementById(
+                                "editStatus"
+                            )
+                            .value
+                            .trim(),
+
+
+                        keterangan:
+
+                            document
+                            .getElementById(
+                                "editKeterangan"
+                            )
+                            .value
+                            .trim(),
+
+
+                        value:
+
+                            Number(
+                                document
+                                .getElementById(
+                                    "editValue"
+                                )
+                                .value
+                            ) || 0,
+
+
+                        photo:
+
+                            document
+                            .getElementById(
+                                "editPhoto"
+                            )
+                            .value
+                            .trim()
+
+                    };
+
+
+                    await update(
+
+                        ref(
+                            db,
+                            "unit/" + firebaseKey
+                        ),
+
+                        updatedData
+
+                    );
+
+
+                    alert(
+                        "Data kendaraan berhasil diperbarui!"
+                    );
+
+
+                    closeEditModal();
+
+
+                }
+
+                catch (
+                    error
+                ) {
+
+
+                    console.error(
+                        "Gagal update data:",
+                        error
+                    );
+
+
+                    alert(
+                        "Gagal menyimpan perubahan!\n\n" +
+                        error.message
+                    );
+
+                }
+
+                finally {
+
+
+                    button.disabled =
+                        false;
+
+
+                    button.innerHTML =
+                        originalText;
+
+                }
+
+            }
+
+        );
+
+
+
+    /* =========================
+       DELETE VEHICLE
+    ========================= */
+
+    window.deleteVehicle =
+        async function (
+            firebaseKey,
+            plat
+        ) {
+
+
+            const confirmDelete =
+                confirm(
+
+                    "Yakin ingin menghapus kendaraan:\n\n" +
+
+                    plat +
+
+                    "\n\nData yang dihapus tidak dapat dikembalikan."
+
+                );
+
+
+            if (
+                !confirmDelete
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+
+                await remove(
+
+                    ref(
+                        db,
+                        "unit/" + firebaseKey
+                    )
+
+                );
+
+
+                alert(
+                    "Data kendaraan berhasil dihapus!"
+                );
+
+            }
+
+            catch (
+                error
+            ) {
+
+
+                console.error(
+                    "Gagal menghapus data:",
+                    error
+                );
+
+
+                alert(
+                    "Gagal menghapus kendaraan!\n\n" +
+                    error.message
+                );
+
+            }
+
+        };
+
+
+
+    /* =========================
        PHOTO ERROR
     ========================= */
 
@@ -1767,10 +3140,15 @@
             image
         ) {
 
+
             image.outerHTML =
                 `
-                <span class="no-photo">
+                <span
+                    class="no-photo"
+                >
+
                     Foto gagal dimuat
+
                 </span>
                 `;
 
@@ -1786,23 +3164,20 @@
         status
     ) {
 
+
         const text =
             String(
                 status || ""
             )
-            .toLowerCase()
-            .trim();
+            .toLowerCase();
 
-
-        /*
-         * "Tidak aktif" harus diperiksa
-         * sebelum "aktif".
-         */
 
         if (
+
             text.includes(
                 "tidak aktif"
             )
+
         ) {
 
             return "badge-pulang";
@@ -1811,11 +3186,17 @@
 
 
         if (
+
             text.includes(
                 "tersedia"
             )
+
             ||
-            text === "aktif"
+
+            text.includes(
+                "aktif"
+            )
+
         ) {
 
             return "badge-masuk";
@@ -1824,13 +3205,17 @@
 
 
         if (
+
             text.includes(
                 "sewa"
             )
+
             ||
+
             text.includes(
                 "rental"
             )
+
         ) {
 
             return "badge-sewa";
@@ -1851,6 +3236,7 @@
     function getKeteranganClass(
         keterangan
     ) {
+
 
         const text =
             String(
@@ -1879,13 +3265,17 @@
 
 
         if (
+
             text.includes(
                 "sewa"
             )
+
             ||
+
             text.includes(
                 "rental"
             )
+
         ) {
 
             return "badge-sewa";
@@ -1894,17 +3284,23 @@
 
 
         if (
+
             text.includes(
                 "tidak"
             )
+
             ||
+
             text.includes(
                 "maintenance"
             )
+
             ||
+
             text.includes(
                 "perbaikan"
             )
+
         ) {
 
             return "badge-pulang";
@@ -1924,6 +3320,7 @@
 
     function renderPagination() {
 
+
         const totalPages =
             Math.ceil(
                 filteredData.length
@@ -1936,12 +3333,14 @@
             totalPages <= 1
         ) {
 
+
             document
                 .getElementById(
                     "pagination"
                 )
                 .innerHTML =
                 "";
+
 
             return;
 
@@ -1956,8 +3355,11 @@
             `
 
             <button
+
                 class="btn-prev"
+
                 onclick="prevPage()"
+
                 ${
                     currentPage === 1
                     ?
@@ -1965,24 +3367,32 @@
                     :
                     ""
                 }
+
             >
+
                 ← Prev
+
             </button>
 
 
             <span
                 class="page-info"
             >
+
                 Halaman
                 ${currentPage}
                 dari
                 ${totalPages}
+
             </span>
 
 
             <button
+
                 class="btn-next"
+
                 onclick="nextPage()"
+
                 ${
                     currentPage === totalPages
                     ?
@@ -1990,8 +3400,11 @@
                     :
                     ""
                 }
+
             >
+
                 Next →
+
             </button>
 
             `;
@@ -2007,6 +3420,7 @@
     window.nextPage =
         function () {
 
+
             const totalPages =
                 Math.ceil(
                     filteredData.length
@@ -2021,9 +3435,12 @@
                 totalPages
             ) {
 
+
                 currentPage++;
 
+
                 renderTable();
+
 
                 window.scrollTo({
 
@@ -2046,13 +3463,17 @@
     window.prevPage =
         function () {
 
+
             if (
                 currentPage > 1
             ) {
 
+
                 currentPage--;
 
+
                 renderTable();
+
 
                 window.scrollTo({
 
@@ -2077,13 +3498,14 @@
             image
         ) {
 
+
             const url =
                 image.getAttribute(
                     "data-url"
                 );
 
 
-            window.openPhoto(
+            openPhoto(
                 url,
                 image.alt
             );
@@ -2097,6 +3519,7 @@
             url,
             title = ""
         ) {
+
 
             const modal =
                 document.getElementById(
@@ -2138,6 +3561,7 @@
     window.closePhoto =
         function () {
 
+
             const modal =
                 document.getElementById(
                     "photoModal"
@@ -2160,7 +3584,7 @@
 
 
     /* =========================
-       CLOSE CLICK OUTSIDE
+       CLOSE CLICK OUTSIDE PHOTO
     ========================= */
 
     document
@@ -2175,11 +3599,45 @@
                 event
             ) {
 
+
                 if (
-                    event.target === this
+                    event.target ===
+                    this
                 ) {
 
-                    window.closePhoto();
+                    closePhoto();
+
+                }
+
+            }
+
+        );
+
+
+
+    /* =========================
+       CLOSE CLICK OUTSIDE EDIT
+    ========================= */
+
+    document
+        .getElementById(
+            "editModal"
+        )
+        .addEventListener(
+
+            "click",
+
+            function (
+                event
+            ) {
+
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closeEditModal();
 
                 }
 
@@ -2201,11 +3659,16 @@
             event
         ) {
 
+
             if (
-                event.key === "Escape"
+                event.key ===
+                "Escape"
             ) {
 
-                window.closePhoto();
+
+                closePhoto();
+
+                closeEditModal();
 
             }
 
@@ -2222,13 +3685,16 @@
     window.downloadExcel =
         function () {
 
+
             if (
                 filteredData.length === 0
             ) {
 
+
                 alert(
                     "Tidak ada data untuk di-download!"
                 );
+
 
                 return;
 
@@ -2241,38 +3707,52 @@
                     (
                         item,
                         index
-                    ) => ({
+                    ) => {
 
-                        "No":
-                            index + 1,
 
-                        "Plat Nomor":
-                            item.plat || "-",
+                        return {
 
-                        "Nama":
-                            item.nama || "-",
 
-                        "Pajak STNK":
-                            item.stnk || "-",
+                            "No":
+                                index + 1,
 
-                        "BPKB":
-                            item.bpkb || "-",
 
-                        "Status":
-                            item.status || "-",
+                            "Plat Nomor":
+                                item.plat || "-",
 
-                        "Keterangan":
-                            item.keterangan || "-",
 
-                        "Value":
-                            formatRupiah(
-                                item.value
-                            ),
+                            "Nama":
+                                item.nama || "-",
 
-                        "URL Photo":
-                            item.photo || "-"
 
-                    })
+                            "Pajak STNK":
+                                item.stnk || "-",
+
+
+                            "BPKB":
+                                item.bpkb || "-",
+
+
+                            "Status":
+                                item.status || "-",
+
+
+                            "Keterangan":
+                                item.keterangan || "-",
+
+
+                            "Value":
+                                formatRupiah(
+                                    item.value
+                                ),
+
+
+                            "URL Photo":
+                                item.photo || "-"
+
+                        };
+
+                    }
 
                 );
 
@@ -2286,23 +3766,41 @@
 
             worksheet["!cols"] = [
 
-                { wch: 8 },
+                {
+                    wch: 8
+                },
 
-                { wch: 18 },
+                {
+                    wch: 18
+                },
 
-                { wch: 25 },
+                {
+                    wch: 25
+                },
 
-                { wch: 18 },
+                {
+                    wch: 18
+                },
 
-                { wch: 18 },
+                {
+                    wch: 18
+                },
 
-                { wch: 18 },
+                {
+                    wch: 18
+                },
 
-                { wch: 18 },
+                {
+                    wch: 18
+                },
 
-                { wch: 20 },
+                {
+                    wch: 20
+                },
 
-                { wch: 50 }
+                {
+                    wch: 50
+                }
 
             ];
 
@@ -2313,15 +3811,15 @@
 
 
             XLSX.utils
-                .book_append_sheet(
+            .book_append_sheet(
 
-                    workbook,
+                workbook,
 
-                    worksheet,
+                worksheet,
 
-                    "Data Kendaraan"
+                "Data Kendaraan"
 
-                );
+            );
 
 
             XLSX.writeFile(
