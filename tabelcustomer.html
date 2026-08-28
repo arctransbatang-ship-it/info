@@ -493,6 +493,57 @@
 
         font-size: 12px;
 
+        text-align: center;
+
+        padding: 10px;
+
+    }
+
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .status-badge {
+
+        display: inline-block;
+
+        margin-top: 6px;
+
+        padding: 4px 9px;
+
+        border-radius: 999px;
+
+        font-size: 11px;
+
+        font-weight: 800;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.3px;
+
+    }
+
+
+    .status-clear {
+
+        background: #dcfce7;
+
+        color: #15803d;
+
+        border: 1px solid #86efac;
+
+    }
+
+
+    .status-not-clear {
+
+        background: #fee2e2;
+
+        color: #dc2626;
+
+        border: 1px solid #fca5a5;
+
     }
 
 
@@ -581,7 +632,7 @@
 
         display: flex;
 
-        align-items: center;
+        align-items: flex-start;
 
         justify-content: space-between;
 
@@ -617,6 +668,8 @@
 
         font-weight: 800;
 
+        word-break: break-word;
+
     }
 
 
@@ -639,6 +692,15 @@
         max-width: 145px;
 
         word-break: break-word;
+
+    }
+
+
+    .customer-status {
+
+        margin-top: 7px;
+
+        text-align: center;
 
     }
 
@@ -1230,6 +1292,27 @@
 
         }
 
+
+        .customer-card-header {
+
+            flex-direction: column;
+
+        }
+
+
+        .customer-id {
+
+            max-width: 100%;
+
+        }
+
+
+        .customer-status {
+
+            text-align: left;
+
+        }
+
     }
 
 </style>
@@ -1316,7 +1399,7 @@
         <input
             type="text"
             id="searchInput"
-            placeholder="🔍 Cari ID, NIK atau nama customer..."
+            placeholder="🔍 Cari ID, NIK, nama atau alamat..."
         >
 
 
@@ -1487,8 +1570,6 @@
         <form id="editForm">
 
 
-            <!-- FIREBASE KEY -->
-
             <input
                 type="hidden"
                 id="editFirebaseKey"
@@ -1522,6 +1603,21 @@
                     <input
                         type="text"
                         id="editNik"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editStatus"
+                        placeholder="Contoh: clear"
                     >
 
                 </div>
@@ -1828,6 +1924,13 @@
                         .toLowerCase();
 
 
+                    const status =
+                        String(
+                            item.status || ""
+                        )
+                        .toLowerCase();
+
+
                     return (
 
                         id.includes(
@@ -1855,6 +1958,12 @@
                         ||
 
                         domisili.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        status.includes(
                             keyword
                         )
 
@@ -1892,8 +2001,6 @@
     /* =========================
        FIREBASE DATA
 
-       STRUKTUR:
-
        customer/
            firebaseKey/
                alamatktp
@@ -1901,6 +2008,7 @@
                nama
                nik
                photoKTP
+               status
     ========================= */
 
     const dbRef =
@@ -1946,11 +2054,6 @@
 
             }
 
-
-            /*
-               Object.entries digunakan
-               agar Firebase Key tetap tersimpan.
-            */
 
             allData =
                 Object.entries(
@@ -2220,6 +2323,51 @@
                     "";
 
 
+                /* =========================
+                   STATUS
+                ========================= */
+
+                const status =
+                    String(
+                        item.status
+                        ||
+                        ""
+                    )
+                    .trim();
+
+
+                const isClear =
+                    status.toLowerCase()
+                    ===
+                    "clear";
+
+
+                const statusClass =
+                    isClear
+                    ?
+                    "status-clear"
+                    :
+                    "status-not-clear";
+
+
+                const statusText =
+                    status
+                    ||
+                    "Belum Clear";
+
+
+                const statusHtml =
+                    `
+                    <div
+                        class="status-badge ${statusClass}"
+                    >
+
+                        ${escapeHtml(statusText)}
+
+                    </div>
+                    `;
+
+
 
                 /* =========================
                    PHOTO HTML
@@ -2329,7 +2477,17 @@
 
                         <td>
 
-                            ${escapeHtml(id)}
+                            <div>
+
+                                <strong>
+
+                                    ${escapeHtml(id)}
+
+                                </strong>
+
+                            </div>
+
+                            ${statusHtml}
 
                         </td>
 
@@ -2388,7 +2546,7 @@
 
                                     class="btn-delete"
 
-                                    onclick="deleteCustomer('${firebaseKey}', '${escapeHtml(nama)}')"
+                                    onclick="deleteCustomer('${firebaseKey}')"
 
                                 >
 
@@ -2449,11 +2607,26 @@
                             </div>
 
 
-                            <div
-                                class="customer-id"
-                            >
+                            <div>
 
-                                ${escapeHtml(id)}
+
+                                <div
+                                    class="customer-id"
+                                >
+
+                                    ${escapeHtml(id)}
+
+                                </div>
+
+
+                                <div
+                                    class="customer-status"
+                                >
+
+                                    ${statusHtml}
+
+                                </div>
+
 
                             </div>
 
@@ -2550,7 +2723,7 @@
 
                                 class="btn-delete"
 
-                                onclick="deleteCustomer('${firebaseKey}', '${escapeHtml(nama)}')"
+                                onclick="deleteCustomer('${firebaseKey}')"
 
                             >
 
@@ -2653,6 +2826,14 @@
                 )
                 .value =
                 item.nik || "";
+
+
+            document
+                .getElementById(
+                    "editStatus"
+                )
+                .value =
+                item.status || "";
 
 
             document
@@ -2799,6 +2980,16 @@
                             .trim(),
 
 
+                        status:
+
+                            document
+                            .getElementById(
+                                "editStatus"
+                            )
+                            .value
+                            .trim(),
+
+
                         nama:
 
                             document
@@ -2907,9 +3098,29 @@
 
     window.deleteCustomer =
         async function (
-            firebaseKey,
-            nama
+            firebaseKey
         ) {
+
+
+            const item =
+                allData.find(
+
+                    data =>
+                    data.firebaseKey
+                    ===
+                    firebaseKey
+
+                );
+
+
+            const nama =
+                item
+                ?
+                item.nama
+                ||
+                "Customer"
+                :
+                "Customer";
 
 
             const confirmDelete =
@@ -3421,6 +3632,12 @@
                                 "-",
 
 
+                            "Status":
+                                item.status
+                                ||
+                                "Belum Clear",
+
+
                             "Nama":
                                 item.nama
                                 ||
@@ -3471,6 +3688,10 @@
 
                 {
                     wch: 22
+                },
+
+                {
+                    wch: 15
                 },
 
                 {
