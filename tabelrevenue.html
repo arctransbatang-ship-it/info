@@ -16,7 +16,6 @@
 
 
 <!-- LIBRARY EXCEL -->
-
 <script
     src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
 ></script>
@@ -29,14 +28,11 @@
     ========================= */
 
     * {
-
         box-sizing: border-box;
-
         font-family:
             "Segoe UI",
             Arial,
             sans-serif;
-
     }
 
 
@@ -306,7 +302,7 @@
 
         width: 100%;
 
-        max-width: 420px;
+        max-width: 520px;
 
         padding:
             14px
@@ -324,6 +320,22 @@
         background: white;
 
         font-size: 14px;
+
+    }
+
+
+    #searchInput:focus {
+
+        border-color: #2196F3;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(
+                33,
+                150,
+                243,
+                0.12
+            );
 
     }
 
@@ -400,7 +412,7 @@
 
         grid-template-columns:
             repeat(
-                3,
+                2,
                 1fr
             );
 
@@ -451,7 +463,7 @@
 
     .summary-value {
 
-        font-size: 22px;
+        font-size: 24px;
 
         font-weight: 800;
 
@@ -461,13 +473,6 @@
 
 
     .summary-debit {
-
-        color: #C62828;
-
-    }
-
-
-    .summary-kredit {
 
         color: #2E7D32;
 
@@ -504,7 +509,7 @@
 
         width: 100%;
 
-        min-width: 1000px;
+        min-width: 950px;
 
         border-collapse: separate;
 
@@ -559,6 +564,16 @@
     }
 
 
+    tbody tr {
+
+        cursor: pointer;
+
+        transition:
+            background 0.2s ease;
+
+    }
+
+
     tbody tr:hover {
 
         background: #f5faff;
@@ -566,34 +581,11 @@
     }
 
 
-    /* =========================
-       ID TRANSAKSI BUTTON
-    ========================= */
+    .id-transaksi {
 
-    .transaction-id {
+        font-weight: 800;
 
-        border: none;
-
-        background:
-            linear-gradient(
-                135deg,
-                #1565C0,
-                #2196F3
-            );
-
-        color: white;
-
-        padding:
-            7px
-            12px;
-
-        border-radius: 8px;
-
-        cursor: pointer;
-
-        font-size: 12px;
-
-        font-weight: 700;
+        color: #1565C0;
 
     }
 
@@ -617,44 +609,6 @@
         color: #2E7D32;
 
         background: #E8F5E9;
-
-    }
-
-
-    .amount-negative {
-
-        display: inline-block;
-
-        padding:
-            7px
-            12px;
-
-        border-radius: 10px;
-
-        font-weight: 800;
-
-        color: #C62828;
-
-        background: #FFEBEE;
-
-    }
-
-
-    .amount-zero {
-
-        display: inline-block;
-
-        padding:
-            7px
-            12px;
-
-        border-radius: 10px;
-
-        font-weight: 700;
-
-        color: #78909C;
-
-        background: #F5F7F8;
 
     }
 
@@ -731,7 +685,7 @@
 
 
     /* =========================
-       MODAL DETAIL
+       MODAL
     ========================= */
 
     .modal {
@@ -749,12 +703,23 @@
                 0,
                 0,
                 0,
-                0.55
+                0.65
             );
 
-        padding: 20px;
-
         overflow-y: auto;
+
+        padding: 30px 15px;
+
+    }
+
+
+    .modal.show {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
 
     }
 
@@ -763,17 +728,13 @@
 
         width: 100%;
 
-        max-width: 700px;
-
-        margin: 50px auto;
+        max-width: 950px;
 
         background: white;
 
-        border-radius: 20px;
+        border-radius: 22px;
 
-        padding: 25px;
-
-        position: relative;
+        overflow: hidden;
 
         box-shadow:
             0 20px 60px
@@ -781,8 +742,35 @@
                 0,
                 0,
                 0,
-                0.25
+                0.35
             );
+
+        animation:
+            modalShow
+            0.25s ease;
+
+    }
+
+
+    @keyframes modalShow {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateY(20px);
+
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+        }
 
     }
 
@@ -797,89 +785,220 @@
 
         gap: 15px;
 
-        margin-bottom: 20px;
+        padding:
+            20px
+            25px;
 
-        border-bottom:
-            1px
-            solid
-            #e8eef4;
+        background:
+            linear-gradient(
+                135deg,
+                #0d47a1,
+                #2196F3
+            );
 
-        padding-bottom: 15px;
+        color: white;
 
     }
 
 
-    .modal-title {
+    .modal-header h2 {
+
+        margin: 0;
 
         font-size: 20px;
-
-        font-weight: 800;
-
-        color: #1565C0;
 
     }
 
 
     .close-modal {
 
-        background: #C62828;
+        width: 40px;
 
-        padding:
-            8px
-            14px;
+        height: 40px;
 
-    }
+        padding: 0;
 
+        border-radius: 50%;
 
-    .detail-table {
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.2
+            );
 
-        width: 100%;
-
-        min-width: 0;
-
-        border-collapse: collapse;
-
-    }
-
-
-    .detail-table td {
-
-        text-align: left;
-
-        white-space: normal;
-
-        padding:
-            12px
-            10px;
+        font-size: 22px;
 
     }
 
 
-    .detail-table td:first-child {
+    .modal-body {
 
-        width: 35%;
-
-        font-weight: 700;
-
-        color: #607D8B;
+        padding: 25px;
 
     }
 
 
-    .detail-photo {
+    .detail-section {
 
-        width: 100%;
+        margin-bottom: 25px;
 
-        max-width: 350px;
+    }
 
-        border-radius: 12px;
 
-        margin-top: 10px;
+    .detail-section h3 {
+
+        margin:
+            0
+            0
+            15px;
+
+        color: #1565C0;
+
+        font-size: 16px;
+
+        border-bottom:
+            1px
+            solid
+            #e8eef5;
+
+        padding-bottom: 10px;
+
+    }
+
+
+    .detail-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+        gap: 12px;
+
+    }
+
+
+    .detail-item {
+
+        background: #f7faff;
 
         border:
             1px
             solid
-            #e0e0e0;
+            #e4eef8;
+
+        border-radius: 12px;
+
+        padding: 13px;
+
+    }
+
+
+    .detail-label {
+
+        font-size: 11px;
+
+        font-weight: 800;
+
+        color: #78909C;
+
+        text-transform: uppercase;
+
+        margin-bottom: 5px;
+
+    }
+
+
+    .detail-value {
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        color: #263238;
+
+        white-space: pre-wrap;
+
+        word-break: break-word;
+
+    }
+
+
+    .photo-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+        gap: 20px;
+
+    }
+
+
+    .photo-box {
+
+        background: #f7faff;
+
+        border:
+            1px
+            solid
+            #e4eef8;
+
+        border-radius: 16px;
+
+        padding: 15px;
+
+    }
+
+
+    .photo-title {
+
+        font-weight: 800;
+
+        color: #1565C0;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    .photo-box img {
+
+        width: 100%;
+
+        max-height: 450px;
+
+        object-fit: contain;
+
+        border-radius: 12px;
+
+        background: #eef3f8;
+
+        display: block;
+
+    }
+
+
+    .no-photo {
+
+        padding: 40px 15px;
+
+        text-align: center;
+
+        color: #90A4AE;
+
+        background: #f5f7f8;
+
+        border-radius: 12px;
 
     }
 
@@ -888,7 +1007,9 @@
        MOBILE
     ========================= */
 
-    @media (max-width: 700px) {
+    @media (
+        max-width: 700px
+    ) {
 
         .navbar {
 
@@ -1034,14 +1155,35 @@
             color: #607D8B;
 
             flex:
-                0 0 42%;
+                0
+                0
+                45%;
 
         }
 
 
-        .modal-content {
+        .detail-grid {
 
-            margin: 20px auto;
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .photo-grid {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .modal {
+
+            padding: 10px;
+
+        }
+
+
+        .modal-body {
 
             padding: 18px;
 
@@ -1063,9 +1205,7 @@
     href="index.html"
     class="home-btn"
 >
-
     🏠 Home
-
 </a>
 
 
@@ -1092,7 +1232,7 @@
         <input
             type="text"
             id="searchInput"
-            placeholder="🔍 Cari ID transaksi, tanggal atau keterangan..."
+            placeholder="🔍 Cari ID transaksi, tanggal, atau keterangan..."
         >
 
 
@@ -1100,9 +1240,7 @@
             id="btnDownload"
             onclick="downloadExcel()"
         >
-
             📥 Download Excel
-
         </button>
 
     </div>
@@ -1120,7 +1258,6 @@
                 TOTAL TRANSAKSI
 
             </div>
-
 
             <div
                 class="summary-value"
@@ -1142,37 +1279,12 @@
 
             </div>
 
-
             <div
                 class="
                     summary-value
                     summary-debit
                 "
                 id="totalDebit"
-            >
-
-                Rp 0
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-title">
-
-                TOTAL NILAI NEGATIF
-
-            </div>
-
-
-            <div
-                class="
-                    summary-value
-                    summary-kredit
-                "
-                id="totalKredit"
             >
 
                 Rp 0
@@ -1240,11 +1352,13 @@
 </div>
 
 
-<!-- MODAL DETAIL -->
+<!-- =========================
+     MODAL DETAIL TRANSAKSI
+========================= -->
 
 <div
-    id="detailModal"
     class="modal"
+    id="detailModal"
 >
 
     <div class="modal-content">
@@ -1252,29 +1366,32 @@
 
         <div class="modal-header">
 
-            <div
-                class="modal-title"
-                id="modalTitle"
-            >
+            <h2>
 
-                Detail Transaksi
+                📋 Detail Transaksi
 
-            </div>
+            </h2>
 
 
             <button
                 class="close-modal"
                 onclick="closeDetail()"
+                type="button"
             >
 
-                ✕ Tutup
+                ×
 
             </button>
 
         </div>
 
 
-        <div id="detailContent"></div>
+        <div
+            class="modal-body"
+            id="detailContent"
+        >
+
+        </div>
 
 
     </div>
@@ -1282,7 +1399,10 @@
 </div>
 
 
-<!-- FIREBASE -->
+
+<!-- =========================
+     FIREBASE
+========================= -->
 
 <script type="module">
 
@@ -1305,9 +1425,7 @@
     import {
 
         getDatabase,
-
         ref,
-
         onValue
 
     }
@@ -1383,13 +1501,9 @@
     function parseNumber(value) {
 
         if (
-
             value === null ||
-
             value === undefined ||
-
             value === ""
-
         ) {
 
             return 0;
@@ -1398,15 +1512,11 @@
 
 
         if (
-
             typeof value === "number"
-
         ) {
 
             return isNaN(value)
-
                 ? 0
-
                 : value;
 
         }
@@ -1419,12 +1529,19 @@
             .replace(/\s/g, "");
 
 
+        /*
+            Mendukung:
+
+            Rp 500.000
+            500.000
+            -500.000
+            +500.000
+            500000
+        */
+
         if (
-
             text.includes(".") &&
-
             text.includes(",")
-
         ) {
 
             text =
@@ -1435,24 +1552,26 @@
         }
 
         else if (
-
             text.includes(".")
-
         ) {
 
             text =
-                text.replace(/\./g, "");
+                text.replace(
+                    /\./g,
+                    ""
+                );
 
         }
 
         else if (
-
             text.includes(",")
-
         ) {
 
             text =
-                text.replace(/,/g, ".");
+                text.replace(
+                    /,/g,
+                    "."
+                );
 
         }
 
@@ -1461,22 +1580,156 @@
             Number(text);
 
 
-        return
-            isNaN(numberValue)
+        return isNaN(numberValue)
+            ? 0
+            : numberValue;
 
-            ?
+    }
 
-            0
 
-            :
+    /* =========================
+       FORMAT RUPIAH
+    ========================= */
 
-            numberValue;
+    function formatRupiah(value) {
+
+        const numberValue =
+            Number(value || 0);
+
+
+        return (
+            "Rp "
+            +
+            numberValue.toLocaleString(
+                "id-ID"
+            )
+        );
+
+    }
+
+
+    /* =========================
+       ESCAPE HTML
+    ========================= */
+
+    function escapeHtml(value) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================
+       FORMAT TANGGAL
+    ========================= */
+
+    function formatTanggal(value) {
+
+        if (
+            !value
+        ) {
+
+            return "-";
+
+        }
+
+
+        const text =
+            String(value);
+
+
+        /*
+            Jika format Firebase:
+            2026-08-22
+        */
+
+        if (
+            /^\d{4}-\d{2}-\d{2}$/
+            .test(text)
+        ) {
+
+            const parts =
+                text.split("-");
+
+
+            return (
+                parts[2]
+                + "-"
+                + parts[1]
+                + "-"
+                + parts[0]
+            );
+
+        }
+
+
+        return text;
+
+    }
+
+
+    /* =========================
+       GET SORT TIME
+    ========================= */
+
+    function getSortTime(item) {
+
+        const value =
+            item.tanggalInput
+            ||
+            item.tanggal
+            ||
+            item.tanggalTransaksi
+            ||
+            item.tanggalSewa
+            ||
+            item.tanggalsewa
+            ||
+            "";
+
+
+        if (
+            typeof value === "number"
+        ) {
+
+            return value;
+
+        }
+
+
+        const parsed =
+            Date.parse(value);
+
+
+        if (
+            !isNaN(parsed)
+        ) {
+
+            return parsed;
+
+        }
+
+
+        return 0;
 
     }
 
 
     /* =========================
        AMBIL DATA REVENUE
+
+       STRUKTUR:
+
+       revenue
+          └── 2026-08-22
+                └── RENT_1787381003218
     ========================= */
 
     const revenueRef =
@@ -1497,7 +1750,9 @@
                 snapshot.val();
 
 
-            if (!data) {
+            if (
+                !data
+            ) {
 
                 allData = [];
 
@@ -1514,130 +1769,172 @@
             }
 
 
-            const tempData = [];
+            let result = [];
 
 
             /*
-               STRUKTUR:
+                Loop tanggal
 
-               revenue
-                 └── 2026-08-22
-                       └── RENT_1787381003218
-                             ├── transaksiId
-                             ├── tanggalInput
-                             ├── keterangan
-                             └── bayar
+                revenue/
+                    2026-08-22/
+                        RENT_xxx/
             */
 
-            Object.entries(data).forEach(
+            Object.entries(data)
+            .forEach(
 
-                ([tanggalKey, transaksiData]) => {
+                (
+                    [
+                        tanggalKey,
+                        transaksiData
+                    ]
+                ) => {
 
+
+                    /*
+                        Jika struktur langsung
+                        transaksi tanpa folder tanggal
+                    */
 
                     if (
-
-                        !transaksiData ||
-
-                        typeof transaksiData !== "object"
-
+                        transaksiData &&
+                        transaksiData.bayar !== undefined
                     ) {
+
+                        const bayar =
+                            parseNumber(
+                                transaksiData.bayar
+                            );
+
+
+                        /*
+                            NILAI 0 TIDAK DITAMPILKAN
+                        */
+
+                        if (
+                            bayar === 0
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        result.push({
+
+                            firebaseDate:
+                                tanggalKey,
+
+                            firebaseId:
+                                tanggalKey,
+
+                            ...transaksiData,
+
+                            bayar:
+                                bayar
+
+                        });
 
                         return;
 
                     }
 
 
-                    Object.entries(
-                        transaksiData
-                    )
+                    /*
+                        STRUKTUR BERDASARKAN
+                        FOLDER TANGGAL
+                    */
 
-                    .forEach(
+                    if (
+                        transaksiData &&
+                        typeof transaksiData === "object"
+                    ) {
 
-                        ([firebaseId, item]) => {
+                        Object.entries(
+                            transaksiData
+                        )
+                        .forEach(
+
+                            (
+                                [
+                                    transaksiKey,
+                                    item
+                                ]
+                            ) => {
 
 
-                            if (
+                                if (
+                                    !item ||
+                                    typeof item !== "object"
+                                ) {
 
-                                !item ||
+                                    return;
 
-                                typeof item !== "object"
+                                }
 
-                            ) {
 
-                                return;
+                                const bayar =
+                                    parseNumber(
+                                        item.bayar
+                                    );
+
+
+                                /*
+                                    JANGAN TAMPILKAN
+                                    NILAI 0
+                                */
+
+                                if (
+                                    bayar === 0
+                                ) {
+
+                                    return;
+
+                                }
+
+
+                                result.push({
+
+                                    firebaseDate:
+                                        tanggalKey,
+
+                                    firebaseId:
+                                        transaksiKey,
+
+                                    ...item,
+
+                                    bayar:
+                                        bayar
+
+                                });
 
                             }
 
+                        );
 
-                            const transaksiId =
+                    }
 
-                                item.transaksiId
+                }
 
-                                ||
-
-                                firebaseId
-
-                                ||
-
-                                "-";
+            );
 
 
-                            const tanggal =
+            /*
+                URUTKAN DATA TERBARU
+                BERDASARKAN TANGGAL INPUT
+            */
 
-                                item.tanggalInput
+            result.sort(
 
-                                ||
+                (
+                    a,
+                    b
+                ) => {
 
-                                tanggalKey
-
-                                ||
-
-                                "-";
-
-
-                            const keterangan =
-
-                                item.keterangan
-
-                                ||
-
-                                "-";
-
-
-                            const jumlah =
-
-                                parseNumber(
-
-                                    item.bayar
-
-                                    ??
-
-                                    0
-
-                                );
-
-
-                            tempData.push({
-
-                                firebaseId,
-
-                                tanggalKey,
-
-                                transaksiId,
-
-                                tanggal,
-
-                                keterangan,
-
-                                jumlah,
-
-                                detail:
-                                    item
-
-                            });
-
-                        }
-
+                    return (
+                        getSortTime(b)
+                        -
+                        getSortTime(a)
                     );
 
                 }
@@ -1645,34 +1942,63 @@
             );
 
 
-            /*
-               URUTKAN BERDASARKAN TANGGAL TERBARU
-            */
-
-            tempData.sort(
-
-                (a, b) => {
-
-                    const dateA =
-                        new Date(
-                            a.tanggal
-                        ).getTime();
-
-                    const dateB =
-                        new Date(
-                            b.tanggal
-                        ).getTime();
-
-
-                    return dateB - dateA;
-
-                }
-
-            );
-
-
             allData =
-                tempData;
+                result.map(
+
+                    item => {
+
+
+                        const transaksiId =
+                            item.transaksiId
+                            ||
+                            item.firebaseId
+                            ||
+                            "-";
+
+
+                        const tanggal =
+                            item.tanggalInput
+                            ||
+                            item.firebaseDate
+                            ||
+                            item.tanggal
+                            ||
+                            "-";
+
+
+                        const keterangan =
+                            item.keterangan
+                            ||
+                            "-";
+
+
+                        const jumlah =
+                            parseNumber(
+                                item.bayar
+                            );
+
+
+                        return {
+
+                            ...item,
+
+                            transaksiId:
+                                transaksiId,
+
+                            tanggal:
+                                tanggal,
+
+                            keterangan:
+                                keterangan,
+
+                            jumlah:
+                                jumlah
+
+                        };
+
+                    }
+
+                );
 
 
             applySearch();
@@ -1681,6 +2007,7 @@
 
 
         },
+
 
         (error) => {
 
@@ -1691,11 +2018,9 @@
 
 
             showEmptyData(
-
-                "Gagal mengambil data revenue: " +
-
+                "Gagal mengambil data: "
+                +
                 error.message
-
             );
 
         }
@@ -1709,9 +2034,7 @@
 
     function applySearch() {
 
-
         const keyword =
-
             document
             .getElementById(
                 "searchInput"
@@ -1722,14 +2045,12 @@
 
 
         filteredData =
-
             allData.filter(
 
                 item => {
 
 
                     const transaksiId =
-
                         String(
                             item.transaksiId || ""
                         )
@@ -1737,7 +2058,6 @@
 
 
                     const tanggal =
-
                         String(
                             item.tanggal || ""
                         )
@@ -1745,7 +2065,6 @@
 
 
                     const keterangan =
-
                         String(
                             item.keterangan || ""
                         )
@@ -1779,7 +2098,6 @@
 
         currentPage = 1;
 
-
         renderTable();
 
     }
@@ -1800,82 +2118,41 @@
 
     /* =========================
        UPDATE SUMMARY
+
+       TOTAL DEBIT =
+       JUMLAH SELURUH NILAI POSITIF
+       DARI KOLOM JUMLAH
     ========================= */
 
     function updateSummary() {
 
 
-        /*
-           HANYA NILAI POSITIF
-           DIJUMLAHKAN KE TOTAL DEBIT
-        */
+        const dataPositif =
+            allData.filter(
 
-        const totalDebit =
-
-            allData.reduce(
-
-                (
-                    total,
-                    item
-                ) => {
-
-
-                    const jumlah =
-                        Number(
-                            item.jumlah || 0
-                        );
-
-
-                    return
-
-                        jumlah > 0
-
-                        ?
-
-                        total + jumlah
-
-                        :
-
-                        total;
-
-                },
-
-                0
+                item =>
+                    Number(
+                        item.jumlah
+                    ) > 0
 
             );
 
 
-        /*
-           NILAI NEGATIF
-        */
-
-        const totalNegatif =
-
-            allData.reduce(
+        const totalDebit =
+            dataPositif.reduce(
 
                 (
                     total,
                     item
                 ) => {
 
-
-                    const jumlah =
+                    return (
+                        total
+                        +
                         Number(
                             item.jumlah || 0
-                        );
-
-
-                    return
-
-                        jumlah < 0
-
-                        ?
-
-                        total + Math.abs(jumlah)
-
-                        :
-
-                        total;
+                        )
+                    );
 
                 },
 
@@ -1890,10 +2167,8 @@
         )
         .textContent =
 
-            allData.length
-
+            dataPositif.length
             +
-
             " Transaksi";
 
 
@@ -1907,26 +2182,14 @@
                 totalDebit
             );
 
-
-        document
-        .getElementById(
-            "totalKredit"
-        )
-        .textContent =
-
-            formatRupiah(
-                totalNegatif
-            );
-
     }
 
 
     /* =========================
-       EMPTY DATA
+       SHOW EMPTY DATA
     ========================= */
 
     function showEmptyData(message) {
-
 
         document
         .getElementById(
@@ -1961,146 +2224,6 @@
 
 
     /* =========================
-       ESCAPE HTML
-    ========================= */
-
-    function escapeHtml(value) {
-
-        return String(
-            value ?? ""
-        )
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-    }
-
-
-    /* =========================
-       FORMAT RUPIAH
-    ========================= */
-
-    function formatRupiah(value) {
-
-        const numberValue =
-            Number(
-                value || 0
-            );
-
-
-        return (
-
-            "Rp "
-
-            +
-
-            numberValue
-            .toLocaleString(
-                "id-ID"
-            )
-
-        );
-
-    }
-
-
-    /* =========================
-       FORMAT JUMLAH
-    ========================= */
-
-    function formatJumlah(value) {
-
-
-        const numberValue =
-            Number(
-                value || 0
-            );
-
-
-        if (
-
-            numberValue > 0
-
-        ) {
-
-            return `
-
-                <span
-                    class="amount-debit"
-                >
-
-                    ${formatRupiah(numberValue)}
-
-                </span>
-
-            `;
-
-        }
-
-
-        if (
-
-            numberValue < 0
-
-        ) {
-
-            return `
-
-                <span
-                    class="amount-negative"
-                >
-
-                    - ${formatRupiah(
-                        Math.abs(
-                            numberValue
-                        )
-                    )}
-
-                </span>
-
-            `;
-
-        }
-
-
-        return `
-
-            <span
-                class="amount-zero"
-            >
-
-                Rp 0
-
-            </span>
-
-        `;
-
-    }
-
-
-    /* =========================
        RENDER TABLE
     ========================= */
 
@@ -2108,9 +2231,7 @@
 
 
         if (
-
             filteredData.length === 0
-
         ) {
 
             showEmptyData(
@@ -2123,22 +2244,15 @@
 
 
         const totalPages =
-
             Math.ceil(
-
                 filteredData.length
-
                 /
-
                 rowsPerPage
-
             );
 
 
         if (
-
             currentPage > totalPages
-
         ) {
 
             currentPage =
@@ -2148,27 +2262,20 @@
 
 
         const start =
-
             (
                 currentPage - 1
             )
-
             *
-
             rowsPerPage;
 
 
         const end =
-
             start
-
             +
-
             rowsPerPage;
 
 
         const paginatedData =
-
             filteredData.slice(
                 start,
                 end
@@ -2177,22 +2284,30 @@
 
         let html = "";
 
-
         let no =
             start + 1;
 
 
         paginatedData.forEach(
 
-            item => {
+            (
+                item,
+                index
+            ) => {
+
+
+                const dataIndex =
+                    allData.indexOf(
+                        item
+                    );
 
 
                 html +=
 
                     `
-
-                    <tr>
-
+                    <tr
+                        onclick="showDetail(${dataIndex})"
+                    >
 
                         <td
                             data-label="No."
@@ -2205,18 +2320,12 @@
 
                         <td
                             data-label="ID Transaksi"
+                            class="id-transaksi"
                         >
 
-                            <button
-                                class="transaction-id"
-                                onclick="showDetail('${escapeAttribute(item.firebaseId)}')"
-                            >
-
-                                ${escapeHtml(
-                                    item.transaksiId
-                                )}
-
-                            </button>
+                            ${escapeHtml(
+                                item.transaksiId
+                            )}
 
                         </td>
 
@@ -2226,7 +2335,9 @@
                         >
 
                             ${escapeHtml(
-                                item.tanggal
+                                formatTanggal(
+                                    item.tanggal
+                                )
                             )}
 
                         </td>
@@ -2247,15 +2358,20 @@
                             data-label="Jumlah"
                         >
 
-                            ${formatJumlah(
-                                item.jumlah
-                            )}
+                            <span
+                                class="amount-debit"
+                            >
+
+                                ${formatRupiah(
+                                    item.jumlah
+                                )}
+
+                            </span>
 
                         </td>
 
 
                     </tr>
-
                     `;
 
 
@@ -2280,34 +2396,6 @@
 
 
     /* =========================
-       ESCAPE ATTRIBUTE
-    ========================= */
-
-    function escapeAttribute(value) {
-
-        return String(
-            value ?? ""
-        )
-
-        .replace(
-            /\\/g,
-            "\\\\"
-        )
-
-        .replace(
-            /'/g,
-            "\\'"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        );
-
-    }
-
-
-    /* =========================
        PAGINATION
     ========================= */
 
@@ -2315,22 +2403,15 @@
 
 
         const totalPages =
-
             Math.ceil(
-
                 filteredData.length
-
                 /
-
                 rowsPerPage
-
             );
 
 
         if (
-
             totalPages <= 1
-
         ) {
 
             document
@@ -2352,19 +2433,14 @@
         .innerHTML =
 
             `
-
             <button
                 class="btn-prev"
                 onclick="prevPage()"
                 ${
                     currentPage === 1
-
                     ?
-
                     "disabled"
-
                     :
-
                     ""
                 }
             >
@@ -2379,11 +2455,8 @@
             >
 
                 Halaman
-
                 ${currentPage}
-
                 dari
-
                 ${totalPages}
 
             </span>
@@ -2394,13 +2467,9 @@
                 onclick="nextPage()"
                 ${
                     currentPage === totalPages
-
                     ?
-
                     "disabled"
-
                     :
-
                     ""
                 }
             >
@@ -2408,7 +2477,6 @@
                 Selanjutnya →
 
             </button>
-
             `;
 
     }
@@ -2423,22 +2491,15 @@
 
 
             const totalPages =
-
                 Math.ceil(
-
                     filteredData.length
-
                     /
-
                     rowsPerPage
-
                 );
 
 
             if (
-
                 currentPage < totalPages
-
             ) {
 
                 currentPage++;
@@ -2459,9 +2520,7 @@
 
 
             if (
-
                 currentPage > 1
-
             ) {
 
                 currentPage--;
@@ -2474,90 +2533,278 @@
 
 
     /* =========================
-       SHOW DETAIL
+       SHOW DETAIL TRANSACTION
     ========================= */
 
     window.showDetail =
-        function (firebaseId) {
+        function (
+            index
+        ) {
 
 
             const item =
-
-                allData.find(
-
-                    data =>
-
-                        String(
-                            data.firebaseId
-                        )
-
-                        ===
-
-                        String(
-                            firebaseId
-                        )
-
-                );
+                allData[index];
 
 
-            if (!item) {
-
-                alert(
-                    "Detail transaksi tidak ditemukan."
-                );
+            if (
+                !item
+            ) {
 
                 return;
 
             }
 
 
-            const detail =
-                item.detail || {};
+            const excludedFields = [
+
+                "fotoJaminan",
+
+                "fotoPengambilan",
+
+                "fotoJaminanPublicId",
+
+                "firebaseDate",
+
+                "firebaseId",
+
+                "bayar",
+
+                "jumlah"
+
+            ];
 
 
-            document
-            .getElementById(
-                "modalTitle"
+            let detailHtml = "";
+
+
+            Object.entries(
+                item
             )
-            .textContent =
+            .forEach(
 
-                "Detail: "
-
-                +
-
-                item.transaksiId;
-
-
-            let fotoHtml =
-                "-";
+                (
+                    [
+                        key,
+                        value
+                    ]
+                ) => {
 
 
-            if (
+                    if (
+                        excludedFields.includes(
+                            key
+                        )
+                    ) {
 
-                detail.fotoJaminan
+                        return;
 
-            ) {
+                    }
 
-                fotoHtml =
 
-                    `
+                    if (
+                        value === null ||
+                        value === undefined ||
+                        value === ""
+                    ) {
 
-                    <a
-                        href="${escapeHtml(detail.fotoJaminan)}"
-                        target="_blank"
-                    >
+                        return;
 
-                        <img
-                            src="${escapeHtml(detail.fotoJaminan)}"
-                            class="detail-photo"
-                            alt="Foto Jaminan"
+                    }
+
+
+                    /*
+                        Hindari object ditampilkan
+                        sebagai [object Object]
+                    */
+
+                    let displayValue =
+                        value;
+
+
+                    if (
+                        typeof value === "object"
+                    ) {
+
+                        displayValue =
+                            JSON.stringify(
+                                value
+                            );
+
+                    }
+
+
+                    /*
+                        FORMAT NILAI UANG
+                    */
+
+                    if (
+                        key.toLowerCase()
+                        .includes("harga")
+
+                        ||
+
+                        key.toLowerCase()
+                        .includes("bayar")
+
+                        ||
+
+                        key.toLowerCase()
+                        .includes("total")
+
+                        ||
+
+                        key.toLowerCase()
+                        .includes("sisa")
+
+                    ) {
+
+                        const numberValue =
+                            parseNumber(
+                                value
+                            );
+
+
+                        displayValue =
+                            formatRupiah(
+                                numberValue
+                            );
+
+                    }
+
+
+                    detailHtml +=
+
+                        `
+                        <div
+                            class="detail-item"
                         >
 
-                    </a>
+                            <div
+                                class="detail-label"
+                            >
 
-                    `;
+                                ${escapeHtml(
+                                    formatFieldName(
+                                        key
+                                    )
+                                )}
 
-            }
+                            </div>
+
+
+                            <div
+                                class="detail-value"
+                            >
+
+                                ${escapeHtml(
+                                    displayValue
+                                )}
+
+                            </div>
+
+                        </div>
+                        `;
+
+                }
+
+            );
+
+
+            /*
+                TAMBAHKAN JUMLAH TRANSAKSI
+            */
+
+            detailHtml +=
+
+                `
+                <div
+                    class="detail-item"
+                >
+
+                    <div
+                        class="detail-label"
+                    >
+
+                        JUMLAH PEMBAYARAN
+
+                    </div>
+
+
+                    <div
+                        class="detail-value"
+                    >
+
+                        ${formatRupiah(
+                            item.jumlah
+                        )}
+
+                    </div>
+
+                </div>
+                `;
+
+
+            /*
+                FOTO JAMINAN
+            */
+
+            const fotoJaminanHtml =
+                item.fotoJaminan
+                ?
+                `
+                <img
+                    src="${escapeHtml(
+                        item.fotoJaminan
+                    )}"
+                    alt="Foto Jaminan"
+                    onclick="window.open(this.src, '_blank')"
+                    style="cursor:zoom-in"
+                >
+                `
+                :
+                `
+                <div
+                    class="no-photo"
+                >
+
+                    Foto jaminan tidak tersedia
+
+                </div>
+                `;
+
+
+            /*
+                FOTO PENGAMBILAN UNIT
+
+                Field fotoPengambilan
+                tidak ditampilkan sebagai teks,
+                hanya sebagai gambar.
+            */
+
+            const fotoPengambilanHtml =
+                item.fotoPengambilan
+                ?
+                `
+                <img
+                    src="${escapeHtml(
+                        item.fotoPengambilan
+                    )}"
+                    alt="Dokumentasi Pengambilan Unit"
+                    onclick="window.open(this.src, '_blank')"
+                    style="cursor:zoom-in"
+                >
+                `
+                :
+                `
+                <div
+                    class="no-photo"
+                >
+
+                    Foto dokumentasi pengambilan unit
+                    tidak tersedia
+
+                </div>
+                `;
 
 
             document
@@ -2567,150 +2814,81 @@
             .innerHTML =
 
                 `
-
-                <table
-                    class="detail-table"
+                <div
+                    class="detail-section"
                 >
 
+                    <h3>
 
-                    <tr>
+                        Informasi Transaksi
 
-                        <td>ID Transaksi</td>
-
-                        <td>
-                            ${escapeHtml(
-                                item.transaksiId
-                            )}
-                        </td>
-
-                    </tr>
+                    </h3>
 
 
-                    <tr>
+                    <div
+                        class="detail-grid"
+                    >
 
-                        <td>Tanggal Transaksi</td>
+                        ${detailHtml}
 
-                        <td>
-                            ${escapeHtml(
-                                item.tanggal
-                            )}
-                        </td>
+                    </div>
 
-                    </tr>
+                </div>
 
 
-                    <tr>
+                <div
+                    class="detail-section"
+                >
 
-                        <td>Keterangan</td>
+                    <h3>
 
-                        <td>
-                            ${escapeHtml(
-                                item.keterangan
-                            )}
-                        </td>
+                        📷 Dokumentasi Transaksi
 
-                    </tr>
+                    </h3>
 
 
-                    <tr>
-
-                        <td>Jumlah Bayar</td>
-
-                        <td>
-                            ${formatRupiah(
-                                item.jumlah
-                            )}
-                        </td>
-
-                    </tr>
+                    <div
+                        class="photo-grid"
+                    >
 
 
-                    <tr>
+                        <div
+                            class="photo-box"
+                        >
 
-                        <td>Customer</td>
+                            <div
+                                class="photo-title"
+                            >
 
-                        <td>
-                            ${escapeHtml(
-                                detail.customer || "-"
-                            )}
-                        </td>
+                                Foto Jaminan
 
-                    </tr>
+                            </div>
 
+                            ${fotoJaminanHtml}
 
-                    <tr>
-
-                        <td>Nama Unit</td>
-
-                        <td>
-                            ${escapeHtml(
-                                detail.namaUnit ||
-                                detail.unit ||
-                                "-"
-                            )}
-                        </td>
-
-                    </tr>
+                        </div>
 
 
-                    <tr>
+                        <div
+                            class="photo-box"
+                        >
 
-                        <td>Plat Nomor</td>
+                            <div
+                                class="photo-title"
+                            >
 
-                        <td>
-                            ${escapeHtml(
-                                detail.plat ||
-                                detail.platNomor ||
-                                "-"
-                            )}
-                        </td>
+                                Dokumentasi Pengambilan Unit
 
-                    </tr>
+                            </div>
 
+                            ${fotoPengambilanHtml}
 
-                    <tr>
-
-                        <td>Alamat KTP</td>
-
-                        <td>
-                            ${escapeHtml(
-                                detail.alamatktp || "-"
-                            )}
-                        </td>
-
-                    </tr>
+                        </div>
 
 
-                    <tr>
+                    </div>
 
-                        <td>Harga Sewa</td>
-
-                        <td>
-                            ${formatRupiah(
-                                parseNumber(
-                                    detail.harga || 0
-                                )
-                            )}
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>Foto Jaminan</td>
-
-                        <td>
-
-                            ${fotoHtml}
-
-                        </td>
-
-                    </tr>
-
-
-                </table>
-
+                </div>
                 `;
 
 
@@ -2718,11 +2896,102 @@
             .getElementById(
                 "detailModal"
             )
-            .style
-            .display =
-                "block";
+            .classList.add(
+                "show"
+            );
 
         };
+
+
+    /* =========================
+       FORMAT FIELD NAME
+    ========================= */
+
+    function formatFieldName(key) {
+
+
+        const labels = {
+
+            transaksiId:
+                "ID Transaksi",
+
+            tanggalInput:
+                "Tanggal Transaksi",
+
+            tanggalSewa:
+                "Tanggal Sewa",
+
+            selesaiSewa:
+                "Estimasi Tanggal Selesai",
+
+            customer:
+                "Nama Customer",
+
+            namaCustomer:
+                "Nama Customer",
+
+            namaUnit:
+                "Nama Unit",
+
+            plat:
+                "Plat Nomor",
+
+            platNomor:
+                "Plat Nomor",
+
+            hp:
+                "Nomor Telepon",
+
+            noHp:
+                "Nomor Telepon",
+
+            alamatktp:
+                "Alamat KTP",
+
+            keterangan:
+                "Keterangan",
+
+            harga:
+                "Harga Sewa",
+
+            total:
+                "Total Biaya",
+
+            totalBiaya:
+                "Total Biaya",
+
+            sisa:
+                "Sisa Pembayaran",
+
+            rentalType:
+                "Jenis Rental",
+
+            jaminan:
+                "Jaminan"
+
+        };
+
+
+        return (
+
+            labels[key]
+
+            ||
+
+            String(key)
+            .replace(
+                /([A-Z])/g,
+                " $1"
+            )
+            .replace(
+                /^./,
+                char =>
+                    char.toUpperCase()
+            )
+
+        );
+
+    }
 
 
     /* =========================
@@ -2737,34 +3006,60 @@
             .getElementById(
                 "detailModal"
             )
-            .style
-            .display =
-                "none";
+            .classList.remove(
+                "show"
+            );
 
         };
 
 
     /* =========================
-       CLOSE MODAL OUTSIDE
+       CLOSE MODAL IF CLICK
+       OUTSIDE
     ========================= */
 
-    window.addEventListener(
+    document
+    .getElementById(
+        "detailModal"
+    )
+    .addEventListener(
 
         "click",
 
-        function (event) {
-
-
-            const modal =
-                document.getElementById(
-                    "detailModal"
-                );
+        function (
+            event
+        ) {
 
 
             if (
+                event.target === this
+            ) {
 
-                event.target === modal
+                closeDetail();
 
+            }
+
+        }
+
+    );
+
+
+    /* =========================
+       CLOSE WITH ESC
+    ========================= */
+
+    document
+    .addEventListener(
+
+        "keydown",
+
+        function (
+            event
+        ) {
+
+
+            if (
+                event.key === "Escape"
             ) {
 
                 closeDetail();
@@ -2785,9 +3080,7 @@
 
 
             if (
-
                 filteredData.length === 0
-
             ) {
 
                 alert(
@@ -2800,14 +3093,12 @@
 
 
             const dataExcel =
-
                 filteredData.map(
 
                     (
                         item,
                         index
                     ) => {
-
 
                         return {
 
@@ -2836,37 +3127,24 @@
 
 
             /*
-               TAMBAHKAN TOTAL
-               NILAI POSITIF
+                TOTAL DEBIT
             */
 
             const totalDebit =
-
-                filteredData.reduce(
+                dataExcel.reduce(
 
                     (
                         total,
                         item
                     ) => {
 
-
-                        const jumlah =
+                        return (
+                            total
+                            +
                             Number(
-                                item.jumlah || 0
-                            );
-
-
-                        return
-
-                            jumlah > 0
-
-                            ?
-
-                            total + jumlah
-
-                            :
-
-                            total;
+                                item["Jumlah"] || 0
+                            )
+                        );
 
                     },
 
@@ -2874,6 +3152,11 @@
 
                 );
 
+
+            /*
+                TAMBAHKAN TOTAL
+                DI BARIS TERAKHIR EXCEL
+            */
 
             dataExcel.push({
 
@@ -2893,7 +3176,6 @@
 
 
             const worksheet =
-
                 XLSX.utils
                 .json_to_sheet(
                     dataExcel
@@ -2911,7 +3193,7 @@
                 },
 
                 {
-                    wch: 20
+                    wch: 22
                 },
 
                 {
@@ -2925,8 +3207,49 @@
             ];
 
 
-            const workbook =
+            /*
+                FORMAT ANGKA RUPIAH
+                KOLOM JUMLAH
+            */
 
+            const range =
+                XLSX.utils.decode_range(
+                    worksheet["!ref"]
+                );
+
+
+            for (
+                let row = 1;
+                row <= range.e.r;
+                row++
+            ) {
+
+                const cell =
+                    worksheet[
+                        XLSX.utils.encode_cell({
+
+                            r: row,
+
+                            c: 4
+
+                        })
+
+                    ];
+
+
+                if (
+                    cell
+                ) {
+
+                    cell.z =
+                        '"Rp" #,##0';
+
+                }
+
+            }
+
+
+            const workbook =
                 XLSX.utils
                 .book_new();
 
