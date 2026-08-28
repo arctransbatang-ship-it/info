@@ -1,938 +1,2573 @@
 <!DOCTYPE html>
+
 <html lang="id">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+>
 
-    <title>ARC TRANS - Data Customer</title>
-
-
-    <!-- LIBRARY EXCEL -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
-    ></script>
+<title>ARC TRANS - Data Customer</title>
 
 
-    <style>
+<!-- LIBRARY EXCEL -->
 
-        * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<script
+    src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
+></script>
 
+
+<style>
+
+    /* =========================
+       GLOBAL
+    ========================= */
+
+    * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+
+    :root {
+
+        --primary: #2196F3;
+        --primary-dark: #1976D2;
+        --secondary: #21CBF3;
+
+        --success: #16a34a;
+        --danger: #dc2626;
+        --warning: #f59e0b;
+
+        --text: #1e293b;
+        --muted: #64748b;
+        --border: #dbe3ee;
+
+    }
+
+
+    body {
+
+        margin: 0;
+
+        min-height: 100vh;
+
+        background:
+            linear-gradient(
+                135deg,
+                #e0f2fe,
+                #f8fafc
+            );
+
+        color: var(--text);
+
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .topbar {
+
+        width: 100%;
+
+        padding: 14px 20px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        background: white;
+
+        box-shadow:
+            0 2px 12px
+            rgba(15, 23, 42, 0.08);
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 1000;
+
+    }
+
+
+    .brand {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+    }
+
+
+    .brand-icon {
+
+        width: 42px;
+
+        height: 42px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+        color: white;
+
+        font-size: 20px;
+
+        box-shadow:
+            0 6px 16px
+            rgba(33, 150, 243, 0.25);
+
+    }
+
+
+    .brand-text h1 {
+
+        margin: 0;
+
+        font-size: 18px;
+
+    }
+
+
+    .brand-text p {
+
+        margin: 2px 0 0;
+
+        font-size: 12px;
+
+        color: var(--muted);
+
+    }
+
+
+    .home-btn {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-decoration: none;
+
+        background: #eff6ff;
+
+        color: var(--primary-dark);
+
+        font-weight: 700;
+
+        padding: 10px 15px;
+
+        border-radius: 12px;
+
+        transition: 0.2s;
+
+    }
+
+
+    .home-btn:hover {
+
+        background: var(--primary);
+
+        color: white;
+
+        transform: translateY(-1px);
+
+    }
+
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container {
+
+        width: 100%;
+
+        max-width: 1500px;
+
+        margin: auto;
+
+        padding: 20px;
+
+    }
+
+
+    .page-title {
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .page-title h2 {
+
+        margin: 0 0 5px;
+
+        font-size: 24px;
+
+    }
+
+
+    .page-title p {
+
+        margin: 0;
+
+        font-size: 14px;
+
+        color: var(--muted);
+
+    }
+
+
+    /* =========================
+       TOOLBAR
+    ========================= */
+
+    .toolbar {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 18px;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    #searchInput {
+
+        flex: 1;
+
+        min-width: 220px;
+
+        max-width: 450px;
+
+        min-height: 48px;
+
+        padding: 12px 15px;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 12px;
+
+        background: white;
+
+        font-size: 14px;
+
+        outline: none;
+
+    }
+
+
+    #searchInput:focus {
+
+        border-color: var(--primary);
+
+        box-shadow:
+            0 0 0 4px
+            rgba(33, 150, 243, 0.12);
+
+    }
+
+
+    button {
+
+        border: none;
+
+        cursor: pointer;
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        border-radius: 12px;
+
+        padding: 12px 18px;
+
+        transition: 0.2s;
+
+    }
+
+
+    button:hover {
+
+        transform: translateY(-1px);
+
+    }
+
+
+    button:disabled {
+
+        background: #cbd5e1 !important;
+
+        cursor: not-allowed;
+
+        transform: none;
+
+    }
+
+
+    #btnDownload {
+
+        display: none;
+
+        background:
+            linear-gradient(
+                135deg,
+                #16a34a,
+                #22c55e
+            );
+
+        box-shadow:
+            0 6px 15px
+            rgba(34, 197, 94, 0.2);
+
+    }
+
+
+    /* =========================
+       TABLE DESKTOP
+    ========================= */
+
+    .table-container {
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        background: white;
+
+        border-radius: 18px;
+
+        box-shadow:
+            0 10px 30px
+            rgba(15, 23, 42, 0.08);
+
+    }
+
+
+    table {
+
+        width: 100%;
+
+        border-collapse: collapse;
+
+        min-width: 1100px;
+
+    }
+
+
+    th {
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+        color: white;
+
+        padding: 14px 10px;
+
+        text-align: center;
+
+        white-space: nowrap;
+
+    }
+
+
+    td {
+
+        padding: 12px 10px;
+
+        border-bottom:
+            1px solid
+            #edf2f7;
+
+        text-align: center;
+
+        vertical-align: middle;
+
+    }
+
+
+    tbody tr {
+
+        transition: 0.2s;
+
+    }
+
+
+    tbody tr:hover {
+
+        background: #f8fbff;
+
+    }
+
+
+    /* =========================
+       PHOTO
+    ========================= */
+
+    .photo-cell {
+
+        min-width: 130px;
+
+    }
+
+
+    .customer-photo {
+
+        display: block;
+
+        width: 110px;
+
+        height: 80px;
+
+        margin: auto;
+
+        object-fit: cover;
+
+        border-radius: 10px;
+
+        border:
+            1px solid
+            var(--border);
+
+        cursor: pointer;
+
+        transition: 0.2s;
+
+    }
+
+
+    .customer-photo:hover {
+
+        transform: scale(1.06);
+
+        box-shadow:
+            0 6px 18px
+            rgba(0, 0, 0, 0.2);
+
+    }
+
+
+    .no-photo {
+
+        color: #94a3b8;
+
+        font-size: 12px;
+
+    }
+
+
+    /* =========================
+       ACTION BUTTON
+    ========================= */
+
+    .action-area {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 8px;
+
+    }
+
+
+    .btn-edit {
+
+        background:
+            linear-gradient(
+                135deg,
+                #f59e0b,
+                #fbbf24
+            );
+
+        padding: 9px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    .btn-delete {
+
+        background:
+            linear-gradient(
+                135deg,
+                #dc2626,
+                #ef4444
+            );
+
+        padding: 9px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    /* =========================
+       MOBILE CARD
+    ========================= */
+
+    .mobile-list {
+
+        display: none;
+
+    }
+
+
+    .customer-card {
+
+        background: white;
+
+        border-radius: 18px;
+
+        padding: 16px;
+
+        margin-bottom: 14px;
+
+        box-shadow:
+            0 8px 24px
+            rgba(15, 23, 42, 0.08);
+
+        border:
+            1px solid
+            #eef2f7;
+
+    }
+
+
+    .customer-card-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 14px;
+
+        padding-bottom: 12px;
+
+        border-bottom:
+            1px solid
+            #edf2f7;
+
+    }
+
+
+    .customer-number {
+
+        font-size: 12px;
+
+        color: var(--muted);
+
+        font-weight: 700;
+
+    }
+
+
+    .customer-name {
+
+        margin: 3px 0 0;
+
+        font-size: 17px;
+
+        font-weight: 800;
+
+    }
+
+
+    .customer-id {
+
+        background: #eff6ff;
+
+        color: var(--primary-dark);
+
+        padding: 7px 10px;
+
+        border-radius: 10px;
+
+        font-size: 12px;
+
+        font-weight: 800;
+
+        text-align: center;
+
+        max-width: 145px;
+
+        word-break: break-word;
+
+    }
+
+
+    .mobile-photo {
+
+        width: 100%;
+
+        height: 210px;
+
+        object-fit: cover;
+
+        border-radius: 14px;
+
+        margin-bottom: 14px;
+
+        border:
+            1px solid
+            var(--border);
+
+        cursor: pointer;
+
+        background: #f8fafc;
+
+    }
+
+
+    .card-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+
+    }
+
+
+    .card-item {
+
+        background: #f8fafc;
+
+        padding: 10px;
+
+        border-radius: 10px;
+
+    }
+
+
+    .card-item.full {
+
+        grid-column: 1 / -1;
+
+    }
+
+
+    .card-label {
+
+        display: block;
+
+        font-size: 11px;
+
+        color: var(--muted);
+
+        margin-bottom: 5px;
+
+        font-weight: 600;
+
+    }
+
+
+    .card-value {
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: var(--text);
+
+        word-break: break-word;
+
+        line-height: 1.5;
+
+    }
+
+
+    .card-action-area {
+
+        margin-top: 15px;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+    }
+
+
+    .card-action-area button {
+
+        width: 100%;
+
+    }
+
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
+    #pagination {
+
+        margin: 20px 0;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .btn-prev {
+
+        background: var(--warning);
+
+    }
+
+
+    .btn-next {
+
+        background: var(--success);
+
+    }
+
+
+    .page-info {
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: var(--text);
+
+        padding: 8px 12px;
+
+    }
+
+
+    /* =========================
+       EMPTY DATA
+    ========================= */
+
+    .empty-data {
+
+        padding: 35px;
+
+        text-align: center;
+
+        color: var(--muted);
+
+    }
+
+
+    /* =========================
+       PHOTO MODAL
+    ========================= */
+
+    .photo-modal {
+
+        display: none;
+
+        position: fixed;
+
+        z-index: 9999;
+
+        inset: 0;
+
+        background:
+            rgba(15, 23, 42, 0.9);
+
+        justify-content: center;
+
+        align-items: center;
+
+        padding: 20px;
+
+    }
+
+
+    .photo-modal img {
+
+        max-width: 95%;
+
+        max-height: 85vh;
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 10px 40px
+            rgba(0, 0, 0, 0.5);
+
+    }
+
+
+    .close-modal {
+
+        position: absolute;
+
+        top: 18px;
+
+        right: 25px;
+
+        color: white;
+
+        font-size: 42px;
+
+        cursor: pointer;
+
+        line-height: 1;
+
+    }
+
+
+    .modal-caption {
+
+        position: absolute;
+
+        bottom: 20px;
+
+        color: white;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        width: 100%;
+
+        padding: 0 20px;
+
+    }
+
+
+    /* =========================
+       EDIT MODAL
+    ========================= */
+
+    .edit-modal {
+
+        display: none;
+
+        position: fixed;
+
+        z-index: 10000;
+
+        inset: 0;
+
+        background:
+            rgba(15, 23, 42, 0.6);
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 20px;
+
+        overflow-y: auto;
+
+    }
+
+
+    .edit-modal-content {
+
+        width: 100%;
+
+        max-width: 650px;
+
+        background: white;
+
+        border-radius: 20px;
+
+        padding: 24px;
+
+        box-shadow:
+            0 20px 60px
+            rgba(15, 23, 42, 0.25);
+
+        position: relative;
+
+        margin: auto;
+
+    }
+
+
+    .edit-modal-title {
+
+        margin: 0 0 20px;
+
+        font-size: 22px;
+
+    }
+
+
+    .close-edit-modal {
+
+        position: absolute;
+
+        right: 20px;
+
+        top: 15px;
+
+        font-size: 30px;
+
+        cursor: pointer;
+
+        color: var(--muted);
+
+    }
+
+
+    .form-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+
+    }
+
+
+    .form-group {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 6px;
+
+    }
+
+
+    .form-group.full {
+
+        grid-column: 1 / -1;
+
+    }
+
+
+    .form-group label {
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: var(--text);
+
+    }
+
+
+    .form-group input,
+
+    .form-group textarea {
+
+        width: 100%;
+
+        min-height: 45px;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 10px;
+
+        padding: 10px 12px;
+
+        font-size: 14px;
+
+        outline: none;
+
+        resize: vertical;
+
+    }
+
+
+    .form-group textarea {
+
+        min-height: 90px;
+
+    }
+
+
+    .form-group input:focus,
+
+    .form-group textarea:focus {
+
+        border-color: var(--primary);
+
+        box-shadow:
+            0 0 0 3px
+            rgba(33, 150, 243, 0.12);
+
+    }
+
+
+    .edit-modal-actions {
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 10px;
+
+        margin-top: 22px;
+
+    }
+
+
+    .btn-cancel {
+
+        background: #64748b;
+
+    }
+
+
+    .btn-save {
+
+        background:
+            linear-gradient(
+                135deg,
+                #16a34a,
+                #22c55e
+            );
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
 
         body {
-            margin: 0;
-            background: #f5f6f8;
-            color: #333;
+
+            padding-bottom: 20px;
+
         }
 
 
-        /* =========================
-           HOME BUTTON
-        ========================= */
+        .topbar {
+
+            padding: 10px 14px;
+
+        }
+
+
+        .brand-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            font-size: 18px;
+
+        }
+
+
+        .brand-text h1 {
+
+            font-size: 16px;
+
+        }
+
+
+        .brand-text p {
+
+            font-size: 10px;
+
+        }
+
 
         .home-btn {
-            position: fixed;
 
-            top: 12px;
-            left: 15px;
+            padding: 8px 12px;
 
-            z-index: 1000;
+            font-size: 12px;
 
-            background: white;
-            color: #2196F3;
-
-            padding: 8px 15px;
-
-            border-radius: 20px;
-
-            text-decoration: none;
-
-            font-weight: bold;
-
-            box-shadow:
-                0 3px 10px
-                rgba(0, 0, 0, 0.2);
         }
 
-
-        .home-btn:hover {
-            background: #f0f8ff;
-        }
-
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            min-height: 55px;
-
-            padding: 12px 20px;
-
-            background: #87CEFA;
-
-            color: white;
-
-            box-shadow:
-                0 2px 6px
-                rgba(0, 0, 0, 0.1);
-        }
-
-
-        .logo {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-
-        /* =========================
-           CONTAINER
-        ========================= */
 
         .container {
-            width: 100%;
-            padding: 15px;
+
+            padding: 14px;
+
         }
 
 
-        /* =========================
-           TOOLBAR
-        ========================= */
+        .page-title h2 {
+
+            font-size: 21px;
+
+        }
+
 
         .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
 
-            gap: 10px;
+            display: grid;
 
-            margin-bottom: 15px;
+            grid-template-columns: 1fr;
 
-            flex-wrap: wrap;
         }
 
 
         #searchInput {
+
             width: 100%;
-            max-width: 320px;
 
-            padding: 10px 12px;
+            max-width: none;
 
-            border: 1px solid #ddd;
-
-            border-radius: 6px;
-
-            outline: none;
-        }
-
-
-        #searchInput:focus {
-            border-color: #2196F3;
-        }
-
-
-        /* =========================
-           BUTTON
-        ========================= */
-
-        button {
-            border: none;
-
-            padding: 10px 16px;
-
-            border-radius: 6px;
-
-            cursor: pointer;
-
-            color: white;
-
-            font-size: 13px;
-            font-weight: bold;
-
-            transition: 0.2s;
-        }
-
-
-        button:hover {
-            opacity: 0.85;
-        }
-
-
-        button:disabled {
-            background: #ccc !important;
-            cursor: not-allowed;
         }
 
 
         #btnDownload {
-            background: #4CAF50;
-            display: none;
+
+            width: 100%;
+
+            min-height: 48px;
+
         }
 
-
-        /* =========================
-           TABLE
-        ========================= */
 
         .table-container {
-            width: 100%;
 
-            overflow-x: auto;
-
-            background: white;
-
-            border-radius: 8px;
-
-            box-shadow:
-                0 2px 8px
-                rgba(0, 0, 0, 0.08);
-        }
-
-
-        table {
-            width: 100%;
-
-            border-collapse: collapse;
-
-            min-width: 950px;
-        }
-
-
-        th {
-            background: #87CEFA;
-
-            color: white;
-
-            padding: 12px 10px;
-
-            text-align: center;
-
-            white-space: nowrap;
-        }
-
-
-        td {
-            padding: 10px;
-
-            border-bottom:
-                1px
-                solid
-                #eee;
-
-            text-align: center;
-
-            vertical-align: middle;
-        }
-
-
-        tbody tr:hover {
-            background: #f9f9f9;
-        }
-
-
-        /* =========================
-           PHOTO
-        ========================= */
-
-        .photo-cell {
-            min-width: 130px;
-        }
-
-
-        .customer-photo {
-            display: block;
-
-            width: 110px;
-            height: 80px;
-
-            margin: auto;
-
-            object-fit: cover;
-
-            border-radius: 8px;
-
-            border:
-                1px
-                solid
-                #ddd;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.2s,
-                box-shadow 0.2s;
-        }
-
-
-        .customer-photo:hover {
-            transform: scale(1.08);
-
-            box-shadow:
-                0 3px 10px
-                rgba(0, 0, 0, 0.25);
-        }
-
-
-        .no-photo {
-            color: #999;
-            font-size: 12px;
-        }
-
-
-        /* =========================
-           PAGINATION
-        ========================= */
-
-        #pagination {
-            margin-top: 15px;
-            text-align: center;
-        }
-
-
-        .btn-prev {
-            background: #ff9800;
-        }
-
-
-        .btn-next {
-            background: #4CAF50;
-        }
-
-
-        .page-info {
-            margin: 0 10px;
-
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-
-        /* =========================
-           EMPTY DATA
-        ========================= */
-
-        .empty-data {
-            padding: 30px;
-
-            text-align: center;
-
-            color: #777;
-        }
-
-
-        /* =========================
-           PHOTO MODAL
-        ========================= */
-
-        .photo-modal {
             display: none;
 
-            position: fixed;
+        }
 
-            z-index: 9999;
 
-            top: 0;
-            left: 0;
+        .mobile-list {
 
-            width: 100%;
-            height: 100%;
+            display: block;
 
-            background:
-                rgba(0, 0, 0, 0.88);
+        }
 
-            justify-content: center;
-            align-items: center;
+
+        .form-grid {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column: auto;
+
+        }
+
+
+        .edit-modal-content {
 
             padding: 20px;
-        }
-
-
-        .photo-modal img {
-            max-width: 90%;
-            max-height: 85%;
-
-            border-radius: 10px;
-
-            box-shadow:
-                0 5px 30px
-                rgba(0, 0, 0, 0.5);
-        }
-
-
-        .close-modal {
-            position: absolute;
-
-            top: 15px;
-            right: 25px;
-
-            color: white;
-
-            font-size: 42px;
-
-            cursor: pointer;
-
-            line-height: 1;
-        }
-
-
-        .modal-caption {
-            position: absolute;
-
-            bottom: 20px;
-
-            color: white;
-
-            font-size: 15px;
-
-            text-align: center;
-
-            width: 100%;
-        }
-
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 600px) {
-
-            .navbar {
-                min-height: 60px;
-            }
-
-
-            .logo {
-                font-size: 16px;
-            }
-
-
-            .container {
-                padding: 10px;
-            }
-
-
-            .toolbar {
-                align-items: stretch;
-            }
-
-
-            #searchInput {
-                max-width: none;
-            }
-
-
-            #btnDownload {
-                width: 100%;
-            }
-
-
-            .home-btn {
-                font-size: 12px;
-                padding: 7px 10px;
-            }
 
         }
 
-    </style>
+    }
+
+
+    @media (max-width: 380px) {
+
+        .card-grid {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .card-item.full {
+
+            grid-column: auto;
+
+        }
+
+    }
+
+</style>
+```
 
 </head>
 
-
-
 <body>
 
+```
+<!-- =========================
+     HEADER
+========================= -->
 
-    <!-- HOME -->
+<div class="topbar">
+
+
+    <div class="brand">
+
+
+        <div class="brand-icon">
+
+            👤
+
+        </div>
+
+
+        <div class="brand-text">
+
+            <h1>
+                ARC TRANS
+            </h1>
+
+            <p>
+                Vehicle Rental Management
+            </p>
+
+        </div>
+
+
+    </div>
+
 
     <a
         href="index.html"
         class="home-btn"
     >
+
         🏠 Home
+
     </a>
 
 
-    <!-- NAVBAR -->
-
-    <nav class="navbar">
-
-        <div class="logo">
-
-            DATA CUSTOMER
-
-        </div>
-
-    </nav>
+</div>
 
 
-    <!-- CONTAINER -->
 
-    <div class="container">
+<!-- =========================
+     CONTAINER
+========================= -->
 
-
-        <!-- TOOLBAR -->
-
-        <div class="toolbar">
+<div class="container">
 
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Cari ID / NIK atau nama..."
-            >
+    <div class="page-title">
+
+        <h2>
+            Data Customer
+        </h2>
+
+        <p>
+            Informasi seluruh customer ARC TRANS
+        </p>
+
+    </div>
 
 
-            <button
-                id="btnDownload"
-                onclick="downloadExcel()"
-            >
-                Download Excel
-            </button>
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
 
 
-        </div>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Cari ID, NIK atau nama customer..."
+        >
 
 
-        <!-- TABLE -->
+        <button
+            id="btnDownload"
+            onclick="downloadExcel()"
+        >
 
-        <div class="table-container">
+            📥 Download Excel
 
-
-            <table>
-
-
-                <thead>
-
-                    <tr>
-
-                        <th>No.</th>
-
-                        <th>ID / NIK</th>
-
-                        <th>Nama</th>
-
-                        <th>Alamat KTP</th>
-
-                        <th>Domisili</th>
-
-                        <th>Photo</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="isiData">
-
-                    <tr>
-
-                        <td
-                            colspan="6"
-                            class="empty-data"
-                        >
-                            Memuat data customer...
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-
-            </table>
-
-
-        </div>
-
-
-        <!-- PAGINATION -->
-
-        <div id="pagination"></div>
+        </button>
 
 
     </div>
 
 
-    <!-- PHOTO MODAL -->
+
+    <!-- =========================
+         TABLE DESKTOP
+    ========================= -->
+
+    <div class="table-container">
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>No.</th>
+
+                    <th>ID / NIK</th>
+
+                    <th>Nama</th>
+
+                    <th>Alamat KTP</th>
+
+                    <th>Domisili</th>
+
+                    <th>Photo ID / KTP</th>
+
+                    <th>Aksi</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="isiData">
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="empty-data"
+                    >
+
+                        Memuat data customer...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         MOBILE LIST
+    ========================= -->
 
     <div
-        id="photoModal"
-        class="photo-modal"
+        id="mobileList"
+        class="mobile-list"
+    >
+
+        Memuat data customer...
+
+    </div>
+
+
+
+    <!-- PAGINATION -->
+
+    <div id="pagination"></div>
+
+
+</div>
+
+
+
+<!-- =========================
+     PHOTO MODAL
+========================= -->
+
+<div
+    id="photoModal"
+    class="photo-modal"
+>
+
+
+    <span
+        class="close-modal"
+        onclick="closePhoto()"
+    >
+
+        &times;
+
+    </span>
+
+
+    <img
+        id="modalImage"
+        src=""
+        alt="Foto ID / KTP"
     >
 
 
+    <div
+        id="modalCaption"
+        class="modal-caption"
+    >
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     EDIT MODAL
+========================= -->
+
+<div
+    id="editModal"
+    class="edit-modal"
+>
+
+
+    <div class="edit-modal-content">
+
+
         <span
-            class="close-modal"
-            onclick="closePhoto()"
+            class="close-edit-modal"
+            onclick="closeEditModal()"
         >
+
             &times;
+
         </span>
 
 
-        <img
-            id="modalImage"
-            src=""
-            alt="Foto KTP"
-        >
+        <h2 class="edit-modal-title">
+
+            ✏️ Edit Data Customer
+
+        </h2>
 
 
-        <div
-            id="modalCaption"
-            class="modal-caption"
-        >
-        </div>
+        <form id="editForm">
+
+
+            <!-- FIREBASE KEY -->
+
+            <input
+                type="hidden"
+                id="editFirebaseKey"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        ID / Firebase Key
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editId"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        NIK
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editNik"
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Nama Customer
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editNama"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Alamat KTP
+                    </label>
+
+                    <textarea
+                        id="editAlamatKtp"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Domisili
+                    </label>
+
+                    <textarea
+                        id="editDomisili"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        URL Photo ID / KTP
+                    </label>
+
+                    <input
+                        type="url"
+                        id="editPhotoKTP"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="edit-modal-actions">
+
+
+                <button
+                    type="button"
+                    class="btn-cancel"
+                    onclick="closeEditModal()"
+                >
+
+                    Batal
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-save"
+                >
+
+                    💾 Simpan Perubahan
+
+                </button>
+
+
+            </div>
+
+
+        </form>
 
 
     </div>
 
 
-
-    <script type="module">
-
-
-        /* =========================
-           FIREBASE IMPORT
-        ========================= */
-
-        import {
-            initializeApp
-        }
-        from
-        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+</div>
 
 
-        import {
-            getDatabase,
-            ref,
-            onValue
-        }
-        from
-        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+<!-- =========================
+     FIREBASE SCRIPT
+========================= -->
+
+<script type="module">
 
 
-        /* =========================
-           FIREBASE CONFIG
-        ========================= */
+    /* =========================
+       FIREBASE IMPORT
+    ========================= */
 
-        const firebaseConfig = {
+    import {
 
-            apiKey:
-                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+        initializeApp
 
+    }
 
-            authDomain:
-                "arctrans.firebaseapp.com",
+    from
 
-
-            databaseURL:
-                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 
-            projectId:
-                "arctrans",
+    import {
+
+        getDatabase,
+        ref,
+        onValue,
+        update,
+        remove
+
+    }
+
+    from
+
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-            storageBucket:
-                "arctrans.firebasestorage.app",
+
+    /* =========================
+       FIREBASE CONFIG
+    ========================= */
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+        authDomain:
+            "arctrans.firebaseapp.com",
+
+        databaseURL:
+            "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+        projectId:
+            "arctrans",
+
+        storageBucket:
+            "arctrans.firebasestorage.app",
+
+        messagingSenderId:
+            "60781918601",
+
+        appId:
+            "1:60781918601:web:c85d6131207f8a8958"
+
+    };
 
 
-            messagingSenderId:
-                "60781918601",
+
+    /* =========================
+       INITIALIZE FIREBASE
+    ========================= */
+
+    const app =
+        initializeApp(
+            firebaseConfig
+        );
 
 
-            appId:
-                "1:60781918601:web:c85d6131207f8a8958"
-
-        };
-
-
-        /* =========================
-           INITIALIZE FIREBASE
-        ========================= */
-
-        const app =
-            initializeApp(
-                firebaseConfig
-            );
+    const db =
+        getDatabase(
+            app
+        );
 
 
-        const db =
-            getDatabase(
-                app
-            );
+
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    let allData = [];
+
+    let filteredData = [];
+
+    let currentPage = 1;
+
+    const rowsPerPage = 10;
 
 
-        /* =========================
-           VARIABLES
-        ========================= */
 
-        let allData = [];
+    /* =========================
+       USERNAME
+    ========================= */
 
-        let filteredData = [];
-
-        let currentPage = 1;
-
-        const rowsPerPage = 10;
+    const username =
+        localStorage.getItem(
+            "username"
+        );
 
 
-        /* =========================
-           USERNAME
-        ========================= */
 
-        const username =
-            localStorage.getItem(
-                "username"
-            );
+    /* =========================
+       USER DOWNLOAD EXCEL
+    ========================= */
 
+    const allowedUsers = [
 
-        /* =========================
-           USER DOWNLOAD EXCEL
-        ========================= */
+        "Nurhakiki",
 
-        const allowedUsers = [
+        "Henri Yuliansyah",
 
-            "Nurhakiki",
+        "Sultan"
 
-            "Henri Yuliansyah",
-
-            "Sultan"
-
-        ];
+    ];
 
 
-        if (
-            allowedUsers.includes(
-                username
+    if (
+
+        allowedUsers.includes(
+            username
+        )
+
+    ) {
+
+        document
+            .getElementById(
+                "btnDownload"
             )
-        ) {
+            .style
+            .display =
+            "inline-block";
 
+    }
+
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function applySearch() {
+
+
+        const keyword =
             document
-                .getElementById(
-                    "btnDownload"
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+        filteredData =
+            allData.filter(
+
+                item => {
+
+
+                    const id =
+                        String(
+                            item.id || ""
+                        )
+                        .toLowerCase();
+
+
+                    const nik =
+                        String(
+                            item.nik || ""
+                        )
+                        .toLowerCase();
+
+
+                    const nama =
+                        String(
+                            item.nama || ""
+                        )
+                        .toLowerCase();
+
+
+                    const alamatktp =
+                        String(
+                            item.alamatktp || ""
+                        )
+                        .toLowerCase();
+
+
+                    const domisili =
+                        String(
+                            item.domisili || ""
+                        )
+                        .toLowerCase();
+
+
+                    return (
+
+                        id.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        nik.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        nama.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        alamatktp.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        domisili.includes(
+                            keyword
+                        )
+
+                    );
+
+
+                }
+
+            );
+
+
+        currentPage = 1;
+
+
+        renderTable();
+
+    }
+
+
+
+    document
+        .getElementById(
+            "searchInput"
+        )
+        .addEventListener(
+
+            "input",
+
+            applySearch
+
+        );
+
+
+
+    /* =========================
+       FIREBASE DATA
+
+       STRUKTUR:
+
+       customer/
+           firebaseKey/
+               alamatktp
+               domisili
+               nama
+               nik
+               photoKTP
+    ========================= */
+
+    const dbRef =
+        ref(
+            db,
+            "customer"
+        );
+
+
+    onValue(
+
+        dbRef,
+
+        (snapshot) => {
+
+
+            const data =
+                snapshot.val();
+
+
+            console.log(
+                "Data customer Firebase:",
+                data
+            );
+
+
+            if (
+                !data
+            ) {
+
+
+                allData = [];
+
+                filteredData = [];
+
+
+                showEmptyData(
+                    "Data customer belum tersedia"
+                );
+
+
+                return;
+
+            }
+
+
+            /*
+               Object.entries digunakan
+               agar Firebase Key tetap tersimpan.
+            */
+
+            allData =
+                Object.entries(
+                    data
                 )
-                .style
-                .display =
-                "inline-block";
+                .map(
 
-        }
+                    (
+                        [
+                            firebaseKey,
+                            item
+                        ]
+                    ) => ({
 
+                        firebaseKey:
+                            firebaseKey,
 
-        /* =========================
-           SEARCH
-        ========================= */
+                        id:
+                            firebaseKey,
 
-        function applySearch() {
+                        ...item
 
-
-            const keyword =
-                document
-                .getElementById(
-                    "searchInput"
-                )
-                .value
-                .toLowerCase()
-                .trim();
-
-
-            filteredData =
-                allData.filter(
-
-                    item => {
-
-
-                        const id =
-                            String(
-                                item.id || ""
-                            )
-                            .toLowerCase();
-
-
-                        const nik =
-                            String(
-                                item.nik || ""
-                            )
-                            .toLowerCase();
-
-
-                        const nama =
-                            String(
-                                item.nama || ""
-                            )
-                            .toLowerCase();
-
-
-                        return (
-
-                            id.includes(
-                                keyword
-                            )
-
-                            ||
-
-                            nik.includes(
-                                keyword
-                            )
-
-                            ||
-
-                            nama.includes(
-                                keyword
-                            )
-
-                        );
-
-
-                    }
+                    })
 
                 );
 
 
-            currentPage = 1;
+            applySearch();
 
 
-            renderTable();
+        },
+
+
+        (error) => {
+
+
+            console.error(
+                "Firebase Error:",
+                error
+            );
+
+
+            showEmptyData(
+                "Gagal mengambil data customer"
+            );
+
 
         }
+
+    );
+
+
+
+    /* =========================
+       EMPTY DATA
+    ========================= */
+
+    function showEmptyData(
+        message
+    ) {
 
 
         document
             .getElementById(
-                "searchInput"
+                "isiData"
             )
-            .addEventListener(
-                "input",
-                applySearch
+            .innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty-data"
+                >
+
+                    ${escapeHtml(message)}
+
+                </td>
+
+            </tr>
+            `;
+
+
+        document
+            .getElementById(
+                "mobileList"
+            )
+            .innerHTML =
+            `
+            <div class="customer-card">
+
+                <div class="empty-data">
+
+                    ${escapeHtml(message)}
+
+                </div>
+
+            </div>
+            `;
+
+
+        document
+            .getElementById(
+                "pagination"
+            )
+            .innerHTML =
+            "";
+
+    }
+
+
+
+    /* =========================
+       ESCAPE HTML
+    ========================= */
+
+    function escapeHtml(
+        value
+    ) {
+
+
+        return String(
+            value ?? ""
+        )
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+    }
+
+
+
+    /* =========================
+       RENDER TABLE
+    ========================= */
+
+    function renderTable() {
+
+
+        if (
+            filteredData.length === 0
+        ) {
+
+
+            showEmptyData(
+                "Data tidak ditemukan"
             );
 
 
-        /* =========================
-           FIREBASE DATA
+            return;
 
-           STRUKTUR:
+        }
 
-           customer/
-               1234540797076494/
-                   alamatktp
-                   domisili
-                   nama
-                   nik
-                   photoKTP
-        ========================= */
 
-        const dbRef =
-            ref(
-                db,
-                "customer"
+        const totalPages =
+            Math.ceil(
+                filteredData.length
+                /
+                rowsPerPage
             );
 
 
-        onValue(
+        if (
+            currentPage > totalPages
+        ) {
 
-            dbRef,
+            currentPage =
+                totalPages;
 
-
-            (snapshot) => {
-
-
-                const data =
-                    snapshot.val();
+        }
 
 
-                console.log(
-                    "Data customer Firebase:",
-                    data
-                );
+        const start =
+            (
+                currentPage - 1
+            )
+            *
+            rowsPerPage;
 
 
-                if (!data) {
+        const end =
+            start
+            +
+            rowsPerPage;
 
 
-                    allData = [];
-
-                    filteredData = [];
-
-
-                    showEmptyData(
-                        "Data customer belum tersedia"
-                    );
+        const paginatedData =
+            filteredData.slice(
+                start,
+                end
+            );
 
 
-                    return;
+        let tableHtml =
+            "";
+
+
+        let mobileHtml =
+            "";
+
+
+        let no =
+            start + 1;
+
+
+
+        paginatedData.forEach(
+
+            item => {
+
+
+                const firebaseKey =
+                    item.firebaseKey;
+
+
+                const id =
+                    item.nik
+                    ||
+                    item.id
+                    ||
+                    "-";
+
+
+                const nama =
+                    item.nama
+                    ||
+                    "-";
+
+
+                const alamatktp =
+                    item.alamatktp
+                    ||
+                    "-";
+
+
+                const domisili =
+                    item.domisili
+                    ||
+                    "-";
+
+
+                const urlphoto =
+                    item.photoKTP
+                    ||
+                    "";
+
+
+
+                /* =========================
+                   PHOTO HTML
+                ========================= */
+
+                let photoHtml =
+                    `
+                    <span
+                        class="no-photo"
+                    >
+
+                        Tidak ada foto
+
+                    </span>
+                    `;
+
+
+                let mobilePhotoHtml =
+                    `
+                    <div
+                        class="no-photo"
+                    >
+
+                        Tidak ada foto ID / KTP
+
+                    </div>
+                    `;
+
+
+                if (
+
+                    urlphoto
+
+                    &&
+
+                    typeof urlphoto ===
+                    "string"
+
+                ) {
+
+
+                    const safeUrl =
+                        escapeHtml(
+                            urlphoto
+                        );
+
+
+                    photoHtml =
+                        `
+                        <img
+
+                            src="${safeUrl}"
+
+                            alt="Foto ID / KTP ${escapeHtml(nama)}"
+
+                            class="customer-photo"
+
+                            data-url="${safeUrl}"
+
+                            onclick="openPhotoFromElement(this)"
+
+                            onerror="photoError(this)"
+
+                        >
+                        `;
+
+
+                    mobilePhotoHtml =
+                        `
+                        <img
+
+                            src="${safeUrl}"
+
+                            alt="Foto ID / KTP ${escapeHtml(nama)}"
+
+                            class="mobile-photo"
+
+                            data-url="${safeUrl}"
+
+                            onclick="openPhotoFromElement(this)"
+
+                            onerror="photoError(this)"
+
+                        >
+                        `;
 
                 }
 
 
-                /*
-                   Object.entries digunakan
-                   agar KEY Firebase ikut diambil.
 
-                   Contoh:
+                /* =========================
+                   TABLE DESKTOP
+                ========================= */
 
-                   customer/
-                     1234540797076494/
+                tableHtml +=
+                    `
 
-                   Maka:
-
-                   firebaseId =
-                   1234540797076494
-                */
-
-                allData =
-                    Object.entries(
-                        data
-                    )
-                    .map(
-
-                        (
-                            [
-                                firebaseId,
-                                item
-                            ]
-                        ) => {
-
-                            return {
-
-                                ...item,
-
-                                id:
-                                    firebaseId
-
-                            };
-
-                        }
-
-                    );
+                    <tr>
 
 
-                applySearch();
+                        <td>
+
+                            ${no}
+
+                        </td>
 
 
-            },
+                        <td>
+
+                            ${escapeHtml(id)}
+
+                        </td>
 
 
-            (error) => {
+                        <td>
+
+                            ${escapeHtml(nama)}
+
+                        </td>
 
 
-                console.error(
-                    "Firebase Error:",
-                    error
-                );
+                        <td>
+
+                            ${escapeHtml(alamatktp)}
+
+                        </td>
 
 
-                showEmptyData(
-                    "Gagal mengambil data customer"
-                );
+                        <td>
+
+                            ${escapeHtml(domisili)}
+
+                        </td>
+
+
+                        <td
+                            class="photo-cell"
+                        >
+
+                            ${photoHtml}
+
+                        </td>
+
+
+                        <td>
+
+                            <div
+                                class="action-area"
+                            >
+
+
+                                <button
+
+                                    class="btn-edit"
+
+                                    onclick="editCustomer('${firebaseKey}')"
+
+                                >
+
+                                    ✏️ Edit
+
+                                </button>
+
+
+                                <button
+
+                                    class="btn-delete"
+
+                                    onclick="deleteCustomer('${firebaseKey}', '${escapeHtml(nama)}')"
+
+                                >
+
+                                    🗑️ Hapus
+
+                                </button>
+
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                    `;
+
+
+
+                /* =========================
+                   MOBILE CARD
+                ========================= */
+
+                mobileHtml +=
+                    `
+
+                    <div
+                        class="customer-card"
+                    >
+
+
+                        <div
+                            class="customer-card-header"
+                        >
+
+
+                            <div>
+
+
+                                <div
+                                    class="customer-number"
+                                >
+
+                                    CUSTOMER #${no}
+
+                                </div>
+
+
+                                <div
+                                    class="customer-name"
+                                >
+
+                                    ${escapeHtml(nama)}
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div
+                                class="customer-id"
+                            >
+
+                                ${escapeHtml(id)}
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        ${mobilePhotoHtml}
+
+
+
+                        <div
+                            class="card-grid"
+                        >
+
+
+                            <div
+                                class="card-item full"
+                            >
+
+
+                                <span
+                                    class="card-label"
+                                >
+
+                                    Alamat KTP
+
+                                </span>
+
+
+                                <div
+                                    class="card-value"
+                                >
+
+                                    ${escapeHtml(alamatktp)}
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div
+                                class="card-item full"
+                            >
+
+
+                                <span
+                                    class="card-label"
+                                >
+
+                                    Domisili
+
+                                </span>
+
+
+                                <div
+                                    class="card-value"
+                                >
+
+                                    ${escapeHtml(domisili)}
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div
+                            class="card-action-area"
+                        >
+
+
+                            <button
+
+                                class="btn-edit"
+
+                                onclick="editCustomer('${firebaseKey}')"
+
+                            >
+
+                                ✏️ Edit
+
+                            </button>
+
+
+                            <button
+
+                                class="btn-delete"
+
+                                onclick="deleteCustomer('${firebaseKey}', '${escapeHtml(nama)}')"
+
+                            >
+
+                                🗑️ Hapus
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+                    `;
+
+
+                no++;
 
 
             }
@@ -940,644 +2575,716 @@
         );
 
 
-        /* =========================
-           EMPTY DATA
-        ========================= */
-
-        function showEmptyData(
-            message
-        ) {
-
-
-            document
-                .getElementById(
-                    "isiData"
-                )
-                .innerHTML =
-                `
-                <tr>
-
-                    <td
-                        colspan="6"
-                        class="empty-data"
-                    >
-
-                        ${escapeHtml(message)}
-
-                    </td>
-
-                </tr>
-                `;
-
-
-            document
-                .getElementById(
-                    "pagination"
-                )
-                .innerHTML =
-                "";
-
-        }
-
-
-        /* =========================
-           ESCAPE HTML
-        ========================= */
-
-        function escapeHtml(
-            value
-        ) {
-
-
-            return String(
-                value ?? ""
+        document
+            .getElementById(
+                "isiData"
             )
+            .innerHTML =
+            tableHtml;
 
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-
-            .replace(
-                /</g,
-                "&lt;"
-            )
-
-            .replace(
-                />/g,
-                "&gt;"
-            )
-
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-
-        }
-
-
-        /* =========================
-           RENDER TABLE
-        ========================= */
-
-        function renderTable() {
-
-
-            if (
-                filteredData.length === 0
-            ) {
-
-
-                showEmptyData(
-                    "Data tidak ditemukan"
-                );
-
-
-                return;
-
-            }
-
-
-            const totalPages =
-                Math.ceil(
-                    filteredData.length
-                    /
-                    rowsPerPage
-                );
-
-
-            /*
-               Pengaman jika halaman
-               melebihi jumlah halaman
-            */
-
-            if (
-                currentPage > totalPages
-            ) {
-
-                currentPage =
-                    totalPages;
-
-            }
-
-
-            const start =
-                (
-                    currentPage - 1
-                )
-                *
-                rowsPerPage;
-
-
-            const end =
-                start
-                +
-                rowsPerPage;
-
-
-            const paginatedData =
-                filteredData.slice(
-                    start,
-                    end
-                );
-
-
-            let html =
-                "";
-
-
-            let no =
-                start + 1;
-
-
-            paginatedData.forEach(
-
-                item => {
-
-
-                    /*
-                       ID dari Firebase Key
-
-                       Jika ingin menampilkan
-                       NIK dari field,
-                       item.nik diprioritaskan.
-                    */
-
-                    const id =
-                        item.nik
-                        ||
-                        item.id
-                        ||
-                        "-";
-
-
-                    const nama =
-                        item.nama
-                        ||
-                        "-";
-
-
-                    const alamatktp =
-                        item.alamatktp
-                        ||
-                        "-";
-
-
-                    const domisili =
-                        item.domisili
-                        ||
-                        "-";
-
-
-                    /*
-                       SUMBER FOTO:
-
-                       customer/
-                         id/
-                           photoKTP
-
-                       KODE:
-                       item.photoKTP
-                    */
-
-                    const urlphoto =
-                        item.photoKTP
-                        ||
-                        "";
-
-
-                    /* =========================
-                       PHOTO HTML
-                    ========================= */
-
-                    let photoHtml =
-                        `
-                        <span
-                            class="no-photo"
-                        >
-
-                            Tidak ada foto
-
-                        </span>
-                        `;
-
-
-                    if (
-                        urlphoto
-                        &&
-                        typeof urlphoto ===
-                        "string"
-                    ) {
-
-
-                        const safeUrl =
-                            escapeHtml(
-                                urlphoto
-                            );
-
-
-                        photoHtml =
-                            `
-                            <img
-                                src="${safeUrl}"
-
-                                alt="Foto KTP ${escapeHtml(nama)}"
-
-                                class="customer-photo"
-
-                                data-url="${safeUrl}"
-
-                                onclick="openPhotoFromElement(this)"
-
-                                onerror="photoError(this)"
-                            >
-                            `;
-
-                    }
-
-
-                    html +=
-                        `
-                        <tr>
-
-
-                            <td>
-
-                                ${no}
-
-                            </td>
-
-
-                            <td>
-
-                                ${escapeHtml(id)}
-
-                            </td>
-
-
-                            <td>
-
-                                ${escapeHtml(nama)}
-
-                            </td>
-
-
-                            <td>
-
-                                ${escapeHtml(alamatktp)}
-
-                            </td>
-
-
-                            <td>
-
-                                ${escapeHtml(domisili)}
-
-                            </td>
-
-
-                            <td
-                                class="photo-cell"
-                            >
-
-                                ${photoHtml}
-
-                            </td>
-
-
-                        </tr>
-                        `;
-
-
-                    no++;
-
-
-                }
-
-            );
-
-
-            document
-                .getElementById(
-                    "isiData"
-                )
-                .innerHTML =
-                html;
-
-
-            renderPagination();
-
-        }
-
-
-        /* =========================
-           PHOTO ERROR
-        ========================= */
-
-        window.photoError =
-            function (
-                image
-            ) {
-
-
-                image.outerHTML =
-                    `
-                    <span
-                        class="no-photo"
-                    >
-
-                        Foto gagal dimuat
-
-                    </span>
-                    `;
-
-            };
-
-
-        /* =========================
-           PAGINATION
-        ========================= */
-
-        function renderPagination() {
-
-
-            const totalPages =
-                Math.ceil(
-                    filteredData.length
-                    /
-                    rowsPerPage
-                );
-
-
-            if (
-                totalPages <= 1
-            ) {
-
-
-                document
-                    .getElementById(
-                        "pagination"
-                    )
-                    .innerHTML =
-                    "";
-
-
-                return;
-
-            }
-
-
-            document
-                .getElementById(
-                    "pagination"
-                )
-                .innerHTML =
-                `
-
-                <button
-                    class="btn-prev"
-
-                    onclick="prevPage()"
-
-                    ${
-                        currentPage === 1
-                        ?
-                        "disabled"
-                        :
-                        ""
-                    }
-                >
-
-                    Prev
-
-                </button>
-
-
-                <span
-                    class="page-info"
-                >
-
-                    Halaman
-                    ${currentPage}
-                    dari
-                    ${totalPages}
-
-                </span>
-
-
-                <button
-                    class="btn-next"
-
-                    onclick="nextPage()"
-
-                    ${
-                        currentPage === totalPages
-                        ?
-                        "disabled"
-                        :
-                        ""
-                    }
-                >
-
-                    Next
-
-                </button>
-
-                `;
-
-        }
-
-
-        /* =========================
-           NEXT PAGE
-        ========================= */
-
-        window.nextPage =
-            function () {
-
-
-                const totalPages =
-                    Math.ceil(
-                        filteredData.length
-                        /
-                        rowsPerPage
-                    );
-
-
-                if (
-                    currentPage
-                    <
-                    totalPages
-                ) {
-
-
-                    currentPage++;
-
-
-                    renderTable();
-
-                }
-
-            };
-
-
-        /* =========================
-           PREVIOUS PAGE
-        ========================= */
-
-        window.prevPage =
-            function () {
-
-
-                if (
-                    currentPage > 1
-                ) {
-
-
-                    currentPage--;
-
-
-                    renderTable();
-
-                }
-
-            };
-
-
-        /* =========================
-           OPEN PHOTO
-        ========================= */
-
-        window.openPhotoFromElement =
-            function (
-                image
-            ) {
-
-
-                const url =
-                    image.getAttribute(
-                        "data-url"
-                    );
-
-
-                openPhoto(
-                    url,
-                    image.alt
-                );
-
-            };
-
-
-        window.openPhoto =
-            function (
-                url,
-                title = ""
-            ) {
-
-
-                const modal =
-                    document.getElementById(
-                        "photoModal"
-                    );
-
-
-                const image =
-                    document.getElementById(
-                        "modalImage"
-                    );
-
-
-                const caption =
-                    document.getElementById(
-                        "modalCaption"
-                    );
-
-
-                image.src =
-                    url;
-
-
-                caption.textContent =
-                    title;
-
-
-                modal.style.display =
-                    "flex";
-
-            };
-
-
-        /* =========================
-           CLOSE PHOTO
-        ========================= */
-
-        window.closePhoto =
-            function () {
-
-
-                const modal =
-                    document.getElementById(
-                        "photoModal"
-                    );
-
-
-                modal.style.display =
-                    "none";
-
-
-                document
-                    .getElementById(
-                        "modalImage"
-                    )
-                    .src =
-                    "";
-
-            };
-
-
-        /* =========================
-           CLOSE CLICK OUTSIDE
-        ========================= */
 
         document
             .getElementById(
-                "photoModal"
+                "mobileList"
             )
-            .addEventListener(
+            .innerHTML =
+            mobileHtml;
 
-                "click",
 
-                function (
-                    event
+        renderPagination();
+
+    }
+
+
+
+    /* =========================
+       EDIT CUSTOMER
+    ========================= */
+
+    window.editCustomer =
+        function (
+            firebaseKey
+        ) {
+
+
+            const item =
+                allData.find(
+
+                    data =>
+                    data.firebaseKey
+                    ===
+                    firebaseKey
+
+                );
+
+
+            if (
+                !item
+            ) {
+
+                alert(
+                    "Data customer tidak ditemukan!"
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "editFirebaseKey"
+                )
+                .value =
+                firebaseKey;
+
+
+            document
+                .getElementById(
+                    "editId"
+                )
+                .value =
+                firebaseKey;
+
+
+            document
+                .getElementById(
+                    "editNik"
+                )
+                .value =
+                item.nik || "";
+
+
+            document
+                .getElementById(
+                    "editNama"
+                )
+                .value =
+                item.nama || "";
+
+
+            document
+                .getElementById(
+                    "editAlamatKtp"
+                )
+                .value =
+                item.alamatktp || "";
+
+
+            document
+                .getElementById(
+                    "editDomisili"
+                )
+                .value =
+                item.domisili || "";
+
+
+            document
+                .getElementById(
+                    "editPhotoKTP"
+                )
+                .value =
+                item.photoKTP || "";
+
+
+            document
+                .getElementById(
+                    "editModal"
+                )
+                .style
+                .display =
+                "flex";
+
+        };
+
+
+
+    /* =========================
+       CLOSE EDIT MODAL
+    ========================= */
+
+    window.closeEditModal =
+        function () {
+
+
+            document
+                .getElementById(
+                    "editModal"
+                )
+                .style
+                .display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "editForm"
+                )
+                .reset();
+
+        };
+
+
+
+    /* =========================
+       SAVE EDIT
+    ========================= */
+
+    document
+        .getElementById(
+            "editForm"
+        )
+        .addEventListener(
+
+            "submit",
+
+            async function (
+                event
+            ) {
+
+
+                event.preventDefault();
+
+
+                const firebaseKey =
+                    document
+                    .getElementById(
+                        "editFirebaseKey"
+                    )
+                    .value;
+
+
+                if (
+                    !firebaseKey
                 ) {
 
+                    alert(
+                        "Firebase Key tidak ditemukan!"
+                    );
 
-                    if (
-                        event.target ===
-                        this
-                    ) {
-
-                        closePhoto();
-
-                    }
+                    return;
 
                 }
 
+
+                const button =
+                    event.submitter;
+
+
+                const originalText =
+                    button.innerHTML;
+
+
+                button.disabled =
+                    true;
+
+
+                button.innerHTML =
+                    "Menyimpan...";
+
+
+                try {
+
+
+                    const updatedData = {
+
+
+                        nik:
+
+                            document
+                            .getElementById(
+                                "editNik"
+                            )
+                            .value
+                            .trim(),
+
+
+                        nama:
+
+                            document
+                            .getElementById(
+                                "editNama"
+                            )
+                            .value
+                            .trim(),
+
+
+                        alamatktp:
+
+                            document
+                            .getElementById(
+                                "editAlamatKtp"
+                            )
+                            .value
+                            .trim(),
+
+
+                        domisili:
+
+                            document
+                            .getElementById(
+                                "editDomisili"
+                            )
+                            .value
+                            .trim(),
+
+
+                        photoKTP:
+
+                            document
+                            .getElementById(
+                                "editPhotoKTP"
+                            )
+                            .value
+                            .trim()
+
+                    };
+
+
+                    await update(
+
+                        ref(
+                            db,
+                            "customer/" + firebaseKey
+                        ),
+
+                        updatedData
+
+                    );
+
+
+                    alert(
+                        "Data customer berhasil diperbarui!"
+                    );
+
+
+                    closeEditModal();
+
+
+                }
+
+                catch (
+                    error
+                ) {
+
+
+                    console.error(
+                        "Gagal update data:",
+                        error
+                    );
+
+
+                    alert(
+                        "Gagal menyimpan perubahan!\n\n"
+                        +
+                        error.message
+                    );
+
+                }
+
+                finally {
+
+
+                    button.disabled =
+                        false;
+
+
+                    button.innerHTML =
+                        originalText;
+
+                }
+
+
+            }
+
+        );
+
+
+
+    /* =========================
+       DELETE CUSTOMER
+    ========================= */
+
+    window.deleteCustomer =
+        async function (
+            firebaseKey,
+            nama
+        ) {
+
+
+            const confirmDelete =
+                confirm(
+
+                    "Yakin ingin menghapus customer:\n\n"
+
+                    +
+
+                    nama
+
+                    +
+
+                    "\n\nData yang dihapus tidak dapat dikembalikan."
+
+                );
+
+
+            if (
+                !confirmDelete
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+
+                await remove(
+
+                    ref(
+                        db,
+                        "customer/" + firebaseKey
+                    )
+
+                );
+
+
+                alert(
+                    "Data customer berhasil dihapus!"
+                );
+
+
+            }
+
+            catch (
+                error
+            ) {
+
+
+                console.error(
+                    "Gagal menghapus customer:",
+                    error
+                );
+
+
+                alert(
+                    "Gagal menghapus customer!\n\n"
+                    +
+                    error.message
+                );
+
+            }
+
+        };
+
+
+
+    /* =========================
+       PHOTO ERROR
+    ========================= */
+
+    window.photoError =
+        function (
+            image
+        ) {
+
+
+            image.outerHTML =
+                `
+                <span
+                    class="no-photo"
+                >
+
+                    Foto gagal dimuat
+
+                </span>
+                `;
+
+        };
+
+
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
+    function renderPagination() {
+
+
+        const totalPages =
+            Math.ceil(
+                filteredData.length
+                /
+                rowsPerPage
             );
 
 
-        /* =========================
-           CLOSE ESC
-        ========================= */
+        if (
+            totalPages <= 1
+        ) {
 
-        document.addEventListener(
 
-            "keydown",
+            document
+                .getElementById(
+                    "pagination"
+                )
+                .innerHTML =
+                "";
+
+
+            return;
+
+        }
+
+
+        document
+            .getElementById(
+                "pagination"
+            )
+            .innerHTML =
+            `
+
+            <button
+
+                class="btn-prev"
+
+                onclick="prevPage()"
+
+                ${
+                    currentPage === 1
+                    ?
+                    "disabled"
+                    :
+                    ""
+                }
+
+            >
+
+                ← Prev
+
+            </button>
+
+
+            <span
+                class="page-info"
+            >
+
+                Halaman
+                ${currentPage}
+                dari
+                ${totalPages}
+
+            </span>
+
+
+            <button
+
+                class="btn-next"
+
+                onclick="nextPage()"
+
+                ${
+                    currentPage === totalPages
+                    ?
+                    "disabled"
+                    :
+                    ""
+                }
+
+            >
+
+                Next →
+
+            </button>
+
+            `;
+
+    }
+
+
+
+    /* =========================
+       NEXT PAGE
+    ========================= */
+
+    window.nextPage =
+        function () {
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredData.length
+                    /
+                    rowsPerPage
+                );
+
+
+            if (
+                currentPage
+                <
+                totalPages
+            ) {
+
+
+                currentPage++;
+
+
+                renderTable();
+
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+
+        };
+
+
+
+    /* =========================
+       PREVIOUS PAGE
+    ========================= */
+
+    window.prevPage =
+        function () {
+
+
+            if (
+                currentPage > 1
+            ) {
+
+
+                currentPage--;
+
+
+                renderTable();
+
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+
+        };
+
+
+
+    /* =========================
+       OPEN PHOTO
+    ========================= */
+
+    window.openPhotoFromElement =
+        function (
+            image
+        ) {
+
+
+            const url =
+                image.getAttribute(
+                    "data-url"
+                );
+
+
+            openPhoto(
+                url,
+                image.alt
+            );
+
+        };
+
+
+
+    window.openPhoto =
+        function (
+            url,
+            title = ""
+        ) {
+
+
+            const modal =
+                document.getElementById(
+                    "photoModal"
+                );
+
+
+            const image =
+                document.getElementById(
+                    "modalImage"
+                );
+
+
+            const caption =
+                document.getElementById(
+                    "modalCaption"
+                );
+
+
+            image.src =
+                url;
+
+
+            caption.textContent =
+                title;
+
+
+            modal.style.display =
+                "flex";
+
+        };
+
+
+
+    /* =========================
+       CLOSE PHOTO
+    ========================= */
+
+    window.closePhoto =
+        function () {
+
+
+            const modal =
+                document.getElementById(
+                    "photoModal"
+                );
+
+
+            modal.style.display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "modalImage"
+                )
+                .src =
+                "";
+
+        };
+
+
+
+    /* =========================
+       CLOSE CLICK OUTSIDE PHOTO
+    ========================= */
+
+    document
+        .getElementById(
+            "photoModal"
+        )
+        .addEventListener(
+
+            "click",
 
             function (
                 event
@@ -1585,7 +3292,8 @@
 
 
                 if (
-                    event.key === "Escape"
+                    event.target ===
+                    this
                 ) {
 
                     closePhoto();
@@ -1597,151 +3305,223 @@
         );
 
 
-        /* =========================
-           DOWNLOAD EXCEL
-        ========================= */
 
-        window.downloadExcel =
-            function () {
+    /* =========================
+       CLOSE CLICK OUTSIDE EDIT
+    ========================= */
+
+    document
+        .getElementById(
+            "editModal"
+        )
+        .addEventListener(
+
+            "click",
+
+            function (
+                event
+            ) {
 
 
                 if (
-                    filteredData.length === 0
+                    event.target ===
+                    this
                 ) {
 
-
-                    alert(
-                        "Tidak ada data untuk di-download!"
-                    );
-
-
-                    return;
+                    closeEditModal();
 
                 }
 
+            }
 
-                const dataExcel =
-                    filteredData.map(
-
-                        (
-                            item,
-                            index
-                        ) => {
+        );
 
 
-                            return {
+
+    /* =========================
+       CLOSE ESC
+    ========================= */
+
+    document.addEventListener(
+
+        "keydown",
+
+        function (
+            event
+        ) {
 
 
-                                "No":
-                                    index + 1,
+            if (
+                event.key ===
+                "Escape"
+            ) {
 
 
-                                "ID / NIK":
-                                    item.nik
-                                    ||
-                                    item.id
-                                    ||
-                                    "-",
+                closePhoto();
 
 
-                                "Nama":
-                                    item.nama
-                                    ||
-                                    "-",
+                closeEditModal();
+
+            }
+
+        }
+
+    );
 
 
-                                "Alamat KTP":
-                                    item.alamatktp
-                                    ||
-                                    "-",
+
+    /* =========================
+       DOWNLOAD EXCEL
+    ========================= */
+
+    window.downloadExcel =
+        function () {
 
 
-                                "Domisili":
-                                    item.domisili
-                                    ||
-                                    "-",
+            if (
+                filteredData.length === 0
+            ) {
 
 
-                                "URL Photo KTP":
-                                    item.photoKTP
-                                    ||
-                                    "-"
+                alert(
+                    "Tidak ada data untuk di-download!"
+                );
 
 
-                            };
+                return;
+
+            }
 
 
-                        }
+            const dataExcel =
+                filteredData.map(
 
-                    );
-
-
-                const worksheet =
-                    XLSX.utils
-                    .json_to_sheet(
-                        dataExcel
-                    );
+                    (
+                        item,
+                        index
+                    ) => {
 
 
-                worksheet["!cols"] = [
+                        return {
 
-                    {
-                        wch: 8
-                    },
 
-                    {
-                        wch: 22
-                    },
+                            "No":
+                                index + 1,
 
-                    {
-                        wch: 25
-                    },
 
-                    {
-                        wch: 45
-                    },
+                            "ID / Firebase Key":
+                                item.id
+                                ||
+                                "-",
 
-                    {
-                        wch: 35
-                    },
 
-                    {
-                        wch: 60
+                            "NIK":
+                                item.nik
+                                ||
+                                "-",
+
+
+                            "Nama":
+                                item.nama
+                                ||
+                                "-",
+
+
+                            "Alamat KTP":
+                                item.alamatktp
+                                ||
+                                "-",
+
+
+                            "Domisili":
+                                item.domisili
+                                ||
+                                "-",
+
+
+                            "URL Photo KTP":
+                                item.photoKTP
+                                ||
+                                "-"
+
+                        };
+
+
                     }
-
-                ];
-
-
-                const workbook =
-                    XLSX.utils
-                    .book_new();
-
-
-                XLSX.utils
-                    .book_append_sheet(
-
-                        workbook,
-
-                        worksheet,
-
-                        "Data Customer"
-
-                    );
-
-
-                XLSX.writeFile(
-
-                    workbook,
-
-                    "Data_Customer.xlsx"
 
                 );
 
-            };
+
+            const worksheet =
+                XLSX.utils
+                .json_to_sheet(
+                    dataExcel
+                );
 
 
-    </script>
+            worksheet["!cols"] = [
 
+                {
+                    wch: 8
+                },
+
+                {
+                    wch: 22
+                },
+
+                {
+                    wch: 22
+                },
+
+                {
+                    wch: 28
+                },
+
+                {
+                    wch: 45
+                },
+
+                {
+                    wch: 35
+                },
+
+                {
+                    wch: 60
+                }
+
+            ];
+
+
+            const workbook =
+                XLSX.utils
+                .book_new();
+
+
+            XLSX.utils
+            .book_append_sheet(
+
+                workbook,
+
+                worksheet,
+
+                "Data Customer"
+
+            );
+
+
+            XLSX.writeFile(
+
+                workbook,
+
+                "Data_Customer.xlsx"
+
+            );
+
+        };
+
+
+</script>
+```
 
 </body>
 
