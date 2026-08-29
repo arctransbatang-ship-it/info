@@ -1,10 +1,9 @@
+```html
 <!DOCTYPE html>
-
 <html lang="id">
 
 <head>
 
-```
 <meta charset="UTF-8">
 
 <meta
@@ -14,1331 +13,1392 @@
 
 <title>ARC TRANS - Data Customer</title>
 
-
 <!-- LIBRARY EXCEL -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
-></script>
-
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <style>
 
-    /* =========================
-       GLOBAL
-    ========================= */
+/* =========================================================
+   GLOBAL
+========================================================= */
 
-    * {
-        box-sizing: border-box;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
 
+:root {
+    --primary: #2196F3;
+    --primary-dark: #1976D2;
+    --secondary: #21CBF3;
 
-    :root {
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #f59e0b;
+    --purple: #7c3aed;
 
-        --primary: #2196F3;
-        --primary-dark: #1976D2;
-        --secondary: #21CBF3;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #dbe3ee;
+}
 
-        --success: #16a34a;
-        --danger: #dc2626;
-        --warning: #f59e0b;
+body {
+    margin: 0;
+    min-height: 100vh;
 
-        --text: #1e293b;
-        --muted: #64748b;
-        --border: #dbe3ee;
+    background:
+        linear-gradient(
+            135deg,
+            #e0f2fe,
+            #f8fafc
+        );
 
-    }
+    color: var(--text);
+}
 
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar {
+    width: 100%;
+    padding: 14px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: white;
+
+    box-shadow:
+        0 2px 12px
+        rgba(15, 23, 42, 0.08);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color: white;
+    font-size: 20px;
+
+    box-shadow:
+        0 6px 16px
+        rgba(33, 150, 243, 0.25);
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.brand-text p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    background: #eff6ff;
+    color: var(--primary-dark);
+
+    font-weight: 700;
+
+    padding: 10px 15px;
+    border-radius: 12px;
+
+    transition: 0.2s;
+}
+
+.home-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 20px;
+}
+
+.page-title {
+    margin-bottom: 20px;
+}
+
+.page-title h2 {
+    margin: 0 0 5px;
+    font-size: 24px;
+}
+
+.page-title p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+#searchInput {
+    flex: 1;
+    min-width: 220px;
+    max-width: 450px;
+
+    min-height: 48px;
+
+    padding: 12px 15px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    background: white;
+
+    font-size: 14px;
+    outline: none;
+}
+
+#searchInput:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(33, 150, 243, 0.12);
+}
+
+button {
+    border: none;
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    border-radius: 12px;
+
+    padding: 12px 18px;
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background: #cbd5e1 !important;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#btnDownload {
+    display: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    box-shadow:
+        0 6px 15px
+        rgba(34, 197, 94, 0.2);
+}
+
+/* =========================================================
+   TABLE CUSTOMER
+========================================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(15, 23, 42, 0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+}
+
+th {
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color: white;
+
+    padding: 14px 10px;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+td {
+    padding: 12px 10px;
+
+    border-bottom:
+        1px solid
+        #edf2f7;
+
+    text-align: center;
+
+    vertical-align: middle;
+}
+
+tbody tr {
+    transition: 0.2s;
+}
+
+tbody tr:hover {
+    background: #f8fbff;
+}
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.photo-cell {
+    min-width: 130px;
+}
+
+.customer-photo {
+    display: block;
+
+    width: 110px;
+    height: 80px;
+
+    margin: auto;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    border:
+        1px solid
+        var(--border);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.customer-photo:hover {
+    transform: scale(1.06);
+
+    box-shadow:
+        0 6px 18px
+        rgba(0, 0, 0, 0.2);
+}
+
+.no-photo {
+    color: #94a3b8;
+    font-size: 12px;
+    text-align: center;
+    padding: 10px;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge {
+    display: inline-block;
+
+    margin-top: 6px;
+
+    padding: 4px 9px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+}
+
+.status-clear {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #86efac;
+}
+
+.status-not-clear {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+}
+
+/* =========================================================
+   ACTION
+========================================================= */
+
+.action-area {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.btn-edit {
+    background:
+        linear-gradient(
+            135deg,
+            #f59e0b,
+            #fbbf24
+        );
+
+    padding: 9px 12px;
+    font-size: 12px;
+}
+
+.btn-delete {
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #ef4444
+        );
+
+    padding: 9px 12px;
+    font-size: 12px;
+}
+
+.btn-history {
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #a855f7
+        );
+
+    padding: 9px 12px;
+    font-size: 12px;
+}
+
+/* =========================================================
+   MOBILE CARD CUSTOMER
+========================================================= */
+
+.mobile-list {
+    display: none;
+}
+
+.customer-card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 16px;
+
+    margin-bottom: 14px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(15, 23, 42, 0.08);
+
+    border:
+        1px solid
+        #eef2f7;
+}
+
+.customer-card-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 14px;
+
+    padding-bottom: 12px;
+
+    border-bottom:
+        1px solid
+        #edf2f7;
+}
+
+.customer-number {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.customer-name {
+    margin: 3px 0 0;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    word-break: break-word;
+}
+
+.customer-id {
+    background: #eff6ff;
+
+    color: var(--primary-dark);
+
+    padding: 7px 10px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-align: center;
+
+    max-width: 145px;
+
+    word-break: break-word;
+}
+
+.customer-status {
+    margin-top: 7px;
+    text-align: center;
+}
+
+.mobile-photo {
+    width: 100%;
+    height: 210px;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+
+    margin-bottom: 14px;
+
+    border:
+        1px solid
+        var(--border);
+
+    cursor: pointer;
+
+    background: #f8fafc;
+}
+
+.card-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+.card-item {
+    background: #f8fafc;
+
+    padding: 10px;
+
+    border-radius: 10px;
+}
+
+.card-item.full {
+    grid-column: 1 / -1;
+}
+
+.card-label {
+    display: block;
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    margin-bottom: 5px;
+
+    font-weight: 600;
+}
+
+.card-value {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--text);
+
+    word-break: break-word;
+
+    line-height: 1.5;
+}
+
+.card-action-area {
+    margin-top: 15px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+}
+
+.card-action-area button {
+    width: 100%;
+    padding: 10px 5px;
+    font-size: 11px;
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+#pagination {
+    margin: 20px 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.btn-prev {
+    background: var(--warning);
+}
+
+.btn-next {
+    background: var(--success);
+}
+
+.page-info {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--text);
+
+    padding: 8px 12px;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty-data {
+    padding: 35px;
+
+    text-align: center;
+
+    color: var(--muted);
+}
+
+/* =========================================================
+   PHOTO MODAL
+========================================================= */
+
+.photo-modal {
+    display: none;
+
+    position: fixed;
+
+    z-index: 9999;
+
+    inset: 0;
+
+    background:
+        rgba(15, 23, 42, 0.9);
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+}
+
+.photo-modal img {
+    max-width: 95%;
+    max-height: 85vh;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 40px
+        rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+    position: absolute;
+
+    top: 18px;
+    right: 25px;
+
+    color: white;
+
+    font-size: 42px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+.modal-caption {
+    position: absolute;
+
+    bottom: 20px;
+
+    color: white;
+
+    font-size: 14px;
+
+    text-align: center;
+
+    width: 100%;
+
+    padding: 0 20px;
+}
+
+/* =========================================================
+   EDIT MODAL
+========================================================= */
+
+.edit-modal {
+    display: none;
+
+    position: fixed;
+
+    z-index: 10000;
+
+    inset: 0;
+
+    background:
+        rgba(15, 23, 42, 0.6);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    overflow-y: auto;
+}
+
+.edit-modal-content {
+    width: 100%;
+
+    max-width: 650px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(15, 23, 42, 0.25);
+
+    position: relative;
+
+    margin: auto;
+}
+
+.edit-modal-title {
+    margin: 0 0 20px;
+
+    font-size: 22px;
+}
+
+.close-edit-modal {
+    position: absolute;
+
+    right: 20px;
+    top: 15px;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    color: var(--muted);
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    min-height: 45px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 10px;
+
+    padding: 10px 12px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    resize: vertical;
+}
+
+.form-group textarea {
+    min-height: 90px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(33, 150, 243, 0.12);
+}
+
+.edit-modal-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.btn-cancel {
+    background: #64748b;
+}
+
+.btn-save {
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+}
+
+/* =========================================================
+   HISTORY MODAL / PAGE
+========================================================= */
+
+.history-modal {
+    display: none;
+
+    position: fixed;
+
+    z-index: 10001;
+
+    inset: 0;
+
+    background:
+        rgba(15, 23, 42, 0.65);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 15px;
+
+    overflow-y: auto;
+}
+
+.history-modal-content {
+    width: 100%;
+
+    max-width: 1450px;
+
+    max-height: 94vh;
+
+    overflow-y: auto;
+
+    background: #f8fafc;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(15, 23, 42, 0.3);
+
+    position: relative;
+
+    padding: 20px;
+}
+
+.history-header {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.06);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 5;
+}
+
+.history-title-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 15px;
+}
+
+.history-title {
+    margin: 0;
+
+    font-size: 21px;
+
+    color: var(--text);
+}
+
+.history-subtitle {
+    margin: 5px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.close-history {
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border-radius: 10px;
+
+    font-size: 24px;
+}
+
+.history-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+.summary-box {
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid
+        #e2e8f0;
+}
+
+.summary-label {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-bottom: 4px;
+}
+
+.summary-value {
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+.history-table-container {
+    background: white;
+
+    border-radius: 16px;
+
+    overflow-x: auto;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.06);
+}
+
+.history-table {
+    min-width: 1450px;
+}
+
+.history-table th {
+    position: sticky;
+    top: 0;
+
+    z-index: 2;
+}
+
+.history-table td {
+    font-size: 12px;
+}
+
+.history-mobile-list {
+    display: none;
+}
+
+.history-card {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 15px;
+
+    margin-bottom: 12px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.07);
+
+    border:
+        1px solid
+        #eef2f7;
+}
+
+.history-card-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    align-items: flex-start;
+
+    padding-bottom: 12px;
+
+    margin-bottom: 12px;
+
+    border-bottom:
+        1px solid
+        #edf2f7;
+}
+
+.history-card-title {
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+.history-card-plat {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    background: #eff6ff;
+
+    color: var(--primary-dark);
+
+    padding: 5px 8px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.history-payment {
+    text-align: right;
+}
+
+.payment-badge {
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+.payment-lunas {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.payment-kurang {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.payment-lebih {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.payment-normal {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.history-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+.history-item {
+    background: #f8fafc;
+
+    border-radius: 9px;
+
+    padding: 9px;
+}
+
+.history-item.full {
+    grid-column: 1 / -1;
+}
+
+.history-label {
+    display: block;
+
+    font-size: 10px;
+
+    color: var(--muted);
+
+    margin-bottom: 4px;
+}
+
+.history-value {
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.45;
+
+    word-break: break-word;
+}
+
+.history-empty {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.06);
+}
+
+.history-loading {
+    text-align: center;
+
+    padding: 35px;
+
+    color: var(--muted);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
 
     body {
-
-        margin: 0;
-
-        min-height: 100vh;
-
-        background:
-            linear-gradient(
-                135deg,
-                #e0f2fe,
-                #f8fafc
-            );
-
-        color: var(--text);
-
+        padding-bottom: 20px;
     }
-
-
-    /* =========================
-       HEADER
-    ========================= */
 
     .topbar {
-
-        width: 100%;
-
-        padding: 14px 20px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        background: white;
-
-        box-shadow:
-            0 2px 12px
-            rgba(15, 23, 42, 0.08);
-
-        position: sticky;
-
-        top: 0;
-
-        z-index: 1000;
-
+        padding: 10px 14px;
     }
-
-
-    .brand {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 10px;
-
-    }
-
 
     .brand-icon {
-
-        width: 42px;
-
-        height: 42px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        border-radius: 12px;
-
-        background:
-            linear-gradient(
-                135deg,
-                var(--primary),
-                var(--secondary)
-            );
-
-        color: white;
-
-        font-size: 20px;
-
-        box-shadow:
-            0 6px 16px
-            rgba(33, 150, 243, 0.25);
-
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
     }
-
 
     .brand-text h1 {
-
-        margin: 0;
-
-        font-size: 18px;
-
+        font-size: 16px;
     }
-
 
     .brand-text p {
-
-        margin: 2px 0 0;
-
-        font-size: 12px;
-
-        color: var(--muted);
-
+        font-size: 10px;
     }
-
 
     .home-btn {
-
-        display: inline-flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        text-decoration: none;
-
-        background: #eff6ff;
-
-        color: var(--primary-dark);
-
-        font-weight: 700;
-
-        padding: 10px 15px;
-
-        border-radius: 12px;
-
-        transition: 0.2s;
-
+        padding: 8px 12px;
+        font-size: 12px;
     }
-
-
-    .home-btn:hover {
-
-        background: var(--primary);
-
-        color: white;
-
-        transform: translateY(-1px);
-
-    }
-
-
-    /* =========================
-       CONTAINER
-    ========================= */
 
     .container {
-
-        width: 100%;
-
-        max-width: 1500px;
-
-        margin: auto;
-
-        padding: 20px;
-
+        padding: 14px;
     }
-
-
-    .page-title {
-
-        margin-bottom: 20px;
-
-    }
-
 
     .page-title h2 {
-
-        margin: 0 0 5px;
-
-        font-size: 24px;
-
+        font-size: 21px;
     }
-
-
-    .page-title p {
-
-        margin: 0;
-
-        font-size: 14px;
-
-        color: var(--muted);
-
-    }
-
-
-    /* =========================
-       TOOLBAR
-    ========================= */
 
     .toolbar {
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        gap: 12px;
-
-        margin-bottom: 18px;
-
-        flex-wrap: wrap;
-
+        display: grid;
+        grid-template-columns: 1fr;
     }
-
 
     #searchInput {
-
-        flex: 1;
-
-        min-width: 220px;
-
-        max-width: 450px;
-
-        min-height: 48px;
-
-        padding: 12px 15px;
-
-        border:
-            1px solid
-            var(--border);
-
-        border-radius: 12px;
-
-        background: white;
-
-        font-size: 14px;
-
-        outline: none;
-
+        width: 100%;
+        max-width: none;
     }
-
-
-    #searchInput:focus {
-
-        border-color: var(--primary);
-
-        box-shadow:
-            0 0 0 4px
-            rgba(33, 150, 243, 0.12);
-
-    }
-
-
-    button {
-
-        border: none;
-
-        cursor: pointer;
-
-        color: white;
-
-        font-size: 14px;
-
-        font-weight: 700;
-
-        border-radius: 12px;
-
-        padding: 12px 18px;
-
-        transition: 0.2s;
-
-    }
-
-
-    button:hover {
-
-        transform: translateY(-1px);
-
-    }
-
-
-    button:disabled {
-
-        background: #cbd5e1 !important;
-
-        cursor: not-allowed;
-
-        transform: none;
-
-    }
-
 
     #btnDownload {
-
-        display: none;
-
-        background:
-            linear-gradient(
-                135deg,
-                #16a34a,
-                #22c55e
-            );
-
-        box-shadow:
-            0 6px 15px
-            rgba(34, 197, 94, 0.2);
-
+        width: 100%;
+        min-height: 48px;
     }
-
-
-    /* =========================
-       TABLE DESKTOP
-    ========================= */
 
     .table-container {
-
-        width: 100%;
-
-        overflow-x: auto;
-
-        background: white;
-
-        border-radius: 18px;
-
-        box-shadow:
-            0 10px 30px
-            rgba(15, 23, 42, 0.08);
-
+        display: none;
     }
-
-
-    table {
-
-        width: 100%;
-
-        border-collapse: collapse;
-
-        min-width: 1100px;
-
-    }
-
-
-    th {
-
-        background:
-            linear-gradient(
-                135deg,
-                var(--primary),
-                var(--secondary)
-            );
-
-        color: white;
-
-        padding: 14px 10px;
-
-        text-align: center;
-
-        white-space: nowrap;
-
-    }
-
-
-    td {
-
-        padding: 12px 10px;
-
-        border-bottom:
-            1px solid
-            #edf2f7;
-
-        text-align: center;
-
-        vertical-align: middle;
-
-    }
-
-
-    tbody tr {
-
-        transition: 0.2s;
-
-    }
-
-
-    tbody tr:hover {
-
-        background: #f8fbff;
-
-    }
-
-
-    /* =========================
-       PHOTO
-    ========================= */
-
-    .photo-cell {
-
-        min-width: 130px;
-
-    }
-
-
-    .customer-photo {
-
-        display: block;
-
-        width: 110px;
-
-        height: 80px;
-
-        margin: auto;
-
-        object-fit: cover;
-
-        border-radius: 10px;
-
-        border:
-            1px solid
-            var(--border);
-
-        cursor: pointer;
-
-        transition: 0.2s;
-
-    }
-
-
-    .customer-photo:hover {
-
-        transform: scale(1.06);
-
-        box-shadow:
-            0 6px 18px
-            rgba(0, 0, 0, 0.2);
-
-    }
-
-
-    .no-photo {
-
-        color: #94a3b8;
-
-        font-size: 12px;
-
-        text-align: center;
-
-        padding: 10px;
-
-    }
-
-
-    /* =========================
-       STATUS
-    ========================= */
-
-    .status-badge {
-
-        display: inline-block;
-
-        margin-top: 6px;
-
-        padding: 4px 9px;
-
-        border-radius: 999px;
-
-        font-size: 11px;
-
-        font-weight: 800;
-
-        text-transform: uppercase;
-
-        letter-spacing: 0.3px;
-
-    }
-
-
-    .status-clear {
-
-        background: #dcfce7;
-
-        color: #15803d;
-
-        border: 1px solid #86efac;
-
-    }
-
-
-    .status-not-clear {
-
-        background: #fee2e2;
-
-        color: #dc2626;
-
-        border: 1px solid #fca5a5;
-
-    }
-
-
-    /* =========================
-       ACTION BUTTON
-    ========================= */
-
-    .action-area {
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        gap: 8px;
-
-    }
-
-
-    .btn-edit {
-
-        background:
-            linear-gradient(
-                135deg,
-                #f59e0b,
-                #fbbf24
-            );
-
-        padding: 9px 12px;
-
-        font-size: 12px;
-
-    }
-
-
-    .btn-delete {
-
-        background:
-            linear-gradient(
-                135deg,
-                #dc2626,
-                #ef4444
-            );
-
-        padding: 9px 12px;
-
-        font-size: 12px;
-
-    }
-
-
-    /* =========================
-       MOBILE CARD
-    ========================= */
 
     .mobile-list {
-
-        display: none;
-
-    }
-
-
-    .customer-card {
-
-        background: white;
-
-        border-radius: 18px;
-
-        padding: 16px;
-
-        margin-bottom: 14px;
-
-        box-shadow:
-            0 8px 24px
-            rgba(15, 23, 42, 0.08);
-
-        border:
-            1px solid
-            #eef2f7;
-
-    }
-
-
-    .customer-card-header {
-
-        display: flex;
-
-        align-items: flex-start;
-
-        justify-content: space-between;
-
-        gap: 12px;
-
-        margin-bottom: 14px;
-
-        padding-bottom: 12px;
-
-        border-bottom:
-            1px solid
-            #edf2f7;
-
-    }
-
-
-    .customer-number {
-
-        font-size: 12px;
-
-        color: var(--muted);
-
-        font-weight: 700;
-
-    }
-
-
-    .customer-name {
-
-        margin: 3px 0 0;
-
-        font-size: 17px;
-
-        font-weight: 800;
-
-        word-break: break-word;
-
-    }
-
-
-    .customer-id {
-
-        background: #eff6ff;
-
-        color: var(--primary-dark);
-
-        padding: 7px 10px;
-
-        border-radius: 10px;
-
-        font-size: 12px;
-
-        font-weight: 800;
-
-        text-align: center;
-
-        max-width: 145px;
-
-        word-break: break-word;
-
-    }
-
-
-    .customer-status {
-
-        margin-top: 7px;
-
-        text-align: center;
-
-    }
-
-
-    .mobile-photo {
-
-        width: 100%;
-
-        height: 210px;
-
-        object-fit: cover;
-
-        border-radius: 14px;
-
-        margin-bottom: 14px;
-
-        border:
-            1px solid
-            var(--border);
-
-        cursor: pointer;
-
-        background: #f8fafc;
-
-    }
-
-
-    .card-grid {
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 10px;
-
-    }
-
-
-    .card-item {
-
-        background: #f8fafc;
-
-        padding: 10px;
-
-        border-radius: 10px;
-
-    }
-
-
-    .card-item.full {
-
-        grid-column: 1 / -1;
-
-    }
-
-
-    .card-label {
-
         display: block;
-
-        font-size: 11px;
-
-        color: var(--muted);
-
-        margin-bottom: 5px;
-
-        font-weight: 600;
-
     }
-
-
-    .card-value {
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        color: var(--text);
-
-        word-break: break-word;
-
-        line-height: 1.5;
-
-    }
-
-
-    .card-action-area {
-
-        margin-top: 15px;
-
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 10px;
-
-    }
-
-
-    .card-action-area button {
-
-        width: 100%;
-
-    }
-
-
-    /* =========================
-       PAGINATION
-    ========================= */
-
-    #pagination {
-
-        margin: 20px 0;
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        gap: 10px;
-
-        flex-wrap: wrap;
-
-    }
-
-
-    .btn-prev {
-
-        background: var(--warning);
-
-    }
-
-
-    .btn-next {
-
-        background: var(--success);
-
-    }
-
-
-    .page-info {
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        color: var(--text);
-
-        padding: 8px 12px;
-
-    }
-
-
-    /* =========================
-       EMPTY DATA
-    ========================= */
-
-    .empty-data {
-
-        padding: 35px;
-
-        text-align: center;
-
-        color: var(--muted);
-
-    }
-
-
-    /* =========================
-       PHOTO MODAL
-    ========================= */
-
-    .photo-modal {
-
-        display: none;
-
-        position: fixed;
-
-        z-index: 9999;
-
-        inset: 0;
-
-        background:
-            rgba(15, 23, 42, 0.9);
-
-        justify-content: center;
-
-        align-items: center;
-
-        padding: 20px;
-
-    }
-
-
-    .photo-modal img {
-
-        max-width: 95%;
-
-        max-height: 85vh;
-
-        border-radius: 14px;
-
-        box-shadow:
-            0 10px 40px
-            rgba(0, 0, 0, 0.5);
-
-    }
-
-
-    .close-modal {
-
-        position: absolute;
-
-        top: 18px;
-
-        right: 25px;
-
-        color: white;
-
-        font-size: 42px;
-
-        cursor: pointer;
-
-        line-height: 1;
-
-    }
-
-
-    .modal-caption {
-
-        position: absolute;
-
-        bottom: 20px;
-
-        color: white;
-
-        font-size: 14px;
-
-        text-align: center;
-
-        width: 100%;
-
-        padding: 0 20px;
-
-    }
-
-
-    /* =========================
-       EDIT MODAL
-    ========================= */
-
-    .edit-modal {
-
-        display: none;
-
-        position: fixed;
-
-        z-index: 10000;
-
-        inset: 0;
-
-        background:
-            rgba(15, 23, 42, 0.6);
-
-        align-items: center;
-
-        justify-content: center;
-
-        padding: 20px;
-
-        overflow-y: auto;
-
-    }
-
-
-    .edit-modal-content {
-
-        width: 100%;
-
-        max-width: 650px;
-
-        background: white;
-
-        border-radius: 20px;
-
-        padding: 24px;
-
-        box-shadow:
-            0 20px 60px
-            rgba(15, 23, 42, 0.25);
-
-        position: relative;
-
-        margin: auto;
-
-    }
-
-
-    .edit-modal-title {
-
-        margin: 0 0 20px;
-
-        font-size: 22px;
-
-    }
-
-
-    .close-edit-modal {
-
-        position: absolute;
-
-        right: 20px;
-
-        top: 15px;
-
-        font-size: 30px;
-
-        cursor: pointer;
-
-        color: var(--muted);
-
-    }
-
 
     .form-grid {
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 15px;
-
+        grid-template-columns: 1fr;
     }
-
-
-    .form-group {
-
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 6px;
-
-    }
-
 
     .form-group.full {
-
-        grid-column: 1 / -1;
-
+        grid-column: auto;
     }
 
-
-    .form-group label {
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        color: var(--text);
-
+    .edit-modal-content {
+        padding: 20px;
     }
 
+    /* HISTORY MOBILE */
 
-    .form-group input,
-
-    .form-group textarea {
-
-        width: 100%;
-
-        min-height: 45px;
-
-        border:
-            1px solid
-            var(--border);
-
-        border-radius: 10px;
-
-        padding: 10px 12px;
-
-        font-size: 14px;
-
-        outline: none;
-
-        resize: vertical;
-
+    .history-modal {
+        padding: 0;
+        align-items: flex-start;
     }
 
+    .history-modal-content {
+        min-height: 100vh;
+        max-height: 100vh;
 
-    .form-group textarea {
+        border-radius: 0;
 
-        min-height: 90px;
-
+        padding: 12px;
     }
 
+    .history-header {
+        position: relative;
 
-    .form-group input:focus,
+        top: auto;
 
-    .form-group textarea:focus {
-
-        border-color: var(--primary);
-
-        box-shadow:
-            0 0 0 3px
-            rgba(33, 150, 243, 0.12);
-
+        padding: 14px;
     }
 
-
-    .edit-modal-actions {
-
-        display: flex;
-
-        justify-content: flex-end;
-
-        gap: 10px;
-
-        margin-top: 22px;
-
+    .history-title {
+        font-size: 18px;
     }
 
-
-    .btn-cancel {
-
-        background: #64748b;
-
+    .history-subtitle {
+        font-size: 12px;
     }
 
-
-    .btn-save {
-
-        background:
-            linear-gradient(
-                135deg,
-                #16a34a,
-                #22c55e
-            );
-
+    .history-summary {
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 700px) {
-
-        body {
-
-            padding-bottom: 20px;
-
-        }
-
-
-        .topbar {
-
-            padding: 10px 14px;
-
-        }
-
-
-        .brand-icon {
-
-            width: 38px;
-
-            height: 38px;
-
-            font-size: 18px;
-
-        }
-
-
-        .brand-text h1 {
-
-            font-size: 16px;
-
-        }
-
-
-        .brand-text p {
-
-            font-size: 10px;
-
-        }
-
-
-        .home-btn {
-
-            padding: 8px 12px;
-
-            font-size: 12px;
-
-        }
-
-
-        .container {
-
-            padding: 14px;
-
-        }
-
-
-        .page-title h2 {
-
-            font-size: 21px;
-
-        }
-
-
-        .toolbar {
-
-            display: grid;
-
-            grid-template-columns: 1fr;
-
-        }
-
-
-        #searchInput {
-
-            width: 100%;
-
-            max-width: none;
-
-        }
-
-
-        #btnDownload {
-
-            width: 100%;
-
-            min-height: 48px;
-
-        }
-
-
-        .table-container {
-
-            display: none;
-
-        }
-
-
-        .mobile-list {
-
-            display: block;
-
-        }
-
-
-        .form-grid {
-
-            grid-template-columns: 1fr;
-
-        }
-
-
-        .form-group.full {
-
-            grid-column: auto;
-
-        }
-
-
-        .edit-modal-content {
-
-            padding: 20px;
-
-        }
-
+    .history-table-container {
+        display: none;
     }
 
-
-    @media (max-width: 380px) {
-
-        .card-grid {
-
-            grid-template-columns: 1fr;
-
-        }
-
-
-        .card-item.full {
-
-            grid-column: auto;
-
-        }
-
-
-        .customer-card-header {
-
-            flex-direction: column;
-
-        }
-
-
-        .customer-id {
-
-            max-width: 100%;
-
-        }
-
-
-        .customer-status {
-
-            text-align: left;
-
-        }
-
+    .history-mobile-list {
+        display: block;
     }
+
+    .history-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .history-card-top {
+        flex-direction: column;
+    }
+
+    .history-payment {
+        text-align: left;
+    }
+
+}
+
+@media (max-width: 380px) {
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-item.full {
+        grid-column: auto;
+    }
+
+    .customer-card-header {
+        flex-direction: column;
+    }
+
+    .customer-id {
+        max-width: 100%;
+    }
+
+    .customer-status {
+        text-align: left;
+    }
+
+    .card-action-area {
+        grid-template-columns: 1fr;
+    }
+
+    .history-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .history-item.full {
+        grid-column: auto;
+    }
+
+}
 
 </style>
-```
 
 </head>
 
 <body>
 
-```
-<!-- =========================
+
+<!-- =========================================================
      HEADER
-========================= -->
+========================================================= -->
 
 <div class="topbar">
 
-
     <div class="brand">
 
-
         <div class="brand-icon">
-
             👤
-
         </div>
-
 
         <div class="brand-text">
 
@@ -1352,30 +1412,23 @@
 
         </div>
 
-
     </div>
-
 
     <a
         href="index.html"
         class="home-btn"
     >
-
         🏠 Home
-
     </a>
-
 
 </div>
 
 
-
-<!-- =========================
-     CONTAINER
-========================= -->
+<!-- =========================================================
+     CUSTOMER CONTAINER
+========================================================= -->
 
 <div class="container">
-
 
     <div class="page-title">
 
@@ -1390,11 +1443,7 @@
     </div>
 
 
-
-    <!-- TOOLBAR -->
-
     <div class="toolbar">
-
 
         <input
             type="text"
@@ -1402,30 +1451,23 @@
             placeholder="🔍 Cari ID, NIK, nama atau alamat..."
         >
 
-
         <button
             id="btnDownload"
             onclick="downloadExcel()"
         >
-
             📥 Download Excel
-
         </button>
-
 
     </div>
 
 
-
-    <!-- =========================
-         TABLE DESKTOP
-    ========================= -->
+    <!-- =====================================================
+         DESKTOP TABLE
+    ====================================================== -->
 
     <div class="table-container">
 
-
         <table>
-
 
             <thead>
 
@@ -1449,7 +1491,6 @@
 
             </thead>
 
-
             <tbody id="isiData">
 
                 <tr>
@@ -1458,66 +1499,50 @@
                         colspan="7"
                         class="empty-data"
                     >
-
                         Memuat data customer...
-
                     </td>
 
                 </tr>
 
             </tbody>
 
-
         </table>
-
 
     </div>
 
 
-
-    <!-- =========================
+    <!-- =====================================================
          MOBILE LIST
-    ========================= -->
+    ====================================================== -->
 
     <div
         id="mobileList"
         class="mobile-list"
     >
-
         Memuat data customer...
-
     </div>
 
 
-
-    <!-- PAGINATION -->
-
     <div id="pagination"></div>
-
 
 </div>
 
 
-
-<!-- =========================
+<!-- =========================================================
      PHOTO MODAL
-========================= -->
+========================================================= -->
 
 <div
     id="photoModal"
     class="photo-modal"
 >
 
-
     <span
         class="close-modal"
         onclick="closePhoto()"
     >
-
         &times;
-
     </span>
-
 
     <img
         id="modalImage"
@@ -1525,59 +1550,44 @@
         alt="Foto ID / KTP"
     >
 
-
     <div
         id="modalCaption"
         class="modal-caption"
-    >
-    </div>
-
+    ></div>
 
 </div>
 
 
-
-<!-- =========================
+<!-- =========================================================
      EDIT MODAL
-========================= -->
+========================================================= -->
 
 <div
     id="editModal"
     class="edit-modal"
 >
 
-
     <div class="edit-modal-content">
-
 
         <span
             class="close-edit-modal"
             onclick="closeEditModal()"
         >
-
             &times;
-
         </span>
 
-
         <h2 class="edit-modal-title">
-
             ✏️ Edit Data Customer
-
         </h2>
 
-
         <form id="editForm">
-
 
             <input
                 type="hidden"
                 id="editFirebaseKey"
             >
 
-
             <div class="form-grid">
-
 
                 <div class="form-group">
 
@@ -1593,7 +1603,6 @@
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>
@@ -1606,7 +1615,6 @@
                     >
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -1622,7 +1630,6 @@
 
                 </div>
 
-
                 <div class="form-group full">
 
                     <label>
@@ -1637,7 +1644,6 @@
 
                 </div>
 
-
                 <div class="form-group full">
 
                     <label>
@@ -1650,7 +1656,6 @@
 
                 </div>
 
-
                 <div class="form-group full">
 
                     <label>
@@ -1662,7 +1667,6 @@
                     ></textarea>
 
                 </div>
-
 
                 <div class="form-group full">
 
@@ -1678,1898 +1682,2783 @@
 
                 </div>
 
-
             </div>
 
-
-
             <div class="edit-modal-actions">
-
 
                 <button
                     type="button"
                     class="btn-cancel"
                     onclick="closeEditModal()"
                 >
-
                     Batal
-
                 </button>
-
 
                 <button
                     type="submit"
                     class="btn-save"
                 >
-
                     💾 Simpan Perubahan
-
                 </button>
-
 
             </div>
 
-
         </form>
 
-
     </div>
-
 
 </div>
 
 
+<!-- =========================================================
+     HISTORY MODAL
+========================================================= -->
 
-<!-- =========================
-     FIREBASE SCRIPT
-========================= -->
+<div
+    id="historyModal"
+    class="history-modal"
+>
+
+    <div class="history-modal-content">
+
+        <div class="history-header">
+
+            <div class="history-title-row">
+
+                <div>
+
+                    <h2
+                        class="history-title"
+                        id="historyTitle"
+                    >
+                        📋 Histori Rental
+                    </h2>
+
+                    <p
+                        class="history-subtitle"
+                        id="historySubtitle"
+                    >
+                        Memuat histori...
+                    </p>
+
+                </div>
+
+                <button
+                    class="close-history"
+                    onclick="closeHistory()"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <div
+                class="history-summary"
+                id="historySummary"
+            ></div>
+
+        </div>
+
+
+        <!-- DESKTOP -->
+
+        <div
+            class="history-table-container"
+            id="historyTableContainer"
+        >
+
+            <table class="history-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>No.</th>
+
+                        <th>Tanggal Sewa</th>
+
+                        <th>Tanggal Kembali</th>
+
+                        <th>Unit Kendaraan</th>
+
+                        <th>Plat Nomor</th>
+
+                        <th>Jenis Rental</th>
+
+                        <th>Durasi</th>
+
+                        <th>Harga</th>
+
+                        <th>Total</th>
+
+                        <th>Sudah Dibayar</th>
+
+                        <th>Sisa</th>
+
+                        <th>Kelebihan</th>
+
+                        <th>Status Pembayaran</th>
+
+                        <th>Jaminan</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="historyTableBody"
+                >
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- MOBILE -->
+
+        <div
+            id="historyMobileList"
+            class="history-mobile-list"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
 
 <script type="module">
 
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
-    /* =========================
-       FIREBASE IMPORT
-    ========================= */
-
-    import {
-
-        initializeApp
-
-    }
-
-    from
-
-    "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-
-    import {
-
-        getDatabase,
-        ref,
-        onValue,
-        update,
-        remove
-
-    }
-
-    from
-
-    "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {
+    getDatabase,
+    ref,
+    onValue,
+    update,
+    remove,
+    get
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
 
-    /* =========================
-       FIREBASE CONFIG
-    ========================= */
+const firebaseConfig = {
 
-    const firebaseConfig = {
+    apiKey:
+        "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
 
-        apiKey:
-            "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+    authDomain:
+        "arctrans.firebaseapp.com",
 
-        authDomain:
-            "arctrans.firebaseapp.com",
+    databaseURL:
+        "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
 
-        databaseURL:
-            "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId:
+        "arctrans",
 
-        projectId:
-            "arctrans",
+    storageBucket:
+        "arctrans.firebasestorage.app",
 
-        storageBucket:
-            "arctrans.firebasestorage.app",
+    messagingSenderId:
+        "60781918601",
 
-        messagingSenderId:
-            "60781918601",
+    appId:
+        "1:60781918601:web:c85d6131207f8a8958"
 
-        appId:
-            "1:60781918601:web:c85d6131207f8a8958"
-
-    };
-
+};
 
 
-    /* =========================
-       INITIALIZE FIREBASE
-    ========================= */
+const app =
+    initializeApp(
+        firebaseConfig
+    );
 
-    const app =
-        initializeApp(
-            firebaseConfig
-        );
-
-
-    const db =
-        getDatabase(
-            app
-        );
+const db =
+    getDatabase(
+        app
+    );
 
 
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-    /* =========================
-       VARIABLES
-    ========================= */
+let allData = [];
 
-    let allData = [];
+let filteredData = [];
 
-    let filteredData = [];
+let currentPage = 1;
 
-    let currentPage = 1;
-
-    const rowsPerPage = 10;
-
+const rowsPerPage = 10;
 
 
-    /* =========================
-       USERNAME
-    ========================= */
+/* =========================================================
+   USERNAME
+========================================================= */
 
-    const username =
-        localStorage.getItem(
-            "username"
-        );
-
-
-
-    /* =========================
-       USER DOWNLOAD EXCEL
-    ========================= */
-
-    const allowedUsers = [
-
-        "Nurhakiki",
-
-        "Henri Yuliansyah",
-
-        "Sultan"
-
-    ];
+const username =
+    localStorage.getItem(
+        "username"
+    );
 
 
-    if (
+const allowedUsers = [
 
-        allowedUsers.includes(
-            username
+    "Nurhakiki",
+
+    "Henri Yuliansyah",
+
+    "Sultan"
+
+];
+
+
+if (
+    allowedUsers.includes(
+        username
+    )
+) {
+
+    document
+        .getElementById(
+            "btnDownload"
         )
+        .style
+        .display =
+        "inline-block";
 
-    ) {
+}
 
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function applySearch() {
+
+    const keyword =
         document
-            .getElementById(
-                "btnDownload"
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    filteredData =
+        allData.filter(
+
+            item => {
+
+                const id =
+                    String(
+                        item.id || ""
+                    )
+                    .toLowerCase();
+
+                const nik =
+                    String(
+                        item.nik || ""
+                    )
+                    .toLowerCase();
+
+                const nama =
+                    String(
+                        item.nama || ""
+                    )
+                    .toLowerCase();
+
+                const alamatktp =
+                    String(
+                        item.alamatktp || ""
+                    )
+                    .toLowerCase();
+
+                const domisili =
+                    String(
+                        item.domisili || ""
+                    )
+                    .toLowerCase();
+
+                const status =
+                    String(
+                        item.status || ""
+                    )
+                    .toLowerCase();
+
+
+                return (
+
+                    id.includes(keyword)
+
+                    ||
+
+                    nik.includes(keyword)
+
+                    ||
+
+                    nama.includes(keyword)
+
+                    ||
+
+                    alamatktp.includes(keyword)
+
+                    ||
+
+                    domisili.includes(keyword)
+
+                    ||
+
+                    status.includes(keyword)
+
+                );
+
+            }
+
+        );
+
+
+    currentPage = 1;
+
+    renderTable();
+
+}
+
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        applySearch
+    );
+
+
+/* =========================================================
+   CUSTOMER FIREBASE
+========================================================= */
+
+const dbRef =
+    ref(
+        db,
+        "customer"
+    );
+
+
+onValue(
+
+    dbRef,
+
+    snapshot => {
+
+        const data =
+            snapshot.val();
+
+
+        console.log(
+            "Data customer Firebase:",
+            data
+        );
+
+
+        if (!data) {
+
+            allData = [];
+
+            filteredData = [];
+
+            showEmptyData(
+                "Data customer belum tersedia"
+            );
+
+            return;
+
+        }
+
+
+        allData =
+            Object.entries(
+                data
             )
-            .style
-            .display =
-            "inline-block";
+            .map(
 
-    }
+                (
+                    [
+                        firebaseKey,
+                        item
+                    ]
+                ) => ({
 
+                    firebaseKey:
+                        firebaseKey,
 
+                    id:
+                        firebaseKey,
 
-    /* =========================
-       SEARCH
-    ========================= */
+                    ...item
 
-    function applySearch() {
-
-
-        const keyword =
-            document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .toLowerCase()
-            .trim();
-
-
-        filteredData =
-            allData.filter(
-
-                item => {
-
-
-                    const id =
-                        String(
-                            item.id || ""
-                        )
-                        .toLowerCase();
-
-
-                    const nik =
-                        String(
-                            item.nik || ""
-                        )
-                        .toLowerCase();
-
-
-                    const nama =
-                        String(
-                            item.nama || ""
-                        )
-                        .toLowerCase();
-
-
-                    const alamatktp =
-                        String(
-                            item.alamatktp || ""
-                        )
-                        .toLowerCase();
-
-
-                    const domisili =
-                        String(
-                            item.domisili || ""
-                        )
-                        .toLowerCase();
-
-
-                    const status =
-                        String(
-                            item.status || ""
-                        )
-                        .toLowerCase();
-
-
-                    return (
-
-                        id.includes(
-                            keyword
-                        )
-
-                        ||
-
-                        nik.includes(
-                            keyword
-                        )
-
-                        ||
-
-                        nama.includes(
-                            keyword
-                        )
-
-                        ||
-
-                        alamatktp.includes(
-                            keyword
-                        )
-
-                        ||
-
-                        domisili.includes(
-                            keyword
-                        )
-
-                        ||
-
-                        status.includes(
-                            keyword
-                        )
-
-                    );
-
-
-                }
+                })
 
             );
 
 
-        currentPage = 1;
+        applySearch();
 
+    },
 
-        renderTable();
+    error => {
+
+        console.error(
+            "Firebase Error:",
+            error
+        );
+
+        showEmptyData(
+            "Gagal mengambil data customer"
+        );
 
     }
 
+);
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+function showEmptyData(message) {
+
+    document
+        .getElementById(
+            "isiData"
+        )
+        .innerHTML =
+        `
+        <tr>
+            <td
+                colspan="7"
+                class="empty-data"
+            >
+                ${escapeHtml(message)}
+            </td>
+        </tr>
+        `;
 
 
     document
         .getElementById(
-            "searchInput"
+            "mobileList"
         )
-        .addEventListener(
+        .innerHTML =
+        `
+        <div class="customer-card">
+            <div class="empty-data">
+                ${escapeHtml(message)}
+            </div>
+        </div>
+        `;
 
-            "input",
 
-            applySearch
+    document
+        .getElementById(
+            "pagination"
+        )
+        .innerHTML =
+        "";
 
+}
+
+
+/* =========================================================
+   RENDER CUSTOMER
+========================================================= */
+
+function renderTable() {
+
+    if (
+        filteredData.length === 0
+    ) {
+
+        showEmptyData(
+            "Data tidak ditemukan"
+        );
+
+        return;
+
+    }
+
+
+    const totalPages =
+        Math.ceil(
+            filteredData.length /
+            rowsPerPage
         );
 
 
+    if (
+        currentPage > totalPages
+    ) {
 
-    /* =========================
-       FIREBASE DATA
+        currentPage =
+            totalPages;
 
-       customer/
-           firebaseKey/
-               alamatktp
-               domisili
-               nama
-               nik
-               photoKTP
-               status
-    ========================= */
+    }
 
-    const dbRef =
-        ref(
-            db,
-            "customer"
+
+    const start =
+        (
+            currentPage - 1
+        ) *
+        rowsPerPage;
+
+
+    const end =
+        start +
+        rowsPerPage;
+
+
+    const paginatedData =
+        filteredData.slice(
+            start,
+            end
         );
 
 
-    onValue(
+    let tableHtml = "";
 
-        dbRef,
+    let mobileHtml = "";
 
-        (snapshot) => {
-
-
-            const data =
-                snapshot.val();
+    let no =
+        start + 1;
 
 
-            console.log(
-                "Data customer Firebase:",
-                data
-            );
+    paginatedData.forEach(
+
+        item => {
+
+            const firebaseKey =
+                item.firebaseKey;
+
+
+            const id =
+                item.nik ||
+                item.id ||
+                "-";
+
+
+            const nama =
+                item.nama ||
+                "-";
+
+
+            const alamatktp =
+                item.alamatktp ||
+                "-";
+
+
+            const domisili =
+                item.domisili ||
+                "-";
+
+
+            const urlphoto =
+                item.photoKTP ||
+                "";
+
+
+            const status =
+                String(
+                    item.status ||
+                    ""
+                ).trim();
+
+
+            const isClear =
+                status.toLowerCase() ===
+                "clear";
+
+
+            const statusClass =
+                isClear
+                ?
+                "status-clear"
+                :
+                "status-not-clear";
+
+
+            const statusText =
+                status ||
+                "Belum Clear";
+
+
+            const statusHtml =
+                `
+                <div
+                    class="status-badge ${statusClass}"
+                >
+                    ${escapeHtml(statusText)}
+                </div>
+                `;
+
+
+            let photoHtml =
+                `
+                <span class="no-photo">
+                    Tidak ada foto
+                </span>
+                `;
+
+
+            let mobilePhotoHtml =
+                `
+                <div class="no-photo">
+                    Tidak ada foto ID / KTP
+                </div>
+                `;
 
 
             if (
-                !data
+                urlphoto &&
+                typeof urlphoto ===
+                "string"
             ) {
 
-
-                allData = [];
-
-                filteredData = [];
-
-
-                showEmptyData(
-                    "Data customer belum tersedia"
-                );
+                const safeUrl =
+                    escapeHtml(
+                        urlphoto
+                    );
 
 
-                return;
+                photoHtml =
+                    `
+                    <img
+                        src="${safeUrl}"
+                        alt="Foto ID / KTP ${escapeHtml(nama)}"
+                        class="customer-photo"
+                        data-url="${safeUrl}"
+                        onclick="openPhotoFromElement(this)"
+                        onerror="photoError(this)"
+                    >
+                    `;
+
+
+                mobilePhotoHtml =
+                    `
+                    <img
+                        src="${safeUrl}"
+                        alt="Foto ID / KTP ${escapeHtml(nama)}"
+                        class="mobile-photo"
+                        data-url="${safeUrl}"
+                        onclick="openPhotoFromElement(this)"
+                        onerror="photoError(this)"
+                    >
+                    `;
 
             }
 
 
-            allData =
-                Object.entries(
-                    data
-                )
-                .map(
+            /* =============================
+               DESKTOP
+            ============================= */
 
-                    (
-                        [
-                            firebaseKey,
-                            item
-                        ]
-                    ) => ({
+            tableHtml +=
+                `
+                <tr>
 
-                        firebaseKey:
-                            firebaseKey,
+                    <td>
+                        ${no}
+                    </td>
 
-                        id:
-                            firebaseKey,
+                    <td>
 
-                        ...item
+                        <strong>
+                            ${escapeHtml(id)}
+                        </strong>
 
-                    })
+                        ${statusHtml}
 
-                );
+                    </td>
+
+                    <td>
+                        ${escapeHtml(nama)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(alamatktp)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(domisili)}
+                    </td>
+
+                    <td class="photo-cell">
+                        ${photoHtml}
+                    </td>
+
+                    <td>
+
+                        <div class="action-area">
+
+                            <button
+                                class="btn-history"
+                                onclick="showHistory('${escapeHtml(firebaseKey)}')"
+                            >
+                                📋 Histori
+                            </button>
+
+                            <button
+                                class="btn-edit"
+                                onclick="editCustomer('${escapeHtml(firebaseKey)}')"
+                            >
+                                ✏️ Edit
+                            </button>
+
+                            <button
+                                class="btn-delete"
+                                onclick="deleteCustomer('${escapeHtml(firebaseKey)}')"
+                            >
+                                🗑️ Hapus
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+                `;
 
 
-            applySearch();
+            /* =============================
+               MOBILE
+            ============================= */
+
+            mobileHtml +=
+                `
+                <div class="customer-card">
+
+                    <div class="customer-card-header">
+
+                        <div>
+
+                            <div class="customer-number">
+                                CUSTOMER #${no}
+                            </div>
+
+                            <div class="customer-name">
+                                ${escapeHtml(nama)}
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            <div class="customer-id">
+                                ${escapeHtml(id)}
+                            </div>
+
+                            <div class="customer-status">
+                                ${statusHtml}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    ${mobilePhotoHtml}
+
+                    <div class="card-grid">
+
+                        <div class="card-item full">
+
+                            <span class="card-label">
+                                Alamat KTP
+                            </span>
+
+                            <div class="card-value">
+                                ${escapeHtml(alamatktp)}
+                            </div>
+
+                        </div>
+
+                        <div class="card-item full">
+
+                            <span class="card-label">
+                                Domisili
+                            </span>
+
+                            <div class="card-value">
+                                ${escapeHtml(domisili)}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-action-area">
+
+                        <button
+                            class="btn-history"
+                            onclick="showHistory('${escapeHtml(firebaseKey)}')"
+                        >
+                            📋 Histori
+                        </button>
+
+                        <button
+                            class="btn-edit"
+                            onclick="editCustomer('${escapeHtml(firebaseKey)}')"
+                        >
+                            ✏️ Edit
+                        </button>
+
+                        <button
+                            class="btn-delete"
+                            onclick="deleteCustomer('${escapeHtml(firebaseKey)}')"
+                        >
+                            🗑️ Hapus
+                        </button>
+
+                    </div>
+
+                </div>
+                `;
 
 
-        },
-
-
-        (error) => {
-
-
-            console.error(
-                "Firebase Error:",
-                error
-            );
-
-
-            showEmptyData(
-                "Gagal mengambil data customer"
-            );
-
+            no++;
 
         }
 
     );
 
 
+    document
+        .getElementById(
+            "isiData"
+        )
+        .innerHTML =
+        tableHtml;
 
-    /* =========================
-       EMPTY DATA
-    ========================= */
 
-    function showEmptyData(
-        message
-    ) {
+    document
+        .getElementById(
+            "mobileList"
+        )
+        .innerHTML =
+        mobileHtml;
+
+
+    renderPagination();
+
+}
+
+
+/* =========================================================
+   SHOW CUSTOMER HISTORY
+========================================================= */
+
+window.showHistory =
+async function(firebaseKey) {
+
+    const customer =
+        allData.find(
+            item =>
+                item.firebaseKey ===
+                firebaseKey
+        );
+
+
+    if (!customer) {
+
+        alert(
+            "Data customer tidak ditemukan!"
+        );
+
+        return;
+
+    }
+
+
+    const customerId =
+        String(
+            customer.firebaseKey ||
+            ""
+        ).trim();
+
+
+    const customerNik =
+        String(
+            customer.nik ||
+            ""
+        ).trim();
+
+
+    const customerName =
+        customer.nama ||
+        "-";
+
+
+    document
+        .getElementById(
+            "historyTitle"
+        )
+        .textContent =
+        "📋 Histori Rental - " +
+        customerName;
+
+
+    document
+        .getElementById(
+            "historySubtitle"
+        )
+        .innerHTML =
+        `
+        ID Customer:
+        <strong>
+            ${escapeHtml(customerId)}
+        </strong>
+
+        &nbsp; | &nbsp;
+
+        NIK:
+        <strong>
+            ${escapeHtml(customerNik || "-")}
+        </strong>
+        `;
+
+
+    document
+        .getElementById(
+            "historySummary"
+        )
+        .innerHTML =
+        `
+        <div class="summary-box">
+            <span class="summary-label">
+                Total Rental
+            </span>
+            <div
+                class="summary-value"
+                id="summaryTotal"
+            >
+                -
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <span class="summary-label">
+                Total Nilai Rental
+            </span>
+            <div
+                class="summary-value"
+                id="summaryNilai"
+            >
+                -
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <span class="summary-label">
+                Total Pembayaran
+            </span>
+            <div
+                class="summary-value"
+                id="summaryBayar"
+            >
+                -
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <span class="summary-label">
+                Rental Terakhir
+            </span>
+            <div
+                class="summary-value"
+                id="summaryTerakhir"
+            >
+                -
+            </div>
+        </div>
+        `;
+
+
+    document
+        .getElementById(
+            "historyTableBody"
+        )
+        .innerHTML =
+        `
+        <tr>
+            <td
+                colspan="15"
+                class="history-loading"
+            >
+                Memuat histori rental...
+            </td>
+        </tr>
+        `;
+
+
+    document
+        .getElementById(
+            "historyMobileList"
+        )
+        .innerHTML =
+        `
+        <div class="history-loading">
+            Memuat histori rental...
+        </div>
+        `;
+
+
+    document
+        .getElementById(
+            "historyModal"
+        )
+        .style
+        .display =
+        "flex";
+
+
+    try {
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "rentout"
+                )
+            );
+
+
+        const data =
+            snapshot.val();
+
+
+        if (!data) {
+
+            renderHistory([]);
+
+            return;
+
+        }
+
+
+        /*
+         * PENCARIAN UTAMA:
+         *
+         * rentout/<id transaksi>/idcustomer
+         *
+         * Nilai idcustomer dicocokkan
+         * dengan Firebase Key customer.
+         *
+         * Untuk kompatibilitas, NIK juga
+         * ikut diperiksa apabila tersedia.
+         */
+
+        const history =
+            Object.entries(
+                data
+            )
+            .map(
+
+                (
+                    [
+                        firebaseKey,
+                        item
+                    ]
+                ) => ({
+
+                    firebaseKey,
+
+                    ...item
+
+                })
+
+            )
+            .filter(
+
+                item => {
+
+                    const rentalCustomerId =
+                        String(
+                            item.idcustomer ||
+                            ""
+                        ).trim();
+
+
+                    const rentalNik =
+                        String(
+                            item.nik ||
+                            ""
+                        ).trim();
+
+
+                    return (
+
+                        rentalCustomerId ===
+                        customerId
+
+                        ||
+
+                        (
+                            customerNik &&
+                            rentalNik ===
+                            customerNik
+                        )
+
+                    );
+
+                }
+
+            );
+
+
+        /*
+         * URUTKAN TERBARU -> TERLAMA
+         */
+
+        history.sort(
+
+            (a, b) => {
+
+                const timeA =
+                    Number(
+                        a.timestamp ||
+                        0
+                    );
+
+
+                const timeB =
+                    Number(
+                        b.timestamp ||
+                        0
+                    );
+
+
+                if (
+                    timeA &&
+                    timeB
+                ) {
+
+                    return timeB - timeA;
+
+                }
+
+
+                return String(
+                    b.tanggalsewa ||
+                    ""
+                )
+                .localeCompare(
+                    String(
+                        a.tanggalsewa ||
+                        ""
+                    )
+                );
+
+            }
+
+        );
+
+
+        renderHistory(history);
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Gagal mengambil histori:",
+            error
+        );
 
 
         document
             .getElementById(
-                "isiData"
+                "historyTableBody"
             )
             .innerHTML =
             `
             <tr>
-
                 <td
-                    colspan="7"
-                    class="empty-data"
+                    colspan="15"
+                    class="history-empty"
                 >
-
-                    ${escapeHtml(message)}
-
+                    Gagal mengambil histori rental.
+                    <br>
+                    ${escapeHtml(error.message)}
                 </td>
-
             </tr>
             `;
 
 
         document
             .getElementById(
-                "mobileList"
+                "historyMobileList"
             )
             .innerHTML =
             `
-            <div class="customer-card">
+            <div class="history-empty">
 
-                <div class="empty-data">
+                <strong>
+                    Gagal mengambil histori rental
+                </strong>
 
-                    ${escapeHtml(message)}
+                <br><br>
 
+                ${escapeHtml(error.message)}
+
+            </div>
+            `;
+
+    }
+
+};
+
+
+/* =========================================================
+   RENDER HISTORY
+========================================================= */
+
+function renderHistory(history) {
+
+    const tableBody =
+        document
+        .getElementById(
+            "historyTableBody"
+        );
+
+
+    const mobileList =
+        document
+        .getElementById(
+            "historyMobileList"
+        );
+
+
+    /* =============================
+       SUMMARY
+    ============================= */
+
+    let totalNilai = 0;
+
+    let totalBayar = 0;
+
+
+    history.forEach(
+
+        item => {
+
+            totalNilai +=
+                angkaDariRupiah(
+                    item.total
+                    ??
+                    item.totalFormat
+                    ??
+                    0
+                );
+
+
+            totalBayar +=
+                angkaDariRupiah(
+                    item.bayar
+                    ??
+                    item.bayarFormat
+                    ??
+                    0
+                );
+
+        }
+
+    );
+
+
+    document
+        .getElementById(
+            "summaryTotal"
+        )
+        .textContent =
+        history.length;
+
+
+    document
+        .getElementById(
+            "summaryNilai"
+        )
+        .textContent =
+        formatRupiah(
+            totalNilai
+        );
+
+
+    document
+        .getElementById(
+            "summaryBayar"
+        )
+        .textContent =
+        formatRupiah(
+            totalBayar
+        );
+
+
+    const latestDate =
+        history.length
+        ?
+        formatTanggal(
+            history[0].tanggalsewa
+        )
+        :
+        "-";
+
+
+    document
+        .getElementById(
+            "summaryTerakhir"
+        )
+        .textContent =
+        latestDate;
+
+
+    if (
+        history.length === 0
+    ) {
+
+        tableBody.innerHTML =
+            `
+            <tr>
+                <td
+                    colspan="15"
+                    class="history-empty"
+                >
+                    📋 Customer ini belum memiliki
+                    histori rental.
+                </td>
+            </tr>
+            `;
+
+
+        mobileList.innerHTML =
+            `
+            <div class="history-empty">
+
+                <div style="font-size:35px;">
+                    📋
                 </div>
+
+                <br>
+
+                Customer ini belum memiliki
+                histori rental.
 
             </div>
             `;
 
 
-        document
-            .getElementById(
-                "pagination"
-            )
-            .innerHTML =
-            "";
+        return;
 
     }
 
 
+    let tableHtml = "";
 
-    /* =========================
-       ESCAPE HTML
-    ========================= */
+    let mobileHtml = "";
 
-    function escapeHtml(
-        value
-    ) {
+    let no = 1;
 
 
-        return String(
-            value ?? ""
-        )
+    history.forEach(
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        item => {
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-    }
+            const tanggalSewa =
+                formatTanggal(
+                    item.tanggalsewa
+                );
 
 
-
-    /* =========================
-       RENDER TABLE
-    ========================= */
-
-    function renderTable() {
+            const tanggalKembali =
+                formatTanggal(
+                    item.selesaisewa
+                );
 
 
-        if (
-            filteredData.length === 0
-        ) {
+            const namaUnit =
+                item.namaUnit ||
+                "-";
 
 
-            showEmptyData(
-                "Data tidak ditemukan"
-            );
+            const plat =
+                item.plat ||
+                "-";
 
 
-            return;
-
-        }
-
-
-        const totalPages =
-            Math.ceil(
-                filteredData.length
-                /
-                rowsPerPage
-            );
+            const rentalType =
+                formatRentalType(
+                    item.rentaltype
+                );
 
 
-        if (
-            currentPage > totalPages
-        ) {
-
-            currentPage =
-                totalPages;
-
-        }
+            const durasi =
+                formatDurasi(
+                    item.jumlahHari
+                );
 
 
-        const start =
-            (
-                currentPage - 1
-            )
-            *
-            rowsPerPage;
-
-
-        const end =
-            start
-            +
-            rowsPerPage;
-
-
-        const paginatedData =
-            filteredData.slice(
-                start,
-                end
-            );
-
-
-        let tableHtml =
-            "";
-
-
-        let mobileHtml =
-            "";
-
-
-        let no =
-            start + 1;
-
-
-
-        paginatedData.forEach(
-
-            item => {
-
-
-                const firebaseKey =
-                    item.firebaseKey;
-
-
-                const id =
-                    item.nik
-                    ||
-                    item.id
-                    ||
-                    "-";
-
-
-                const nama =
-                    item.nama
-                    ||
-                    "-";
-
-
-                const alamatktp =
-                    item.alamatktp
-                    ||
-                    "-";
-
-
-                const domisili =
-                    item.domisili
-                    ||
-                    "-";
-
-
-                const urlphoto =
-                    item.photoKTP
-                    ||
-                    "";
-
-
-                /* =========================
-                   STATUS
-                ========================= */
-
-                const status =
-                    String(
-                        item.status
-                        ||
-                        ""
+            const harga =
+                formatRupiah(
+                    angkaDariRupiah(
+                        item.harga ??
+                        item.hargaFormat ??
+                        0
                     )
-                    .trim();
-
-
-                const isClear =
-                    status.toLowerCase()
-                    ===
-                    "clear";
-
-
-                const statusClass =
-                    isClear
-                    ?
-                    "status-clear"
-                    :
-                    "status-not-clear";
-
-
-                const statusText =
-                    status
-                    ||
-                    "Belum Clear";
-
-
-                const statusHtml =
-                    `
-                    <div
-                        class="status-badge ${statusClass}"
-                    >
-
-                        ${escapeHtml(statusText)}
-
-                    </div>
-                    `;
-
-
-
-                /* =========================
-                   PHOTO HTML
-                ========================= */
-
-                let photoHtml =
-                    `
-                    <span
-                        class="no-photo"
-                    >
-
-                        Tidak ada foto
-
-                    </span>
-                    `;
-
-
-                let mobilePhotoHtml =
-                    `
-                    <div
-                        class="no-photo"
-                    >
-
-                        Tidak ada foto ID / KTP
-
-                    </div>
-                    `;
-
-
-                if (
-
-                    urlphoto
-
-                    &&
-
-                    typeof urlphoto ===
-                    "string"
-
-                ) {
-
-
-                    const safeUrl =
-                        escapeHtml(
-                            urlphoto
-                        );
-
-
-                    photoHtml =
-                        `
-                        <img
-
-                            src="${safeUrl}"
-
-                            alt="Foto ID / KTP ${escapeHtml(nama)}"
-
-                            class="customer-photo"
-
-                            data-url="${safeUrl}"
-
-                            onclick="openPhotoFromElement(this)"
-
-                            onerror="photoError(this)"
-
-                        >
-                        `;
-
-
-                    mobilePhotoHtml =
-                        `
-                        <img
-
-                            src="${safeUrl}"
-
-                            alt="Foto ID / KTP ${escapeHtml(nama)}"
-
-                            class="mobile-photo"
-
-                            data-url="${safeUrl}"
-
-                            onclick="openPhotoFromElement(this)"
-
-                            onerror="photoError(this)"
-
-                        >
-                        `;
-
-                }
-
-
-
-                /* =========================
-                   TABLE DESKTOP
-                ========================= */
-
-                tableHtml +=
-                    `
-
-                    <tr>
-
-
-                        <td>
-
-                            ${no}
-
-                        </td>
-
-
-                        <td>
-
-                            <div>
-
-                                <strong>
-
-                                    ${escapeHtml(id)}
-
-                                </strong>
-
-                            </div>
-
-                            ${statusHtml}
-
-                        </td>
-
-
-                        <td>
-
-                            ${escapeHtml(nama)}
-
-                        </td>
-
-
-                        <td>
-
-                            ${escapeHtml(alamatktp)}
-
-                        </td>
-
-
-                        <td>
-
-                            ${escapeHtml(domisili)}
-
-                        </td>
-
-
-                        <td
-                            class="photo-cell"
-                        >
-
-                            ${photoHtml}
-
-                        </td>
-
-
-                        <td>
-
-                            <div
-                                class="action-area"
-                            >
-
-
-                                <button
-
-                                    class="btn-edit"
-
-                                    onclick="editCustomer('${firebaseKey}')"
-
-                                >
-
-                                    ✏️ Edit
-
-                                </button>
-
-
-                                <button
-
-                                    class="btn-delete"
-
-                                    onclick="deleteCustomer('${firebaseKey}')"
-
-                                >
-
-                                    🗑️ Hapus
-
-                                </button>
-
-
-                            </div>
-
-                        </td>
-
-
-                    </tr>
-
-                    `;
-
-
-
-                /* =========================
-                   MOBILE CARD
-                ========================= */
-
-                mobileHtml +=
-                    `
-
-                    <div
-                        class="customer-card"
-                    >
-
-
-                        <div
-                            class="customer-card-header"
-                        >
-
-
-                            <div>
-
-
-                                <div
-                                    class="customer-number"
-                                >
-
-                                    CUSTOMER #${no}
-
-                                </div>
-
-
-                                <div
-                                    class="customer-name"
-                                >
-
-                                    ${escapeHtml(nama)}
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div>
-
-
-                                <div
-                                    class="customer-id"
-                                >
-
-                                    ${escapeHtml(id)}
-
-                                </div>
-
-
-                                <div
-                                    class="customer-status"
-                                >
-
-                                    ${statusHtml}
-
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-
-
-
-                        ${mobilePhotoHtml}
-
-
-
-                        <div
-                            class="card-grid"
-                        >
-
-
-                            <div
-                                class="card-item full"
-                            >
-
-
-                                <span
-                                    class="card-label"
-                                >
-
-                                    Alamat KTP
-
-                                </span>
-
-
-                                <div
-                                    class="card-value"
-                                >
-
-                                    ${escapeHtml(alamatktp)}
-
-                                </div>
-
-
-                            </div>
-
-
-
-                            <div
-                                class="card-item full"
-                            >
-
-
-                                <span
-                                    class="card-label"
-                                >
-
-                                    Domisili
-
-                                </span>
-
-
-                                <div
-                                    class="card-value"
-                                >
-
-                                    ${escapeHtml(domisili)}
-
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-
-
-
-                        <div
-                            class="card-action-area"
-                        >
-
-
-                            <button
-
-                                class="btn-edit"
-
-                                onclick="editCustomer('${firebaseKey}')"
-
-                            >
-
-                                ✏️ Edit
-
-                            </button>
-
-
-                            <button
-
-                                class="btn-delete"
-
-                                onclick="deleteCustomer('${firebaseKey}')"
-
-                            >
-
-                                🗑️ Hapus
-
-                            </button>
-
-
-                        </div>
-
-
-                    </div>
-
-                    `;
-
-
-                no++;
-
-
-            }
-
-        );
-
-
-        document
-            .getElementById(
-                "isiData"
-            )
-            .innerHTML =
-            tableHtml;
-
-
-        document
-            .getElementById(
-                "mobileList"
-            )
-            .innerHTML =
-            mobileHtml;
-
-
-        renderPagination();
-
-    }
-
-
-
-    /* =========================
-       EDIT CUSTOMER
-    ========================= */
-
-    window.editCustomer =
-        function (
-            firebaseKey
-        ) {
-
-
-            const item =
-                allData.find(
-
-                    data =>
-                    data.firebaseKey
-                    ===
-                    firebaseKey
-
                 );
 
 
-            if (
-                !item
-            ) {
-
-                alert(
-                    "Data customer tidak ditemukan!"
-                );
-
-                return;
-
-            }
-
-
-            document
-                .getElementById(
-                    "editFirebaseKey"
-                )
-                .value =
-                firebaseKey;
-
-
-            document
-                .getElementById(
-                    "editId"
-                )
-                .value =
-                firebaseKey;
-
-
-            document
-                .getElementById(
-                    "editNik"
-                )
-                .value =
-                item.nik || "";
-
-
-            document
-                .getElementById(
-                    "editStatus"
-                )
-                .value =
-                item.status || "";
-
-
-            document
-                .getElementById(
-                    "editNama"
-                )
-                .value =
-                item.nama || "";
-
-
-            document
-                .getElementById(
-                    "editAlamatKtp"
-                )
-                .value =
-                item.alamatktp || "";
-
-
-            document
-                .getElementById(
-                    "editDomisili"
-                )
-                .value =
-                item.domisili || "";
-
-
-            document
-                .getElementById(
-                    "editPhotoKTP"
-                )
-                .value =
-                item.photoKTP || "";
-
-
-            document
-                .getElementById(
-                    "editModal"
-                )
-                .style
-                .display =
-                "flex";
-
-        };
-
-
-
-    /* =========================
-       CLOSE EDIT MODAL
-    ========================= */
-
-    window.closeEditModal =
-        function () {
-
-
-            document
-                .getElementById(
-                    "editModal"
-                )
-                .style
-                .display =
-                "none";
-
-
-            document
-                .getElementById(
-                    "editForm"
-                )
-                .reset();
-
-        };
-
-
-
-    /* =========================
-       SAVE EDIT
-    ========================= */
-
-    document
-        .getElementById(
-            "editForm"
-        )
-        .addEventListener(
-
-            "submit",
-
-            async function (
-                event
-            ) {
-
-
-                event.preventDefault();
-
-
-                const firebaseKey =
-                    document
-                    .getElementById(
-                        "editFirebaseKey"
+            const total =
+                formatRupiah(
+                    angkaDariRupiah(
+                        item.total ??
+                        item.totalFormat ??
+                        0
                     )
-                    .value;
-
-
-                if (
-                    !firebaseKey
-                ) {
-
-                    alert(
-                        "Firebase Key tidak ditemukan!"
-                    );
-
-                    return;
-
-                }
-
-
-                const button =
-                    event.submitter;
-
-
-                const originalText =
-                    button.innerHTML;
-
-
-                button.disabled =
-                    true;
-
-
-                button.innerHTML =
-                    "Menyimpan...";
-
-
-                try {
-
-
-                    const updatedData = {
-
-
-                        nik:
-
-                            document
-                            .getElementById(
-                                "editNik"
-                            )
-                            .value
-                            .trim(),
-
-
-                        status:
-
-                            document
-                            .getElementById(
-                                "editStatus"
-                            )
-                            .value
-                            .trim(),
-
-
-                        nama:
-
-                            document
-                            .getElementById(
-                                "editNama"
-                            )
-                            .value
-                            .trim(),
-
-
-                        alamatktp:
-
-                            document
-                            .getElementById(
-                                "editAlamatKtp"
-                            )
-                            .value
-                            .trim(),
-
-
-                        domisili:
-
-                            document
-                            .getElementById(
-                                "editDomisili"
-                            )
-                            .value
-                            .trim(),
-
-
-                        photoKTP:
-
-                            document
-                            .getElementById(
-                                "editPhotoKTP"
-                            )
-                            .value
-                            .trim()
-
-                    };
-
-
-                    await update(
-
-                        ref(
-                            db,
-                            "customer/" + firebaseKey
-                        ),
-
-                        updatedData
-
-                    );
-
-
-                    alert(
-                        "Data customer berhasil diperbarui!"
-                    );
-
-
-                    closeEditModal();
-
-
-                }
-
-                catch (
-                    error
-                ) {
-
-
-                    console.error(
-                        "Gagal update data:",
-                        error
-                    );
-
-
-                    alert(
-                        "Gagal menyimpan perubahan!\n\n"
-                        +
-                        error.message
-                    );
-
-                }
-
-                finally {
-
-
-                    button.disabled =
-                        false;
-
-
-                    button.innerHTML =
-                        originalText;
-
-                }
-
-
-            }
-
-        );
-
-
-
-    /* =========================
-       DELETE CUSTOMER
-    ========================= */
-
-    window.deleteCustomer =
-        async function (
-            firebaseKey
-        ) {
-
-
-            const item =
-                allData.find(
-
-                    data =>
-                    data.firebaseKey
-                    ===
-                    firebaseKey
-
                 );
 
 
-            const nama =
-                item
-                ?
-                item.nama
-                ||
-                "Customer"
-                :
-                "Customer";
-
-
-            const confirmDelete =
-                confirm(
-
-                    "Yakin ingin menghapus customer:\n\n"
-
-                    +
-
-                    nama
-
-                    +
-
-                    "\n\nData yang dihapus tidak dapat dikembalikan."
-
-                );
-
-
-            if (
-                !confirmDelete
-            ) {
-
-                return;
-
-            }
-
-
-            try {
-
-
-                await remove(
-
-                    ref(
-                        db,
-                        "customer/" + firebaseKey
+            const bayar =
+                formatRupiah(
+                    angkaDariRupiah(
+                        item.bayar ??
+                        item.bayarFormat ??
+                        0
                     )
-
                 );
 
 
-                alert(
-                    "Data customer berhasil dihapus!"
+            const sisa =
+                formatRupiah(
+                    angkaDariRupiah(
+                        item.sisa ??
+                        item.sisaFormat ??
+                        0
+                    )
                 );
 
 
-            }
-
-            catch (
-                error
-            ) {
-
-
-                console.error(
-                    "Gagal menghapus customer:",
-                    error
+            const kelebihan =
+                formatRupiah(
+                    angkaDariRupiah(
+                        item.kelebihanBayar ??
+                        item.kelebihanBayarFormat ??
+                        0
+                    )
                 );
 
 
-                alert(
-                    "Gagal menghapus customer!\n\n"
-                    +
-                    error.message
+            const statusPembayaran =
+                item.statusPembayaran ||
+                "-";
+
+
+            const jaminan =
+                item.jaminan ||
+                "-";
+
+
+            const status =
+                item.status ||
+                "RENT OUT";
+
+
+            const paymentClass =
+                getPaymentClass(
+                    statusPembayaran
                 );
 
-            }
 
-        };
-
-
-
-    /* =========================
-       PHOTO ERROR
-    ========================= */
-
-    window.photoError =
-        function (
-            image
-        ) {
-
-
-            image.outerHTML =
+            const statusPembayaranHtml =
                 `
                 <span
-                    class="no-photo"
+                    class="payment-badge ${paymentClass}"
                 >
-
-                    Foto gagal dimuat
-
+                    ${escapeHtml(statusPembayaran)}
                 </span>
                 `;
 
-        };
+
+            /* =============================
+               DESKTOP TABLE
+            ============================= */
+
+            tableHtml +=
+                `
+                <tr>
+
+                    <td>
+                        ${no}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(tanggalSewa)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(tanggalKembali)}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(namaUnit)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(plat)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(rentalType)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(durasi)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(harga)}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(total)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(bayar)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(sisa)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(kelebihan)}
+                    </td>
+
+                    <td>
+                        ${statusPembayaranHtml}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(jaminan)}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(status)}
+                        </strong>
+                    </td>
+
+                </tr>
+                `;
 
 
+            /* =============================
+               MOBILE CARD
+            ============================= */
 
-    /* =========================
-       PAGINATION
-    ========================= */
+            mobileHtml +=
+                `
+                <div class="history-card">
 
-    function renderPagination() {
+                    <div class="history-card-top">
+
+                        <div>
+
+                            <div class="history-card-title">
+                                ${escapeHtml(namaUnit)}
+                            </div>
+
+                            <div class="history-card-plat">
+                                🚗 ${escapeHtml(plat)}
+                            </div>
+
+                        </div>
+
+                        <div class="history-payment">
+
+                            ${statusPembayaranHtml}
+
+                        </div>
+
+                    </div>
 
 
-        const totalPages =
-            Math.ceil(
-                filteredData.length
-                /
-                rowsPerPage
-            );
+                    <div class="history-grid">
+
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Tanggal Sewa
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(tanggalSewa)}
+                            </div>
+
+                        </div>
 
 
-        if (
-            totalPages <= 1
-        ) {
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Tanggal Kembali
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(tanggalKembali)}
+                            </div>
+
+                        </div>
 
 
-            document
-                .getElementById(
-                    "pagination"
-                )
-                .innerHTML =
-                "";
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Jenis Rental
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(rentalType)}
+                            </div>
+
+                        </div>
 
 
-            return;
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Durasi
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(durasi)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Harga
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(harga)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Total Biaya
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(total)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Sudah Dibayar
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(bayar)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Sisa Pembayaran
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(sisa)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Kelebihan Bayar
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(kelebihan)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <span class="history-label">
+                                Jaminan
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(jaminan)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item full">
+
+                            <span class="history-label">
+                                Status Pembayaran
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(statusPembayaran)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-item full">
+
+                            <span class="history-label">
+                                Status Transaksi
+                            </span>
+
+                            <div class="history-value">
+                                ${escapeHtml(status)}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                `;
+
+
+            no++;
 
         }
 
-
-        document
-            .getElementById(
-                "pagination"
-            )
-            .innerHTML =
-            `
-
-            <button
-
-                class="btn-prev"
-
-                onclick="prevPage()"
-
-                ${
-                    currentPage === 1
-                    ?
-                    "disabled"
-                    :
-                    ""
-                }
-
-            >
-
-                ← Prev
-
-            </button>
+    );
 
 
-            <span
-                class="page-info"
-            >
-
-                Halaman
-                ${currentPage}
-                dari
-                ${totalPages}
-
-            </span>
+    tableBody.innerHTML =
+        tableHtml;
 
 
-            <button
+    mobileList.innerHTML =
+        mobileHtml;
 
-                class="btn-next"
+}
 
-                onclick="nextPage()"
 
-                ${
-                    currentPage === totalPages
-                    ?
-                    "disabled"
-                    :
-                    ""
-                }
+/* =========================================================
+   PAYMENT CLASS
+========================================================= */
 
-            >
+function getPaymentClass(status) {
 
-                Next →
+    const value =
+        String(
+            status ||
+            ""
+        )
+        .toLowerCase()
+        .trim();
 
-            </button>
 
-            `;
+    if (
+        value.includes("lunas")
+    ) {
+
+        return "payment-lunas";
 
     }
 
 
+    if (
+        value.includes("kurang") ||
+        value.includes("belum")
+    ) {
 
-    /* =========================
-       NEXT PAGE
-    ========================= */
+        return "payment-kurang";
 
-    window.nextPage =
-        function () {
+    }
 
 
-            const totalPages =
-                Math.ceil(
-                    filteredData.length
-                    /
-                    rowsPerPage
-                );
+    if (
+        value.includes("lebih")
+    ) {
 
+        return "payment-lebih";
 
-            if (
-                currentPage
-                <
-                totalPages
-            ) {
+    }
 
 
-                currentPage++;
+    return "payment-normal";
 
+}
 
-                renderTable();
 
+/* =========================================================
+   FORMAT RENTAL TYPE
+========================================================= */
 
-                window.scrollTo({
+function formatRentalType(value) {
 
-                    top: 0,
-
-                    behavior: "smooth"
-
-                });
-
-            }
-
-        };
-
-
-
-    /* =========================
-       PREVIOUS PAGE
-    ========================= */
-
-    window.prevPage =
-        function () {
-
-
-            if (
-                currentPage > 1
-            ) {
-
-
-                currentPage--;
-
-
-                renderTable();
-
-
-                window.scrollTo({
-
-                    top: 0,
-
-                    behavior: "smooth"
-
-                });
-
-            }
-
-        };
-
-
-
-    /* =========================
-       OPEN PHOTO
-    ========================= */
-
-    window.openPhotoFromElement =
-        function (
-            image
-        ) {
-
-
-            const url =
-                image.getAttribute(
-                    "data-url"
-                );
-
-
-            openPhoto(
-                url,
-                image.alt
-            );
-
-        };
-
-
-
-    window.openPhoto =
-        function (
-            url,
-            title = ""
-        ) {
-
-
-            const modal =
-                document.getElementById(
-                    "photoModal"
-                );
-
-
-            const image =
-                document.getElementById(
-                    "modalImage"
-                );
-
-
-            const caption =
-                document.getElementById(
-                    "modalCaption"
-                );
-
-
-            image.src =
-                url;
-
-
-            caption.textContent =
-                title;
-
-
-            modal.style.display =
-                "flex";
-
-        };
-
-
-
-    /* =========================
-       CLOSE PHOTO
-    ========================= */
-
-    window.closePhoto =
-        function () {
-
-
-            const modal =
-                document.getElementById(
-                    "photoModal"
-                );
-
-
-            modal.style.display =
-                "none";
-
-
-            document
-                .getElementById(
-                    "modalImage"
-                )
-                .src =
-                "";
-
-        };
-
-
-
-    /* =========================
-       CLOSE CLICK OUTSIDE PHOTO
-    ========================= */
-
-    document
-        .getElementById(
-            "photoModal"
+    const type =
+        String(
+            value ||
+            ""
         )
-        .addEventListener(
-
-            "click",
-
-            function (
-                event
-            ) {
+        .toLowerCase()
+        .trim();
 
 
-                if (
-                    event.target ===
-                    this
-                ) {
+    const map = {
 
-                    closePhoto();
+        setengahhari:
+            "Setengah Hari",
 
-                }
+        harian:
+            "Harian",
 
-            }
+        mingguan:
+            "Mingguan",
 
+        bulanan:
+            "Bulanan"
+
+    };
+
+
+    return (
+        map[type] ||
+        value ||
+        "-"
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT DURASI
+========================================================= */
+
+function formatDurasi(value) {
+
+    if (
+        value === undefined ||
+        value === null ||
+        value === ""
+    ) {
+
+        return "-";
+
+    }
+
+
+    const number =
+        Number(
+            value
         );
 
 
+    if (
+        number === 0.5
+    ) {
 
-    /* =========================
-       CLOSE CLICK OUTSIDE EDIT
-    ========================= */
+        return "½ Hari";
+
+    }
+
+
+    if (
+        number === 1
+    ) {
+
+        return "1 Hari";
+
+    }
+
+
+    if (
+        !isNaN(number)
+    ) {
+
+        return (
+            number +
+            " Hari"
+        );
+
+    }
+
+
+    return String(
+        value
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT RUPIAH
+========================================================= */
+
+function formatRupiah(value) {
+
+    const number =
+        Number(
+            value || 0
+        );
+
+
+    return (
+        "Rp " +
+        number.toLocaleString(
+            "id-ID"
+        )
+    );
+
+}
+
+
+/* =========================================================
+   CONVERT RUPIAH
+========================================================= */
+
+function angkaDariRupiah(value) {
+
+    if (
+        typeof value ===
+        "number"
+    ) {
+
+        return value;
+
+    }
+
+
+    if (
+        value === undefined ||
+        value === null
+    ) {
+
+        return 0;
+
+    }
+
+
+    const cleaned =
+        String(value)
+        .replace(
+            /[^0-9-]/g,
+            ""
+        );
+
+
+    return Number(
+        cleaned
+    ) || 0;
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatTanggal(value) {
+
+    if (
+        !value
+    ) {
+
+        return "-";
+
+    }
+
+
+    const stringValue =
+        String(value);
+
+
+    /*
+     * Format YYYY-MM-DD
+     */
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/
+        .test(
+            stringValue
+        )
+    ) {
+
+        const parts =
+            stringValue.split("-");
+
+
+        return (
+            parts[2] +
+            "-" +
+            parts[1] +
+            "-" +
+            parts[0]
+        );
+
+    }
+
+
+    /*
+     * Format timestamp
+     */
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        !isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return date.toLocaleDateString(
+            "id-ID",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    return stringValue;
+
+}
+
+
+/* =========================================================
+   CLOSE HISTORY
+========================================================= */
+
+window.closeHistory =
+function() {
+
+    document
+        .getElementById(
+            "historyModal"
+        )
+        .style
+        .display =
+        "none";
+
+};
+
+
+/* =========================================================
+   EDIT CUSTOMER
+========================================================= */
+
+window.editCustomer =
+function(firebaseKey) {
+
+    const item =
+        allData.find(
+            data =>
+                data.firebaseKey ===
+                firebaseKey
+        );
+
+
+    if (!item) {
+
+        alert(
+            "Data customer tidak ditemukan!"
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "editFirebaseKey"
+        )
+        .value =
+        firebaseKey;
+
+
+    document
+        .getElementById(
+            "editId"
+        )
+        .value =
+        firebaseKey;
+
+
+    document
+        .getElementById(
+            "editNik"
+        )
+        .value =
+        item.nik || "";
+
+
+    document
+        .getElementById(
+            "editStatus"
+        )
+        .value =
+        item.status || "";
+
+
+    document
+        .getElementById(
+            "editNama"
+        )
+        .value =
+        item.nama || "";
+
+
+    document
+        .getElementById(
+            "editAlamatKtp"
+        )
+        .value =
+        item.alamatktp || "";
+
+
+    document
+        .getElementById(
+            "editDomisili"
+        )
+        .value =
+        item.domisili || "";
+
+
+    document
+        .getElementById(
+            "editPhotoKTP"
+        )
+        .value =
+        item.photoKTP || "";
+
 
     document
         .getElementById(
             "editModal"
         )
-        .addEventListener(
+        .style
+        .display =
+        "flex";
 
-            "click",
-
-            function (
-                event
-            ) {
+};
 
 
-                if (
-                    event.target ===
-                    this
-                ) {
+/* =========================================================
+   CLOSE EDIT
+========================================================= */
 
-                    closeEditModal();
+window.closeEditModal =
+function() {
 
-                }
+    document
+        .getElementById(
+            "editModal"
+        )
+        .style
+        .display =
+        "none";
+
+
+    document
+        .getElementById(
+            "editForm"
+        )
+        .reset();
+
+};
+
+
+/* =========================================================
+   SAVE EDIT
+========================================================= */
+
+document
+    .getElementById(
+        "editForm"
+    )
+    .addEventListener(
+
+        "submit",
+
+        async event => {
+
+            event.preventDefault();
+
+
+            const firebaseKey =
+                document
+                .getElementById(
+                    "editFirebaseKey"
+                )
+                .value;
+
+
+            if (!firebaseKey) {
+
+                alert(
+                    "Firebase Key tidak ditemukan!"
+                );
+
+                return;
 
             }
+
+
+            const button =
+                event.submitter;
+
+
+            const originalText =
+                button.innerHTML;
+
+
+            button.disabled =
+                true;
+
+
+            button.innerHTML =
+                "Menyimpan...";
+
+
+            try {
+
+                const updatedData = {
+
+                    nik:
+                        document
+                        .getElementById(
+                            "editNik"
+                        )
+                        .value
+                        .trim(),
+
+                    status:
+                        document
+                        .getElementById(
+                            "editStatus"
+                        )
+                        .value
+                        .trim(),
+
+                    nama:
+                        document
+                        .getElementById(
+                            "editNama"
+                        )
+                        .value
+                        .trim(),
+
+                    alamatktp:
+                        document
+                        .getElementById(
+                            "editAlamatKtp"
+                        )
+                        .value
+                        .trim(),
+
+                    domisili:
+                        document
+                        .getElementById(
+                            "editDomisili"
+                        )
+                        .value
+                        .trim(),
+
+                    photoKTP:
+                        document
+                        .getElementById(
+                            "editPhotoKTP"
+                        )
+                        .value
+                        .trim()
+
+                };
+
+
+                await update(
+
+                    ref(
+                        db,
+                        "customer/" +
+                        firebaseKey
+                    ),
+
+                    updatedData
+
+                );
+
+
+                alert(
+                    "Data customer berhasil diperbarui!"
+                );
+
+
+                closeEditModal();
+
+            }
+
+            catch(error) {
+
+                console.error(
+                    "Gagal update:",
+                    error
+                );
+
+
+                alert(
+                    "Gagal menyimpan perubahan!\n\n" +
+                    error.message
+                );
+
+            }
+
+            finally {
+
+                button.disabled =
+                    false;
+
+                button.innerHTML =
+                    originalText;
+
+            }
+
+        }
+
+    );
+
+
+/* =========================================================
+   DELETE CUSTOMER
+========================================================= */
+
+window.deleteCustomer =
+async function(firebaseKey) {
+
+    const item =
+        allData.find(
+            data =>
+                data.firebaseKey ===
+                firebaseKey
+        );
+
+
+    const nama =
+        item
+        ?
+        item.nama || "Customer"
+        :
+        "Customer";
+
+
+    const confirmDelete =
+        confirm(
+
+            "Yakin ingin menghapus customer:\n\n" +
+
+            nama +
+
+            "\n\nData yang dihapus tidak dapat dikembalikan."
 
         );
 
 
+    if (!confirmDelete) {
 
-    /* =========================
-       CLOSE ESC
-    ========================= */
+        return;
 
-    document.addEventListener(
+    }
 
-        "keydown",
 
-        function (
-            event
-        ) {
+    try {
 
+        await remove(
+
+            ref(
+                db,
+                "customer/" +
+                firebaseKey
+            )
+
+        );
+
+
+        alert(
+            "Data customer berhasil dihapus!"
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Gagal menghapus customer:",
+            error
+        );
+
+
+        alert(
+            "Gagal menghapus customer!\n\n" +
+            error.message
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+window.photoError =
+function(image) {
+
+    image.outerHTML =
+        `
+        <span class="no-photo">
+            Foto gagal dimuat
+        </span>
+        `;
+
+};
+
+
+window.openPhotoFromElement =
+function(image) {
+
+    const url =
+        image.getAttribute(
+            "data-url"
+        );
+
+
+    openPhoto(
+        url,
+        image.alt
+    );
+
+};
+
+
+window.openPhoto =
+function(url, title = "") {
+
+    const modal =
+        document.getElementById(
+            "photoModal"
+        );
+
+
+    const image =
+        document.getElementById(
+            "modalImage"
+        );
+
+
+    const caption =
+        document.getElementById(
+            "modalCaption"
+        );
+
+
+    image.src =
+        url;
+
+
+    caption.textContent =
+        title;
+
+
+    modal.style.display =
+        "flex";
+
+};
+
+
+window.closePhoto =
+function() {
+
+    const modal =
+        document.getElementById(
+            "photoModal"
+        );
+
+
+    modal.style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "modalImage"
+        )
+        .src =
+        "";
+
+};
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination() {
+
+    const totalPages =
+        Math.ceil(
+            filteredData.length /
+            rowsPerPage
+        );
+
+
+    if (
+        totalPages <= 1
+    ) {
+
+        document
+            .getElementById(
+                "pagination"
+            )
+            .innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "pagination"
+        )
+        .innerHTML =
+        `
+
+        <button
+            class="btn-prev"
+            onclick="prevPage()"
+            ${currentPage === 1
+                ? "disabled"
+                : ""}
+        >
+            ← Prev
+        </button>
+
+        <span class="page-info">
+
+            Halaman
+            ${currentPage}
+            dari
+            ${totalPages}
+
+        </span>
+
+        <button
+            class="btn-next"
+            onclick="nextPage()"
+            ${currentPage === totalPages
+                ? "disabled"
+                : ""}
+        >
+            Next →
+        </button>
+
+        `;
+
+}
+
+
+window.nextPage =
+function() {
+
+    const totalPages =
+        Math.ceil(
+            filteredData.length /
+            rowsPerPage
+        );
+
+
+    if (
+        currentPage <
+        totalPages
+    ) {
+
+        currentPage++;
+
+        renderTable();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+};
+
+
+window.prevPage =
+function() {
+
+    if (
+        currentPage > 1
+    ) {
+
+        currentPage--;
+
+        renderTable();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+};
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+document
+    .getElementById(
+        "photoModal"
+    )
+    .addEventListener(
+
+        "click",
+
+        function(event) {
 
             if (
-                event.key ===
-                "Escape"
+                event.target ===
+                this
             ) {
-
 
                 closePhoto();
 
+            }
+
+        }
+
+    );
+
+
+document
+    .getElementById(
+        "editModal"
+    )
+    .addEventListener(
+
+        "click",
+
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
 
                 closeEditModal();
 
@@ -3580,170 +4469,183 @@
     );
 
 
+document
+    .getElementById(
+        "historyModal"
+    )
+    .addEventListener(
 
-    /* =========================
-       DOWNLOAD EXCEL
-    ========================= */
+        "click",
 
-    window.downloadExcel =
-        function () {
-
+        function(event) {
 
             if (
-                filteredData.length === 0
+                event.target ===
+                this
             ) {
 
-
-                alert(
-                    "Tidak ada data untuk di-download!"
-                );
-
-
-                return;
+                closeHistory();
 
             }
 
+        }
 
-            const dataExcel =
-                filteredData.map(
-
-                    (
-                        item,
-                        index
-                    ) => {
+    );
 
 
-                        return {
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+
+    "keydown",
+
+    function(event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closePhoto();
+
+            closeEditModal();
+
+            closeHistory();
+
+        }
+
+    }
+
+);
 
 
-                            "No":
-                                index + 1,
+/* =========================================================
+   DOWNLOAD EXCEL
+========================================================= */
+
+window.downloadExcel =
+function() {
+
+    if (
+        filteredData.length === 0
+    ) {
+
+        alert(
+            "Tidak ada data untuk di-download!"
+        );
+
+        return;
+
+    }
 
 
-                            "ID / Firebase Key":
-                                item.id
-                                ||
-                                "-",
+    const dataExcel =
+        filteredData.map(
+
+            (
+                item,
+                index
+            ) => {
+
+                return {
+
+                    "No":
+                        index + 1,
+
+                    "ID / Firebase Key":
+                        item.id ||
+                        "-",
+
+                    "NIK":
+                        item.nik ||
+                        "-",
+
+                    "Status":
+                        item.status ||
+                        "Belum Clear",
+
+                    "Nama":
+                        item.nama ||
+                        "-",
+
+                    "Alamat KTP":
+                        item.alamatktp ||
+                        "-",
+
+                    "Domisili":
+                        item.domisili ||
+                        "-",
+
+                    "URL Photo KTP":
+                        item.photoKTP ||
+                        "-"
+
+                };
+
+            }
+
+        );
 
 
-                            "NIK":
-                                item.nik
-                                ||
-                                "-",
+    const worksheet =
+        XLSX.utils
+        .json_to_sheet(
+            dataExcel
+        );
 
 
-                            "Status":
-                                item.status
-                                ||
-                                "Belum Clear",
+    worksheet["!cols"] = [
+
+        { wch: 8 },
+
+        { wch: 22 },
+
+        { wch: 22 },
+
+        { wch: 15 },
+
+        { wch: 28 },
+
+        { wch: 45 },
+
+        { wch: 35 },
+
+        { wch: 60 }
+
+    ];
 
 
-                            "Nama":
-                                item.nama
-                                ||
-                                "-",
+    const workbook =
+        XLSX.utils
+        .book_new();
 
 
-                            "Alamat KTP":
-                                item.alamatktp
-                                ||
-                                "-",
+    XLSX.utils
+        .book_append_sheet(
+
+            workbook,
+
+            worksheet,
+
+            "Data Customer"
+
+        );
 
 
-                            "Domisili":
-                                item.domisili
-                                ||
-                                "-",
+    XLSX.writeFile(
 
+        workbook,
 
-                            "URL Photo KTP":
-                                item.photoKTP
-                                ||
-                                "-"
+        "Data_Customer.xlsx"
 
-                        };
+    );
 
-
-                    }
-
-                );
-
-
-            const worksheet =
-                XLSX.utils
-                .json_to_sheet(
-                    dataExcel
-                );
-
-
-            worksheet["!cols"] = [
-
-                {
-                    wch: 8
-                },
-
-                {
-                    wch: 22
-                },
-
-                {
-                    wch: 22
-                },
-
-                {
-                    wch: 15
-                },
-
-                {
-                    wch: 28
-                },
-
-                {
-                    wch: 45
-                },
-
-                {
-                    wch: 35
-                },
-
-                {
-                    wch: 60
-                }
-
-            ];
-
-
-            const workbook =
-                XLSX.utils
-                .book_new();
-
-
-            XLSX.utils
-            .book_append_sheet(
-
-                workbook,
-
-                worksheet,
-
-                "Data Customer"
-
-            );
-
-
-            XLSX.writeFile(
-
-                workbook,
-
-                "Data_Customer.xlsx"
-
-            );
-
-        };
-
+};
 
 </script>
-```
 
 </body>
-
 </html>
+```
