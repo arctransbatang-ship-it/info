@@ -4,901 +4,981 @@
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+>
 
-    <title>ARC TRANS</title>
-
-
-    <style>
-
-        /* =========================
-           GLOBAL
-        ========================= */
-
-        * {
-            box-sizing: border-box;
-            font-family:
-                "Segoe UI",
-                Arial,
-                sans-serif;
-        }
+<title>ARC TRANS</title>
 
 
-        html {
-            min-height: 100%;
-        }
+<!-- =====================================================
+     FAVICON / ICON WEBSITE ARC TRANS
+     ===================================================== -->
+
+<!-- Icon utama browser -->
+<link
+    rel="icon"
+    type="image/png"
+    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
+>
+
+<!-- Shortcut icon -->
+<link
+    rel="shortcut icon"
+    type="image/png"
+    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
+>
+
+<!-- Icon untuk iPhone / iPad -->
+<link
+    rel="apple-touch-icon"
+    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
+>
+
+<!-- =====================================================
+     PWA / ANDROID THEME
+     ===================================================== -->
+
+<meta
+    name="theme-color"
+    content="#2196F3"
+>
+
+<meta
+    name="mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+>
+
+<meta
+    name="apple-mobile-web-app-title"
+    content="ARC TRANS"
+>
 
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            padding: 20px;
+<style>
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    /* =====================================================
+       GLOBAL
+       ===================================================== */
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #0f4c81 0%,
-                    #2196F3 45%,
-                    #21CBF3 100%
-                );
+    * {
+        box-sizing: border-box;
 
-            overflow-x: hidden;
-            position: relative;
-        }
+        font-family:
+            "Segoe UI",
+            Arial,
+            sans-serif;
+    }
 
 
-        /* =========================
-           BACKGROUND DECORATION
-        ========================= */
-
-        body::before {
-            content: "";
-
-            position: fixed;
-
-            width: 300px;
-            height: 300px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.12
-                );
-
-            top: -100px;
-            left: -100px;
-
-            filter: blur(2px);
-        }
+    html {
+        min-height: 100%;
+    }
 
 
-        body::after {
-            content: "";
+    body {
+        margin: 0;
 
-            position: fixed;
+        min-height: 100vh;
 
-            width: 350px;
-            height: 350px;
+        padding: 20px;
 
-            border-radius: 50%;
+        display: flex;
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.10
-                );
+        justify-content: center;
 
-            bottom: -150px;
-            right: -100px;
-        }
+        align-items: center;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0f4c81 0%,
+                #2196F3 45%,
+                #21CBF3 100%
+            );
+
+        overflow-x: hidden;
+
+        position: relative;
+    }
 
 
-        /* =========================
-           CONTAINER
-        ========================= */
+    /* =====================================================
+       BACKGROUND DECORATION
+       ===================================================== */
 
-        .container {
-            position: relative;
-            z-index: 2;
+    body::before {
+        content: "";
 
-            width: 100%;
-            max-width: 980px;
+        position: fixed;
 
-            padding: 40px;
+        width: 300px;
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.96
-                );
+        height: 300px;
 
-            border-radius: 28px;
+        border-radius: 50%;
 
-            box-shadow:
-                0 25px 60px
-                rgba(
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.12
+            );
+
+        top: -100px;
+
+        left: -100px;
+
+        filter: blur(2px);
+    }
+
+
+    body::after {
+        content: "";
+
+        position: fixed;
+
+        width: 350px;
+
+        height: 350px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.10
+            );
+
+        bottom: -150px;
+
+        right: -100px;
+    }
+
+
+    /* =====================================================
+       CONTAINER
+       ===================================================== */
+
+    .container {
+        position: relative;
+
+        z-index: 2;
+
+        width: 100%;
+
+        max-width: 980px;
+
+        padding: 40px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.96
+            );
+
+        border-radius: 28px;
+
+        box-shadow:
+            0 25px 60px
+            rgba(
+                0,
+                0,
+                0,
+                0.25
+            );
+
+        animation:
+            fadeIn
+            0.6s
+            ease;
+    }
+
+
+    /* =====================================================
+       HEADER
+       ===================================================== */
+
+    .header {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        margin-bottom: 35px;
+    }
+
+
+    /* =====================================================
+       LOGO
+       ===================================================== */
+
+    .logo {
+        width: 100px;
+
+        height: 100px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        margin-bottom: 16px;
+
+        border-radius: 30px;
+
+        overflow: hidden;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2196F3,
+                #21CBF3
+            );
+
+        box-shadow:
+            0 12px 25px
+            rgba(
+                33,
+                150,
+                243,
+                0.35
+            );
+
+        animation:
+            floatLogo
+            3s
+            ease-in-out
+            infinite;
+    }
+
+
+    /* Gambar logo utama */
+
+    .logo img {
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        display: block;
+    }
+
+
+    /* =====================================================
+       TITLE
+       ===================================================== */
+
+    h1 {
+        margin: 0;
+
+        font-size:
+            clamp(
+                26px,
+                5vw,
+                38px
+            );
+
+        font-weight: 800;
+
+        letter-spacing: 2px;
+
+        color: #1565C0;
+    }
+
+
+    .subtitle {
+        margin-top: 8px;
+
+        color: #78909C;
+
+        font-size:
+            clamp(
+                13px,
+                3vw,
+                16px
+            );
+    }
+
+
+    /* =====================================================
+       MENU GRID
+       ===================================================== */
+
+    .menu {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(
                     0,
-                    0,
-                    0,
-                    0.25
-                );
+                    1fr
+                )
+            );
 
-            animation:
-                fadeIn 0.6s ease;
+        gap: 18px;
+    }
+
+
+    /* =====================================================
+       MENU ITEM
+       ===================================================== */
+
+    .menu-item {
+        position: relative;
+
+        min-height: 185px;
+
+        padding:
+            22px
+            15px;
+
+        text-decoration: none;
+
+        color: #263238;
+
+        background: #ffffff;
+
+        border:
+            1px solid
+            #e6edf3;
+
+        border-radius: 22px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        text-align: center;
+
+        overflow: hidden;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
+    }
+
+
+    /* =====================================================
+       HOVER
+       ===================================================== */
+
+    .menu-item:hover {
+        transform:
+            translateY(-7px);
+
+        border-color:
+            #2196F3;
+
+        background:
+            #f7fbff;
+
+        box-shadow:
+            0 15px 30px
+            rgba(
+                33,
+                150,
+                243,
+                0.20
+            );
+    }
+
+
+    .menu-item:active {
+        transform:
+            scale(0.98);
+    }
+
+
+    /* =====================================================
+       TOP ACCENT
+       ===================================================== */
+
+    .menu-item::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 4px;
+
+        background:
+            linear-gradient(
+                90deg,
+                #2196F3,
+                #21CBF3
+            );
+
+        transform:
+            scaleX(0);
+
+        transition:
+            0.25s ease;
+    }
+
+
+    .menu-item:hover::before {
+        transform:
+            scaleX(1);
+    }
+
+
+    /* =====================================================
+       MENU ICON
+       ===================================================== */
+
+    .menu-icon {
+        width: 78px;
+
+        height: 78px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        margin-bottom: 16px;
+
+        border-radius: 24px;
+
+        font-size: 38px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #e3f2fd,
+                #f1fbff
+            );
+
+        transition:
+            transform 0.25s ease,
+            background 0.25s ease;
+    }
+
+
+    .menu-item:hover .menu-icon {
+        transform:
+            scale(1.12)
+            rotate(3deg);
+
+        background:
+            linear-gradient(
+                135deg,
+                #d7efff,
+                #e8faff
+            );
+    }
+
+
+    /* =====================================================
+       MENU TEXT
+       ===================================================== */
+
+    .menu-text {
+        font-size:
+            clamp(
+                13px,
+                2vw,
+                16px
+            );
+
+        font-weight: 700;
+
+        line-height: 1.5;
+    }
+
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
+    .footer {
+        margin-top: 32px;
+
+        padding-top: 22px;
+
+        border-top:
+            1px solid
+            #edf0f2;
+
+        text-align: center;
+
+        color: #90A4AE;
+
+        font-size: 13px;
+    }
+
+
+    /* =====================================================
+       ANIMATION
+       ===================================================== */
+
+    @keyframes fadeIn {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(30px);
         }
 
+        to {
+            opacity: 1;
 
-        /* =========================
-           HEADER
-        ========================= */
+            transform:
+                translateY(0);
+        }
+    }
 
-        .header {
-            display: flex;
 
-            flex-direction: column;
+    @keyframes floatLogo {
 
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            margin-bottom: 35px;
+        0%,
+        100% {
+            transform:
+                translateY(0);
         }
 
-
-        /* =========================
-           LOGO
-        ========================= */
-
-        .logo {
-            width: 100px;
-            height: 100px;
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            margin-bottom: 16px;
-
-            border-radius: 30px;
-
-            font-size: 50px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #2196F3,
-                    #21CBF3
-                );
-
-            box-shadow:
-                0 12px 25px
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.35
-                );
-
-            animation:
-                floatLogo
-                3s
-                ease-in-out
-                infinite;
-        }
-
-
-        /* =========================
-           TITLE
-        ========================= */
-
-        h1 {
-            margin: 0;
-
-            font-size:
-                clamp(
-                    26px,
-                    5vw,
-                    38px
-                );
-
-            font-weight: 800;
-
-            letter-spacing: 2px;
-
-            color: #1565C0;
-        }
-
-
-        .subtitle {
-            margin-top: 8px;
-
-            color: #78909C;
-
-            font-size:
-                clamp(
-                    13px,
-                    3vw,
-                    16px
-                );
-        }
-
-
-        /* =========================
-           MENU GRID
-        ========================= */
-
-        .menu {
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    3,
-                    minmax(
-                        0,
-                        1fr
-                    )
-                );
-
-            gap: 18px;
-        }
-
-
-        /* =========================
-           MENU ITEM
-        ========================= */
-
-        .menu-item {
-            position: relative;
-
-            min-height: 185px;
-
-            padding:
-                22px
-                15px;
-
-            text-decoration: none;
-
-            color: #263238;
-
-            background: #ffffff;
-
-            border:
-                1px solid
-                #e6edf3;
-
-            border-radius: 22px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            overflow: hidden;
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                border-color 0.25s ease,
-                background 0.25s ease;
-        }
-
-
-        /* =========================
-           HOVER
-        ========================= */
-
-        .menu-item:hover {
+        50% {
             transform:
                 translateY(-7px);
+        }
+    }
 
-            border-color:
-                #2196F3;
 
-            background:
-                #f7fbff;
+    /* =====================================================
+       TABLET
+       ===================================================== */
 
-            box-shadow:
-                0 15px 30px
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.20
+    @media (max-width: 850px) {
+
+        .container {
+            max-width: 700px;
+        }
+
+        .menu {
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
                 );
         }
+    }
 
 
-        .menu-item:active {
-            transform:
-                scale(0.98);
+    /* =====================================================
+       MOBILE
+       ===================================================== */
+
+    @media (max-width: 600px) {
+
+        body {
+            padding: 14px;
+
+            align-items:
+                flex-start;
         }
 
 
-        /* =========================
-           TOP ACCENT
-        ========================= */
+        .container {
+            margin-top: 10px;
 
-        .menu-item::before {
-            content: "";
+            padding:
+                28px
+                16px
+                20px;
 
-            position: absolute;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 4px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #2196F3,
-                    #21CBF3
-                );
-
-            transform:
-                scaleX(0);
-
-            transition:
-                0.25s ease;
+            border-radius:
+                24px;
         }
 
 
-        .menu-item:hover::before {
-            transform:
-                scaleX(1);
+        .header {
+            margin-bottom:
+                25px;
         }
 
 
-        /* =========================
-           MENU ICON
-        ========================= */
+        .logo {
+            width: 82px;
+
+            height: 82px;
+
+            border-radius:
+                24px;
+        }
+
+
+        .menu {
+            gap: 12px;
+        }
+
+
+        .menu-item {
+            min-height:
+                155px;
+
+            padding:
+                16px
+                10px;
+
+            border-radius:
+                18px;
+        }
+
 
         .menu-icon {
-            width: 78px;
-            height: 78px;
+            width: 65px;
 
-            display: flex;
+            height: 65px;
 
-            justify-content: center;
-            align-items: center;
+            border-radius:
+                20px;
 
-            margin-bottom: 16px;
+            font-size:
+                32px;
 
-            border-radius: 24px;
-
-            font-size: 38px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #e3f2fd,
-                    #f1fbff
-                );
-
-            transition:
-                transform 0.25s ease,
-                background 0.25s ease;
+            margin-bottom:
+                10px;
         }
 
 
-        .menu-item:hover .menu-icon {
-            transform:
-                scale(1.12)
-                rotate(3deg);
+        .footer {
+            margin-top:
+                24px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #d7efff,
-                    #e8faff
-                );
+            padding-top:
+                18px;
+        }
+    }
+
+
+    /* =====================================================
+       SMALL MOBILE
+       ===================================================== */
+
+    @media (max-width: 380px) {
+
+        body {
+            padding: 10px;
         }
 
 
-        /* =========================
-           MENU TEXT
-        ========================= */
+        .container {
+            padding:
+                22px
+                12px
+                18px;
+        }
+
+
+        .menu {
+            gap: 10px;
+        }
+
+
+        .menu-item {
+            min-height:
+                140px;
+
+            padding:
+                12px
+                6px;
+        }
+
+
+        .menu-icon {
+            width: 58px;
+
+            height: 58px;
+
+            font-size:
+                28px;
+        }
+
 
         .menu-text {
             font-size:
-                clamp(
-                    13px,
-                    2vw,
-                    16px
-                );
-
-            font-weight: 700;
-
-            line-height: 1.5;
+                12px;
         }
+    }
 
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        .footer {
-            margin-top: 32px;
-
-            padding-top: 22px;
-
-            border-top:
-                1px solid
-                #edf0f2;
-
-            text-align: center;
-
-            color: #90A4AE;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           ANIMATION
-        ========================= */
-
-        @keyframes fadeIn {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    translateY(0);
-            }
-
-        }
-
-
-        @keyframes floatLogo {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    translateY(-7px);
-            }
-
-        }
-
-
-        /* =========================
-           TABLET
-        ========================= */
-
-        @media (max-width: 850px) {
-
-            .container {
-                max-width: 700px;
-            }
-
-            .menu {
-                grid-template-columns:
-                    repeat(
-                        2,
-                        1fr
-                    );
-            }
-
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 600px) {
-
-            body {
-                padding: 14px;
-
-                align-items:
-                    flex-start;
-            }
-
-
-            .container {
-
-                margin-top: 10px;
-
-                padding:
-                    28px
-                    16px
-                    20px;
-
-                border-radius:
-                    24px;
-            }
-
-
-            .header {
-                margin-bottom:
-                    25px;
-            }
-
-
-            .logo {
-
-                width: 82px;
-                height: 82px;
-
-                border-radius:
-                    24px;
-
-                font-size:
-                    42px;
-            }
-
-
-            .menu {
-
-                gap: 12px;
-            }
-
-
-            .menu-item {
-
-                min-height:
-                    155px;
-
-                padding:
-                    16px
-                    10px;
-
-                border-radius:
-                    18px;
-            }
-
-
-            .menu-icon {
-
-                width: 65px;
-                height: 65px;
-
-                border-radius:
-                    20px;
-
-                font-size:
-                    32px;
-
-                margin-bottom:
-                    10px;
-            }
-
-
-            .footer {
-
-                margin-top:
-                    24px;
-
-                padding-top:
-                    18px;
-            }
-
-        }
-
-
-        /* =========================
-           SMALL MOBILE
-        ========================= */
-
-        @media (max-width: 380px) {
-
-            body {
-                padding: 10px;
-            }
-
-
-            .container {
-
-                padding:
-                    22px
-                    12px
-                    18px;
-            }
-
-
-            .menu {
-
-                gap: 10px;
-            }
-
-
-            .menu-item {
-
-                min-height:
-                    140px;
-
-                padding:
-                    12px
-                    6px;
-            }
-
-
-            .menu-icon {
-
-                width: 58px;
-                height: 58px;
-
-                font-size:
-                    28px;
-            }
-
-
-            .menu-text {
-
-                font-size:
-                    12px;
-            }
-
-        }
-
-    </style>
+</style>
+```
 
 </head>
 
-
 <body>
 
+```
+<main class="container">
 
-    <main class="container">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="header">
 
 
-        <!-- =========================
-             HEADER
-        ========================== -->
+        <!-- LOGO ARC TRANS -->
 
-        <div class="header">
+        <div class="logo">
 
-            <div class="logo">
-                🚐
+            <img
+                src="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
+                alt="ARC TRANS Logo"
+            >
+
+        </div>
+
+
+        <h1>
+            ARC TRANS
+        </h1>
+
+
+        <div class="subtitle">
+            Sistem Manajemen Unit & Customer
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MENU
+         ===================================================== -->
+
+    <div class="menu">
+
+
+        <!-- INPUT UNIT -->
+
+        <a
+            href="unit.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🚗
             </div>
 
-
-            <h1>
-                ARC TRANS
-            </h1>
-
-
-            <div class="subtitle">
-                Sistem Manajemen Unit & Customer
+            <div class="menu-text">
+                Input Unit
             </div>
 
-        </div>
+        </a>
 
 
 
-        <!-- =========================
-             MENU
-        ========================== -->
+        <!-- DATA UNIT -->
 
-        <div class="menu">
+        <a
+            href="tabelunit.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                📋
+            </div>
 
-            <!-- INPUT UNIT -->
+            <div class="menu-text">
+                Data Unit Kendaraan
+            </div>
 
-            <a
-                href="unit.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    🚗
-                </div>
 
-                <div class="menu-text">
-                    Input Unit
-                </div>
 
-            </a>
+        <!-- INPUT CUSTOMER -->
 
+        <a
+            href="customer.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                👤
+            </div>
 
-            <!-- DATA UNIT -->
+            <div class="menu-text">
+                Input Customer
+            </div>
 
-            <a
-                href="tabelunit.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    📋
-                </div>
 
-                <div class="menu-text">
-                    Data Unit Kendaraan
-                </div>
 
-            </a>
+        <!-- DATA CUSTOMER -->
 
+        <a
+            href="tabelcustomer.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                👥
+            </div>
 
-            <!-- INPUT CUSTOMER -->
+            <div class="menu-text">
+                Data Customer
+            </div>
 
-            <a
-                href="customer.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    👤
-                </div>
 
-                <div class="menu-text">
-                    Input Customer
-                </div>
 
-            </a>
+        <!-- RENT OUT -->
 
+        <a
+            href="outrent.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                📝
+            </div>
 
-            <!-- DATA CUSTOMER -->
+            <div class="menu-text">
+                RENT OUT
+            </div>
 
-            <a
-                href="tabelcustomer.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    👥
-                </div>
 
-                <div class="menu-text">
-                    Data Customer
-                </div>
 
-            </a>
+        <!-- BOOKING UNIT -->
 
+        <a
+            href="booking.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                📅
+            </div>
 
-            <!-- RENT OUT -->
+            <div class="menu-text">
+                Booking Unit
+            </div>
 
-            <a
-                href="outrent.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    📝
-                </div>
 
-                <div class="menu-text">
-                    RENT OUT
-                </div>
 
-            </a>
+        <!-- LIST BOOKING UNIT -->
 
+        <a
+            href="tabelbooking.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                📑
+            </div>
 
-            <!-- BOOKING UNIT -->
+            <div class="menu-text">
+                List Booking Unit
+            </div>
 
-            <a
-                href="booking.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    📅
-                </div>
 
-                <div class="menu-text">
-                    Booking Unit
-                </div>
 
-            </a>
+        <!-- UPDATE UNIT OUT -->
 
+        <a
+            href="tabeloutrent.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                📊
+            </div>
 
-            <!-- LIST BOOKING UNIT -->
+            <div class="menu-text">
+                UPDATE Unit OUT
+            </div>
 
-            <a
-                href="tabelbooking.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    📑
-                </div>
 
-                <div class="menu-text">
-                    List Booking Unit
-                </div>
 
-            </a>
+        <!-- REVENUE -->
 
+        <a
+            href="tabelrevenue.html"
+            class="menu-item"
+        >
 
+            <div class="menu-icon">
+                💰
+            </div>
 
-            <!-- TABEL RENTAL OUT -->
+            <div class="menu-text">
+                Revenue
+            </div>
 
-            <a
-                href="tabeloutrent.html"
-                class="menu-item"
-            >
+        </a>
 
-                <div class="menu-icon">
-                    📊
-                </div>
 
-                <div class="menu-text">
-                    UPDATE Unit OUT
-                </div>
+    </div>
 
-            </a>
 
 
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
 
-            <!-- =========================
-                 REVENUE
-            ========================== -->
+    <div class="footer">
 
-            <a
-                href="tabelrevenue.html"
-                class="menu-item"
-            >
+        © 2026 ARC TRANS
 
-                <div class="menu-icon">
-                    💰
-                </div>
+    </div>
 
-                <div class="menu-text">
-                    Revenue
-                </div>
 
-            </a>
-
-
-        </div>
-
-
-
-        <!-- =========================
-             FOOTER
-        ========================== -->
-
-        <div class="footer">
-
-            © 2026 ARC TRANS
-
-        </div>
-
-
-    </main>
-
+</main>
+```
 
 </body>
 
