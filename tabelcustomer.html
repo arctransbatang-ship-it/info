@@ -1,1774 +1,2008 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
->
-
-<title>ARC TRANS - Data Customer</title>
-
-<!-- LIBRARY EXCEL -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-
-<style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-:root {
-    --primary: #2196F3;
-    --primary-dark: #1976D2;
-    --secondary: #21CBF3;
-
-    --success: #16a34a;
-    --danger: #dc2626;
-    --warning: #f59e0b;
-    --purple: #7c3aed;
+    <meta charset="UTF-8">
 
-    --text: #1e293b;
-    --muted: #64748b;
-    --border: #dbe3ee;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e0f2fe,
-            #f8fafc
-        );
-
-    color: var(--text);
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.topbar {
-    width: 100%;
-    padding: 14px 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: white;
-
-    box-shadow:
-        0 2px 12px
-        rgba(15, 23, 42, 0.08);
-
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand-icon {
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
-
-    color: white;
-    font-size: 20px;
-
-    box-shadow:
-        0 6px 16px
-        rgba(33, 150, 243, 0.25);
-}
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    >
 
-.brand-text h1 {
-    margin: 0;
-    font-size: 18px;
-}
+    <title>ARC TRANS - Data Customer</title>
 
-.brand-text p {
-    margin: 2px 0 0;
-    font-size: 12px;
-    color: var(--muted);
-}
 
-.home-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    <!-- =========================================================
+         LIBRARY EXCEL
+    ========================================================== -->
 
-    text-decoration: none;
+    <script
+        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
+    ></script>
 
-    background: #eff6ff;
-    color: var(--primary-dark);
 
-    font-weight: 700;
+    <!-- =========================================================
+         STYLE
+    ========================================================== -->
 
-    padding: 10px 15px;
-    border-radius: 12px;
+    <style>
 
-    transition: 0.2s;
-}
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
 
-.home-btn:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-1px);
-}
 
-/* =========================================================
-   CONTAINER
-========================================================= */
+        :root {
 
-.container {
-    width: 100%;
-    max-width: 1500px;
-    margin: auto;
-    padding: 20px;
-}
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --secondary: #21CBF3;
 
-.page-title {
-    margin-bottom: 20px;
-}
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --purple: #7c3aed;
 
-.page-title h2 {
-    margin: 0 0 5px;
-    font-size: 24px;
-}
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #dbe3ee;
 
-.page-title p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--muted);
-}
+        }
 
-/* =========================================================
-   TOOLBAR
-========================================================= */
 
-.toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+        body {
 
-    gap: 12px;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
-}
+            margin: 0;
 
-#searchInput {
-    flex: 1;
-    min-width: 220px;
-    max-width: 450px;
+            min-height: 100vh;
 
-    min-height: 48px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #e0f2fe,
+                    #f8fafc
+                );
 
-    padding: 12px 15px;
+            color: var(--text);
 
-    border:
-        1px solid
-        var(--border);
+        }
 
-    border-radius: 12px;
 
-    background: white;
+        /* =====================================================
+           HEADER
+        ====================================================== */
 
-    font-size: 14px;
-    outline: none;
-}
+        .topbar {
 
-#searchInput:focus {
-    border-color: var(--primary);
+            width: 100%;
 
-    box-shadow:
-        0 0 0 4px
-        rgba(33, 150, 243, 0.12);
-}
+            padding: 14px 20px;
 
-button {
-    border: none;
-    cursor: pointer;
+            display: flex;
 
-    color: white;
+            align-items: center;
 
-    font-size: 14px;
-    font-weight: 700;
+            justify-content: space-between;
 
-    border-radius: 12px;
+            background: white;
 
-    padding: 12px 18px;
+            box-shadow:
+                0 2px 12px
+                rgba(15, 23, 42, 0.08);
 
-    transition: 0.2s;
-}
+            position: sticky;
 
-button:hover {
-    transform: translateY(-1px);
-}
+            top: 0;
 
-button:disabled {
-    background: #cbd5e1 !important;
-    cursor: not-allowed;
-    transform: none;
-}
+            z-index: 1000;
 
-#btnDownload {
-    display: none;
+        }
 
-    background:
-        linear-gradient(
-            135deg,
-            #16a34a,
-            #22c55e
-        );
 
-    box-shadow:
-        0 6px 15px
-        rgba(34, 197, 94, 0.2);
-}
+        .brand {
 
-/* =========================================================
-   TABLE CUSTOMER
-========================================================= */
+            display: flex;
 
-.table-container {
-    width: 100%;
+            align-items: center;
 
-    overflow-x: auto;
+            gap: 10px;
 
-    background: white;
+        }
 
-    border-radius: 18px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(15, 23, 42, 0.08);
-}
+        .brand-icon {
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 1200px;
-}
+            width: 42px;
 
-th {
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
+            height: 42px;
 
-    color: white;
+            display: flex;
 
-    padding: 14px 10px;
+            align-items: center;
 
-    text-align: center;
+            justify-content: center;
 
-    white-space: nowrap;
-}
+            border-radius: 12px;
 
-td {
-    padding: 12px 10px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
 
-    border-bottom:
-        1px solid
-        #edf2f7;
+            color: white;
 
-    text-align: center;
+            font-size: 20px;
 
-    vertical-align: middle;
-}
+            box-shadow:
+                0 6px 16px
+                rgba(33, 150, 243, 0.25);
 
-tbody tr {
-    transition: 0.2s;
-}
+        }
 
-tbody tr:hover {
-    background: #f8fbff;
-}
 
-/* =========================================================
-   PHOTO
-========================================================= */
+        .brand-text h1 {
 
-.photo-cell {
-    min-width: 130px;
-}
+            margin: 0;
 
-.customer-photo {
-    display: block;
+            font-size: 18px;
 
-    width: 110px;
-    height: 80px;
+        }
 
-    margin: auto;
 
-    object-fit: cover;
+        .brand-text p {
 
-    border-radius: 10px;
+            margin: 2px 0 0;
 
-    border:
-        1px solid
-        var(--border);
+            font-size: 12px;
 
-    cursor: pointer;
+            color: var(--muted);
 
-    transition: 0.2s;
-}
+        }
 
-.customer-photo:hover {
-    transform: scale(1.06);
 
-    box-shadow:
-        0 6px 18px
-        rgba(0, 0, 0, 0.2);
-}
+        .home-btn {
 
-.no-photo {
-    color: #94a3b8;
-    font-size: 12px;
-    text-align: center;
-    padding: 10px;
-}
+            display: inline-flex;
 
-/* =========================================================
-   STATUS
-========================================================= */
+            align-items: center;
 
-.status-badge {
-    display: inline-block;
+            justify-content: center;
 
-    margin-top: 6px;
+            text-decoration: none;
 
-    padding: 4px 9px;
+            background: #eff6ff;
 
-    border-radius: 999px;
+            color: var(--primary-dark);
 
-    font-size: 11px;
-    font-weight: 800;
+            font-weight: 700;
 
-    text-transform: uppercase;
+            padding: 10px 15px;
 
-    letter-spacing: 0.3px;
-}
+            border-radius: 12px;
 
-.status-clear {
-    background: #dcfce7;
-    color: #15803d;
-    border: 1px solid #86efac;
-}
+            transition: 0.2s;
 
-.status-not-clear {
-    background: #fee2e2;
-    color: #dc2626;
-    border: 1px solid #fca5a5;
-}
+        }
 
-/* =========================================================
-   ACTION
-========================================================= */
 
-.action-area {
-    display: flex;
+        .home-btn:hover {
 
-    justify-content: center;
-    align-items: center;
+            background: var(--primary);
 
-    gap: 7px;
+            color: white;
 
-    flex-wrap: wrap;
-}
+            transform: translateY(-1px);
 
-.btn-edit {
-    background:
-        linear-gradient(
-            135deg,
-            #f59e0b,
-            #fbbf24
-        );
+        }
 
-    padding: 9px 12px;
-    font-size: 12px;
-}
 
-.btn-delete {
-    background:
-        linear-gradient(
-            135deg,
-            #dc2626,
-            #ef4444
-        );
+        /* =====================================================
+           CONTAINER
+        ====================================================== */
 
-    padding: 9px 12px;
-    font-size: 12px;
-}
+        .container {
 
-.btn-history {
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #a855f7
-        );
+            width: 100%;
 
-    padding: 9px 12px;
-    font-size: 12px;
-}
+            max-width: 1500px;
 
-/* =========================================================
-   MOBILE CARD CUSTOMER
-========================================================= */
+            margin: auto;
 
-.mobile-list {
-    display: none;
-}
+            padding: 20px;
 
-.customer-card {
-    background: white;
+        }
 
-    border-radius: 18px;
 
-    padding: 16px;
+        .page-title {
 
-    margin-bottom: 14px;
+            margin-bottom: 20px;
 
-    box-shadow:
-        0 8px 24px
-        rgba(15, 23, 42, 0.08);
+        }
 
-    border:
-        1px solid
-        #eef2f7;
-}
 
-.customer-card-header {
-    display: flex;
+        .page-title h2 {
 
-    align-items: flex-start;
+            margin: 0 0 5px;
 
-    justify-content: space-between;
+            font-size: 24px;
 
-    gap: 12px;
+        }
 
-    margin-bottom: 14px;
 
-    padding-bottom: 12px;
+        .page-title p {
 
-    border-bottom:
-        1px solid
-        #edf2f7;
-}
+            margin: 0;
 
-.customer-number {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 700;
-}
+            font-size: 14px;
 
-.customer-name {
-    margin: 3px 0 0;
+            color: var(--muted);
 
-    font-size: 17px;
-    font-weight: 800;
+        }
 
-    word-break: break-word;
-}
 
-.customer-id {
-    background: #eff6ff;
+        /* =====================================================
+           TOOLBAR
+        ====================================================== */
 
-    color: var(--primary-dark);
+        .toolbar {
 
-    padding: 7px 10px;
+            display: flex;
 
-    border-radius: 10px;
+            align-items: center;
 
-    font-size: 12px;
-    font-weight: 800;
+            justify-content: space-between;
 
-    text-align: center;
+            gap: 12px;
 
-    max-width: 145px;
+            margin-bottom: 18px;
 
-    word-break: break-word;
-}
+            flex-wrap: wrap;
 
-.customer-status {
-    margin-top: 7px;
-    text-align: center;
-}
+        }
 
-.mobile-photo {
-    width: 100%;
-    height: 210px;
 
-    object-fit: cover;
+        #searchInput {
 
-    border-radius: 14px;
+            flex: 1;
 
-    margin-bottom: 14px;
+            min-width: 220px;
 
-    border:
-        1px solid
-        var(--border);
+            max-width: 500px;
 
-    cursor: pointer;
+            min-height: 48px;
 
-    background: #f8fafc;
-}
+            padding: 12px 15px;
 
-.card-grid {
-    display: grid;
+            border:
+                1px solid
+                var(--border);
 
-    grid-template-columns:
-        repeat(2, 1fr);
+            border-radius: 12px;
 
-    gap: 10px;
-}
+            background: white;
 
-.card-item {
-    background: #f8fafc;
+            font-size: 14px;
 
-    padding: 10px;
+            outline: none;
 
-    border-radius: 10px;
-}
+        }
 
-.card-item.full {
-    grid-column: 1 / -1;
-}
 
-.card-label {
-    display: block;
+        #searchInput:focus {
 
-    font-size: 11px;
+            border-color: var(--primary);
 
-    color: var(--muted);
+            box-shadow:
+                0 0 0 4px
+                rgba(33, 150, 243, 0.12);
 
-    margin-bottom: 5px;
+        }
 
-    font-weight: 600;
-}
 
-.card-value {
-    font-size: 13px;
+        button {
 
-    font-weight: 700;
+            border: none;
 
-    color: var(--text);
+            cursor: pointer;
 
-    word-break: break-word;
+            color: white;
 
-    line-height: 1.5;
-}
+            font-size: 14px;
 
-.card-action-area {
-    margin-top: 15px;
+            font-weight: 700;
 
-    display: grid;
+            border-radius: 12px;
 
-    grid-template-columns:
-        repeat(3, 1fr);
+            padding: 12px 18px;
 
-    gap: 8px;
-}
+            transition: 0.2s;
 
-.card-action-area button {
-    width: 100%;
-    padding: 10px 5px;
-    font-size: 11px;
-}
+        }
 
-/* =========================================================
-   PAGINATION
-========================================================= */
 
-#pagination {
-    margin: 20px 0;
+        button:hover {
 
-    display: flex;
+            transform: translateY(-1px);
 
-    justify-content: center;
-    align-items: center;
+        }
 
-    gap: 10px;
 
-    flex-wrap: wrap;
-}
+        button:disabled {
 
-.btn-prev {
-    background: var(--warning);
-}
+            background: #cbd5e1 !important;
 
-.btn-next {
-    background: var(--success);
-}
+            cursor: not-allowed;
 
-.page-info {
-    font-size: 13px;
+            transform: none;
 
-    font-weight: 700;
+        }
 
-    color: var(--text);
 
-    padding: 8px 12px;
-}
+        #btnDownload {
 
-/* =========================================================
-   EMPTY
-========================================================= */
+            display: none;
 
-.empty-data {
-    padding: 35px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #16a34a,
+                    #22c55e
+                );
 
-    text-align: center;
+            box-shadow:
+                0 6px 15px
+                rgba(34, 197, 94, 0.2);
 
-    color: var(--muted);
-}
+        }
 
-/* =========================================================
-   PHOTO MODAL
-========================================================= */
 
-.photo-modal {
-    display: none;
+        /* =====================================================
+           CUSTOMER TABLE
+        ====================================================== */
 
-    position: fixed;
+        .table-container {
 
-    z-index: 9999;
+            width: 100%;
 
-    inset: 0;
+            overflow-x: auto;
 
-    background:
-        rgba(15, 23, 42, 0.9);
+            background: white;
 
-    justify-content: center;
+            border-radius: 18px;
 
-    align-items: center;
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.08);
 
-    padding: 20px;
-}
+        }
 
-.photo-modal img {
-    max-width: 95%;
-    max-height: 85vh;
 
-    border-radius: 14px;
+        table {
 
-    box-shadow:
-        0 10px 40px
-        rgba(0, 0, 0, 0.5);
-}
+            width: 100%;
 
-.close-modal {
-    position: absolute;
+            border-collapse: collapse;
 
-    top: 18px;
-    right: 25px;
+            min-width: 1200px;
 
-    color: white;
+        }
 
-    font-size: 42px;
 
-    cursor: pointer;
+        th {
 
-    line-height: 1;
-}
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
 
-.modal-caption {
-    position: absolute;
+            color: white;
 
-    bottom: 20px;
+            padding: 14px 10px;
 
-    color: white;
+            text-align: center;
 
-    font-size: 14px;
+            white-space: nowrap;
 
-    text-align: center;
+        }
 
-    width: 100%;
 
-    padding: 0 20px;
-}
+        td {
 
-/* =========================================================
-   EDIT MODAL
-========================================================= */
+            padding: 12px 10px;
 
-.edit-modal {
-    display: none;
+            border-bottom:
+                1px solid
+                #edf2f7;
 
-    position: fixed;
+            text-align: center;
 
-    z-index: 10000;
+            vertical-align: middle;
 
-    inset: 0;
+        }
 
-    background:
-        rgba(15, 23, 42, 0.6);
 
-    align-items: center;
+        tbody tr {
 
-    justify-content: center;
+            transition: 0.2s;
 
-    padding: 20px;
+        }
 
-    overflow-y: auto;
-}
 
-.edit-modal-content {
-    width: 100%;
+        tbody tr:hover {
 
-    max-width: 650px;
+            background: #f8fbff;
 
-    background: white;
+        }
 
-    border-radius: 20px;
 
-    padding: 24px;
+        /* =====================================================
+           PHOTO
+        ====================================================== */
 
-    box-shadow:
-        0 20px 60px
-        rgba(15, 23, 42, 0.25);
+        .photo-cell {
 
-    position: relative;
+            min-width: 130px;
 
-    margin: auto;
-}
+        }
 
-.edit-modal-title {
-    margin: 0 0 20px;
 
-    font-size: 22px;
-}
+        .customer-photo {
 
-.close-edit-modal {
-    position: absolute;
+            display: block;
 
-    right: 20px;
-    top: 15px;
+            width: 110px;
 
-    font-size: 30px;
+            height: 80px;
 
-    cursor: pointer;
+            margin: auto;
 
-    color: var(--muted);
-}
+            object-fit: cover;
 
-.form-grid {
-    display: grid;
+            border-radius: 10px;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+            border:
+                1px solid
+                var(--border);
 
-    gap: 15px;
-}
+            cursor: pointer;
 
-.form-group {
-    display: flex;
+            transition: 0.2s;
 
-    flex-direction: column;
+        }
 
-    gap: 6px;
-}
 
-.form-group.full {
-    grid-column: 1 / -1;
-}
+        .customer-photo:hover {
 
-.form-group label {
-    font-size: 13px;
+            transform: scale(1.06);
 
-    font-weight: 700;
+            box-shadow:
+                0 6px 18px
+                rgba(0, 0, 0, 0.2);
 
-    color: var(--text);
-}
+        }
 
-.form-group input,
-.form-group textarea {
-    width: 100%;
 
-    min-height: 45px;
+        .no-photo {
 
-    border:
-        1px solid
-        var(--border);
+            color: #94a3b8;
 
-    border-radius: 10px;
+            font-size: 12px;
 
-    padding: 10px 12px;
+            text-align: center;
 
-    font-size: 14px;
+            padding: 10px;
 
-    outline: none;
+        }
 
-    resize: vertical;
-}
 
-.form-group textarea {
-    min-height: 90px;
-}
+        /* =====================================================
+           CUSTOMER STATUS
+        ====================================================== */
 
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--primary);
+        .status-badge {
 
-    box-shadow:
-        0 0 0 3px
-        rgba(33, 150, 243, 0.12);
-}
+            display: inline-block;
 
-.edit-modal-actions {
-    display: flex;
+            margin-top: 6px;
 
-    justify-content: flex-end;
+            padding: 4px 9px;
 
-    gap: 10px;
+            border-radius: 999px;
 
-    margin-top: 22px;
-}
+            font-size: 11px;
 
-.btn-cancel {
-    background: #64748b;
-}
+            font-weight: 800;
 
-.btn-save {
-    background:
-        linear-gradient(
-            135deg,
-            #16a34a,
-            #22c55e
-        );
-}
+            text-transform: uppercase;
 
-/* =========================================================
-   HISTORY MODAL / PAGE
-========================================================= */
+            letter-spacing: 0.3px;
 
-.history-modal {
-    display: none;
+        }
 
-    position: fixed;
 
-    z-index: 10001;
+        .status-clear {
 
-    inset: 0;
+            background: #dcfce7;
 
-    background:
-        rgba(15, 23, 42, 0.65);
+            color: #15803d;
 
-    align-items: center;
+            border:
+                1px solid
+                #86efac;
 
-    justify-content: center;
+        }
 
-    padding: 15px;
 
-    overflow-y: auto;
-}
+        .status-not-clear {
 
-.history-modal-content {
-    width: 100%;
+            background: #fee2e2;
 
-    max-width: 1450px;
+            color: #dc2626;
 
-    max-height: 94vh;
+            border:
+                1px solid
+                #fca5a5;
 
-    overflow-y: auto;
+        }
 
-    background: #f8fafc;
 
-    border-radius: 20px;
+        /* =====================================================
+           ACTION
+        ====================================================== */
 
-    box-shadow:
-        0 25px 70px
-        rgba(15, 23, 42, 0.3);
+        .action-area {
 
-    position: relative;
+            display: flex;
 
-    padding: 20px;
-}
+            justify-content: center;
 
-.history-header {
-    background: white;
+            align-items: center;
 
-    border-radius: 16px;
+            gap: 7px;
 
-    padding: 18px;
+            flex-wrap: wrap;
 
-    margin-bottom: 15px;
+        }
 
-    box-shadow:
-        0 5px 18px
-        rgba(15, 23, 42, 0.06);
 
-    position: sticky;
+        .btn-edit {
 
-    top: 0;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f59e0b,
+                    #fbbf24
+                );
 
-    z-index: 5;
-}
+            padding: 9px 12px;
 
-.history-title-row {
-    display: flex;
+            font-size: 12px;
 
-    justify-content: space-between;
+        }
 
-    align-items: flex-start;
 
-    gap: 15px;
-}
+        .btn-delete {
 
-.history-title {
-    margin: 0;
+            background:
+                linear-gradient(
+                    135deg,
+                    #dc2626,
+                    #ef4444
+                );
 
-    font-size: 21px;
+            padding: 9px 12px;
 
-    color: var(--text);
-}
+            font-size: 12px;
 
-.history-subtitle {
-    margin: 5px 0 0;
+        }
 
-    color: var(--muted);
 
-    font-size: 13px;
-}
+        .btn-history {
 
-.close-history {
-    background: #fee2e2;
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #a855f7
+                );
 
-    color: #dc2626;
+            padding: 9px 12px;
 
-    width: 40px;
-    height: 40px;
+            font-size: 12px;
 
-    padding: 0;
+        }
 
-    border-radius: 10px;
 
-    font-size: 24px;
-}
+        /* =====================================================
+           MOBILE CUSTOMER CARD
+        ====================================================== */
 
-.history-summary {
-    display: grid;
+        .mobile-list {
 
-    grid-template-columns:
-        repeat(4, 1fr);
+            display: none;
 
-    gap: 10px;
+        }
 
-    margin-top: 15px;
-}
 
-.summary-box {
-    padding: 12px;
+        .customer-card {
 
-    border-radius: 12px;
+            background: white;
 
-    background: #f8fafc;
+            border-radius: 18px;
 
-    border:
-        1px solid
-        #e2e8f0;
-}
+            padding: 16px;
 
-.summary-label {
-    display: block;
+            margin-bottom: 14px;
 
-    color: var(--muted);
+            box-shadow:
+                0 8px 24px
+                rgba(15, 23, 42, 0.08);
 
-    font-size: 11px;
+            border:
+                1px solid
+                #eef2f7;
 
-    margin-bottom: 4px;
-}
+        }
 
-.summary-value {
-    font-size: 17px;
 
-    font-weight: 800;
-}
+        .customer-card-header {
 
-.history-table-container {
-    background: white;
+            display: flex;
 
-    border-radius: 16px;
+            align-items: flex-start;
 
-    overflow-x: auto;
+            justify-content: space-between;
 
-    box-shadow:
-        0 5px 18px
-        rgba(15, 23, 42, 0.06);
-}
+            gap: 12px;
 
-.history-table {
-    min-width: 1450px;
-}
+            margin-bottom: 14px;
 
-.history-table th {
-    position: sticky;
-    top: 0;
+            padding-bottom: 12px;
 
-    z-index: 2;
-}
+            border-bottom:
+                1px solid
+                #edf2f7;
 
-.history-table td {
-    font-size: 12px;
-}
+        }
 
-.history-mobile-list {
-    display: none;
-}
 
-.history-card {
-    background: white;
+        .customer-number {
 
-    border-radius: 16px;
+            font-size: 12px;
 
-    padding: 15px;
+            color: var(--muted);
 
-    margin-bottom: 12px;
+            font-weight: 700;
 
-    box-shadow:
-        0 5px 18px
-        rgba(15, 23, 42, 0.07);
+        }
 
-    border:
-        1px solid
-        #eef2f7;
-}
 
-.history-card-top {
-    display: flex;
+        .customer-name {
 
-    justify-content: space-between;
+            margin: 3px 0 0;
 
-    gap: 10px;
+            font-size: 17px;
 
-    align-items: flex-start;
+            font-weight: 800;
 
-    padding-bottom: 12px;
+            word-break: break-word;
 
-    margin-bottom: 12px;
+        }
 
-    border-bottom:
-        1px solid
-        #edf2f7;
-}
 
-.history-card-title {
-    font-size: 16px;
+        .customer-id {
 
-    font-weight: 800;
-}
+            background: #eff6ff;
 
-.history-card-plat {
-    display: inline-block;
+            color: var(--primary-dark);
 
-    margin-top: 5px;
+            padding: 7px 10px;
 
-    background: #eff6ff;
+            border-radius: 10px;
 
-    color: var(--primary-dark);
+            font-size: 12px;
 
-    padding: 5px 8px;
+            font-weight: 800;
 
-    border-radius: 8px;
+            text-align: center;
 
-    font-size: 12px;
+            max-width: 145px;
 
-    font-weight: 800;
-}
+            word-break: break-word;
 
-.history-payment {
-    text-align: right;
-}
+        }
 
-.payment-badge {
-    display: inline-block;
 
-    padding: 5px 8px;
+        .customer-status {
 
-    border-radius: 999px;
+            margin-top: 7px;
 
-    font-size: 10px;
+            text-align: center;
 
-    font-weight: 800;
-}
+        }
 
-.payment-lunas {
-    background: #dcfce7;
-    color: #15803d;
-}
 
-.payment-kurang {
-    background: #fee2e2;
-    color: #dc2626;
-}
+        .mobile-photo {
 
-.payment-lebih {
-    background: #fef3c7;
-    color: #b45309;
-}
+            width: 100%;
 
-.payment-normal {
-    background: #e2e8f0;
-    color: #475569;
-}
+            height: 210px;
 
-.history-grid {
-    display: grid;
+            object-fit: cover;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+            border-radius: 14px;
 
-    gap: 8px;
-}
+            margin-bottom: 14px;
 
-.history-item {
-    background: #f8fafc;
+            border:
+                1px solid
+                var(--border);
 
-    border-radius: 9px;
+            cursor: pointer;
 
-    padding: 9px;
-}
+            background: #f8fafc;
 
-.history-item.full {
-    grid-column: 1 / -1;
-}
+        }
 
-.history-label {
-    display: block;
 
-    font-size: 10px;
+        .card-grid {
 
-    color: var(--muted);
+            display: grid;
 
-    margin-bottom: 4px;
-}
+            grid-template-columns:
+                repeat(2, 1fr);
 
-.history-value {
-    font-size: 12px;
+            gap: 10px;
 
-    font-weight: 700;
+        }
 
-    line-height: 1.45;
 
-    word-break: break-word;
-}
+        .card-item {
 
-.history-empty {
-    background: white;
+            background: #f8fafc;
 
-    border-radius: 16px;
+            padding: 10px;
 
-    padding: 40px 20px;
+            border-radius: 10px;
 
-    text-align: center;
+        }
 
-    color: var(--muted);
 
-    box-shadow:
-        0 5px 18px
-        rgba(15, 23, 42, 0.06);
-}
+        .card-item.full {
 
-.history-loading {
-    text-align: center;
+            grid-column: 1 / -1;
 
-    padding: 35px;
+        }
 
-    color: var(--muted);
-}
 
-/* =========================================================
-   MOBILE
-========================================================= */
+        .card-label {
 
-@media (max-width: 700px) {
+            display: block;
 
-    body {
-        padding-bottom: 20px;
-    }
+            font-size: 11px;
 
-    .topbar {
-        padding: 10px 14px;
-    }
+            color: var(--muted);
 
-    .brand-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
-    }
+            margin-bottom: 5px;
 
-    .brand-text h1 {
-        font-size: 16px;
-    }
+            font-weight: 600;
 
-    .brand-text p {
-        font-size: 10px;
-    }
+        }
 
-    .home-btn {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
 
-    .container {
-        padding: 14px;
-    }
+        .card-value {
 
-    .page-title h2 {
-        font-size: 21px;
-    }
+            font-size: 13px;
 
-    .toolbar {
-        display: grid;
-        grid-template-columns: 1fr;
-    }
+            font-weight: 700;
 
-    #searchInput {
-        width: 100%;
-        max-width: none;
-    }
+            color: var(--text);
 
-    #btnDownload {
-        width: 100%;
-        min-height: 48px;
-    }
+            word-break: break-word;
 
-    .table-container {
-        display: none;
-    }
+            line-height: 1.5;
 
-    .mobile-list {
-        display: block;
-    }
+        }
 
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
 
-    .form-group.full {
-        grid-column: auto;
-    }
+        .card-action-area {
 
-    .edit-modal-content {
-        padding: 20px;
-    }
+            margin-top: 15px;
 
-    /* HISTORY MOBILE */
+            display: grid;
 
-    .history-modal {
-        padding: 0;
-        align-items: flex-start;
-    }
+            grid-template-columns:
+                repeat(3, 1fr);
 
-    .history-modal-content {
-        min-height: 100vh;
-        max-height: 100vh;
+            gap: 8px;
 
-        border-radius: 0;
+        }
 
-        padding: 12px;
-    }
 
-    .history-header {
-        position: relative;
+        .card-action-area button {
 
-        top: auto;
+            width: 100%;
 
-        padding: 14px;
-    }
+            padding: 10px 5px;
 
-    .history-title {
-        font-size: 18px;
-    }
+            font-size: 11px;
 
-    .history-subtitle {
-        font-size: 12px;
-    }
+        }
 
-    .history-summary {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
 
-    .history-table-container {
-        display: none;
-    }
+        /* =====================================================
+           PAGINATION
+        ====================================================== */
 
-    .history-mobile-list {
-        display: block;
-    }
+        #pagination {
 
-    .history-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
+            margin: 20px 0;
 
-    .history-card-top {
-        flex-direction: column;
-    }
+            display: flex;
 
-    .history-payment {
-        text-align: left;
-    }
+            justify-content: center;
 
-}
+            align-items: center;
 
-@media (max-width: 380px) {
+            gap: 10px;
 
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
+            flex-wrap: wrap;
 
-    .card-item.full {
-        grid-column: auto;
-    }
+        }
 
-    .customer-card-header {
-        flex-direction: column;
-    }
 
-    .customer-id {
-        max-width: 100%;
-    }
+        .btn-prev {
 
-    .customer-status {
-        text-align: left;
-    }
+            background: var(--warning);
 
-    .card-action-area {
-        grid-template-columns: 1fr;
-    }
+        }
 
-    .history-grid {
-        grid-template-columns: 1fr;
-    }
 
-    .history-item.full {
-        grid-column: auto;
-    }
+        .btn-next {
 
-}
+            background: var(--success);
 
-</style>
+        }
+
+
+        .page-info {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: var(--text);
+
+            padding: 8px 12px;
+
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ====================================================== */
+
+        .empty-data {
+
+            padding: 35px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =====================================================
+           PHOTO MODAL
+        ====================================================== */
+
+        .photo-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 99999;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, 0.9);
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+
+        .photo-modal img {
+
+            max-width: 95%;
+
+            max-height: 85vh;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 10px 40px
+                rgba(0, 0, 0, 0.5);
+
+        }
+
+
+        .close-modal {
+
+            position: absolute;
+
+            top: 18px;
+
+            right: 25px;
+
+            color: white;
+
+            font-size: 42px;
+
+            cursor: pointer;
+
+            line-height: 1;
+
+        }
+
+
+        .modal-caption {
+
+            position: absolute;
+
+            bottom: 20px;
+
+            color: white;
+
+            font-size: 14px;
+
+            text-align: center;
+
+            width: 100%;
+
+            padding: 0 20px;
+
+        }
+
+
+        /* =====================================================
+           EDIT MODAL
+        ====================================================== */
+
+        .edit-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 100000;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, 0.6);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+        }
+
+
+        .edit-modal-content {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(15, 23, 42, 0.25);
+
+            position: relative;
+
+            margin: auto;
+
+        }
+
+
+        .edit-modal-title {
+
+            margin: 0 0 20px;
+
+            font-size: 22px;
+
+        }
+
+
+        .close-edit-modal {
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 15px;
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+            color: var(--muted);
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 6px;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .form-group label {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: var(--text);
+
+        }
+
+
+        .form-group input,
+
+        .form-group textarea {
+
+            width: 100%;
+
+            min-height: 45px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+
+            padding: 10px 12px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            resize: vertical;
+
+        }
+
+
+        .form-group textarea {
+
+            min-height: 90px;
+
+        }
+
+
+        .form-group input:focus,
+
+        .form-group textarea:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(33, 150, 243, 0.12);
+
+        }
+
+
+        .edit-modal-actions {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            margin-top: 22px;
+
+        }
+
+
+        .btn-cancel {
+
+            background: #64748b;
+
+        }
+
+
+        .btn-save {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #16a34a,
+                    #22c55e
+                );
+
+        }
+
+
+        /* =====================================================
+           HISTORY MODAL
+        ====================================================== */
+
+        .history-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 100001;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, 0.65);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 15px;
+
+            overflow-y: auto;
+
+        }
+
+
+        .history-modal-content {
+
+            width: 100%;
+
+            max-width: 1450px;
+
+            max-height: 94vh;
+
+            overflow-y: auto;
+
+            background: #f8fafc;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(15, 23, 42, 0.3);
+
+            position: relative;
+
+            padding: 20px;
+
+        }
+
+
+        .history-header {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            margin-bottom: 15px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(15, 23, 42, 0.06);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+        }
+
+
+        .history-title-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 15px;
+
+        }
+
+
+        .history-title {
+
+            margin: 0;
+
+            font-size: 21px;
+
+            color: var(--text);
+
+        }
+
+
+        .history-subtitle {
+
+            margin: 5px 0 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .close-history {
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+            width: 40px;
+
+            height: 40px;
+
+            padding: 0;
+
+            border-radius: 10px;
+
+            font-size: 24px;
+
+        }
+
+
+        .history-summary {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 10px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .summary-box {
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            background: #f8fafc;
+
+            border:
+                1px solid
+                #e2e8f0;
+
+        }
+
+
+        .summary-label {
+
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .summary-value {
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           HISTORY TABLE
+        ====================================================== */
+
+        .history-table-container {
+
+            background: white;
+
+            border-radius: 16px;
+
+            overflow-x: auto;
+
+            box-shadow:
+                0 5px 18px
+                rgba(15, 23, 42, 0.06);
+
+        }
+
+
+        .history-table {
+
+            min-width: 1450px;
+
+        }
+
+
+        .history-table th {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 2;
+
+        }
+
+
+        .history-table td {
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================================
+           HISTORY MOBILE
+        ====================================================== */
+
+        .history-mobile-list {
+
+            display: none;
+
+        }
+
+
+        .history-card {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            margin-bottom: 12px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(15, 23, 42, 0.07);
+
+            border:
+                1px solid
+                #eef2f7;
+
+        }
+
+
+        .history-card-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            align-items: flex-start;
+
+            padding-bottom: 12px;
+
+            margin-bottom: 12px;
+
+            border-bottom:
+                1px solid
+                #edf2f7;
+
+        }
+
+
+        .history-card-title {
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+        }
+
+
+        .history-card-plat {
+
+            display: inline-block;
+
+            margin-top: 5px;
+
+            background: #eff6ff;
+
+            color: var(--primary-dark);
+
+            padding: 5px 8px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        .history-payment {
+
+            text-align: right;
+
+        }
+
+
+        .payment-badge {
+
+            display: inline-block;
+
+            padding: 5px 8px;
+
+            border-radius: 999px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .payment-lunas {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+        }
+
+
+        .payment-kurang {
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+        }
+
+
+        .payment-lebih {
+
+            background: #fef3c7;
+
+            color: #b45309;
+
+        }
+
+
+        .payment-normal {
+
+            background: #e2e8f0;
+
+            color: #475569;
+
+        }
+
+
+        .history-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 8px;
+
+        }
+
+
+        .history-item {
+
+            background: #f8fafc;
+
+            border-radius: 9px;
+
+            padding: 9px;
+
+        }
+
+
+        .history-item.full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .history-label {
+
+            display: block;
+
+            font-size: 10px;
+
+            color: var(--muted);
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .history-value {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            line-height: 1.45;
+
+            word-break: break-word;
+
+        }
+
+
+        .history-empty {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 40px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            box-shadow:
+                0 5px 18px
+                rgba(15, 23, 42, 0.06);
+
+        }
+
+
+        .history-loading {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+
+                padding-bottom: 20px;
+
+            }
+
+
+            .topbar {
+
+                padding: 10px 14px;
+
+            }
+
+
+            .brand-icon {
+
+                width: 38px;
+
+                height: 38px;
+
+                font-size: 18px;
+
+            }
+
+
+            .brand-text h1 {
+
+                font-size: 16px;
+
+            }
+
+
+            .brand-text p {
+
+                font-size: 10px;
+
+            }
+
+
+            .home-btn {
+
+                padding: 8px 12px;
+
+                font-size: 12px;
+
+            }
+
+
+            .container {
+
+                padding: 14px;
+
+            }
+
+
+            .page-title h2 {
+
+                font-size: 21px;
+
+            }
+
+
+            .toolbar {
+
+                display: grid;
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            #searchInput {
+
+                width: 100%;
+
+                max-width: none;
+
+            }
+
+
+            #btnDownload {
+
+                width: 100%;
+
+                min-height: 48px;
+
+            }
+
+
+            .table-container {
+
+                display: none;
+
+            }
+
+
+            .mobile-list {
+
+                display: block;
+
+            }
+
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .edit-modal-content {
+
+                padding: 20px;
+
+            }
+
+
+            /* HISTORY */
+
+            .history-modal {
+
+                padding: 0;
+
+                align-items: flex-start;
+
+            }
+
+
+            .history-modal-content {
+
+                min-height: 100vh;
+
+                max-height: 100vh;
+
+                border-radius: 0;
+
+                padding: 12px;
+
+            }
+
+
+            .history-header {
+
+                position: relative;
+
+                top: auto;
+
+                padding: 14px;
+
+            }
+
+
+            .history-title {
+
+                font-size: 18px;
+
+            }
+
+
+            .history-subtitle {
+
+                font-size: 12px;
+
+            }
+
+
+            .history-summary {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .history-table-container {
+
+                display: none;
+
+            }
+
+
+            .history-mobile-list {
+
+                display: block;
+
+            }
+
+
+            .history-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .history-card-top {
+
+                flex-direction: column;
+
+            }
+
+
+            .history-payment {
+
+                text-align: left;
+
+            }
+
+        }
+
+
+        @media (max-width: 380px) {
+
+            .card-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .card-item.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .customer-card-header {
+
+                flex-direction: column;
+
+            }
+
+
+            .customer-id {
+
+                max-width: 100%;
+
+            }
+
+
+            .customer-status {
+
+                text-align: left;
+
+            }
+
+
+            .card-action-area {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .history-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .history-item.full {
+
+                grid-column: auto;
+
+            }
+
+        }
+
+    </style>
 
 </head>
+
 
 <body>
 
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
 
-<div class="topbar">
+    <div class="topbar">
 
-    <div class="brand">
+        <div class="brand">
 
-        <div class="brand-icon">
-            👤
+            <div class="brand-icon">
+                👤
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    ARC TRANS
+                </h1>
+
+                <p>
+                    Vehicle Rental Management
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="brand-text">
 
-            <h1>
-                ARC TRANS
-            </h1>
+        <a
+            href="index.html"
+            class="home-btn"
+        >
+            🏠 Home
+        </a>
+
+    </div>
+
+
+    <!-- =========================================================
+         CUSTOMER
+    ========================================================== -->
+
+    <div class="container">
+
+        <div class="page-title">
+
+            <h2>
+                Data Customer
+            </h2>
 
             <p>
-                Vehicle Rental Management
+                Informasi seluruh customer ARC TRANS
             </p>
 
         </div>
 
-    </div>
 
-    <a
-        href="index.html"
-        class="home-btn"
-    >
-        🏠 Home
-    </a>
+        <!-- =====================================================
+             TOOLBAR
+        ====================================================== -->
 
-</div>
-
-
-<!-- =========================================================
-     CUSTOMER CONTAINER
-========================================================= -->
-
-<div class="container">
-
-    <div class="page-title">
-
-        <h2>
-            Data Customer
-        </h2>
-
-        <p>
-            Informasi seluruh customer ARC TRANS
-        </p>
-
-    </div>
-
-
-    <div class="toolbar">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="🔍 Cari ID, NIK, nama atau alamat..."
-        >
-
-        <button
-            id="btnDownload"
-            onclick="downloadExcel()"
-        >
-            📥 Download Excel
-        </button>
-
-    </div>
-
-
-    <!-- =====================================================
-         DESKTOP TABLE
-    ====================================================== -->
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>No.</th>
-
-                    <th>ID / NIK</th>
-
-                    <th>Nama</th>
-
-                    <th>Alamat KTP</th>
-
-                    <th>Domisili</th>
-
-                    <th>Photo ID / KTP</th>
-
-                    <th>Aksi</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="isiData">
-
-                <tr>
-
-                    <td
-                        colspan="7"
-                        class="empty-data"
-                    >
-                        Memuat data customer...
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-
-    <!-- =====================================================
-         MOBILE LIST
-    ====================================================== -->
-
-    <div
-        id="mobileList"
-        class="mobile-list"
-    >
-        Memuat data customer...
-    </div>
-
-
-    <div id="pagination"></div>
-
-</div>
-
-
-<!-- =========================================================
-     PHOTO MODAL
-========================================================= -->
-
-<div
-    id="photoModal"
-    class="photo-modal"
->
-
-    <span
-        class="close-modal"
-        onclick="closePhoto()"
-    >
-        &times;
-    </span>
-
-    <img
-        id="modalImage"
-        src=""
-        alt="Foto ID / KTP"
-    >
-
-    <div
-        id="modalCaption"
-        class="modal-caption"
-    ></div>
-
-</div>
-
-
-<!-- =========================================================
-     EDIT MODAL
-========================================================= -->
-
-<div
-    id="editModal"
-    class="edit-modal"
->
-
-    <div class="edit-modal-content">
-
-        <span
-            class="close-edit-modal"
-            onclick="closeEditModal()"
-        >
-            &times;
-        </span>
-
-        <h2 class="edit-modal-title">
-            ✏️ Edit Data Customer
-        </h2>
-
-        <form id="editForm">
+        <div class="toolbar">
 
             <input
-                type="hidden"
-                id="editFirebaseKey"
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Cari ID, NIK, nama atau alamat..."
             >
 
-            <div class="form-grid">
 
-                <div class="form-group">
-
-                    <label>
-                        ID / Firebase Key
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editId"
-                        readonly
-                    >
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        NIK
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editNik"
-                    >
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        Status
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editStatus"
-                        placeholder="Contoh: clear"
-                    >
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label>
-                        Nama Customer
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editNama"
-                        required
-                    >
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label>
-                        Alamat KTP
-                    </label>
-
-                    <textarea
-                        id="editAlamatKtp"
-                    ></textarea>
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label>
-                        Domisili
-                    </label>
-
-                    <textarea
-                        id="editDomisili"
-                    ></textarea>
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label>
-                        URL Photo ID / KTP
-                    </label>
-
-                    <input
-                        type="url"
-                        id="editPhotoKTP"
-                        placeholder="https://..."
-                    >
-
-                </div>
-
-            </div>
-
-            <div class="edit-modal-actions">
-
-                <button
-                    type="button"
-                    class="btn-cancel"
-                    onclick="closeEditModal()"
-                >
-                    Batal
-                </button>
-
-                <button
-                    type="submit"
-                    class="btn-save"
-                >
-                    💾 Simpan Perubahan
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     HISTORY MODAL
-========================================================= -->
-
-<div
-    id="historyModal"
-    class="history-modal"
->
-
-    <div class="history-modal-content">
-
-        <div class="history-header">
-
-            <div class="history-title-row">
-
-                <div>
-
-                    <h2
-                        class="history-title"
-                        id="historyTitle"
-                    >
-                        📋 Histori Rental
-                    </h2>
-
-                    <p
-                        class="history-subtitle"
-                        id="historySubtitle"
-                    >
-                        Memuat histori...
-                    </p>
-
-                </div>
-
-                <button
-                    class="close-history"
-                    onclick="closeHistory()"
-                >
-                    &times;
-                </button>
-
-            </div>
-
-
-            <div
-                class="history-summary"
-                id="historySummary"
-            ></div>
+            <button
+                id="btnDownload"
+                onclick="downloadExcel()"
+            >
+                📥 Download Excel
+            </button>
 
         </div>
 
 
-        <!-- DESKTOP -->
+        <!-- =====================================================
+             DESKTOP TABLE
+        ====================================================== -->
 
-        <div
-            class="history-table-container"
-            id="historyTableContainer"
-        >
+        <div class="table-container">
 
-            <table class="history-table">
+            <table>
 
                 <thead>
 
@@ -1776,41 +2010,35 @@ tbody tr:hover {
 
                         <th>No.</th>
 
-                        <th>Tanggal Sewa</th>
+                        <th>ID / NIK</th>
 
-                        <th>Tanggal Kembali</th>
+                        <th>Nama</th>
 
-                        <th>Unit Kendaraan</th>
+                        <th>Alamat KTP</th>
 
-                        <th>Plat Nomor</th>
+                        <th>Domisili</th>
 
-                        <th>Jenis Rental</th>
+                        <th>Photo ID / KTP</th>
 
-                        <th>Durasi</th>
-
-                        <th>Harga</th>
-
-                        <th>Total</th>
-
-                        <th>Sudah Dibayar</th>
-
-                        <th>Sisa</th>
-
-                        <th>Kelebihan</th>
-
-                        <th>Status Pembayaran</th>
-
-                        <th>Jaminan</th>
-
-                        <th>Status</th>
+                        <th>Aksi</th>
 
                     </tr>
 
                 </thead>
 
-                <tbody
-                    id="historyTableBody"
-                >
+
+                <tbody id="isiData">
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="empty-data"
+                        >
+                            Memuat data customer...
+                        </td>
+
+                    </tr>
 
                 </tbody>
 
@@ -1819,1098 +2047,654 @@ tbody tr:hover {
         </div>
 
 
-        <!-- MOBILE -->
+        <!-- =====================================================
+             MOBILE
+        ====================================================== -->
 
         <div
-            id="historyMobileList"
-            class="history-mobile-list"
+            id="mobileList"
+            class="mobile-list"
+        >
+            Memuat data customer...
+        </div>
+
+
+        <div id="pagination"></div>
+
+    </div>
+
+
+    <!-- =========================================================
+         PHOTO MODAL
+    ========================================================== -->
+
+    <div
+        id="photoModal"
+        class="photo-modal"
+    >
+
+        <span
+            class="close-modal"
+            onclick="closePhoto()"
+        >
+            &times;
+        </span>
+
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Foto ID / KTP"
+        >
+
+
+        <div
+            id="modalCaption"
+            class="modal-caption"
         ></div>
 
     </div>
 
-</div>
+
+    <!-- =========================================================
+         EDIT MODAL
+    ========================================================== -->
+
+    <div
+        id="editModal"
+        class="edit-modal"
+    >
+
+        <div class="edit-modal-content">
+
+            <span
+                class="close-edit-modal"
+                onclick="closeEditModal()"
+            >
+                &times;
+            </span>
 
 
-<!-- =========================================================
-     FIREBASE
-========================================================= -->
-
-<script type="module">
-
-import {
-    initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-import {
-    getDatabase,
-    ref,
-    onValue,
-    update,
-    remove,
-    get
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+            <h2 class="edit-modal-title">
+                ✏️ Edit Data Customer
+            </h2>
 
 
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
+            <form id="editForm">
 
-const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
-
-    authDomain:
-        "arctrans.firebaseapp.com",
-
-    databaseURL:
-        "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
-
-    projectId:
-        "arctrans",
-
-    storageBucket:
-        "arctrans.firebasestorage.app",
-
-    messagingSenderId:
-        "60781918601",
-
-    appId:
-        "1:60781918601:web:c85d6131207f8a8958"
-
-};
+                <input
+                    type="hidden"
+                    id="editFirebaseKey"
+                >
 
 
-const app =
-    initializeApp(
-        firebaseConfig
-    );
+                <div class="form-grid">
 
-const db =
-    getDatabase(
-        app
-    );
+                    <div class="form-group">
 
+                        <label>
+                            ID / Firebase Key
+                        </label>
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+                        <input
+                            type="text"
+                            id="editId"
+                            readonly
+                        >
 
-let allData = [];
-
-let filteredData = [];
-
-let currentPage = 1;
-
-const rowsPerPage = 10;
+                    </div>
 
 
-/* =========================================================
-   USERNAME
-========================================================= */
+                    <div class="form-group">
 
-const username =
-    localStorage.getItem(
-        "username"
-    );
+                        <label>
+                            NIK
+                        </label>
 
+                        <input
+                            type="text"
+                            id="editNik"
+                        >
 
-const allowedUsers = [
-
-    "Nurhakiki",
-
-    "Henri Yuliansyah",
-
-    "Sultan"
-
-];
+                    </div>
 
 
-if (
-    allowedUsers.includes(
-        username
-    )
-) {
+                    <div class="form-group">
 
-    document
-        .getElementById(
-            "btnDownload"
-        )
-        .style
-        .display =
-        "inline-block";
+                        <label>
+                            Status
+                        </label>
 
-}
+                        <input
+                            type="text"
+                            id="editStatus"
+                            placeholder="Contoh: clear"
+                        >
+
+                    </div>
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+                    <div class="form-group full">
 
-function applySearch() {
+                        <label>
+                            Nama Customer
+                        </label>
 
-    const keyword =
-        document
-        .getElementById(
-            "searchInput"
-        )
-        .value
-        .toLowerCase()
-        .trim();
+                        <input
+                            type="text"
+                            id="editNama"
+                            required
+                        >
+
+                    </div>
 
 
-    filteredData =
-        allData.filter(
+                    <div class="form-group full">
 
-            item => {
+                        <label>
+                            Alamat KTP
+                        </label>
 
-                const id =
-                    String(
-                        item.id || ""
+                        <textarea
+                            id="editAlamatKtp"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Domisili
+                        </label>
+
+                        <textarea
+                            id="editDomisili"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            URL Photo ID / KTP
+                        </label>
+
+                        <input
+                            type="url"
+                            id="editPhotoKTP"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="edit-modal-actions">
+
+                    <button
+                        type="button"
+                        class="btn-cancel"
+                        onclick="closeEditModal()"
+                    >
+                        Batal
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn-save"
+                    >
+                        💾 Simpan Perubahan
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         HISTORY MODAL
+    ========================================================== -->
+
+    <div
+        id="historyModal"
+        class="history-modal"
+    >
+
+        <div class="history-modal-content">
+
+            <div class="history-header">
+
+                <div class="history-title-row">
+
+                    <div>
+
+                        <h2
+                            class="history-title"
+                            id="historyTitle"
+                        >
+                            📋 Histori Rental
+                        </h2>
+
+
+                        <p
+                            class="history-subtitle"
+                            id="historySubtitle"
+                        >
+                            Memuat histori...
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="close-history"
+                        onclick="closeHistory()"
+                    >
+                        &times;
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="history-summary"
+                    id="historySummary"
+                ></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 HISTORY DESKTOP
+            ================================================== -->
+
+            <div
+                class="history-table-container"
+                id="historyTableContainer"
+            >
+
+                <table class="history-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+
+                            <th>Tanggal Sewa</th>
+
+                            <th>Tanggal Kembali</th>
+
+                            <th>Unit Kendaraan</th>
+
+                            <th>Plat Nomor</th>
+
+                            <th>Jenis Rental</th>
+
+                            <th>Durasi</th>
+
+                            <th>Harga</th>
+
+                            <th>Total</th>
+
+                            <th>Sudah Dibayar</th>
+
+                            <th>Sisa</th>
+
+                            <th>Kelebihan</th>
+
+                            <th>Status Pembayaran</th>
+
+                            <th>Jaminan</th>
+
+                            <th>Status Transaksi</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="historyTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- =================================================
+                 HISTORY MOBILE
+            ================================================== -->
+
+            <div
+                id="historyMobileList"
+                class="history-mobile-list"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         FIREBASE
+    ========================================================== -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            onValue,
+            update,
+            remove,
+            get
+        }
+        from
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+        /* =====================================================
+           FIREBASE CONFIG
+        ====================================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+            authDomain:
+                "arctrans.firebaseapp.com",
+
+            databaseURL:
+                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+            projectId:
+                "arctrans",
+
+            storageBucket:
+                "arctrans.firebasestorage.app",
+
+            messagingSenderId:
+                "60781918601",
+
+            appId:
+                "1:60781918601:web:c85d6131207f8a8958"
+
+        };
+
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getDatabase(
+                app
+            );
+
+
+        /* =====================================================
+           VARIABLES
+        ====================================================== */
+
+        let allData = [];
+
+        let filteredData = [];
+
+        let currentPage = 1;
+
+        const rowsPerPage = 10;
+
+
+        /* =====================================================
+           USERNAME
+        ====================================================== */
+
+        const username =
+            localStorage.getItem(
+                "username"
+            );
+
+
+        const allowedUsers = [
+
+            "Nurhakiki",
+
+            "Henri Yuliansyah",
+
+            "Sultan"
+
+        ];
+
+
+        if (
+            allowedUsers.includes(
+                username
+            )
+        ) {
+
+            document
+                .getElementById(
+                    "btnDownload"
+                )
+                .style
+                .display =
+                "inline-block";
+
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ====================================================== */
+
+        function applySearch() {
+
+            const keyword =
+                document
+                    .getElementById(
+                        "searchInput"
                     )
-                    .toLowerCase();
-
-                const nik =
-                    String(
-                        item.nik || ""
-                    )
-                    .toLowerCase();
-
-                const nama =
-                    String(
-                        item.nama || ""
-                    )
-                    .toLowerCase();
-
-                const alamatktp =
-                    String(
-                        item.alamatktp || ""
-                    )
-                    .toLowerCase();
-
-                const domisili =
-                    String(
-                        item.domisili || ""
-                    )
-                    .toLowerCase();
-
-                const status =
-                    String(
-                        item.status || ""
-                    )
-                    .toLowerCase();
+                    .value
+                    .toLowerCase()
+                    .trim();
 
 
-                return (
+            filteredData =
+                allData.filter(
 
-                    id.includes(keyword)
+                    item => {
 
-                    ||
+                        const id =
+                            String(
+                                item.id || ""
+                            )
+                            .toLowerCase();
 
-                    nik.includes(keyword)
 
-                    ||
+                        const nik =
+                            String(
+                                item.nik || ""
+                            )
+                            .toLowerCase();
 
-                    nama.includes(keyword)
 
-                    ||
+                        const nama =
+                            String(
+                                item.nama || ""
+                            )
+                            .toLowerCase();
 
-                    alamatktp.includes(keyword)
 
-                    ||
+                        const alamatktp =
+                            String(
+                                item.alamatktp || ""
+                            )
+                            .toLowerCase();
 
-                    domisili.includes(keyword)
 
-                    ||
+                        const domisili =
+                            String(
+                                item.domisili || ""
+                            )
+                            .toLowerCase();
 
-                    status.includes(keyword)
+
+                        const status =
+                            String(
+                                item.status || ""
+                            )
+                            .toLowerCase();
+
+
+                        return (
+
+                            id.includes(keyword)
+
+                            ||
+
+                            nik.includes(keyword)
+
+                            ||
+
+                            nama.includes(keyword)
+
+                            ||
+
+                            alamatktp.includes(keyword)
+
+                            ||
+
+                            domisili.includes(keyword)
+
+                            ||
+
+                            status.includes(keyword)
+
+                        );
+
+                    }
 
                 );
 
-            }
 
-        );
+            currentPage = 1;
 
-
-    currentPage = 1;
-
-    renderTable();
-
-}
-
-
-document
-    .getElementById(
-        "searchInput"
-    )
-    .addEventListener(
-        "input",
-        applySearch
-    );
-
-
-/* =========================================================
-   CUSTOMER FIREBASE
-========================================================= */
-
-const dbRef =
-    ref(
-        db,
-        "customer"
-    );
-
-
-onValue(
-
-    dbRef,
-
-    snapshot => {
-
-        const data =
-            snapshot.val();
-
-
-        console.log(
-            "Data customer Firebase:",
-            data
-        );
-
-
-        if (!data) {
-
-            allData = [];
-
-            filteredData = [];
-
-            showEmptyData(
-                "Data customer belum tersedia"
-            );
-
-            return;
+            renderTable();
 
         }
 
 
-        allData =
-            Object.entries(
-                data
+        document
+            .getElementById(
+                "searchInput"
             )
-            .map(
-
-                (
-                    [
-                        firebaseKey,
-                        item
-                    ]
-                ) => ({
-
-                    firebaseKey:
-                        firebaseKey,
-
-                    id:
-                        firebaseKey,
-
-                    ...item
-
-                })
-
+            .addEventListener(
+                "input",
+                applySearch
             );
 
 
-        applySearch();
+        /* =====================================================
+           CUSTOMER FIREBASE
+        ====================================================== */
 
-    },
+        const dbRef =
+            ref(
+                db,
+                "customer"
+            );
 
-    error => {
 
-        console.error(
-            "Firebase Error:",
-            error
-        );
+        onValue(
 
-        showEmptyData(
-            "Gagal mengambil data customer"
-        );
+            dbRef,
 
-    }
+            snapshot => {
 
-);
+                const data =
+                    snapshot.val();
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+                console.log(
+                    "Data customer Firebase:",
+                    data
+                );
 
-function escapeHtml(value) {
 
-    return String(
-        value ?? ""
-    )
+                if (!data) {
 
-    .replace(
-        /&/g,
-        "&amp;"
-    )
+                    allData = [];
 
-    .replace(
-        /</g,
-        "&lt;"
-    )
+                    filteredData = [];
 
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-function showEmptyData(message) {
-
-    document
-        .getElementById(
-            "isiData"
-        )
-        .innerHTML =
-        `
-        <tr>
-            <td
-                colspan="7"
-                class="empty-data"
-            >
-                ${escapeHtml(message)}
-            </td>
-        </tr>
-        `;
-
-
-    document
-        .getElementById(
-            "mobileList"
-        )
-        .innerHTML =
-        `
-        <div class="customer-card">
-            <div class="empty-data">
-                ${escapeHtml(message)}
-            </div>
-        </div>
-        `;
-
-
-    document
-        .getElementById(
-            "pagination"
-        )
-        .innerHTML =
-        "";
-
-}
-
-
-/* =========================================================
-   RENDER CUSTOMER
-========================================================= */
-
-function renderTable() {
-
-    if (
-        filteredData.length === 0
-    ) {
-
-        showEmptyData(
-            "Data tidak ditemukan"
-        );
-
-        return;
-
-    }
-
-
-    const totalPages =
-        Math.ceil(
-            filteredData.length /
-            rowsPerPage
-        );
-
-
-    if (
-        currentPage > totalPages
-    ) {
-
-        currentPage =
-            totalPages;
-
-    }
-
-
-    const start =
-        (
-            currentPage - 1
-        ) *
-        rowsPerPage;
-
-
-    const end =
-        start +
-        rowsPerPage;
-
-
-    const paginatedData =
-        filteredData.slice(
-            start,
-            end
-        );
-
-
-    let tableHtml = "";
-
-    let mobileHtml = "";
-
-    let no =
-        start + 1;
-
-
-    paginatedData.forEach(
-
-        item => {
-
-            const firebaseKey =
-                item.firebaseKey;
-
-
-            const id =
-                item.nik ||
-                item.id ||
-                "-";
-
-
-            const nama =
-                item.nama ||
-                "-";
-
-
-            const alamatktp =
-                item.alamatktp ||
-                "-";
-
-
-            const domisili =
-                item.domisili ||
-                "-";
-
-
-            const urlphoto =
-                item.photoKTP ||
-                "";
-
-
-            const status =
-                String(
-                    item.status ||
-                    ""
-                ).trim();
-
-
-            const isClear =
-                status.toLowerCase() ===
-                "clear";
-
-
-            const statusClass =
-                isClear
-                ?
-                "status-clear"
-                :
-                "status-not-clear";
-
-
-            const statusText =
-                status ||
-                "Belum Clear";
-
-
-            const statusHtml =
-                `
-                <div
-                    class="status-badge ${statusClass}"
-                >
-                    ${escapeHtml(statusText)}
-                </div>
-                `;
-
-
-            let photoHtml =
-                `
-                <span class="no-photo">
-                    Tidak ada foto
-                </span>
-                `;
-
-
-            let mobilePhotoHtml =
-                `
-                <div class="no-photo">
-                    Tidak ada foto ID / KTP
-                </div>
-                `;
-
-
-            if (
-                urlphoto &&
-                typeof urlphoto ===
-                "string"
-            ) {
-
-                const safeUrl =
-                    escapeHtml(
-                        urlphoto
+                    showEmptyData(
+                        "Data customer belum tersedia"
                     );
 
+                    return;
 
-                photoHtml =
-                    `
-                    <img
-                        src="${safeUrl}"
-                        alt="Foto ID / KTP ${escapeHtml(nama)}"
-                        class="customer-photo"
-                        data-url="${safeUrl}"
-                        onclick="openPhotoFromElement(this)"
-                        onerror="photoError(this)"
-                    >
-                    `;
+                }
 
 
-                mobilePhotoHtml =
-                    `
-                    <img
-                        src="${safeUrl}"
-                        alt="Foto ID / KTP ${escapeHtml(nama)}"
-                        class="mobile-photo"
-                        data-url="${safeUrl}"
-                        onclick="openPhotoFromElement(this)"
-                        onerror="photoError(this)"
-                    >
-                    `;
-
-            }
-
-
-            /* =============================
-               DESKTOP
-            ============================= */
-
-            tableHtml +=
-                `
-                <tr>
-
-                    <td>
-                        ${no}
-                    </td>
-
-                    <td>
-
-                        <strong>
-                            ${escapeHtml(id)}
-                        </strong>
-
-                        ${statusHtml}
-
-                    </td>
-
-                    <td>
-                        ${escapeHtml(nama)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(alamatktp)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(domisili)}
-                    </td>
-
-                    <td class="photo-cell">
-                        ${photoHtml}
-                    </td>
-
-                    <td>
-
-                        <div class="action-area">
-
-                            <button
-                                class="btn-history"
-                                onclick="showHistory('${escapeHtml(firebaseKey)}')"
-                            >
-                                📋 Histori
-                            </button>
-
-                            <button
-                                class="btn-edit"
-                                onclick="editCustomer('${escapeHtml(firebaseKey)}')"
-                            >
-                                ✏️ Edit
-                            </button>
-
-                            <button
-                                class="btn-delete"
-                                onclick="deleteCustomer('${escapeHtml(firebaseKey)}')"
-                            >
-                                🗑️ Hapus
-                            </button>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-                `;
-
-
-            /* =============================
-               MOBILE
-            ============================= */
-
-            mobileHtml +=
-                `
-                <div class="customer-card">
-
-                    <div class="customer-card-header">
-
-                        <div>
-
-                            <div class="customer-number">
-                                CUSTOMER #${no}
-                            </div>
-
-                            <div class="customer-name">
-                                ${escapeHtml(nama)}
-                            </div>
-
-                        </div>
-
-                        <div>
-
-                            <div class="customer-id">
-                                ${escapeHtml(id)}
-                            </div>
-
-                            <div class="customer-status">
-                                ${statusHtml}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    ${mobilePhotoHtml}
-
-                    <div class="card-grid">
-
-                        <div class="card-item full">
-
-                            <span class="card-label">
-                                Alamat KTP
-                            </span>
-
-                            <div class="card-value">
-                                ${escapeHtml(alamatktp)}
-                            </div>
-
-                        </div>
-
-                        <div class="card-item full">
-
-                            <span class="card-label">
-                                Domisili
-                            </span>
-
-                            <div class="card-value">
-                                ${escapeHtml(domisili)}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="card-action-area">
-
-                        <button
-                            class="btn-history"
-                            onclick="showHistory('${escapeHtml(firebaseKey)}')"
-                        >
-                            📋 Histori
-                        </button>
-
-                        <button
-                            class="btn-edit"
-                            onclick="editCustomer('${escapeHtml(firebaseKey)}')"
-                        >
-                            ✏️ Edit
-                        </button>
-
-                        <button
-                            class="btn-delete"
-                            onclick="deleteCustomer('${escapeHtml(firebaseKey)}')"
-                        >
-                            🗑️ Hapus
-                        </button>
-
-                    </div>
-
-                </div>
-                `;
-
-
-            no++;
-
-        }
-
-    );
-
-
-    document
-        .getElementById(
-            "isiData"
-        )
-        .innerHTML =
-        tableHtml;
-
-
-    document
-        .getElementById(
-            "mobileList"
-        )
-        .innerHTML =
-        mobileHtml;
-
-
-    renderPagination();
-
-}
-
-
-/* =========================================================
-   SHOW CUSTOMER HISTORY
-========================================================= */
-
-window.showHistory =
-async function(firebaseKey) {
-
-    const customer =
-        allData.find(
-            item =>
-                item.firebaseKey ===
-                firebaseKey
-        );
-
-
-    if (!customer) {
-
-        alert(
-            "Data customer tidak ditemukan!"
-        );
-
-        return;
-
-    }
-
-
-    const customerId =
-        String(
-            customer.firebaseKey ||
-            ""
-        ).trim();
-
-
-    const customerNik =
-        String(
-            customer.nik ||
-            ""
-        ).trim();
-
-
-    const customerName =
-        customer.nama ||
-        "-";
-
-
-    document
-        .getElementById(
-            "historyTitle"
-        )
-        .textContent =
-        "📋 Histori Rental - " +
-        customerName;
-
-
-    document
-        .getElementById(
-            "historySubtitle"
-        )
-        .innerHTML =
-        `
-        ID Customer:
-        <strong>
-            ${escapeHtml(customerId)}
-        </strong>
-
-        &nbsp; | &nbsp;
-
-        NIK:
-        <strong>
-            ${escapeHtml(customerNik || "-")}
-        </strong>
-        `;
-
-
-    document
-        .getElementById(
-            "historySummary"
-        )
-        .innerHTML =
-        `
-        <div class="summary-box">
-            <span class="summary-label">
-                Total Rental
-            </span>
-            <div
-                class="summary-value"
-                id="summaryTotal"
-            >
-                -
-            </div>
-        </div>
-
-        <div class="summary-box">
-            <span class="summary-label">
-                Total Nilai Rental
-            </span>
-            <div
-                class="summary-value"
-                id="summaryNilai"
-            >
-                -
-            </div>
-        </div>
-
-        <div class="summary-box">
-            <span class="summary-label">
-                Total Pembayaran
-            </span>
-            <div
-                class="summary-value"
-                id="summaryBayar"
-            >
-                -
-            </div>
-        </div>
-
-        <div class="summary-box">
-            <span class="summary-label">
-                Rental Terakhir
-            </span>
-            <div
-                class="summary-value"
-                id="summaryTerakhir"
-            >
-                -
-            </div>
-        </div>
-        `;
-
-
-    document
-        .getElementById(
-            "historyTableBody"
-        )
-        .innerHTML =
-        `
-        <tr>
-            <td
-                colspan="15"
-                class="history-loading"
-            >
-                Memuat histori rental...
-            </td>
-        </tr>
-        `;
-
-
-    document
-        .getElementById(
-            "historyMobileList"
-        )
-        .innerHTML =
-        `
-        <div class="history-loading">
-            Memuat histori rental...
-        </div>
-        `;
-
-
-    document
-        .getElementById(
-            "historyModal"
-        )
-        .style
-        .display =
-        "flex";
-
-
-    try {
-
-        const snapshot =
-            await get(
-                ref(
-                    db,
-                    "rentout"
-                )
-            );
-
-
-        const data =
-            snapshot.val();
-
-
-        if (!data) {
-
-            renderHistory([]);
-
-            return;
-
-        }
-
-
-        /*
-         * PENCARIAN UTAMA:
-         *
-         * rentout/<id transaksi>/idcustomer
-         *
-         * Nilai idcustomer dicocokkan
-         * dengan Firebase Key customer.
-         *
-         * Untuk kompatibilitas, NIK juga
-         * ikut diperiksa apabila tersedia.
-         */
-
-        const history =
-            Object.entries(
-                data
-            )
-            .map(
-
-                (
-                    [
-                        firebaseKey,
-                        item
-                    ]
-                ) => ({
-
-                    firebaseKey,
-
-                    ...item
-
-                })
-
-            )
-            .filter(
-
-                item => {
-
-                    const rentalCustomerId =
-                        String(
-                            item.idcustomer ||
-                            ""
-                        ).trim();
-
-
-                    const rentalNik =
-                        String(
-                            item.nik ||
-                            ""
-                        ).trim();
-
-
-                    return (
-
-                        rentalCustomerId ===
-                        customerId
-
-                        ||
+                allData =
+                    Object.entries(
+                        data
+                    )
+                    .map(
 
                         (
-                            customerNik &&
-                            rentalNik ===
-                            customerNik
-                        )
+                            [
+                                firebaseKey,
+                                item
+                            ]
+                        ) => ({
+
+                            firebaseKey:
+                                firebaseKey,
+
+                            id:
+                                firebaseKey,
+
+                            ...item
+
+                        })
 
                     );
 
-                }
 
-            );
+                applySearch();
 
-
-        /*
-         * URUTKAN TERBARU -> TERLAMA
-         */
-
-        history.sort(
-
-            (a, b) => {
-
-                const timeA =
-                    Number(
-                        a.timestamp ||
-                        0
-                    );
+            },
 
 
-                const timeB =
-                    Number(
-                        b.timestamp ||
-                        0
-                    );
+            error => {
+
+                console.error(
+                    "Firebase Error:",
+                    error
+                );
 
 
-                if (
-                    timeA &&
-                    timeB
-                ) {
-
-                    return timeB - timeA;
-
-                }
-
-
-                return String(
-                    b.tanggalsewa ||
-                    ""
-                )
-                .localeCompare(
-                    String(
-                        a.tanggalsewa ||
-                        ""
-                    )
+                showEmptyData(
+                    "Gagal mengambil data customer"
                 );
 
             }
@@ -2918,1084 +2702,117 @@ async function(firebaseKey) {
         );
 
 
-        renderHistory(history);
+        /* =====================================================
+           ESCAPE HTML
+        ====================================================== */
 
-    }
+        function escapeHtml(value) {
 
-    catch(error) {
-
-        console.error(
-            "Gagal mengambil histori:",
-            error
-        );
-
-
-        document
-            .getElementById(
-                "historyTableBody"
+            return String(
+                value ?? ""
             )
-            .innerHTML =
-            `
-            <tr>
-                <td
-                    colspan="15"
-                    class="history-empty"
-                >
-                    Gagal mengambil histori rental.
-                    <br>
-                    ${escapeHtml(error.message)}
-                </td>
-            </tr>
-            `;
 
-
-        document
-            .getElementById(
-                "historyMobileList"
+            .replace(
+                /&/g,
+                "&amp;"
             )
-            .innerHTML =
-            `
-            <div class="history-empty">
 
-                <strong>
-                    Gagal mengambil histori rental
-                </strong>
+            .replace(
+                /</g,
+                "&lt;"
+            )
 
-                <br><br>
+            .replace(
+                />/g,
+                "&gt;"
+            )
 
-                ${escapeHtml(error.message)}
+            .replace(
+                /"/g,
+                "&quot;"
+            )
 
-            </div>
-            `;
-
-    }
-
-};
-
-
-/* =========================================================
-   RENDER HISTORY
-========================================================= */
-
-function renderHistory(history) {
-
-    const tableBody =
-        document
-        .getElementById(
-            "historyTableBody"
-        );
-
-
-    const mobileList =
-        document
-        .getElementById(
-            "historyMobileList"
-        );
-
-
-    /* =============================
-       SUMMARY
-    ============================= */
-
-    let totalNilai = 0;
-
-    let totalBayar = 0;
-
-
-    history.forEach(
-
-        item => {
-
-            totalNilai +=
-                angkaDariRupiah(
-                    item.total
-                    ??
-                    item.totalFormat
-                    ??
-                    0
-                );
-
-
-            totalBayar +=
-                angkaDariRupiah(
-                    item.bayar
-                    ??
-                    item.bayarFormat
-                    ??
-                    0
-                );
+            .replace(
+                /'/g,
+                "&#039;"
+            );
 
         }
 
-    );
 
+        /* =====================================================
+           EMPTY DATA
+        ====================================================== */
 
-    document
-        .getElementById(
-            "summaryTotal"
-        )
-        .textContent =
-        history.length;
+        function showEmptyData(message) {
 
+            document
+                .getElementById(
+                    "isiData"
+                )
+                .innerHTML =
 
-    document
-        .getElementById(
-            "summaryNilai"
-        )
-        .textContent =
-        formatRupiah(
-            totalNilai
-        );
-
-
-    document
-        .getElementById(
-            "summaryBayar"
-        )
-        .textContent =
-        formatRupiah(
-            totalBayar
-        );
-
-
-    const latestDate =
-        history.length
-        ?
-        formatTanggal(
-            history[0].tanggalsewa
-        )
-        :
-        "-";
-
-
-    document
-        .getElementById(
-            "summaryTerakhir"
-        )
-        .textContent =
-        latestDate;
-
-
-    if (
-        history.length === 0
-    ) {
-
-        tableBody.innerHTML =
-            `
-            <tr>
-                <td
-                    colspan="15"
-                    class="history-empty"
-                >
-                    📋 Customer ini belum memiliki
-                    histori rental.
-                </td>
-            </tr>
-            `;
-
-
-        mobileList.innerHTML =
-            `
-            <div class="history-empty">
-
-                <div style="font-size:35px;">
-                    📋
-                </div>
-
-                <br>
-
-                Customer ini belum memiliki
-                histori rental.
-
-            </div>
-            `;
-
-
-        return;
-
-    }
-
-
-    let tableHtml = "";
-
-    let mobileHtml = "";
-
-    let no = 1;
-
-
-    history.forEach(
-
-        item => {
-
-            const tanggalSewa =
-                formatTanggal(
-                    item.tanggalsewa
-                );
-
-
-            const tanggalKembali =
-                formatTanggal(
-                    item.selesaisewa
-                );
-
-
-            const namaUnit =
-                item.namaUnit ||
-                "-";
-
-
-            const plat =
-                item.plat ||
-                "-";
-
-
-            const rentalType =
-                formatRentalType(
-                    item.rentaltype
-                );
-
-
-            const durasi =
-                formatDurasi(
-                    item.jumlahHari
-                );
-
-
-            const harga =
-                formatRupiah(
-                    angkaDariRupiah(
-                        item.harga ??
-                        item.hargaFormat ??
-                        0
-                    )
-                );
-
-
-            const total =
-                formatRupiah(
-                    angkaDariRupiah(
-                        item.total ??
-                        item.totalFormat ??
-                        0
-                    )
-                );
-
-
-            const bayar =
-                formatRupiah(
-                    angkaDariRupiah(
-                        item.bayar ??
-                        item.bayarFormat ??
-                        0
-                    )
-                );
-
-
-            const sisa =
-                formatRupiah(
-                    angkaDariRupiah(
-                        item.sisa ??
-                        item.sisaFormat ??
-                        0
-                    )
-                );
-
-
-            const kelebihan =
-                formatRupiah(
-                    angkaDariRupiah(
-                        item.kelebihanBayar ??
-                        item.kelebihanBayarFormat ??
-                        0
-                    )
-                );
-
-
-            const statusPembayaran =
-                item.statusPembayaran ||
-                "-";
-
-
-            const jaminan =
-                item.jaminan ||
-                "-";
-
-
-            const status =
-                item.status ||
-                "RENT OUT";
-
-
-            const paymentClass =
-                getPaymentClass(
-                    statusPembayaran
-                );
-
-
-            const statusPembayaranHtml =
                 `
-                <span
-                    class="payment-badge ${paymentClass}"
-                >
-                    ${escapeHtml(statusPembayaran)}
-                </span>
-                `;
 
-
-            /* =============================
-               DESKTOP TABLE
-            ============================= */
-
-            tableHtml +=
-                `
                 <tr>
 
-                    <td>
-                        ${no}
-                    </td>
+                    <td
+                        colspan="7"
+                        class="empty-data"
+                    >
 
-                    <td>
-                        ${escapeHtml(tanggalSewa)}
-                    </td>
+                        ${escapeHtml(message)}
 
-                    <td>
-                        ${escapeHtml(tanggalKembali)}
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${escapeHtml(namaUnit)}
-                        </strong>
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${escapeHtml(plat)}
-                        </strong>
-                    </td>
-
-                    <td>
-                        ${escapeHtml(rentalType)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(durasi)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(harga)}
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${escapeHtml(total)}
-                        </strong>
-                    </td>
-
-                    <td>
-                        ${escapeHtml(bayar)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(sisa)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(kelebihan)}
-                    </td>
-
-                    <td>
-                        ${statusPembayaranHtml}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(jaminan)}
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${escapeHtml(status)}
-                        </strong>
                     </td>
 
                 </tr>
+
                 `;
 
 
-            /* =============================
-               MOBILE CARD
-            ============================= */
+            document
+                .getElementById(
+                    "mobileList"
+                )
+                .innerHTML =
 
-            mobileHtml +=
                 `
-                <div class="history-card">
 
-                    <div class="history-card-top">
+                <div class="customer-card">
 
-                        <div>
+                    <div class="empty-data">
 
-                            <div class="history-card-title">
-                                ${escapeHtml(namaUnit)}
-                            </div>
-
-                            <div class="history-card-plat">
-                                🚗 ${escapeHtml(plat)}
-                            </div>
-
-                        </div>
-
-                        <div class="history-payment">
-
-                            ${statusPembayaranHtml}
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="history-grid">
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Tanggal Sewa
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(tanggalSewa)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Tanggal Kembali
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(tanggalKembali)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Jenis Rental
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(rentalType)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Durasi
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(durasi)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Harga
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(harga)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Total Biaya
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(total)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Sudah Dibayar
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(bayar)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Sisa Pembayaran
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(sisa)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Kelebihan Bayar
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(kelebihan)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item">
-
-                            <span class="history-label">
-                                Jaminan
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(jaminan)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item full">
-
-                            <span class="history-label">
-                                Status Pembayaran
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(statusPembayaran)}
-                            </div>
-
-                        </div>
-
-
-                        <div class="history-item full">
-
-                            <span class="history-label">
-                                Status Transaksi
-                            </span>
-
-                            <div class="history-value">
-                                ${escapeHtml(status)}
-                            </div>
-
-                        </div>
+                        ${escapeHtml(message)}
 
                     </div>
 
                 </div>
+
                 `;
 
 
-            no++;
+            document
+                .getElementById(
+                    "pagination"
+                )
+                .innerHTML =
+                "";
 
         }
 
-    );
 
+        /* =====================================================
+           RENDER CUSTOMER
+        ====================================================== */
 
-    tableBody.innerHTML =
-        tableHtml;
+        function renderTable() {
 
+            if (
+                filteredData.length === 0
+            ) {
 
-    mobileList.innerHTML =
-        mobileHtml;
-
-}
-
-
-/* =========================================================
-   PAYMENT CLASS
-========================================================= */
-
-function getPaymentClass(status) {
-
-    const value =
-        String(
-            status ||
-            ""
-        )
-        .toLowerCase()
-        .trim();
-
-
-    if (
-        value.includes("lunas")
-    ) {
-
-        return "payment-lunas";
-
-    }
-
-
-    if (
-        value.includes("kurang") ||
-        value.includes("belum")
-    ) {
-
-        return "payment-kurang";
-
-    }
-
-
-    if (
-        value.includes("lebih")
-    ) {
-
-        return "payment-lebih";
-
-    }
-
-
-    return "payment-normal";
-
-}
-
-
-/* =========================================================
-   FORMAT RENTAL TYPE
-========================================================= */
-
-function formatRentalType(value) {
-
-    const type =
-        String(
-            value ||
-            ""
-        )
-        .toLowerCase()
-        .trim();
-
-
-    const map = {
-
-        setengahhari:
-            "Setengah Hari",
-
-        harian:
-            "Harian",
-
-        mingguan:
-            "Mingguan",
-
-        bulanan:
-            "Bulanan"
-
-    };
-
-
-    return (
-        map[type] ||
-        value ||
-        "-"
-    );
-
-}
-
-
-/* =========================================================
-   FORMAT DURASI
-========================================================= */
-
-function formatDurasi(value) {
-
-    if (
-        value === undefined ||
-        value === null ||
-        value === ""
-    ) {
-
-        return "-";
-
-    }
-
-
-    const number =
-        Number(
-            value
-        );
-
-
-    if (
-        number === 0.5
-    ) {
-
-        return "½ Hari";
-
-    }
-
-
-    if (
-        number === 1
-    ) {
-
-        return "1 Hari";
-
-    }
-
-
-    if (
-        !isNaN(number)
-    ) {
-
-        return (
-            number +
-            " Hari"
-        );
-
-    }
-
-
-    return String(
-        value
-    );
-
-}
-
-
-/* =========================================================
-   FORMAT RUPIAH
-========================================================= */
-
-function formatRupiah(value) {
-
-    const number =
-        Number(
-            value || 0
-        );
-
-
-    return (
-        "Rp " +
-        number.toLocaleString(
-            "id-ID"
-        )
-    );
-
-}
-
-
-/* =========================================================
-   CONVERT RUPIAH
-========================================================= */
-
-function angkaDariRupiah(value) {
-
-    if (
-        typeof value ===
-        "number"
-    ) {
-
-        return value;
-
-    }
-
-
-    if (
-        value === undefined ||
-        value === null
-    ) {
-
-        return 0;
-
-    }
-
-
-    const cleaned =
-        String(value)
-        .replace(
-            /[^0-9-]/g,
-            ""
-        );
-
-
-    return Number(
-        cleaned
-    ) || 0;
-
-}
-
-
-/* =========================================================
-   FORMAT DATE
-========================================================= */
-
-function formatTanggal(value) {
-
-    if (
-        !value
-    ) {
-
-        return "-";
-
-    }
-
-
-    const stringValue =
-        String(value);
-
-
-    /*
-     * Format YYYY-MM-DD
-     */
-
-    if (
-        /^\d{4}-\d{2}-\d{2}$/
-        .test(
-            stringValue
-        )
-    ) {
-
-        const parts =
-            stringValue.split("-");
-
-
-        return (
-            parts[2] +
-            "-" +
-            parts[1] +
-            "-" +
-            parts[0]
-        );
-
-    }
-
-
-    /*
-     * Format timestamp
-     */
-
-    const date =
-        new Date(
-            value
-        );
-
-
-    if (
-        !isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return date.toLocaleDateString(
-            "id-ID",
-            {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            }
-        );
-
-    }
-
-
-    return stringValue;
-
-}
-
-
-/* =========================================================
-   CLOSE HISTORY
-========================================================= */
-
-window.closeHistory =
-function() {
-
-    document
-        .getElementById(
-            "historyModal"
-        )
-        .style
-        .display =
-        "none";
-
-};
-
-
-/* =========================================================
-   EDIT CUSTOMER
-========================================================= */
-
-window.editCustomer =
-function(firebaseKey) {
-
-    const item =
-        allData.find(
-            data =>
-                data.firebaseKey ===
-                firebaseKey
-        );
-
-
-    if (!item) {
-
-        alert(
-            "Data customer tidak ditemukan!"
-        );
-
-        return;
-
-    }
-
-
-    document
-        .getElementById(
-            "editFirebaseKey"
-        )
-        .value =
-        firebaseKey;
-
-
-    document
-        .getElementById(
-            "editId"
-        )
-        .value =
-        firebaseKey;
-
-
-    document
-        .getElementById(
-            "editNik"
-        )
-        .value =
-        item.nik || "";
-
-
-    document
-        .getElementById(
-            "editStatus"
-        )
-        .value =
-        item.status || "";
-
-
-    document
-        .getElementById(
-            "editNama"
-        )
-        .value =
-        item.nama || "";
-
-
-    document
-        .getElementById(
-            "editAlamatKtp"
-        )
-        .value =
-        item.alamatktp || "";
-
-
-    document
-        .getElementById(
-            "editDomisili"
-        )
-        .value =
-        item.domisili || "";
-
-
-    document
-        .getElementById(
-            "editPhotoKTP"
-        )
-        .value =
-        item.photoKTP || "";
-
-
-    document
-        .getElementById(
-            "editModal"
-        )
-        .style
-        .display =
-        "flex";
-
-};
-
-
-/* =========================================================
-   CLOSE EDIT
-========================================================= */
-
-window.closeEditModal =
-function() {
-
-    document
-        .getElementById(
-            "editModal"
-        )
-        .style
-        .display =
-        "none";
-
-
-    document
-        .getElementById(
-            "editForm"
-        )
-        .reset();
-
-};
-
-
-/* =========================================================
-   SAVE EDIT
-========================================================= */
-
-document
-    .getElementById(
-        "editForm"
-    )
-    .addEventListener(
-
-        "submit",
-
-        async event => {
-
-            event.preventDefault();
-
-
-            const firebaseKey =
-                document
-                .getElementById(
-                    "editFirebaseKey"
-                )
-                .value;
-
-
-            if (!firebaseKey) {
-
-                alert(
-                    "Firebase Key tidak ditemukan!"
+                showEmptyData(
+                    "Data tidak ditemukan"
                 );
 
                 return;
@@ -4003,649 +2820,3094 @@ document
             }
 
 
-            const button =
-                event.submitter;
+            const totalPages =
+                Math.ceil(
+                    filteredData.length /
+                    rowsPerPage
+                );
 
 
-            const originalText =
-                button.innerHTML;
+            if (
+                currentPage > totalPages
+            ) {
+
+                currentPage =
+                    totalPages;
+
+            }
 
 
-            button.disabled =
-                true;
+            const start =
+                (
+                    currentPage - 1
+                ) *
+                rowsPerPage;
 
 
-            button.innerHTML =
-                "Menyimpan...";
+            const end =
+                start +
+                rowsPerPage;
+
+
+            const paginatedData =
+                filteredData.slice(
+                    start,
+                    end
+                );
+
+
+            let tableHtml = "";
+
+            let mobileHtml = "";
+
+            let no =
+                start + 1;
+
+
+            paginatedData.forEach(
+
+                item => {
+
+                    const firebaseKey =
+                        item.firebaseKey;
+
+
+                    const id =
+                        item.nik ||
+                        item.id ||
+                        "-";
+
+
+                    const nama =
+                        item.nama ||
+                        "-";
+
+
+                    const alamatktp =
+                        item.alamatktp ||
+                        "-";
+
+
+                    const domisili =
+                        item.domisili ||
+                        "-";
+
+
+                    const urlphoto =
+                        item.photoKTP ||
+                        "";
+
+
+                    const status =
+                        String(
+                            item.status ||
+                            ""
+                        ).trim();
+
+
+                    const isClear =
+                        status.toLowerCase() ===
+                        "clear";
+
+
+                    const statusClass =
+                        isClear
+                        ?
+                        "status-clear"
+                        :
+                        "status-not-clear";
+
+
+                    const statusText =
+                        status ||
+                        "Belum Clear";
+
+
+                    const statusHtml =
+
+                        `
+
+                        <div
+                            class="status-badge ${statusClass}"
+                        >
+
+                            ${escapeHtml(statusText)}
+
+                        </div>
+
+                        `;
+
+
+                    let photoHtml =
+
+                        `
+
+                        <span class="no-photo">
+
+                            Tidak ada foto
+
+                        </span>
+
+                        `;
+
+
+                    let mobilePhotoHtml =
+
+                        `
+
+                        <div class="no-photo">
+
+                            Tidak ada foto ID / KTP
+
+                        </div>
+
+                        `;
+
+
+                    if (
+
+                        urlphoto &&
+
+                        typeof urlphoto ===
+                        "string"
+
+                    ) {
+
+                        const safeUrl =
+                            escapeHtml(
+                                urlphoto
+                            );
+
+
+                        photoHtml =
+
+                            `
+
+                            <img
+
+                                src="${safeUrl}"
+
+                                alt="Foto ID / KTP ${escapeHtml(nama)}"
+
+                                class="customer-photo"
+
+                                data-url="${safeUrl}"
+
+                                onclick="openPhotoFromElement(this)"
+
+                                onerror="photoError(this)"
+
+                            >
+
+                            `;
+
+
+                        mobilePhotoHtml =
+
+                            `
+
+                            <img
+
+                                src="${safeUrl}"
+
+                                alt="Foto ID / KTP ${escapeHtml(nama)}"
+
+                                class="mobile-photo"
+
+                                data-url="${safeUrl}"
+
+                                onclick="openPhotoFromElement(this)"
+
+                                onerror="photoError(this)"
+
+                            >
+
+                            `;
+
+                    }
+
+
+                    /* =========================================
+                       DESKTOP
+                    ========================================== */
+
+                    tableHtml +=
+
+                        `
+
+                        <tr>
+
+                            <td>
+
+                                ${no}
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(id)}
+
+                                </strong>
+
+                                ${statusHtml}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(nama)}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(alamatktp)}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(domisili)}
+
+                            </td>
+
+
+                            <td class="photo-cell">
+
+                                ${photoHtml}
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="action-area">
+
+                                    <button
+
+                                        class="btn-history"
+
+                                        onclick="showHistory('${escapeHtml(firebaseKey)}')"
+
+                                    >
+
+                                        📋 Histori
+
+                                    </button>
+
+
+                                    <button
+
+                                        class="btn-edit"
+
+                                        onclick="editCustomer('${escapeHtml(firebaseKey)}')"
+
+                                    >
+
+                                        ✏️ Edit
+
+                                    </button>
+
+
+                                    <button
+
+                                        class="btn-delete"
+
+                                        onclick="deleteCustomer('${escapeHtml(firebaseKey)}')"
+
+                                    >
+
+                                        🗑️ Hapus
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        `;
+
+
+                    /* =========================================
+                       MOBILE
+                    ========================================== */
+
+                    mobileHtml +=
+
+                        `
+
+                        <div class="customer-card">
+
+                            <div class="customer-card-header">
+
+                                <div>
+
+                                    <div class="customer-number">
+
+                                        CUSTOMER #${no}
+
+                                    </div>
+
+
+                                    <div class="customer-name">
+
+                                        ${escapeHtml(nama)}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div>
+
+                                    <div class="customer-id">
+
+                                        ${escapeHtml(id)}
+
+                                    </div>
+
+
+                                    <div class="customer-status">
+
+                                        ${statusHtml}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            ${mobilePhotoHtml}
+
+
+                            <div class="card-grid">
+
+                                <div class="card-item full">
+
+                                    <span class="card-label">
+
+                                        Alamat KTP
+
+                                    </span>
+
+
+                                    <div class="card-value">
+
+                                        ${escapeHtml(alamatktp)}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="card-item full">
+
+                                    <span class="card-label">
+
+                                        Domisili
+
+                                    </span>
+
+
+                                    <div class="card-value">
+
+                                        ${escapeHtml(domisili)}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-action-area">
+
+                                <button
+
+                                    class="btn-history"
+
+                                    onclick="showHistory('${escapeHtml(firebaseKey)}')"
+
+                                >
+
+                                    📋 Histori
+
+                                </button>
+
+
+                                <button
+
+                                    class="btn-edit"
+
+                                    onclick="editCustomer('${escapeHtml(firebaseKey)}')"
+
+                                >
+
+                                    ✏️ Edit
+
+                                </button>
+
+
+                                <button
+
+                                    class="btn-delete"
+
+                                    onclick="deleteCustomer('${escapeHtml(firebaseKey)}')"
+
+                                >
+
+                                    🗑️ Hapus
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+
+                    no++;
+
+                }
+
+            );
+
+
+            document
+                .getElementById(
+                    "isiData"
+                )
+                .innerHTML =
+                tableHtml;
+
+
+            document
+                .getElementById(
+                    "mobileList"
+                )
+                .innerHTML =
+                mobileHtml;
+
+
+            renderPagination();
+
+        }
+
+
+        /* =====================================================
+           SHOW CUSTOMER HISTORY
+
+           SUMBER DATA:
+           histori/{ID_CUSTOMER}
+
+           BUKAN:
+           rentout
+        ====================================================== */
+
+        window.showHistory =
+        async function(firebaseKey) {
+
+            const customer =
+                allData.find(
+
+                    item =>
+                        item.firebaseKey ===
+                        firebaseKey
+
+                );
+
+
+            if (!customer) {
+
+                alert(
+                    "Data customer tidak ditemukan!"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * ID customer yang digunakan
+             * sebagai child pada node histori.
+             *
+             * Struktur Firebase:
+             *
+             * histori
+             *   └── ID_CUSTOMER
+             *        ├── transaksi1
+             *        ├── transaksi2
+             *        └── transaksi3
+             */
+
+            const customerId =
+                String(
+                    customer.firebaseKey ||
+                    ""
+                ).trim();
+
+
+            const customerNik =
+                String(
+                    customer.nik ||
+                    ""
+                ).trim();
+
+
+            const customerName =
+                customer.nama ||
+                "-";
+
+
+            document
+                .getElementById(
+                    "historyTitle"
+                )
+                .textContent =
+                "📋 Histori Rental - " +
+                customerName;
+
+
+            document
+                .getElementById(
+                    "historySubtitle"
+                )
+                .innerHTML =
+
+                `
+
+                ID Customer:
+
+                <strong>
+
+                    ${escapeHtml(customerId)}
+
+                </strong>
+
+
+                &nbsp; | &nbsp;
+
+
+                NIK:
+
+                <strong>
+
+                    ${escapeHtml(customerNik || "-")}
+
+                </strong>
+
+                `;
+
+
+            document
+                .getElementById(
+                    "historySummary"
+                )
+                .innerHTML =
+
+                `
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+
+                        Total Rental
+
+                    </span>
+
+                    <div
+                        class="summary-value"
+                        id="summaryTotal"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+
+                        Total Nilai Rental
+
+                    </span>
+
+                    <div
+                        class="summary-value"
+                        id="summaryNilai"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+
+                        Total Pembayaran
+
+                    </span>
+
+                    <div
+                        class="summary-value"
+                        id="summaryBayar"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+
+                        Rental Terakhir
+
+                    </span>
+
+                    <div
+                        class="summary-value"
+                        id="summaryTerakhir"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+                `;
+
+
+            document
+                .getElementById(
+                    "historyTableBody"
+                )
+                .innerHTML =
+
+                `
+
+                <tr>
+
+                    <td
+                        colspan="15"
+                        class="history-loading"
+                    >
+
+                        Memuat histori rental...
+
+                    </td>
+
+                </tr>
+
+                `;
+
+
+            document
+                .getElementById(
+                    "historyMobileList"
+                )
+                .innerHTML =
+
+                `
+
+                <div class="history-loading">
+
+                    Memuat histori rental...
+
+                </div>
+
+                `;
+
+
+            document
+                .getElementById(
+                    "historyModal"
+                )
+                .style
+                .display =
+                "flex";
 
 
             try {
 
-                const updatedData = {
+                /*
+                 * =================================================
+                 * PERUBAHAN UTAMA
+                 *
+                 * SEBELUM:
+                 * get(ref(db, "rentout"))
+                 *
+                 * SEKARANG:
+                 * get(ref(db, "histori/" + customerId))
+                 *
+                 * =================================================
+                 */
 
-                    nik:
-                        document
-                        .getElementById(
-                            "editNik"
+                const historyRef =
+                    ref(
+                        db,
+                        "histori/" +
+                        customerId
+                    );
+
+
+                const snapshot =
+                    await get(
+                        historyRef
+                    );
+
+
+                const data =
+                    snapshot.val();
+
+
+                console.log(
+                    "Histori customer:",
+                    customerId,
+                    data
+                );
+
+
+                if (!data) {
+
+                    renderHistory([]);
+
+                    return;
+
+                }
+
+
+                /*
+                 * =================================================
+                 * DATA HISTORI
+                 *
+                 * histori/{ID_CUSTOMER}
+                 *     └── transaksi
+                 *
+                 * Setiap transaksi menjadi satu item histori.
+                 * =================================================
+                 */
+
+                let history = [];
+
+
+                /*
+                 * Apabila node histori/{ID_CUSTOMER}
+                 * langsung berupa object transaksi.
+                 */
+
+                if (
+                    typeof data === "object" &&
+                    data !== null
+                ) {
+
+                    history =
+                        Object.entries(
+                            data
                         )
-                        .value
-                        .trim(),
+                        .map(
 
-                    status:
-                        document
-                        .getElementById(
-                            "editStatus"
+                            (
+                                [
+                                    firebaseKey,
+                                    item
+                                ]
+                            ) => {
+
+                                /*
+                                 * Jika item merupakan object
+                                 * transaksi normal.
+                                 */
+
+                                if (
+                                    item &&
+                                    typeof item === "object" &&
+                                    !Array.isArray(item)
+                                ) {
+
+                                    return {
+
+                                        firebaseKey:
+                                            firebaseKey,
+
+                                        ...item
+
+                                    };
+
+                                }
+
+
+                                return null;
+
+                            }
+
                         )
-                        .value
-                        .trim(),
+                        .filter(
+                            item =>
+                                item !== null
+                        );
 
-                    nama:
-                        document
-                        .getElementById(
-                            "editNama"
+                }
+
+
+                /*
+                 * =================================================
+                 * FILTER TRANSAKSI SELESAI
+                 *
+                 * Karena node "histori" memang ditujukan
+                 * untuk transaksi yang sudah selesai,
+                 * transaksi yang terdapat di node ini
+                 * dianggap sebagai histori selesai.
+                 *
+                 * Tetapi apabila data mempunyai field status
+                 * transaksi, tetap diperiksa.
+                 * =================================================
+                 */
+
+                history =
+                    history.filter(
+
+                        item => {
+
+                            const status =
+                                String(
+                                    item.status ||
+                                    ""
+                                )
+                                .toLowerCase()
+                                .trim();
+
+
+                            /*
+                             * Jika tidak ada status,
+                             * transaksi tetap ditampilkan
+                             * karena sudah berada di node histori.
+                             */
+
+                            if (!status) {
+
+                                return true;
+
+                            }
+
+
+                            /*
+                             * Status yang secara jelas
+                             * menunjukkan transaksi aktif
+                             * tidak ditampilkan.
+                             */
+
+                            const activeStatus = [
+
+                                "rent out",
+
+                                "rentout",
+
+                                "aktif",
+
+                                "active",
+
+                                "berjalan",
+
+                                "ongoing"
+
+                            ];
+
+
+                            if (
+                                activeStatus.includes(
+                                    status
+                                )
+                            ) {
+
+                                return false;
+
+                            }
+
+
+                            return true;
+
+                        }
+
+                    );
+
+
+                /*
+                 * =================================================
+                 * SORT TERBARU -> TERLAMA
+                 * =================================================
+                 */
+
+                history.sort(
+
+                    (a, b) => {
+
+                        const timeA =
+                            Number(
+                                a.timestamp ||
+                                a.createdAt ||
+                                0
+                            );
+
+
+                        const timeB =
+                            Number(
+                                b.timestamp ||
+                                b.createdAt ||
+                                0
+                            );
+
+
+                        if (
+                            timeA &&
+                            timeB
+                        ) {
+
+                            return (
+                                timeB -
+                                timeA
+                            );
+
+                        }
+
+
+                        return String(
+                            b.tanggalsewa ||
+                            b.tanggalSewa ||
+                            ""
                         )
-                        .value
-                        .trim(),
+                        .localeCompare(
 
-                    alamatktp:
+                            String(
+                                a.tanggalsewa ||
+                                a.tanggalSewa ||
+                                ""
+                            )
+
+                        );
+
+                    }
+
+                );
+
+
+                renderHistory(
+                    history
+                );
+
+            }
+
+
+            catch(error) {
+
+                console.error(
+                    "Gagal mengambil histori:",
+                    error
+                );
+
+
+                document
+                    .getElementById(
+                        "historyTableBody"
+                    )
+                    .innerHTML =
+
+                    `
+
+                    <tr>
+
+                        <td
+                            colspan="15"
+                            class="history-empty"
+                        >
+
+                            Gagal mengambil histori rental.
+
+                            <br><br>
+
+                            ${escapeHtml(error.message)}
+
+                        </td>
+
+                    </tr>
+
+                    `;
+
+
+                document
+                    .getElementById(
+                        "historyMobileList"
+                    )
+                    .innerHTML =
+
+                    `
+
+                    <div class="history-empty">
+
+                        <strong>
+
+                            Gagal mengambil histori rental
+
+                        </strong>
+
+                        <br><br>
+
+                        ${escapeHtml(error.message)}
+
+                    </div>
+
+                    `;
+
+            }
+
+        };
+
+
+        /* =====================================================
+           RENDER HISTORY
+        ====================================================== */
+
+        function renderHistory(history) {
+
+            const tableBody =
+                document
+                    .getElementById(
+                        "historyTableBody"
+                    );
+
+
+            const mobileList =
+                document
+                    .getElementById(
+                        "historyMobileList"
+                    );
+
+
+            /* =================================================
+               SUMMARY
+            ================================================== */
+
+            let totalNilai = 0;
+
+            let totalBayar = 0;
+
+
+            history.forEach(
+
+                item => {
+
+                    totalNilai +=
+                        angkaDariRupiah(
+
+                            item.total ??
+                            item.totalFormat ??
+                            item.totalBiaya ??
+                            0
+
+                        );
+
+
+                    totalBayar +=
+                        angkaDariRupiah(
+
+                            item.bayar ??
+                            item.bayarFormat ??
+                            item.sudahDibayar ??
+                            0
+
+                        );
+
+                }
+
+            );
+
+
+            document
+                .getElementById(
+                    "summaryTotal"
+                )
+                .textContent =
+                history.length;
+
+
+            document
+                .getElementById(
+                    "summaryNilai"
+                )
+                .textContent =
+                formatRupiah(
+                    totalNilai
+                );
+
+
+            document
+                .getElementById(
+                    "summaryBayar"
+                )
+                .textContent =
+                formatRupiah(
+                    totalBayar
+                );
+
+
+            const latestDate =
+                history.length
+
+                ?
+
+                formatTanggal(
+
+                    history[0].tanggalsewa ??
+                    history[0].tanggalSewa
+
+                )
+
+                :
+
+                "-";
+
+
+            document
+                .getElementById(
+                    "summaryTerakhir"
+                )
+                .textContent =
+                latestDate;
+
+
+            /* =================================================
+               EMPTY HISTORY
+            ================================================== */
+
+            if (
+                history.length === 0
+            ) {
+
+                tableBody.innerHTML =
+
+                    `
+
+                    <tr>
+
+                        <td
+                            colspan="15"
+                            class="history-empty"
+                        >
+
+                            📋 Customer ini belum memiliki
+                            histori rental.
+
+                        </td>
+
+                    </tr>
+
+                    `;
+
+
+                mobileList.innerHTML =
+
+                    `
+
+                    <div class="history-empty">
+
+                        <div
+                            style="font-size:35px;"
+                        >
+                            📋
+                        </div>
+
+                        <br>
+
+                        Customer ini belum memiliki
+                        histori rental.
+
+                    </div>
+
+                    `;
+
+
+                return;
+
+            }
+
+
+            let tableHtml = "";
+
+            let mobileHtml = "";
+
+            let no = 1;
+
+
+            history.forEach(
+
+                item => {
+
+                    const tanggalSewa =
+                        formatTanggal(
+
+                            item.tanggalsewa ??
+                            item.tanggalSewa
+
+                        );
+
+
+                    const tanggalKembali =
+                        formatTanggal(
+
+                            item.selesaisewa ??
+                            item.tanggalSelesai ??
+                            item.tanggalKembali
+
+                        );
+
+
+                    const namaUnit =
+                        item.namaUnit ??
+                        item.namaunit ??
+                        item.namaKendaraan ??
+                        "-";
+
+
+                    const plat =
+                        item.plat ??
+                        item.platNomor ??
+                        item.platnomor ??
+                        "-";
+
+
+                    const rentalType =
+                        formatRentalType(
+
+                            item.rentaltype ??
+                            item.rentalType ??
+                            item.jenisRental
+
+                        );
+
+
+                    const durasi =
+                        formatDurasi(
+
+                            item.jumlahHari ??
+                            item.durasi
+
+                        );
+
+
+                    const harga =
+                        formatRupiah(
+
+                            angkaDariRupiah(
+
+                                item.harga ??
+                                item.hargaFormat ??
+                                0
+
+                            )
+
+                        );
+
+
+                    const total =
+                        formatRupiah(
+
+                            angkaDariRupiah(
+
+                                item.total ??
+                                item.totalFormat ??
+                                item.totalBiaya ??
+                                0
+
+                            )
+
+                        );
+
+
+                    const bayar =
+                        formatRupiah(
+
+                            angkaDariRupiah(
+
+                                item.bayar ??
+                                item.bayarFormat ??
+                                item.sudahDibayar ??
+                                0
+
+                            )
+
+                        );
+
+
+                    const sisa =
+                        formatRupiah(
+
+                            angkaDariRupiah(
+
+                                item.sisa ??
+                                item.sisaFormat ??
+                                item.sisaPembayaran ??
+                                0
+
+                            )
+
+                        );
+
+
+                    const kelebihan =
+                        formatRupiah(
+
+                            angkaDariRupiah(
+
+                                item.kelebihanBayar ??
+                                item.kelebihanBayarFormat ??
+                                item.kelebihan ??
+                                0
+
+                            )
+
+                        );
+
+
+                    const statusPembayaran =
+                        item.statusPembayaran ??
+                        item.statuspembayaran ??
+                        "-";
+
+
+                    const jaminan =
+                        item.jaminan ??
+                        "-";
+
+
+                    const status =
+                        item.status ??
+                        "SELESAI";
+
+
+                    const paymentClass =
+                        getPaymentClass(
+                            statusPembayaran
+                        );
+
+
+                    const statusPembayaranHtml =
+
+                        `
+
+                        <span
+                            class="payment-badge ${paymentClass}"
+                        >
+
+                            ${escapeHtml(
+                                statusPembayaran
+                            )}
+
+                        </span>
+
+                        `;
+
+
+                    /* =========================================
+                       DESKTOP
+                    ========================================== */
+
+                    tableHtml +=
+
+                        `
+
+                        <tr>
+
+                            <td>
+
+                                ${no}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    tanggalSewa
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    tanggalKembali
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        namaUnit
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        plat
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    rentalType
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    durasi
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    harga
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        total
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    bayar
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    sisa
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    kelebihan
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${statusPembayaranHtml}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    jaminan
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        status
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+                        </tr>
+
+                        `;
+
+
+                    /* =========================================
+                       MOBILE
+                    ========================================== */
+
+                    mobileHtml +=
+
+                        `
+
+                        <div class="history-card">
+
+                            <div class="history-card-top">
+
+                                <div>
+
+                                    <div class="history-card-title">
+
+                                        ${escapeHtml(
+                                            namaUnit
+                                        )}
+
+                                    </div>
+
+
+                                    <div class="history-card-plat">
+
+                                        🚗
+
+                                        ${escapeHtml(
+                                            plat
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-payment">
+
+                                    ${statusPembayaranHtml}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-grid">
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Tanggal Sewa
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            tanggalSewa
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Tanggal Kembali
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            tanggalKembali
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Jenis Rental
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            rentalType
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Durasi
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            durasi
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Harga
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            harga
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Total Biaya
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            total
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Sudah Dibayar
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            bayar
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Sisa Pembayaran
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            sisa
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Kelebihan Bayar
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            kelebihan
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item">
+
+                                    <span class="history-label">
+
+                                        Jaminan
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            jaminan
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item full">
+
+                                    <span class="history-label">
+
+                                        Status Pembayaran
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            statusPembayaran
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-item full">
+
+                                    <span class="history-label">
+
+                                        Status Transaksi
+
+                                    </span>
+
+
+                                    <div class="history-value">
+
+                                        ${escapeHtml(
+                                            status
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+
+                    no++;
+
+                }
+
+            );
+
+
+            tableBody.innerHTML =
+                tableHtml;
+
+
+            mobileList.innerHTML =
+                mobileHtml;
+
+        }
+
+
+        /* =====================================================
+           PAYMENT CLASS
+        ====================================================== */
+
+        function getPaymentClass(status) {
+
+            const value =
+                String(
+                    status || ""
+                )
+                .toLowerCase()
+                .trim();
+
+
+            if (
+                value.includes("lunas")
+            ) {
+
+                return "payment-lunas";
+
+            }
+
+
+            if (
+                value.includes("kurang") ||
+                value.includes("belum")
+            ) {
+
+                return "payment-kurang";
+
+            }
+
+
+            if (
+                value.includes("lebih")
+            ) {
+
+                return "payment-lebih";
+
+            }
+
+
+            return "payment-normal";
+
+        }
+
+
+        /* =====================================================
+           FORMAT RENTAL TYPE
+        ====================================================== */
+
+        function formatRentalType(value) {
+
+            const type =
+                String(
+                    value || ""
+                )
+                .toLowerCase()
+                .trim();
+
+
+            const map = {
+
+                setengahhari:
+                    "Setengah Hari",
+
+                harian:
+                    "Harian",
+
+                mingguan:
+                    "Mingguan",
+
+                bulanan:
+                    "Bulanan"
+
+            };
+
+
+            return (
+
+                map[type] ||
+
+                value ||
+
+                "-"
+
+            );
+
+        }
+
+
+        /* =====================================================
+           FORMAT DURASI
+        ====================================================== */
+
+        function formatDurasi(value) {
+
+            if (
+
+                value === undefined ||
+
+                value === null ||
+
+                value === ""
+
+            ) {
+
+                return "-";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (
+                number === 0.5
+            ) {
+
+                return "½ Hari";
+
+            }
+
+
+            if (
+                number === 1
+            ) {
+
+                return "1 Hari";
+
+            }
+
+
+            if (
+                !isNaN(number)
+            ) {
+
+                return (
+                    number +
+                    " Hari"
+                );
+
+            }
+
+
+            return String(value);
+
+        }
+
+
+        /* =====================================================
+           FORMAT RUPIAH
+        ====================================================== */
+
+        function formatRupiah(value) {
+
+            const number =
+                Number(
+                    value || 0
+                );
+
+
+            return (
+
+                "Rp " +
+
+                number.toLocaleString(
+                    "id-ID"
+                )
+
+            );
+
+        }
+
+
+        /* =====================================================
+           CONVERT RUPIAH
+        ====================================================== */
+
+        function angkaDariRupiah(value) {
+
+            if (
+                typeof value ===
+                "number"
+            ) {
+
+                return value;
+
+            }
+
+
+            if (
+                value === undefined ||
+                value === null
+            ) {
+
+                return 0;
+
+            }
+
+
+            const cleaned =
+                String(value)
+                    .replace(
+                        /[^0-9-]/g,
+                        ""
+                    );
+
+
+            return (
+                Number(cleaned) ||
+                0
+            );
+
+        }
+
+
+        /* =====================================================
+           FORMAT DATE
+        ====================================================== */
+
+        function formatTanggal(value) {
+
+            if (!value) {
+
+                return "-";
+
+            }
+
+
+            const stringValue =
+                String(value);
+
+
+            /*
+             * YYYY-MM-DD
+             */
+
+            if (
+
+                /^\d{4}-\d{2}-\d{2}$/
+                    .test(
+                        stringValue
+                    )
+
+            ) {
+
+                const parts =
+                    stringValue.split(
+                        "-"
+                    );
+
+
+                return (
+
+                    parts[2] +
+                    "-" +
+                    parts[1] +
+                    "-" +
+                    parts[0]
+
+                );
+
+            }
+
+
+            /*
+             * Timestamp
+             */
+
+            const date =
+                new Date(
+                    value
+                );
+
+
+            if (
+                !isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return date.toLocaleDateString(
+
+                    "id-ID",
+
+                    {
+
+                        day:
+                            "2-digit",
+
+                        month:
+                            "2-digit",
+
+                        year:
+                            "numeric"
+
+                    }
+
+                );
+
+            }
+
+
+            return stringValue;
+
+        }
+
+
+        /* =====================================================
+           CLOSE HISTORY
+        ====================================================== */
+
+        window.closeHistory =
+        function() {
+
+            document
+                .getElementById(
+                    "historyModal"
+                )
+                .style
+                .display =
+                "none";
+
+        };
+
+
+        /* =====================================================
+           EDIT CUSTOMER
+        ====================================================== */
+
+        window.editCustomer =
+        function(firebaseKey) {
+
+            const item =
+                allData.find(
+
+                    data =>
+                        data.firebaseKey ===
+                        firebaseKey
+
+                );
+
+
+            if (!item) {
+
+                alert(
+                    "Data customer tidak ditemukan!"
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "editFirebaseKey"
+                )
+                .value =
+                firebaseKey;
+
+
+            document
+                .getElementById(
+                    "editId"
+                )
+                .value =
+                firebaseKey;
+
+
+            document
+                .getElementById(
+                    "editNik"
+                )
+                .value =
+                item.nik || "";
+
+
+            document
+                .getElementById(
+                    "editStatus"
+                )
+                .value =
+                item.status || "";
+
+
+            document
+                .getElementById(
+                    "editNama"
+                )
+                .value =
+                item.nama || "";
+
+
+            document
+                .getElementById(
+                    "editAlamatKtp"
+                )
+                .value =
+                item.alamatktp || "";
+
+
+            document
+                .getElementById(
+                    "editDomisili"
+                )
+                .value =
+                item.domisili || "";
+
+
+            document
+                .getElementById(
+                    "editPhotoKTP"
+                )
+                .value =
+                item.photoKTP || "";
+
+
+            document
+                .getElementById(
+                    "editModal"
+                )
+                .style
+                .display =
+                "flex";
+
+        };
+
+
+        /* =====================================================
+           CLOSE EDIT
+        ====================================================== */
+
+        window.closeEditModal =
+        function() {
+
+            document
+                .getElementById(
+                    "editModal"
+                )
+                .style
+                .display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "editForm"
+                )
+                .reset();
+
+        };
+
+
+        /* =====================================================
+           SAVE EDIT
+        ====================================================== */
+
+        document
+            .getElementById(
+                "editForm"
+            )
+            .addEventListener(
+
+                "submit",
+
+                async event => {
+
+                    event.preventDefault();
+
+
+                    const firebaseKey =
                         document
-                        .getElementById(
-                            "editAlamatKtp"
-                        )
-                        .value
-                        .trim(),
-
-                    domisili:
-                        document
-                        .getElementById(
-                            "editDomisili"
-                        )
-                        .value
-                        .trim(),
-
-                    photoKTP:
-                        document
-                        .getElementById(
-                            "editPhotoKTP"
-                        )
-                        .value
-                        .trim()
-
-                };
+                            .getElementById(
+                                "editFirebaseKey"
+                            )
+                            .value;
 
 
-                await update(
+                    if (!firebaseKey) {
+
+                        alert(
+                            "Firebase Key tidak ditemukan!"
+                        );
+
+                        return;
+
+                    }
+
+
+                    const button =
+                        event.submitter;
+
+
+                    const originalText =
+                        button.innerHTML;
+
+
+                    button.disabled =
+                        true;
+
+
+                    button.innerHTML =
+                        "Menyimpan...";
+
+
+                    try {
+
+                        const updatedData = {
+
+                            nik:
+                                document
+                                    .getElementById(
+                                        "editNik"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            status:
+                                document
+                                    .getElementById(
+                                        "editStatus"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            nama:
+                                document
+                                    .getElementById(
+                                        "editNama"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            alamatktp:
+                                document
+                                    .getElementById(
+                                        "editAlamatKtp"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            domisili:
+                                document
+                                    .getElementById(
+                                        "editDomisili"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            photoKTP:
+                                document
+                                    .getElementById(
+                                        "editPhotoKTP"
+                                    )
+                                    .value
+                                    .trim()
+
+                        };
+
+
+                        await update(
+
+                            ref(
+                                db,
+                                "customer/" +
+                                firebaseKey
+                            ),
+
+                            updatedData
+
+                        );
+
+
+                        alert(
+                            "Data customer berhasil diperbarui!"
+                        );
+
+
+                        closeEditModal();
+
+                    }
+
+
+                    catch(error) {
+
+                        console.error(
+                            "Gagal update:",
+                            error
+                        );
+
+
+                        alert(
+
+                            "Gagal menyimpan perubahan!\n\n" +
+
+                            error.message
+
+                        );
+
+                    }
+
+
+                    finally {
+
+                        button.disabled =
+                            false;
+
+
+                        button.innerHTML =
+                            originalText;
+
+                    }
+
+                }
+
+            );
+
+
+        /* =====================================================
+           DELETE CUSTOMER
+        ====================================================== */
+
+        window.deleteCustomer =
+        async function(firebaseKey) {
+
+            const item =
+                allData.find(
+
+                    data =>
+                        data.firebaseKey ===
+                        firebaseKey
+
+                );
+
+
+            const nama =
+                item
+                ?
+                item.nama ||
+                "Customer"
+                :
+                "Customer";
+
+
+            const confirmDelete =
+                confirm(
+
+                    "Yakin ingin menghapus customer:\n\n" +
+
+                    nama +
+
+                    "\n\nData yang dihapus tidak dapat dikembalikan."
+
+                );
+
+
+            if (!confirmDelete) {
+
+                return;
+
+            }
+
+
+            try {
+
+                await remove(
 
                     ref(
                         db,
                         "customer/" +
                         firebaseKey
-                    ),
-
-                    updatedData
+                    )
 
                 );
 
 
                 alert(
-                    "Data customer berhasil diperbarui!"
+                    "Data customer berhasil dihapus!"
                 );
 
-
-                closeEditModal();
-
             }
+
 
             catch(error) {
 
                 console.error(
-                    "Gagal update:",
+                    "Gagal menghapus customer:",
                     error
                 );
 
 
                 alert(
-                    "Gagal menyimpan perubahan!\n\n" +
+
+                    "Gagal menghapus customer!\n\n" +
+
                     error.message
+
                 );
 
             }
 
-            finally {
+        };
 
-                button.disabled =
-                    false;
 
-                button.innerHTML =
-                    originalText;
+        /* =====================================================
+           PHOTO ERROR
+        ====================================================== */
+
+        window.photoError =
+        function(image) {
+
+            image.outerHTML =
+
+                `
+
+                <span class="no-photo">
+
+                    Foto gagal dimuat
+
+                </span>
+
+                `;
+
+        };
+
+
+        /* =====================================================
+           OPEN PHOTO FROM ELEMENT
+        ====================================================== */
+
+        window.openPhotoFromElement =
+        function(image) {
+
+            const url =
+                image.getAttribute(
+                    "data-url"
+                );
+
+
+            openPhoto(
+                url,
+                image.alt
+            );
+
+        };
+
+
+        /* =====================================================
+           OPEN PHOTO
+        ====================================================== */
+
+        window.openPhoto =
+        function(
+            url,
+            title = ""
+        ) {
+
+            const modal =
+                document.getElementById(
+                    "photoModal"
+                );
+
+
+            const image =
+                document.getElementById(
+                    "modalImage"
+                );
+
+
+            const caption =
+                document.getElementById(
+                    "modalCaption"
+                );
+
+
+            image.src =
+                url;
+
+
+            caption.textContent =
+                title;
+
+
+            modal.style.display =
+                "flex";
+
+        };
+
+
+        /* =====================================================
+           CLOSE PHOTO
+        ====================================================== */
+
+        window.closePhoto =
+        function() {
+
+            const modal =
+                document.getElementById(
+                    "photoModal"
+                );
+
+
+            modal.style.display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "modalImage"
+                )
+                .src =
+                "";
+
+        };
+
+
+        /* =====================================================
+           PAGINATION
+        ====================================================== */
+
+        function renderPagination() {
+
+            const totalPages =
+                Math.ceil(
+
+                    filteredData.length /
+                    rowsPerPage
+
+                );
+
+
+            if (
+                totalPages <= 1
+            ) {
+
+                document
+                    .getElementById(
+                        "pagination"
+                    )
+                    .innerHTML =
+                    "";
+
+                return;
 
             }
 
+
+            document
+                .getElementById(
+                    "pagination"
+                )
+                .innerHTML =
+
+                `
+
+                <button
+
+                    class="btn-prev"
+
+                    onclick="prevPage()"
+
+                    ${
+                        currentPage === 1
+                        ?
+                        "disabled"
+                        :
+                        ""
+                    }
+
+                >
+
+                    ← Prev
+
+                </button>
+
+
+                <span class="page-info">
+
+                    Halaman
+                    ${currentPage}
+                    dari
+                    ${totalPages}
+
+                </span>
+
+
+                <button
+
+                    class="btn-next"
+
+                    onclick="nextPage()"
+
+                    ${
+                        currentPage === totalPages
+                        ?
+                        "disabled"
+                        :
+                        ""
+                    }
+
+                >
+
+                    Next →
+
+                </button>
+
+                `;
+
         }
 
-    );
 
+        window.nextPage =
+        function() {
 
-/* =========================================================
-   DELETE CUSTOMER
-========================================================= */
+            const totalPages =
+                Math.ceil(
 
-window.deleteCustomer =
-async function(firebaseKey) {
+                    filteredData.length /
+                    rowsPerPage
 
-    const item =
-        allData.find(
-            data =>
-                data.firebaseKey ===
-                firebaseKey
-        );
+                );
 
 
-    const nama =
-        item
-        ?
-        item.nama || "Customer"
-        :
-        "Customer";
+            if (
+                currentPage <
+                totalPages
+            ) {
 
+                currentPage++;
 
-    const confirmDelete =
-        confirm(
 
-            "Yakin ingin menghapus customer:\n\n" +
+                renderTable();
 
-            nama +
 
-            "\n\nData yang dihapus tidak dapat dikembalikan."
+                window.scrollTo({
 
-        );
+                    top: 0,
 
+                    behavior:
+                        "smooth"
 
-    if (!confirmDelete) {
+                });
 
-        return;
+            }
 
-    }
+        };
 
 
-    try {
+        window.prevPage =
+        function() {
 
-        await remove(
+            if (
+                currentPage > 1
+            ) {
 
-            ref(
-                db,
-                "customer/" +
-                firebaseKey
-            )
+                currentPage--;
 
-        );
 
+                renderTable();
 
-        alert(
-            "Data customer berhasil dihapus!"
-        );
 
-    }
+                window.scrollTo({
 
-    catch(error) {
+                    top: 0,
 
-        console.error(
-            "Gagal menghapus customer:",
-            error
-        );
+                    behavior:
+                        "smooth"
 
+                });
 
-        alert(
-            "Gagal menghapus customer!\n\n" +
-            error.message
-        );
+            }
 
-    }
+        };
 
-};
 
-
-/* =========================================================
-   PHOTO
-========================================================= */
-
-window.photoError =
-function(image) {
-
-    image.outerHTML =
-        `
-        <span class="no-photo">
-            Foto gagal dimuat
-        </span>
-        `;
-
-};
-
-
-window.openPhotoFromElement =
-function(image) {
-
-    const url =
-        image.getAttribute(
-            "data-url"
-        );
-
-
-    openPhoto(
-        url,
-        image.alt
-    );
-
-};
-
-
-window.openPhoto =
-function(url, title = "") {
-
-    const modal =
-        document.getElementById(
-            "photoModal"
-        );
-
-
-    const image =
-        document.getElementById(
-            "modalImage"
-        );
-
-
-    const caption =
-        document.getElementById(
-            "modalCaption"
-        );
-
-
-    image.src =
-        url;
-
-
-    caption.textContent =
-        title;
-
-
-    modal.style.display =
-        "flex";
-
-};
-
-
-window.closePhoto =
-function() {
-
-    const modal =
-        document.getElementById(
-            "photoModal"
-        );
-
-
-    modal.style.display =
-        "none";
-
-
-    document
-        .getElementById(
-            "modalImage"
-        )
-        .src =
-        "";
-
-};
-
-
-/* =========================================================
-   PAGINATION
-========================================================= */
-
-function renderPagination() {
-
-    const totalPages =
-        Math.ceil(
-            filteredData.length /
-            rowsPerPage
-        );
-
-
-    if (
-        totalPages <= 1
-    ) {
+        /* =====================================================
+           MODAL OUTSIDE CLICK
+        ====================================================== */
 
         document
             .getElementById(
-                "pagination"
+                "photoModal"
             )
-            .innerHTML =
-            "";
+            .addEventListener(
 
-        return;
+                "click",
 
-    }
+                function(event) {
 
+                    if (
+                        event.target ===
+                        this
+                    ) {
 
-    document
-        .getElementById(
-            "pagination"
-        )
-        .innerHTML =
-        `
+                        closePhoto();
 
-        <button
-            class="btn-prev"
-            onclick="prevPage()"
-            ${currentPage === 1
-                ? "disabled"
-                : ""}
-        >
-            ← Prev
-        </button>
+                    }
 
-        <span class="page-info">
+                }
 
-            Halaman
-            ${currentPage}
-            dari
-            ${totalPages}
-
-        </span>
-
-        <button
-            class="btn-next"
-            onclick="nextPage()"
-            ${currentPage === totalPages
-                ? "disabled"
-                : ""}
-        >
-            Next →
-        </button>
-
-        `;
-
-}
+            );
 
 
-window.nextPage =
-function() {
+        document
+            .getElementById(
+                "editModal"
+            )
+            .addEventListener(
 
-    const totalPages =
-        Math.ceil(
-            filteredData.length /
-            rowsPerPage
+                "click",
+
+                function(event) {
+
+                    if (
+                        event.target ===
+                        this
+                    ) {
+
+                        closeEditModal();
+
+                    }
+
+                }
+
+            );
+
+
+        document
+            .getElementById(
+                "historyModal"
+            )
+            .addEventListener(
+
+                "click",
+
+                function(event) {
+
+                    if (
+                        event.target ===
+                        this
+                    ) {
+
+                        closeHistory();
+
+                    }
+
+                }
+
+            );
+
+
+        /* =====================================================
+           ESC
+        ====================================================== */
+
+        document.addEventListener(
+
+            "keydown",
+
+            function(event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closePhoto();
+
+                    closeEditModal();
+
+                    closeHistory();
+
+                }
+
+            }
+
         );
 
 
-    if (
-        currentPage <
-        totalPages
-    ) {
+        /* =====================================================
+           DOWNLOAD EXCEL
+        ====================================================== */
 
-        currentPage++;
-
-        renderTable();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-
-};
-
-
-window.prevPage =
-function() {
-
-    if (
-        currentPage > 1
-    ) {
-
-        currentPage--;
-
-        renderTable();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-
-};
-
-
-/* =========================================================
-   MODAL OUTSIDE CLICK
-========================================================= */
-
-document
-    .getElementById(
-        "photoModal"
-    )
-    .addEventListener(
-
-        "click",
-
-        function(event) {
+        window.downloadExcel =
+        function() {
 
             if (
-                event.target ===
-                this
+                filteredData.length === 0
             ) {
 
-                closePhoto();
+                alert(
+                    "Tidak ada data untuk di-download!"
+                );
+
+                return;
 
             }
 
-        }
 
-    );
+            const dataExcel =
+                filteredData.map(
 
+                    (
+                        item,
+                        index
+                    ) => {
 
-document
-    .getElementById(
-        "editModal"
-    )
-    .addEventListener(
+                        return {
 
-        "click",
+                            "No":
+                                index + 1,
 
-        function(event) {
+                            "ID / Firebase Key":
+                                item.id ||
+                                "-",
 
-            if (
-                event.target ===
-                this
-            ) {
+                            "NIK":
+                                item.nik ||
+                                "-",
 
-                closeEditModal();
+                            "Status":
+                                item.status ||
+                                "Belum Clear",
 
-            }
+                            "Nama":
+                                item.nama ||
+                                "-",
 
-        }
+                            "Alamat KTP":
+                                item.alamatktp ||
+                                "-",
 
-    );
+                            "Domisili":
+                                item.domisili ||
+                                "-",
 
+                            "URL Photo KTP":
+                                item.photoKTP ||
+                                "-"
 
-document
-    .getElementById(
-        "historyModal"
-    )
-    .addEventListener(
+                        };
 
-        "click",
+                    }
 
-        function(event) {
+                );
 
-            if (
-                event.target ===
-                this
-            ) {
 
-                closeHistory();
+            const worksheet =
+                XLSX.utils
+                    .json_to_sheet(
+                        dataExcel
+                    );
 
-            }
 
-        }
+            worksheet["!cols"] = [
 
-    );
+                { wch: 8 },
 
+                { wch: 22 },
 
-/* =========================================================
-   ESC
-========================================================= */
+                { wch: 22 },
 
-document.addEventListener(
+                { wch: 15 },
 
-    "keydown",
+                { wch: 28 },
 
-    function(event) {
+                { wch: 45 },
 
-        if (
-            event.key ===
-            "Escape"
-        ) {
+                { wch: 35 },
 
-            closePhoto();
+                { wch: 60 }
 
-            closeEditModal();
+            ];
 
-            closeHistory();
 
-        }
+            const workbook =
+                XLSX.utils
+                    .book_new();
 
-    }
 
-);
+            XLSX.utils
+                .book_append_sheet(
 
+                    workbook,
 
-/* =========================================================
-   DOWNLOAD EXCEL
-========================================================= */
+                    worksheet,
 
-window.downloadExcel =
-function() {
+                    "Data Customer"
 
-    if (
-        filteredData.length === 0
-    ) {
+                );
 
-        alert(
-            "Tidak ada data untuk di-download!"
-        );
 
-        return;
+            XLSX.writeFile(
 
-    }
+                workbook,
 
+                "Data_Customer.xlsx"
 
-    const dataExcel =
-        filteredData.map(
+            );
 
-            (
-                item,
-                index
-            ) => {
+        };
 
-                return {
-
-                    "No":
-                        index + 1,
-
-                    "ID / Firebase Key":
-                        item.id ||
-                        "-",
-
-                    "NIK":
-                        item.nik ||
-                        "-",
-
-                    "Status":
-                        item.status ||
-                        "Belum Clear",
-
-                    "Nama":
-                        item.nama ||
-                        "-",
-
-                    "Alamat KTP":
-                        item.alamatktp ||
-                        "-",
-
-                    "Domisili":
-                        item.domisili ||
-                        "-",
-
-                    "URL Photo KTP":
-                        item.photoKTP ||
-                        "-"
-
-                };
-
-            }
-
-        );
-
-
-    const worksheet =
-        XLSX.utils
-        .json_to_sheet(
-            dataExcel
-        );
-
-
-    worksheet["!cols"] = [
-
-        { wch: 8 },
-
-        { wch: 22 },
-
-        { wch: 22 },
-
-        { wch: 15 },
-
-        { wch: 28 },
-
-        { wch: 45 },
-
-        { wch: 35 },
-
-        { wch: 60 }
-
-    ];
-
-
-    const workbook =
-        XLSX.utils
-        .book_new();
-
-
-    XLSX.utils
-        .book_append_sheet(
-
-            workbook,
-
-            worksheet,
-
-            "Data Customer"
-
-        );
-
-
-    XLSX.writeFile(
-
-        workbook,
-
-        "Data_Customer.xlsx"
-
-    );
-
-};
-
-</script>
+    </script>
 
 </body>
+
 </html>
-```
