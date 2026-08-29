@@ -4076,9 +4076,11 @@
                     const tanggalKembali =
                         formatTanggal(
 
-                            item.selesaisewa ??
-                            item.tanggalSelesai ??
-                            item.tanggalKembali
+                            /*
+                             * Sumber Tanggal Kembali:
+                             * histori/{ID_CUSTOMER}/{ID_RENTAL}/tanggalSelesaiRental
+                             */
+                            item.tanggalSelesaiRental
 
                         );
 
