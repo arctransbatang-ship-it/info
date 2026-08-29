@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARC TRANS - Booking Unit Mobil</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+:root {
+    --primary: #2196F3;
+    --primary-dark: #1976D2;
+    --secondary: #21CBF3;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #f59e0b;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #dbe3ee;
+    --background: #f1f5f9;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+    color: var(--text);
+    padding: 20px;
+}
+
+.topbar {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-size: 22px;
+    box-shadow: 0 8px 20px rgba(33,150,243,.25);
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.brand-text p {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    background: white;
+    color: var(--primary);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    transition: .2s;
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+    background: var(--primary);
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 15px 45px rgba(15,23,42,.12);
+    animation: fadeIn .4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-title {
+    margin-bottom: 30px;
+}
+
+.form-title h2 {
+    margin: 0 0 6px;
+    font-size: 25px;
+}
+
+.form-title p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+}
+
+input,
+select {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: white;
+    font-size: 14px;
+    outline: none;
+    transition: .2s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(33,150,243,.12);
+}
+
+input[readonly] {
+    background: #f8fafc;
+    color: #475569;
+}
+
+.durasi-info,
+.sisa-info {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.durasi-info.active,
+.sisa-info.active {
+    display: block;
+}
+
+.durasi-info {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.durasi-info.error {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.sisa-lunas {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.sisa-kurang {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.sisa-lebih {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.booking-info {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.action-area {
+    margin-top: 30px;
+}
+
+#btnProses {
+    width: 100%;
+    min-height: 52px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+    box-shadow: 0 8px 20px rgba(33,150,243,.25);
+}
+
+#btnProses:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(33,150,243,.35);
+}
+
+#btnProses:disabled {
+    opacity: .7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#statusSimpan {
+    min-height: 22px;
+    margin-top: 12px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.link-kembali {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 12px;
+    }
+
+    .topbar {
+        margin-bottom: 12px;
+    }
+
+    .brand-text h1 {
+        font-size: 17px;
+    }
+
+    .brand-text p {
+        display: none;
+    }
+
+    .home-btn {
+        padding: 9px 12px;
+    }
+
+    .container {
+        padding: 22px 16px;
+        border-radius: 20px;
+    }
+
+    .form-title h2 {
+        font-size: 21px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    input,
+    select {
+        min-height: 50px;
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="brand">
+        <div class="brand-icon">🚐</div>
+
+        <div class="brand-text">
+            <h1>ARC TRANS</h1>
+            <p>Vehicle Rental Management</p>
+        </div>
+    </div>
+
+    <a href="index.html" class="home-btn">
+        <span>⌂</span>
+        Home
+    </a>
+</div>
+
+<div class="container">
+
+    <div class="form-title">
+        <h2>Form Booking</h2>
+        <p>Input data booking unit kendaraan</p>
+    </div>
+
+    <div class="form-grid">
+
+        <!-- UNIT -->
+        <div class="form-group">
+            <label for="plat">
+                ID Unit / Plat Nomor
+            </label>
+
+            <select id="plat">
+                <option value="">
+                    Memuat data unit...
+                </option>
+            </select>
+        </div>
+
+        <!-- NAMA UNIT -->
+        <div class="form-group">
+            <label for="nama">
+                Nama Unit Kendaraan
+            </label>
+
+            <input
+                type="text"
+                id="nama"
+                readonly
+                placeholder="Nama unit otomatis"
+            >
+        </div>
+
+        <!-- CUSTOMER -->
+        <div class="form-group">
+            <label for="idcustomer">
+                ID Customer
+            </label>
+
+            <select id="idcustomer">
+                <option value="">
+                    Memuat data customer...
+                </option>
+            </select>
+        </div>
+
+        <!-- NAMA CUSTOMER -->
+        <div class="form-group">
+            <label for="customer">
+                Nama Customer
+            </label>
+
+            <input
+                type="text"
+                id="customer"
+                readonly
+                placeholder="Nama customer otomatis"
+            >
+        </div>
+
+        <!-- RENTAL TYPE -->
+        <div class="form-group">
+            <label for="rentaltype">
+                Rental Type
+            </label>
+
+            <select id="rentaltype">
+                <option value="">
+                    -- Pilih Rental Type --
+                </option>
+
+                <option value="setengahhari">
+                    Setengah Hari
+                </option>
+
+                <option value="harian">
+                    Harian
+                </option>
+
+                <option value="mingguan">
+                    Mingguan
+                </option>
+
+                <option value="bulanan">
+                    Bulanan
+                </option>
+            </select>
+        </div>
+
+        <!-- HARGA -->
+        <div class="form-group">
+            <label for="harga">
+                Harga
+            </label>
+
+            <input
+                type="text"
+                id="harga"
+                inputmode="numeric"
+                placeholder="Rp 0"
+            >
+        </div>
+
+        <!-- TANGGAL SEWA -->
+        <div class="form-group">
+            <label for="tanggalsewa">
+                Tanggal Booking / Sewa
+            </label>
+
+            <input
+                type="date"
+                id="tanggalsewa"
+            >
+        </div>
+
+        <!-- TANGGAL SELESAI -->
+        <div class="form-group">
+            <label for="selesaisewa">
+                Estimasi Tanggal Selesai
+            </label>
+
+            <input
+                type="date"
+                id="selesaisewa"
+            >
+
+            <div
+                id="durasiInfo"
+                class="durasi-info"
+            ></div>
+        </div>
+
+        <!-- TOTAL -->
+        <div class="form-group">
+            <label for="total">
+                Total Biaya Booking
+            </label>
+
+            <input
+                type="text"
+                id="total"
+                readonly
+                placeholder="Total akan dihitung otomatis"
+            >
+        </div>
+
+        <!-- DP -->
+        <div class="form-group">
+            <label for="bayar">
+                Bayar / DP Booking
+            </label>
+
+            <input
+                type="text"
+                id="bayar"
+                inputmode="numeric"
+                placeholder="Rp 0"
+            >
+        </div>
+
+        <!-- SISA -->
+        <div class="form-group full-width">
+            <label for="sisa">
+                Sisa Pembayaran
+            </label>
+
+            <input
+                type="text"
+                id="sisa"
+                readonly
+                placeholder="Rp 0"
+            >
+
+            <div
+                id="sisaInfo"
+                class="sisa-info"
+            ></div>
+        </div>
+
+        <!-- INFO -->
+        <div class="form-group full-width">
+            <div class="booking-info">
+                <strong>ℹ Informasi Booking</strong><br>
+                Data ini akan disimpan sebagai <strong>BOOKING</strong>
+                dan tidak akan menghapus unit dari node <strong>unit</strong>,
+                tidak memindahkan unit ke <strong>ready</strong>,
+                serta tidak membuat data revenue.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="action-area">
+        <button
+            id="btnProses"
+            type="button"
+        >
+            Simpan Booking
+        </button>
+
+        <div id="statusSimpan"></div>
+    </div>
+
+    <a
+        href="home.html"
+        class="link-kembali"
+    >
+        ← Kembali
+    </a>
+
+</div>
+
+<script type="module">
+
+/* =================================
+   FIREBASE IMPORT
+================================= */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    set,
+    onValue
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =================================
+   FIREBASE CONFIG
+================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+    authDomain:
+        "arctrans.firebaseapp.com",
+
+    databaseURL:
+        "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+    projectId:
+        "arctrans",
+
+    storageBucket:
+        "arctrans.firebasestorage.app",
+
+    messagingSenderId:
+        "60781918601",
+
+    appId:
+        "1:60781918601:web:c85d6131207f8a8958"
+};
+
+
+/* =================================
+   INIT FIREBASE
+================================= */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+const db =
+    getDatabase(
+        app
+    );
+
+
+/* =================================
+   ELEMEN HTML
+================================= */
+
+const platInput =
+    document.getElementById("plat");
+
+const namaInput =
+    document.getElementById("nama");
+
+const idCustomerInput =
+    document.getElementById("idcustomer");
+
+const customerInput =
+    document.getElementById("customer");
+
+const rentalTypeInput =
+    document.getElementById("rentaltype");
+
+const hargaInput =
+    document.getElementById("harga");
+
+const tanggalSewaInput =
+    document.getElementById("tanggalsewa");
+
+const selesaiSewaInput =
+    document.getElementById("selesaisewa");
+
+const durasiInfo =
+    document.getElementById("durasiInfo");
+
+const totalInput =
+    document.getElementById("total");
+
+const bayarInput =
+    document.getElementById("bayar");
+
+const sisaInput =
+    document.getElementById("sisa");
+
+const sisaInfo =
+    document.getElementById("sisaInfo");
+
+const btnProses =
+    document.getElementById("btnProses");
+
+const statusSimpan =
+    document.getElementById("statusSimpan");
+
+
+/* =================================
+   DATA
+================================= */
+
+let daftarUnit = {};
+let daftarCustomer = {};
+
+
+/* =================================
+   TANGGAL HARI INI
+   FORMAT YYYY-MM-DD
+================================= */
+
+function getTanggalHariIni() {
+
+    const sekarang =
+        new Date();
+
+    const tahun =
+        sekarang.getFullYear();
+
+    const bulan =
+        String(
+            sekarang.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const hari =
+        String(
+            sekarang.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    return (
+        tahun +
+        "-" +
+        bulan +
+        "-" +
+        hari
+    );
+}
+
+
+/* =================================
+   TANGGAL INPUT
+   DD/MM/YYYY HH:MM:SS
+================================= */
+
+function formatTanggalInput() {
+
+    const sekarang =
+        new Date();
+
+    const tanggal =
+        String(
+            sekarang.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const bulan =
+        String(
+            sekarang.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const tahun =
+        sekarang.getFullYear();
+
+    const jam =
+        String(
+            sekarang.getHours()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const menit =
+        String(
+            sekarang.getMinutes()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const detik =
+        String(
+            sekarang.getSeconds()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    return (
+        tanggal +
+        "/" +
+        bulan +
+        "/" +
+        tahun +
+        " " +
+        jam +
+        ":" +
+        menit +
+        ":" +
+        detik
+    );
+}
+
+
+/* =================================
+   SET MINIMUM TANGGAL
+================================= */
+
+const tanggalHariIni =
+    getTanggalHariIni();
+
+tanggalSewaInput.min =
+    tanggalHariIni;
+
+selesaiSewaInput.min =
+    tanggalHariIni;
+
+
+/* =================================
+   FORMAT RUPIAH
+================================= */
+
+function formatRupiah(
+    angka
+) {
+
+    const nilai =
+        Number(angka) || 0;
+
+    return (
+        "Rp " +
+        nilai.toLocaleString(
+            "id-ID"
+        )
+    );
+}
+
+
+/* =================================
+   AMBIL ANGKA DARI RUPIAH
+================================= */
+
+function angkaDariRupiah(
+    nilai
+) {
+
+    return Number(
+        String(
+            nilai || ""
+        )
+        .replace(
+            /\D/g,
+            ""
+        )
+    ) || 0;
+}
+
+
+/* =================================
+   FORMAT SISA
+================================= */
+
+function formatSisaPembayaran(
+    nilai
+) {
+
+    if (nilai === 0) {
+        return "0";
+    }
+
+    if (nilai > 0) {
+        return (
+            "+ " +
+            formatRupiah(
+                nilai
+            )
+        );
+    }
+
+    return (
+        "- " +
+        formatRupiah(
+            Math.abs(
+                nilai
+            )
+        )
+    );
+}
+
+
+/* =================================
+   AMBIL DATA UNIT
+   NODE:
+   unit/{ID PLAT MOBIL}
+================================= */
+
+const unitRef =
+    ref(
+        db,
+        "unit"
+    );
+
+onValue(
+    unitRef,
+
+    function(snapshot) {
+
+        const data =
+            snapshot.val();
+
+        daftarUnit =
+            data || {};
+
+        platInput.innerHTML =
+            `
+            <option value="">
+                -- Pilih ID Unit / Plat Mobil --
+            </option>
+            `;
+
+        if (!data) {
+
+            platInput.innerHTML +=
+                `
+                <option
+                    value=""
+                    disabled
+                >
+                    Data unit belum tersedia
+                </option>
+                `;
+
+            return;
+        }
+
+        Object.entries(
+            data
+        )
+        .forEach(
+            function([
+                id,
+                unit
+            ]) {
+
+                /*
+                 * KEY FIREBASE DIANGGAP
+                 * SEBAGAI ID PLAT MOBIL.
+                 *
+                 * Contoh:
+                 * unit/B1234XYZ
+                 */
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    id;
+
+                option.textContent =
+                    (
+                        unit?.plat ||
+                        id
+                    ) +
+                    " - " +
+                    (
+                        unit?.nama ||
+                        "Tanpa Nama"
+                    );
+
+                platInput.appendChild(
+                    option
+                );
+            }
+        );
+    },
+
+    function(error) {
+
+        console.error(
+            "Error Unit:",
+            error
+        );
+
+        platInput.innerHTML =
+            `
+            <option value="">
+                Gagal memuat data unit
+            </option>
+            `;
+    }
+);
+
+
+/* =================================
+   SAAT UNIT DIPILIH
+================================= */
+
+platInput.addEventListener(
+    "change",
+
+    function() {
+
+        const unitId =
+            this.value;
+
+        if (!unitId) {
+
+            namaInput.value =
+                "";
+
+            return;
+        }
+
+        const unit =
+            daftarUnit[
+                unitId
+            ];
+
+        if (!unit) {
+            return;
+        }
+
+        namaInput.value =
+            unit.nama ||
+            "";
+
+        /*
+         * Reset perhitungan
+         */
+        hargaInput.value =
+            "";
+
+        totalInput.value =
+            "";
+
+        bayarInput.value =
+            "";
+
+        sisaInput.value =
+            "";
+
+        sisaInfo.className =
+            "sisa-info";
+
+        sisaInfo.textContent =
+            "";
+    }
+);
+
+
+/* =================================
+   AMBIL DATA CUSTOMER
+   NODE:
+   customer/{ID CUSTOMER}
+================================= */
+
+const customerRef =
+    ref(
+        db,
+        "customer"
+    );
+
+onValue(
+    customerRef,
+
+    function(snapshot) {
+
+        const data =
+            snapshot.val();
+
+        daftarCustomer =
+            data || {};
+
+        idCustomerInput.innerHTML =
+            `
+            <option value="">
+                -- Pilih ID Customer --
+            </option>
+            `;
+
+        if (!data) {
+
+            idCustomerInput.innerHTML +=
+                `
+                <option
+                    value=""
+                    disabled
+                >
+                    Data customer belum tersedia
+                </option>
+                `;
+
+            return;
+        }
+
+        Object.entries(
+            data
+        )
+        .forEach(
+            function([
+                id,
+                customer
+            ]) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    id;
+
+                option.textContent =
+                    (
+                        customer?.nik ||
+                        id
+                    ) +
+                    " - " +
+                    (
+                        customer?.nama ||
+                        "Tanpa Nama"
+                    );
+
+                idCustomerInput.appendChild(
+                    option
+                );
+            }
+        );
+    },
+
+    function(error) {
+
+        console.error(
+            "Error Customer:",
+            error
+        );
+
+        idCustomerInput.innerHTML =
+            `
+            <option value="">
+                Gagal memuat data customer
+            </option>
+            `;
+    }
+);
+
+
+/* =================================
+   SAAT CUSTOMER DIPILIH
+================================= */
+
+idCustomerInput.addEventListener(
+    "change",
+
+    function() {
+
+        const id =
+            this.value;
+
+        if (!id) {
+
+            customerInput.value =
+                "";
+
+            return;
+        }
+
+        const dataCustomer =
+            daftarCustomer[id];
+
+        customerInput.value =
+            dataCustomer?.nama ||
+            "";
+    }
+);
+
+
+/* =================================
+   HITUNG JUMLAH HARI
+================================= */
+
+function hitungJumlahHari() {
+
+    const tanggalSewa =
+        tanggalSewaInput.value;
+
+    const selesaiSewa =
+        selesaiSewaInput.value;
+
+    if (
+        !tanggalSewa ||
+        !selesaiSewa
+    ) {
+        return 0;
+    }
+
+    const mulai =
+        new Date(
+            tanggalSewa +
+            "T00:00:00"
+        );
+
+    const selesai =
+        new Date(
+            selesaiSewa +
+            "T00:00:00"
+        );
+
+    const selisih =
+        selesai -
+        mulai;
+
+    return Math.ceil(
+        selisih /
+        (
+            1000 *
+            60 *
+            60 *
+            24
+        )
+    );
+}
+
+
+/* =================================
+   UPDATE DURASI
+================================= */
+
+function updateDurasiInfo() {
+
+    const tanggalSewa =
+        tanggalSewaInput.value;
+
+    const selesaiSewa =
+        selesaiSewaInput.value;
+
+    if (
+        !tanggalSewa ||
+        !selesaiSewa
+    ) {
+
+        durasiInfo.className =
+            "durasi-info";
+
+        durasiInfo.textContent =
+            "";
+
+        return;
+    }
+
+    const jumlahHari =
+        hitungJumlahHari();
+
+    if (jumlahHari < 0) {
+
+        durasiInfo.className =
+            "durasi-info active error";
+
+        durasiInfo.textContent =
+            "⚠ Estimasi tanggal selesai tidak boleh sebelum tanggal sewa.";
+
+        return;
+    }
+
+    if (
+        rentalTypeInput.value ===
+        "setengahhari"
+    ) {
+
+        durasiInfo.className =
+            "durasi-info active";
+
+        durasiInfo.textContent =
+            "🕒 Durasi booking: Setengah Hari";
+
+        return;
+    }
+
+    durasiInfo.className =
+        "durasi-info active";
+
+    durasiInfo.textContent =
+        "📅 Durasi booking: " +
+        jumlahHari +
+        " hari";
+}
+
+
+/* =================================
+   TANGGAL SEWA
+================================= */
+
+tanggalSewaInput.addEventListener(
+    "change",
+
+    function() {
+
+        const tanggalDipilih =
+            this.value;
+
+        const hariIni =
+            getTanggalHariIni();
+
+        if (
+            tanggalDipilih &&
+            tanggalDipilih < hariIni
+        ) {
+
+            alert(
+                "Tanggal booking tidak boleh sebelum hari ini!"
+            );
+
+            this.value =
+                "";
+
+            selesaiSewaInput.value =
+                "";
+
+            return;
+        }
+
+        selesaiSewaInput.min =
+            tanggalDipilih ||
+            hariIni;
+
+        if (
+            selesaiSewaInput.value &&
+            selesaiSewaInput.value <
+            tanggalDipilih
+        ) {
+
+            selesaiSewaInput.value =
+                "";
+        }
+
+        updateDurasiInfo();
+        hitungTotal();
+    }
+);
+
+
+/* =================================
+   TANGGAL SELESAI
+================================= */
+
+selesaiSewaInput.addEventListener(
+    "change",
+
+    function() {
+
+        const tanggalSelesai =
+            this.value;
+
+        const tanggalSewa =
+            tanggalSewaInput.value;
+
+        const hariIni =
+            getTanggalHariIni();
+
+        if (
+            tanggalSelesai &&
+            tanggalSelesai < hariIni
+        ) {
+
+            alert(
+                "Estimasi tanggal selesai tidak boleh sebelum hari ini!"
+            );
+
+            this.value =
+                "";
+
+            return;
+        }
+
+        if (!tanggalSewa) {
+
+            alert(
+                "Silakan pilih tanggal booking terlebih dahulu!"
+            );
+
+            this.value =
+                "";
+
+            return;
+        }
+
+        if (
+            tanggalSelesai <
+            tanggalSewa
+        ) {
+
+            alert(
+                "Estimasi tanggal selesai tidak boleh sebelum tanggal booking!"
+            );
+
+            this.value =
+                "";
+
+            return;
+        }
+
+        updateDurasiInfo();
+        hitungTotal();
+    }
+);
+
+
+/* =================================
+   INPUT HARGA
+================================= */
+
+hargaInput.addEventListener(
+    "input",
+
+    function() {
+
+        const angka =
+            angkaDariRupiah(
+                this.value
+            );
+
+        this.value =
+            angka > 0
+            ?
+            formatRupiah(
+                angka
+            )
+            :
+            "";
+
+        hitungTotal();
+    }
+);
+
+
+/* =================================
+   INPUT BAYAR / DP
+================================= */
+
+bayarInput.addEventListener(
+    "input",
+
+    function() {
+
+        const angka =
+            angkaDariRupiah(
+                this.value
+            );
+
+        this.value =
+            angka > 0
+            ?
+            formatRupiah(
+                angka
+            )
+            :
+            "";
+
+        hitungSisa();
+    }
+);
+
+
+/* =================================
+   INPUT TOTAL MANUAL
+   KHUSUS SETENGAH HARI
+================================= */
+
+totalInput.addEventListener(
+    "input",
+
+    function() {
+
+        if (
+            rentalTypeInput.value ===
+            "setengahhari"
+        ) {
+
+            const angka =
+                angkaDariRupiah(
+                    this.value
+                );
+
+            this.value =
+                angka > 0
+                ?
+                formatRupiah(
+                    angka
+                )
+                :
+                "";
+        }
+
+        hitungSisa();
+    }
+);
+
+
+/* =================================
+   HITUNG TOTAL
+================================= */
+
+function hitungTotal() {
+
+    const harga =
+        angkaDariRupiah(
+            hargaInput.value
+        );
+
+    const rentalType =
+        rentalTypeInput.value;
+
+    const jumlahHari =
+        hitungJumlahHari();
+
+    if (
+        rentalType ===
+        "setengahhari"
+    ) {
+
+        totalInput.readOnly =
+            false;
+
+        totalInput.placeholder =
+            "Input total biaya manual";
+
+        hitungSisa();
+
+        return;
+    }
+
+    totalInput.readOnly =
+        true;
+
+    totalInput.placeholder =
+        "Total dihitung otomatis";
+
+    if (
+        harga <= 0 ||
+        !rentalType ||
+        jumlahHari <= 0
+    ) {
+
+        totalInput.value =
+            "";
+
+        hitungSisa();
+
+        return;
+    }
+
+    let jumlahPeriode =
+        0;
+
+    if (
+        rentalType ===
+        "harian"
+    ) {
+
+        jumlahPeriode =
+            jumlahHari;
+    }
+
+    else if (
+        rentalType ===
+        "mingguan"
+    ) {
+
+        jumlahPeriode =
+            Math.ceil(
+                jumlahHari / 7
+            );
+    }
+
+    else if (
+        rentalType ===
+        "bulanan"
+    ) {
+
+        jumlahPeriode =
+            Math.ceil(
+                jumlahHari / 30
+            );
+    }
+
+    const total =
+        harga *
+        jumlahPeriode;
+
+    totalInput.value =
+        formatRupiah(
+            total
+        );
+
+    hitungSisa();
+}
+
+
+/* =================================
+   HITUNG SISA PEMBAYARAN
+================================= */
+
+function hitungSisa() {
+
+    const total =
+        angkaDariRupiah(
+            totalInput.value
+        );
+
+    const bayar =
+        angkaDariRupiah(
+            bayarInput.value
+        );
+
+    sisaInfo.className =
+        "sisa-info";
+
+    sisaInfo.textContent =
+        "";
+
+    if (total <= 0) {
+
+        sisaInput.value =
+            "";
+
+        return;
+    }
+
+    if (bayar === total) {
+
+        sisaInput.value =
+            "0";
+
+        sisaInfo.className =
+            "sisa-info active sisa-lunas";
+
+        sisaInfo.textContent =
+            "✓ Pembayaran LUNAS";
+
+        return;
+    }
+
+    if (bayar > total) {
+
+        const lebihBayar =
+            bayar -
+            total;
+
+        sisaInput.value =
+            "+ " +
+            formatRupiah(
+                lebihBayar
+            );
+
+        sisaInfo.className =
+            "sisa-info active sisa-lebih";
+
+        sisaInfo.textContent =
+            "＋ Kelebihan pembayaran: " +
+            formatRupiah(
+                lebihBayar
+            );
+
+        return;
+    }
+
+    const sisa =
+        total -
+        bayar;
+
+    sisaInput.value =
+        "- " +
+        formatRupiah(
+            sisa
+        );
+
+    sisaInfo.className =
+        "sisa-info active sisa-kurang";
+
+    sisaInfo.textContent =
+        "Sisa pembayaran: " +
+        formatRupiah(
+            sisa
+        );
+}
+
+
+/* =================================
+   RENTAL TYPE
+================================= */
+
+rentalTypeInput.addEventListener(
+    "change",
+
+    function() {
+
+        if (
+            this.value ===
+            "setengahhari"
+        ) {
+
+            totalInput.value =
+                "";
+
+            totalInput.readOnly =
+                false;
+
+            totalInput.placeholder =
+                "Input total biaya manual";
+
+            durasiInfo.className =
+                "durasi-info active";
+
+            durasiInfo.textContent =
+                "🕒 Durasi booking: Setengah Hari";
+        }
+
+        else {
+
+            totalInput.value =
+                "";
+
+            totalInput.readOnly =
+                true;
+
+            totalInput.placeholder =
+                "Total dihitung otomatis";
+
+            updateDurasiInfo();
+        }
+
+        hitungTotal();
+    }
+);
+
+
+/* =================================
+   TOMBOL SIMPAN BOOKING
+================================= */
+
+btnProses.addEventListener(
+    "click",
+    simpanBooking
+);
+
+
+/* =================================
+   SIMPAN BOOKING
+   NODE:
+   Booking/{ID TRANSAKSI}
+================================= */
+
+async function simpanBooking() {
+
+    const unitId =
+        platInput.value;
+
+    const unit =
+        daftarUnit[unitId];
+
+    const idcustomer =
+        idCustomerInput.value;
+
+    const dataCustomer =
+        daftarCustomer[idcustomer];
+
+    const nama =
+        namaInput.value.trim();
+
+    const customer =
+        customerInput.value.trim();
+
+    const rentaltype =
+        rentalTypeInput.value;
+
+    const harga =
+        angkaDariRupiah(
+            hargaInput.value
+        );
+
+    const tanggalsewa =
+        tanggalSewaInput.value;
+
+    const selesaisewa =
+        selesaiSewaInput.value;
+
+    const total =
+        angkaDariRupiah(
+            totalInput.value
+        );
+
+    const bayar =
+        angkaDariRupiah(
+            bayarInput.value
+        );
+
+    const hariIni =
+        getTanggalHariIni();
+
+
+    /* =================================
+       VALIDASI
+    ================================= */
+
+    if (!unitId) {
+
+        alert(
+            "Pilih ID Unit / Plat Mobil!"
+        );
+
+        return;
+    }
+
+    if (!unit) {
+
+        alert(
+            "Data unit tidak ditemukan!"
+        );
+
+        return;
+    }
+
+    if (!idcustomer) {
+
+        alert(
+            "Pilih ID Customer!"
+        );
+
+        return;
+    }
+
+    if (!rentaltype) {
+
+        alert(
+            "Pilih Rental Type!"
+        );
+
+        return;
+    }
+
+    if (harga <= 0) {
+
+        alert(
+            "Harga harus diisi!"
+        );
+
+        return;
+    }
+
+    if (!tanggalsewa) {
+
+        alert(
+            "Pilih tanggal booking / sewa!"
+        );
+
+        return;
+    }
+
+    if (
+        tanggalsewa <
+        hariIni
+    ) {
+
+        alert(
+            "Tanggal booking tidak boleh lebih kecil dari tanggal hari ini!"
+        );
+
+        return;
+    }
+
+    if (!selesaisewa) {
+
+        alert(
+            "Pilih estimasi tanggal selesai!"
+        );
+
+        return;
+    }
+
+    if (
+        rentaltype !==
+        "setengahhari"
+    ) {
+
+        if (
+            selesaisewa <=
+            tanggalsewa
+        ) {
+
+            alert(
+                "Tanggal selesai harus lebih besar dari tanggal booking!"
+            );
+
+            return;
+        }
+    }
+
+    if (total <= 0) {
+
+        alert(
+            "Total biaya belum valid!"
+        );
+
+        return;
+    }
+
+
+    /* =================================
+       HITUNG PEMBAYARAN
+    ================================= */
+
+    let sisa =
+        0;
+
+    let kelebihanBayar =
+        0;
+
+    if (bayar < total) {
+
+        sisa =
+            total -
+            bayar;
+    }
+
+    else if (bayar === total) {
+
+        sisa =
+            0;
+    }
+
+    else {
+
+        kelebihanBayar =
+            bayar -
+            total;
+
+        sisa =
+            0;
+    }
+
+
+    /* =================================
+       STATUS PEMBAYARAN
+    ================================= */
+
+    let statusPembayaran =
+        "BELUM LUNAS";
+
+    if (
+        bayar ===
+        total
+    ) {
+
+        statusPembayaran =
+            "LUNAS";
+    }
+
+    else if (
+        bayar >
+        total
+    ) {
+
+        statusPembayaran =
+            "LEBIH BAYAR";
+    }
+
+
+    /* =================================
+       DISABLE BUTTON
+    ================================= */
+
+    btnProses.disabled =
+        true;
+
+    btnProses.textContent =
+        "Menyimpan Booking...";
+
+    statusSimpan.textContent =
+        "Mohon tunggu...";
+
+
+    try {
+
+        /* =================================
+           ID TRANSAKSI
+        ================================= */
+
+        const transaksiId =
+            "BOOKING_" +
+            Date.now();
+
+
+        /* =================================
+           JUMLAH HARI
+        ================================= */
+
+        let jumlahHari =
+            hitungJumlahHari();
+
+        if (
+            rentaltype ===
+            "setengahhari"
+        ) {
+
+            jumlahHari =
+                0.5;
+        }
+
+
+        /* =================================
+           DATA BOOKING
+        ================================= */
+
+        const dataBooking = {
+
+            transaksiId:
+                transaksiId,
+
+            /* UNIT */
+
+            unitId:
+                unitId,
+
+            plat:
+                unit?.plat ||
+                unitId,
+
+            namaUnit:
+                unit?.nama ||
+                nama,
+
+            /* CUSTOMER */
+
+            idcustomer:
+                idcustomer,
+
+            nik:
+                dataCustomer?.nik ||
+                idcustomer,
+
+            customer:
+                customer,
+
+            alamatktp:
+                dataCustomer?.alamatktp ||
+                "",
+
+            hp:
+                dataCustomer?.hp ||
+                "",
+
+            /* BOOKING */
+
+            rentaltype:
+                rentaltype,
+
+            harga:
+                harga,
+
+            hargaFormat:
+                formatRupiah(
+                    harga
+                ),
+
+            tanggalsewa:
+                tanggalsewa,
+
+            selesaisewa:
+                selesaisewa,
+
+            jumlahHari:
+                jumlahHari,
+
+            total:
+                total,
+
+            totalFormat:
+                formatRupiah(
+                    total
+                ),
+
+            bayar:
+                bayar,
+
+            bayarFormat:
+                formatRupiah(
+                    bayar
+                ),
+
+            /* PEMBAYARAN */
+
+            sisa:
+                sisa,
+
+            sisaFormat:
+                sisa === 0
+                ?
+                "0"
+                :
+                "- " +
+                formatRupiah(
+                    sisa
+                ),
+
+            kelebihanBayar:
+                kelebihanBayar,
+
+            kelebihanBayarFormat:
+                formatRupiah(
+                    kelebihanBayar
+                ),
+
+            statusPembayaran:
+                statusPembayaran,
+
+            /* STATUS BOOKING */
+
+            status:
+                "BOOKING",
+
+            statusBooking:
+                "BOOKING",
+
+            /* TIMESTAMP */
+
+            timestamp:
+                Date.now(),
+
+            tanggalInput:
+                formatTanggalInput()
+        };
+
+
+        /* =================================
+           SIMPAN:
+           Booking/{ID TRANSAKSI}
+        ================================= */
+
+        await set(
+            ref(
+                db,
+                "Booking/" +
+                transaksiId
+            ),
+            dataBooking
+        );
+
+
+        /* =================================
+           BERHASIL
+        ================================= */
+
+        statusSimpan.textContent =
+            "✓ Booking berhasil disimpan";
+
+        alert(
+            "Booking berhasil disimpan!\n\n" +
+            "ID Transaksi: " +
+            transaksiId +
+            "\n\n" +
+            "Unit: " +
+            (
+                unit?.plat ||
+                unitId
+            ) +
+            "\n" +
+            "Customer: " +
+            customer +
+            "\n" +
+            "Tanggal Booking: " +
+            tanggalsewa +
+            "\n" +
+            "Tanggal Selesai: " +
+            selesaisewa +
+            "\n\n" +
+            "Status: BOOKING"
+        );
+
+
+        /* =================================
+           RESET FORM
+        ================================= */
+
+        platInput.value =
+            "";
+
+        namaInput.value =
+            "";
+
+        idCustomerInput.value =
+            "";
+
+        customerInput.value =
+            "";
+
+        rentalTypeInput.value =
+            "";
+
+        hargaInput.value =
+            "";
+
+        tanggalSewaInput.value =
+            "";
+
+        selesaiSewaInput.value =
+            "";
+
+        totalInput.value =
+            "";
+
+        bayarInput.value =
+            "";
+
+        sisaInput.value =
+            "";
+
+        durasiInfo.className =
+            "durasi-info";
+
+        durasiInfo.textContent =
+            "";
+
+        sisaInfo.className =
+            "sisa-info";
+
+        sisaInfo.textContent =
+            "";
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "ERROR BOOKING:",
+            error
+        );
+
+        statusSimpan.textContent =
+            "Gagal menyimpan booking: " +
+            error.message;
+
+        alert(
+            "Gagal menyimpan booking:\n\n" +
+            error.message
+        );
+    }
+
+    finally {
+
+        btnProses.disabled =
+            false;
+
+        btnProses.textContent =
+            "Simpan Booking";
+    }
+}
+
+</script>
+
+</body>
+</html>
