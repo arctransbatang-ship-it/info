@@ -446,21 +446,35 @@ finally{hideLoading();}
 /* =========================================================
 PROCESS BOOKING -> RENT OUT
 ========================================================= */
+function normalisasiPlat(value){return String(value??"").trim().toLowerCase();}
+
+async function cariUnitReady(idPlat){
+const target=normalisasiPlat(idPlat);
+if(!target)return null;
+const snapshot=await get(ref(db,"ready"));
+if(!snapshot.exists())return null;
+const readyData=snapshot.val()||{};
+for(const [key,value] of Object.entries(readyData)){
+const unit=value&&typeof value==="object"?value:{};
+const kandidat=[key,unit.plat,unit.idPlat,unit.idUnit,unit.unitId,unit.noPlat,unit.nomorPlat,unit["ID Plat"],unit["ID_PLAT"],unit["Plat Nomor"],unit["PLAT NOMOR"]];
+if(kandidat.some(v=>normalisasiPlat(v)===target))return {key,data:unit};
+}
+return null;
+}
+
 window.processBooking=async function(encodedId){
 const id=decodeURIComponent(encodedId),item=findBooking(id);
 if(!item){alert("Data booking tidak ditemukan.");return;}
-const unitId=item.unitId||item.plat;
+const unitId=String(item.unitId||item.plat||item.idPlat||item.idUnit||item.noPlat||item.nomorPlat||"").trim();
 if(!unitId){alert("Booking tidak memiliki ID Plat / Unit.");return;}
 try{
-showLoading("Memeriksa ketersediaan unit...");
-const readySnapshot=await get(ref(db,"ready/"+unitId));
+showLoading("Memeriksa unit pada READY...");
+const readyUnit=await cariUnitReady(unitId);
 hideLoading();
-if(!readySnapshot.exists()){
-alert("⚠ UNIT TIDAK TERSEDIA\\n\\nID Plat: "+unitId+"\\n\\nUnit tidak ditemukan pada:\\nready/"+unitId+"\\n\\nBooking belum dapat diproses.");
-return;
-}
-selectedBookingId=id;selectedBookingData=item;openProcessModal(item,readySnapshot.val()||{});
-}catch(error){hideLoading();console.error(error);alert("Gagal melakukan pengecekan unit:\\n\\n"+error.message);}
+if(!readyUnit){alert("⚠ UNIT TIDAK TERSEDIA\n\nPlat Nomor: "+unitId+"\n\nPlat tersebut tidak ditemukan pada node READY.");return;}
+console.log("UNIT READY DITEMUKAN:",{bookingPlat:unitId,readyKey:readyUnit.key,readyData:readyUnit.data});
+selectedBookingId=id;selectedBookingData=item;openProcessModal(item,readyUnit.data||{});
+}catch(error){hideLoading();console.error(error);alert("Gagal melakukan pengecekan unit READY:\n\n"+error.message);}
 };
 
 function openProcessModal(booking,readyUnit){
@@ -595,8 +609,12 @@ if(rentaltype!=="setengahhari"&&selesaisewa<=tanggalsewa){alert("Tanggal selesai
 
 try{
 btn.disabled=true;btn.textContent="Memeriksa Unit...";
-const readySnapshot=await get(ref(db,"ready/"+unitId));
-if(!readySnapshot.exists()){alert("⚠ UNIT SUDAH TIDAK TERSEDIA\\n\\nUnit "+unitId+" sudah tidak terdapat pada READY.\\n\\nTransaksi dibatalkan.");closeProcessModal();return;}
+const readyUnit=await cariUnitReady(unitId);
+if(!readyUnit){
+alert("⚠ UNIT SUDAH TIDAK TERSEDIA\n\nUnit "+unitId+" sudah tidak ditemukan pada READY.\n\nTransaksi dibatalkan.");
+closeProcessModal();
+return;
+}
 
 const jumlahHari=calculateDays(rentaltype,tanggalsewa,selesaisewa);
 let sisa=0,kelebihanBayar=0,statusPembayaran="BELUM LUNAS";
@@ -622,7 +640,7 @@ status:"RENT OUT",timestamp:Date.now(),tanggalInput:formatTanggalInput()
 
 await set(ref(db,"rentout/"+transaksiId),dataRent);
 await set(ref(db,"revenue/"+hariIni+"/"+transaksiId),{...dataRent,keterangan:"DP Mobil - "+unitId+" - "+namaUnit});
-await remove(ref(db,"ready/"+unitId));
+await remove(ref(db,"ready/"+readyUnit.key));
 await update(ref(db,"unit/"+unitId),{keterangan:"Out"});
 
 /* BOOKING DIHAPUS DARI Booking/{ID_TRANSAKSI} */
