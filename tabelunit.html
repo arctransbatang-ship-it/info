@@ -1,1281 +1,1857 @@
 <!DOCTYPE html>
-
 <html lang="id">
 
 <head>
 
-```
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>ARC TRANS - Data Kendaraan</title>
+    <title>ARC TRANS - Data Kendaraan</title>
 
 
-<!-- LIBRARY EXCEL -->
+    <!-- LIBRARY EXCEL -->
 
-<script
-    src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
-></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
+    ></script>
 
 
-<style>
+    <style>
 
-    * {
-        box-sizing: border-box;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
 
 
-    :root {
+        :root {
 
-        --primary: #2196F3;
-        --primary-dark: #1976D2;
-        --secondary: #21CBF3;
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --secondary: #21CBF3;
 
-        --success: #16a34a;
-        --danger: #dc2626;
-        --warning: #f59e0b;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --purple: #7c3aed;
 
-        --text: #1e293b;
-        --muted: #64748b;
-        --border: #dbe3ee;
-
-    }
-
-
-    body {
-
-        margin: 0;
-
-        min-height: 100vh;
-
-        background:
-            linear-gradient(
-                135deg,
-                #e0f2fe,
-                #f8fafc
-            );
-
-        color: var(--text);
-
-    }
-
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .topbar {
-
-        width: 100%;
-
-        padding: 14px 20px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        background: white;
-
-        box-shadow:
-            0 2px 12px
-            rgba(15, 23, 42, 0.08);
-
-        position: sticky;
-
-        top: 0;
-
-        z-index: 1000;
-
-    }
-
-
-    .brand {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 10px;
-
-    }
-
-
-    .brand-icon {
-
-        width: 42px;
-
-        height: 42px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        border-radius: 12px;
-
-        background:
-            linear-gradient(
-                135deg,
-                var(--primary),
-                var(--secondary)
-            );
-
-        color: white;
-
-        font-size: 20px;
-
-        box-shadow:
-            0 6px 16px
-            rgba(33, 150, 243, 0.25);
-
-    }
-
-
-    .brand-text h1 {
-
-        margin: 0;
-
-        font-size: 18px;
-
-    }
-
-
-    .brand-text p {
-
-        margin: 2px 0 0;
-
-        font-size: 12px;
-
-        color: var(--muted);
-
-    }
-
-
-    .home-btn {
-
-        display: inline-flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        text-decoration: none;
-
-        background: #eff6ff;
-
-        color: var(--primary-dark);
-
-        font-weight: 700;
-
-        padding: 10px 15px;
-
-        border-radius: 12px;
-
-        transition: 0.2s;
-
-    }
-
-
-    .home-btn:hover {
-
-        background: var(--primary);
-
-        color: white;
-
-        transform: translateY(-1px);
-
-    }
-
-
-    /* =========================
-       CONTAINER
-    ========================= */
-
-    .container {
-
-        width: 100%;
-
-        max-width: 1500px;
-
-        margin: auto;
-
-        padding: 20px;
-
-    }
-
-
-    .page-title {
-
-        margin-bottom: 20px;
-
-    }
-
-
-    .page-title h2 {
-
-        margin: 0 0 5px;
-
-        font-size: 24px;
-
-    }
-
-
-    .page-title p {
-
-        margin: 0;
-
-        font-size: 14px;
-
-        color: var(--muted);
-
-    }
-
-
-    /* =========================
-       TOOLBAR
-    ========================= */
-
-    .toolbar {
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        gap: 12px;
-
-        margin-bottom: 18px;
-
-        flex-wrap: wrap;
-
-    }
-
-
-    #searchInput {
-
-        flex: 1;
-
-        min-width: 220px;
-
-        max-width: 450px;
-
-        min-height: 48px;
-
-        padding: 12px 15px;
-
-        border: 1px solid var(--border);
-
-        border-radius: 12px;
-
-        background: white;
-
-        font-size: 14px;
-
-        outline: none;
-
-    }
-
-
-    #searchInput:focus {
-
-        border-color: var(--primary);
-
-        box-shadow:
-            0 0 0 4px
-            rgba(33, 150, 243, 0.12);
-
-    }
-
-
-    button {
-
-        border: none;
-
-        cursor: pointer;
-
-        color: white;
-
-        font-size: 14px;
-
-        font-weight: 700;
-
-        border-radius: 12px;
-
-        padding: 12px 18px;
-
-        transition: 0.2s;
-
-    }
-
-
-    button:hover {
-
-        transform: translateY(-1px);
-
-    }
-
-
-    button:disabled {
-
-        background: #cbd5e1 !important;
-
-        cursor: not-allowed;
-
-        transform: none;
-
-    }
-
-
-    #btnDownload {
-
-        display: inline-block;
-
-        background:
-            linear-gradient(
-                135deg,
-                #16a34a,
-                #22c55e
-            );
-
-        box-shadow:
-            0 6px 15px
-            rgba(34, 197, 94, 0.2);
-
-    }
-
-
-    /* =========================
-       TABLE
-    ========================= */
-
-    .table-container {
-
-        width: 100%;
-
-        overflow-x: auto;
-
-        background: white;
-
-        border-radius: 18px;
-
-        box-shadow:
-            0 10px 30px
-            rgba(15, 23, 42, 0.08);
-
-    }
-
-
-    table {
-
-        width: 100%;
-
-        border-collapse: collapse;
-
-        min-width: 1250px;
-
-    }
-
-
-    th {
-
-        background:
-            linear-gradient(
-                135deg,
-                var(--primary),
-                var(--secondary)
-            );
-
-        color: white;
-
-        padding: 14px 10px;
-
-        text-align: center;
-
-        white-space: nowrap;
-
-    }
-
-
-    td {
-
-        padding: 12px 10px;
-
-        border-bottom:
-            1px solid
-            #edf2f7;
-
-        text-align: center;
-
-        vertical-align: middle;
-
-    }
-
-
-    tbody tr {
-
-        transition: 0.2s;
-
-    }
-
-
-    tbody tr:hover {
-
-        background: #f8fbff;
-
-    }
-
-
-    /* =========================
-       PHOTO
-    ========================= */
-
-    .photo-cell {
-
-        min-width: 130px;
-
-    }
-
-
-    .vehicle-photo {
-
-        display: block;
-
-        width: 110px;
-
-        height: 80px;
-
-        margin: auto;
-
-        object-fit: cover;
-
-        border-radius: 10px;
-
-        border:
-            1px solid
-            var(--border);
-
-        cursor: pointer;
-
-        transition: 0.2s;
-
-    }
-
-
-    .vehicle-photo:hover {
-
-        transform: scale(1.06);
-
-        box-shadow:
-            0 6px 18px
-            rgba(0, 0, 0, 0.2);
-
-    }
-
-
-    .no-photo {
-
-        color: #94a3b8;
-
-        font-size: 12px;
-
-    }
-
-
-    /* =========================
-       BADGE
-    ========================= */
-
-    .badge {
-
-        display: inline-block;
-
-        padding: 7px 12px;
-
-        border-radius: 20px;
-
-        font-size: 12px;
-
-        font-weight: 700;
-
-        color: white;
-
-        min-width: 80px;
-
-    }
-
-
-    .badge-masuk {
-
-        background: #16a34a;
-
-    }
-
-
-    .badge-pulang {
-
-        background: #dc2626;
-
-    }
-
-
-    .badge-sewa {
-
-        background: #f59e0b;
-
-    }
-
-
-    .badge-out {
-
-        background: #dc2626;
-
-    }
-
-
-    .badge-default {
-
-        background: #64748b;
-
-    }
-
-
-    /* =========================
-       ACTION BUTTON
-    ========================= */
-
-    .action-area {
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        gap: 8px;
-
-    }
-
-
-    .btn-edit {
-
-        background:
-            linear-gradient(
-                135deg,
-                #f59e0b,
-                #fbbf24
-            );
-
-        padding: 9px 12px;
-
-        font-size: 12px;
-
-    }
-
-
-    .btn-delete {
-
-        background:
-            linear-gradient(
-                135deg,
-                #dc2626,
-                #ef4444
-            );
-
-        padding: 9px 12px;
-
-        font-size: 12px;
-
-    }
-
-
-    /* =========================
-       MOBILE CARD
-    ========================= */
-
-    .mobile-list {
-
-        display: none;
-
-    }
-
-
-    .vehicle-card {
-
-        background: white;
-
-        border-radius: 18px;
-
-        padding: 16px;
-
-        margin-bottom: 14px;
-
-        box-shadow:
-            0 8px 24px
-            rgba(15, 23, 42, 0.08);
-
-        border:
-            1px solid
-            #eef2f7;
-
-    }
-
-
-    .vehicle-card-header {
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        gap: 12px;
-
-        margin-bottom: 14px;
-
-        padding-bottom: 12px;
-
-        border-bottom:
-            1px solid
-            #edf2f7;
-
-    }
-
-
-    .vehicle-number {
-
-        font-size: 12px;
-
-        color: var(--muted);
-
-        font-weight: 700;
-
-    }
-
-
-    .vehicle-name {
-
-        margin: 3px 0 0;
-
-        font-size: 17px;
-
-        font-weight: 800;
-
-    }
-
-
-    .mobile-photo {
-
-        width: 100%;
-
-        height: 180px;
-
-        object-fit: cover;
-
-        border-radius: 14px;
-
-        margin-bottom: 14px;
-
-        border:
-            1px solid
-            var(--border);
-
-        cursor: pointer;
-
-    }
-
-
-    .card-grid {
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 10px;
-
-    }
-
-
-    .card-item {
-
-        background: #f8fafc;
-
-        padding: 10px;
-
-        border-radius: 10px;
-
-    }
-
-
-    .card-item.full {
-
-        grid-column: 1 / -1;
-
-    }
-
-
-    .card-label {
-
-        display: block;
-
-        font-size: 11px;
-
-        color: var(--muted);
-
-        margin-bottom: 5px;
-
-        font-weight: 600;
-
-    }
-
-
-    .card-value {
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        color: var(--text);
-
-        word-break: break-word;
-
-    }
-
-
-    .card-badge-area {
-
-        margin-top: 12px;
-
-        display: flex;
-
-        flex-wrap: wrap;
-
-        gap: 8px;
-
-    }
-
-
-    .card-action-area {
-
-        margin-top: 15px;
-
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 10px;
-
-    }
-
-
-    .card-action-area button {
-
-        width: 100%;
-
-    }
-
-
-    /* =========================
-       PAGINATION
-    ========================= */
-
-    #pagination {
-
-        margin: 20px 0;
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        gap: 10px;
-
-        flex-wrap: wrap;
-
-    }
-
-
-    .btn-prev {
-
-        background: var(--warning);
-
-    }
-
-
-    .btn-next {
-
-        background: var(--success);
-
-    }
-
-
-    .page-info {
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        color: var(--text);
-
-        padding: 8px 12px;
-
-    }
-
-
-    /* =========================
-       EMPTY
-    ========================= */
-
-    .empty-data {
-
-        padding: 35px;
-
-        text-align: center;
-
-        color: var(--muted);
-
-    }
-
-
-    /* =========================
-       PHOTO MODAL
-    ========================= */
-
-    .photo-modal {
-
-        display: none;
-
-        position: fixed;
-
-        z-index: 9999;
-
-        inset: 0;
-
-        background:
-            rgba(15, 23, 42, 0.9);
-
-        justify-content: center;
-
-        align-items: center;
-
-        padding: 20px;
-
-    }
-
-
-    .photo-modal img {
-
-        max-width: 95%;
-
-        max-height: 85vh;
-
-        border-radius: 14px;
-
-        box-shadow:
-            0 10px 40px
-            rgba(0, 0, 0, 0.5);
-
-    }
-
-
-    .close-modal {
-
-        position: absolute;
-
-        top: 18px;
-
-        right: 25px;
-
-        color: white;
-
-        font-size: 42px;
-
-        cursor: pointer;
-
-        line-height: 1;
-
-    }
-
-
-    .modal-caption {
-
-        position: absolute;
-
-        bottom: 20px;
-
-        color: white;
-
-        font-size: 14px;
-
-        text-align: center;
-
-        width: 100%;
-
-        padding: 0 20px;
-
-    }
-
-
-    /* =========================
-       EDIT MODAL
-    ========================= */
-
-    .edit-modal {
-
-        display: none;
-
-        position: fixed;
-
-        z-index: 10000;
-
-        inset: 0;
-
-        background:
-            rgba(15, 23, 42, 0.6);
-
-        align-items: center;
-
-        justify-content: center;
-
-        padding: 20px;
-
-        overflow-y: auto;
-
-    }
-
-
-    .edit-modal-content {
-
-        width: 100%;
-
-        max-width: 650px;
-
-        background: white;
-
-        border-radius: 20px;
-
-        padding: 24px;
-
-        box-shadow:
-            0 20px 60px
-            rgba(15, 23, 42, 0.25);
-
-        position: relative;
-
-        margin: auto;
-
-    }
-
-
-    .edit-modal-title {
-
-        margin: 0 0 20px;
-
-        font-size: 22px;
-
-    }
-
-
-    .close-edit-modal {
-
-        position: absolute;
-
-        right: 20px;
-
-        top: 15px;
-
-        font-size: 30px;
-
-        cursor: pointer;
-
-        color: var(--muted);
-
-    }
-
-
-    .form-grid {
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 15px;
-
-    }
-
-
-    .form-group {
-
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 6px;
-
-    }
-
-
-    .form-group.full {
-
-        grid-column: 1 / -1;
-
-    }
-
-
-    .form-group label {
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        color: var(--text);
-
-    }
-
-
-    .form-group input,
-
-    .form-group select {
-
-        width: 100%;
-
-        min-height: 45px;
-
-        border:
-            1px solid
-            var(--border);
-
-        border-radius: 10px;
-
-        padding: 10px 12px;
-
-        font-size: 14px;
-
-        outline: none;
-
-    }
-
-
-    .form-group input:focus,
-
-    .form-group select:focus {
-
-        border-color: var(--primary);
-
-        box-shadow:
-            0 0 0 3px
-            rgba(33, 150, 243, 0.12);
-
-    }
-
-
-    .edit-modal-actions {
-
-        display: flex;
-
-        justify-content: flex-end;
-
-        gap: 10px;
-
-        margin-top: 22px;
-
-    }
-
-
-    .btn-cancel {
-
-        background: #64748b;
-
-    }
-
-
-    .btn-save {
-
-        background:
-            linear-gradient(
-                135deg,
-                #16a34a,
-                #22c55e
-            );
-
-    }
-
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 700px) {
-
-        body {
-
-            padding-bottom: 20px;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #dbe3ee;
 
         }
 
 
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e0f2fe,
+                    #f8fafc
+                );
+
+            color: var(--text);
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
         .topbar {
 
-            padding: 10px 14px;
+            width: 100%;
+
+            padding: 14px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: white;
+
+            box-shadow:
+                0 2px 12px
+                rgba(15, 23, 42, 0.08);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
 
         }
 
 
         .brand-icon {
 
-            width: 38px;
+            width: 42px;
 
-            height: 38px;
+            height: 42px;
 
-            font-size: 18px;
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color: white;
+
+            font-size: 20px;
+
+            box-shadow:
+                0 6px 16px
+                rgba(33, 150, 243, 0.25);
 
         }
 
 
         .brand-text h1 {
 
-            font-size: 16px;
+            margin: 0;
+
+            font-size: 18px;
 
         }
 
 
         .brand-text p {
 
-            font-size: 10px;
+            margin: 2px 0 0;
+
+            font-size: 12px;
+
+            color: var(--muted);
 
         }
 
 
         .home-btn {
 
-            padding: 8px 12px;
+            display: inline-flex;
 
-            font-size: 12px;
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            background: #eff6ff;
+
+            color: var(--primary-dark);
+
+            font-weight: 700;
+
+            padding: 10px 15px;
+
+            border-radius: 12px;
+
+            transition: 0.2s;
 
         }
 
 
+        .home-btn:hover {
+
+            background: var(--primary);
+
+            color: white;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
         .container {
 
-            padding: 14px;
+            width: 100%;
+
+            max-width: 1500px;
+
+            margin: auto;
+
+            padding: 20px;
+
+        }
+
+
+        .page-title {
+
+            margin-bottom: 20px;
 
         }
 
 
         .page-title h2 {
 
-            font-size: 21px;
+            margin: 0 0 5px;
+
+            font-size: 24px;
 
         }
 
 
+        .page-title p {
+
+            margin: 0;
+
+            font-size: 14px;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
         .toolbar {
 
-            display: grid;
+            display: flex;
 
-            grid-template-columns: 1fr;
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin-bottom: 18px;
+
+            flex-wrap: wrap;
 
         }
 
 
         #searchInput {
 
-            width: 100%;
+            flex: 1;
 
-            max-width: none;
+            min-width: 220px;
+
+            max-width: 450px;
+
+            min-height: 48px;
+
+            padding: 12px 15px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: white;
+
+            font-size: 14px;
+
+            outline: none;
+
+        }
+
+
+        #searchInput:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(33, 150, 243, 0.12);
+
+        }
+
+
+        button {
+
+            border: none;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            border-radius: 12px;
+
+            padding: 12px 18px;
+
+            transition: 0.2s;
+
+        }
+
+
+        button:hover {
+
+            transform: translateY(-1px);
+
+        }
+
+
+        button:disabled {
+
+            background: #cbd5e1 !important;
+
+            cursor: not-allowed;
+
+            transform: none;
 
         }
 
 
         #btnDownload {
 
-            width: 100%;
+            display: inline-block;
 
-            min-height: 48px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #16a34a,
+                    #22c55e
+                );
+
+            box-shadow:
+                0 6px 15px
+                rgba(34, 197, 94, 0.2);
 
         }
 
 
+        /* =========================
+           TABLE
+        ========================= */
+
         .table-container {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.08);
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 1400px;
+
+        }
+
+
+        th {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color: white;
+
+            padding: 14px 10px;
+
+            text-align: center;
+
+            white-space: nowrap;
+
+        }
+
+
+        td {
+
+            padding: 12px 10px;
+
+            border-bottom:
+                1px solid
+                #edf2f7;
+
+            text-align: center;
+
+            vertical-align: middle;
+
+        }
+
+
+        tbody tr {
+
+            transition: 0.2s;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: #f8fbff;
+
+        }
+
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .photo-cell {
+
+            min-width: 130px;
+
+        }
+
+
+        .vehicle-photo {
+
+            display: block;
+
+            width: 110px;
+
+            height: 80px;
+
+            margin: auto;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            border:
+                1px solid
+                var(--border);
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .vehicle-photo:hover {
+
+            transform: scale(1.06);
+
+            box-shadow:
+                0 6px 18px
+                rgba(0, 0, 0, 0.2);
+
+        }
+
+
+        .no-photo {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================
+           BADGE
+        ========================= */
+
+        .badge {
+
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: white;
+
+            min-width: 80px;
+
+        }
+
+
+        .badge-masuk {
+
+            background: #16a34a;
+
+        }
+
+
+        .badge-pulang {
+
+            background: #dc2626;
+
+        }
+
+
+        .badge-sewa {
+
+            background: #f59e0b;
+
+        }
+
+
+        .badge-out {
+
+            background: #dc2626;
+
+        }
+
+
+        .badge-default {
+
+            background: #64748b;
+
+        }
+
+
+        /* =========================
+           ACTION BUTTON
+        ========================= */
+
+        .action-area {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, auto);
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 6px;
+
+        }
+
+
+        .btn-edit {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f59e0b,
+                    #fbbf24
+                );
+
+            padding: 9px 12px;
+
+            font-size: 12px;
+
+        }
+
+
+        .btn-delete {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dc2626,
+                    #ef4444
+                );
+
+            padding: 9px 12px;
+
+            font-size: 12px;
+
+        }
+
+
+        .btn-history {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #9333ea
+                );
+
+            padding: 9px 12px;
+
+            font-size: 12px;
+
+            box-shadow:
+                0 5px 12px
+                rgba(124, 58, 237, 0.18);
+
+        }
+
+
+        /* =========================
+           MOBILE CARD
+        ========================= */
+
+        .mobile-list {
 
             display: none;
 
         }
 
 
-        .mobile-list {
+        .vehicle-card {
 
-            display: block;
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 16px;
+
+            margin-bottom: 14px;
+
+            box-shadow:
+                0 8px 24px
+                rgba(15, 23, 42, 0.08);
+
+            border:
+                1px solid
+                #eef2f7;
+
+        }
+
+
+        .vehicle-card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin-bottom: 14px;
+
+            padding-bottom: 12px;
+
+            border-bottom:
+                1px solid
+                #edf2f7;
+
+        }
+
+
+        .vehicle-number {
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            font-weight: 700;
+
+        }
+
+
+        .vehicle-name {
+
+            margin: 3px 0 0;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+        }
+
+
+        .mobile-photo {
+
+            width: 100%;
+
+            height: 180px;
+
+            object-fit: cover;
+
+            border-radius: 14px;
+
+            margin-bottom: 14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            cursor: pointer;
 
         }
 
 
         .card-grid {
 
-            grid-template-columns: 1fr 1fr;
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
 
         }
 
 
-        .form-grid {
+        .card-item {
 
-            grid-template-columns: 1fr;
+            background: #f8fafc;
 
-        }
+            padding: 10px;
 
-
-        .form-group.full {
-
-            grid-column: auto;
-
-        }
-
-
-        .edit-modal-content {
-
-            padding: 20px;
-
-        }
-
-    }
-
-
-    @media (max-width: 380px) {
-
-        .card-grid {
-
-            grid-template-columns: 1fr;
+            border-radius: 10px;
 
         }
 
 
         .card-item.full {
 
-            grid-column: auto;
+            grid-column: 1 / -1;
 
         }
 
-    }
 
-</style>
-```
+        .card-label {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            margin-bottom: 5px;
+
+            font-weight: 600;
+
+        }
+
+
+        .card-value {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: var(--text);
+
+            word-break: break-word;
+
+        }
+
+
+        .card-badge-area {
+
+            margin-top: 12px;
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+        }
+
+
+        .card-action-area {
+
+            margin-top: 15px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+        }
+
+
+        .card-action-area .btn-history {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .card-action-area button {
+
+            width: 100%;
+
+        }
+
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        #pagination {
+
+            margin: 20px 0;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .btn-prev {
+
+            background: var(--warning);
+
+        }
+
+
+        .btn-next {
+
+            background: var(--success);
+
+        }
+
+
+        .page-info {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: var(--text);
+
+            padding: 8px 12px;
+
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty-data {
+
+            padding: 35px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =========================
+           PHOTO MODAL
+        ========================= */
+
+        .photo-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, 0.9);
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+
+        .photo-modal img {
+
+            max-width: 95%;
+
+            max-height: 85vh;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 10px 40px
+                rgba(0, 0, 0, 0.5);
+
+        }
+
+
+        .close-modal {
+
+            position: absolute;
+
+            top: 18px;
+
+            right: 25px;
+
+            color: white;
+
+            font-size: 42px;
+
+            cursor: pointer;
+
+            line-height: 1;
+
+        }
+
+
+        .modal-caption {
+
+            position: absolute;
+
+            bottom: 20px;
+
+            color: white;
+
+            font-size: 14px;
+
+            text-align: center;
+
+            width: 100%;
+
+            padding: 0 20px;
+
+        }
+
+
+        /* =========================
+           EDIT MODAL
+        ========================= */
+
+        .edit-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 10000;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, 0.6);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+        }
+
+
+        .edit-modal-content {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(15, 23, 42, 0.25);
+
+            position: relative;
+
+            margin: auto;
+
+        }
+
+
+        .edit-modal-title {
+
+            margin: 0 0 20px;
+
+            font-size: 22px;
+
+        }
+
+
+        .close-edit-modal {
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 15px;
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+            color: var(--muted);
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 6px;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .form-group label {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: var(--text);
+
+        }
+
+
+        .form-group input,
+
+        .form-group select {
+
+            width: 100%;
+
+            min-height: 45px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+
+            padding: 10px 12px;
+
+            font-size: 14px;
+
+            outline: none;
+
+        }
+
+
+        .form-group input:focus,
+
+        .form-group select:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(33, 150, 243, 0.12);
+
+        }
+
+
+        .edit-modal-actions {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            margin-top: 22px;
+
+        }
+
+
+        .btn-cancel {
+
+            background: #64748b;
+
+        }
+
+
+        .btn-save {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #16a34a,
+                    #22c55e
+                );
+
+        }
+
+
+        /* =========================
+           HISTORY MODAL
+        ========================= */
+
+        .history-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 11000;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, 0.65);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 15px;
+
+            overflow-y: auto;
+
+        }
+
+
+        .history-modal-content {
+
+            width: 100%;
+
+            max-width: 950px;
+
+            max-height: 92vh;
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 22px;
+
+            position: relative;
+
+            box-shadow:
+                0 25px 70px
+                rgba(15, 23, 42, 0.3);
+
+        }
+
+
+        .history-title {
+
+            margin: 0;
+
+            padding-right: 40px;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+        }
+
+
+        .history-subtitle {
+
+            margin: 5px 0 18px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .close-history-modal {
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 13px;
+
+            font-size: 32px;
+
+            cursor: pointer;
+
+            color: var(--muted);
+
+            line-height: 1;
+
+        }
+
+
+        .history-summary {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .history-summary-item {
+
+            background: #f8fafc;
+
+            border-radius: 12px;
+
+            padding: 12px;
+
+            border:
+                1px solid
+                #edf2f7;
+
+        }
+
+
+        .history-summary-label {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .history-summary-value {
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+        }
+
+
+        .history-search {
+
+            width: 100%;
+
+            min-height: 45px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 12px;
+
+            padding: 10px 13px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .history-search:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(33, 150, 243, 0.12);
+
+        }
+
+
+        .history-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .history-card {
+
+            border:
+                1px solid
+                #e2e8f0;
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            background: white;
+
+            box-shadow:
+                0 5px 15px
+                rgba(15, 23, 42, 0.05);
+
+        }
+
+
+        .history-card-header {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding-bottom: 11px;
+
+            margin-bottom: 11px;
+
+            border-bottom:
+                1px solid
+                #edf2f7;
+
+        }
+
+
+        .history-customer-name {
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .history-customer-id {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+        }
+
+
+        .history-transaction {
+
+            background: #f3e8ff;
+
+            color: #6b21a8;
+
+            padding: 6px 9px;
+
+            border-radius: 9px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            word-break: break-all;
+
+            text-align: right;
+
+        }
+
+
+        .history-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 9px;
+
+        }
+
+
+        .history-item {
+
+            background: #f8fafc;
+
+            padding: 10px;
+
+            border-radius: 10px;
+
+        }
+
+
+        .history-item.full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .history-label {
+
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            margin-bottom: 4px;
+
+            font-weight: 600;
+
+        }
+
+
+        .history-value {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            word-break: break-word;
+
+        }
+
+
+        .history-loading {
+
+            padding: 35px 15px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+        }
+
+
+        .history-empty {
+
+            padding: 35px 15px;
+
+            text-align: center;
+
+            background: #f8fafc;
+
+            border-radius: 14px;
+
+            color: var(--muted);
+
+        }
+
+
+        .history-error {
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            background: #fef2f2;
+
+            color: #b91c1c;
+
+            font-size: 13px;
+
+        }
+
+
+        .history-guarantee {
+
+            color: #0369a1;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            body {
+
+                padding-bottom: 20px;
+
+            }
+
+
+            .topbar {
+
+                padding: 10px 14px;
+
+            }
+
+
+            .brand-icon {
+
+                width: 38px;
+
+                height: 38px;
+
+                font-size: 18px;
+
+            }
+
+
+            .brand-text h1 {
+
+                font-size: 16px;
+
+            }
+
+
+            .brand-text p {
+
+                font-size: 10px;
+
+            }
+
+
+            .home-btn {
+
+                padding: 8px 12px;
+
+                font-size: 12px;
+
+            }
+
+
+            .container {
+
+                padding: 14px;
+
+            }
+
+
+            .page-title h2 {
+
+                font-size: 21px;
+
+            }
+
+
+            .toolbar {
+
+                display: grid;
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            #searchInput {
+
+                width: 100%;
+
+                max-width: none;
+
+            }
+
+
+            #btnDownload {
+
+                width: 100%;
+
+                min-height: 48px;
+
+            }
+
+
+            .table-container {
+
+                display: none;
+
+            }
+
+
+            .mobile-list {
+
+                display: block;
+
+            }
+
+
+            .card-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .edit-modal-content {
+
+                padding: 20px;
+
+            }
+
+
+            /* HISTORY MOBILE */
+
+            .history-modal {
+
+                padding: 8px;
+
+                align-items: flex-start;
+
+            }
+
+
+            .history-modal-content {
+
+                max-height: 96vh;
+
+                margin-top: 5px;
+
+                border-radius: 18px;
+
+                padding: 17px;
+
+            }
+
+
+            .history-title {
+
+                font-size: 19px;
+
+            }
+
+
+            .history-subtitle {
+
+                font-size: 12px;
+
+                margin-bottom: 13px;
+
+            }
+
+
+            .history-summary {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+                gap: 6px;
+
+            }
+
+
+            .history-summary-item {
+
+                padding: 9px 7px;
+
+            }
+
+
+            .history-summary-label {
+
+                font-size: 9px;
+
+            }
+
+
+            .history-summary-value {
+
+                font-size: 14px;
+
+            }
+
+
+            .history-card {
+
+                padding: 12px;
+
+                border-radius: 14px;
+
+            }
+
+
+            .history-card-header {
+
+                flex-direction: column;
+
+                gap: 7px;
+
+            }
+
+
+            .history-customer-name {
+
+                font-size: 16px;
+
+            }
+
+
+            .history-transaction {
+
+                text-align: left;
+
+                width: 100%;
+
+            }
+
+
+            .history-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap: 7px;
+
+            }
+
+
+            .history-item {
+
+                padding: 9px;
+
+            }
+
+
+            .history-item.full {
+
+                grid-column: 1 / -1;
+
+            }
+
+
+            .history-value {
+
+                font-size: 11px;
+
+            }
+
+
+            .close-history-modal {
+
+                right: 15px;
+
+                top: 12px;
+
+                font-size: 28px;
+
+            }
+
+        }
+
+
+        @media (max-width: 380px) {
+
+            .card-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .card-item.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .history-summary {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+
+            .history-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .history-item.full {
+
+                grid-column: auto;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-```
+
 <!-- =========================
      HEADER
 ========================= -->
@@ -1285,9 +1861,7 @@
     <div class="brand">
 
         <div class="brand-icon">
-
             🚐
-
         </div>
 
 
@@ -1310,9 +1884,7 @@
         href="index.html"
         class="home-btn"
     >
-
         🏠 Home
-
     </a>
 
 </div>
@@ -1344,7 +1916,6 @@
 
     <div class="toolbar">
 
-
         <input
             type="text"
             id="searchInput"
@@ -1356,11 +1927,8 @@
             id="btnDownload"
             onclick="downloadExcel()"
         >
-
             📥 Download Excel
-
         </button>
-
 
     </div>
 
@@ -1411,9 +1979,7 @@
                         colspan="10"
                         class="empty-data"
                     >
-
                         Memuat data kendaraan...
-
                     </td>
 
                 </tr>
@@ -1434,9 +2000,7 @@
         id="mobileList"
         class="mobile-list"
     >
-
         Memuat data kendaraan...
-
     </div>
 
 
@@ -1463,9 +2027,7 @@
         class="close-modal"
         onclick="closePhoto()"
     >
-
         &times;
-
     </span>
 
 
@@ -1479,8 +2041,7 @@
     <div
         id="modalCaption"
         class="modal-caption"
-    >
-    </div>
+    ></div>
 
 </div>
 
@@ -1502,16 +2063,12 @@
             class="close-edit-modal"
             onclick="closeEditModal()"
         >
-
             &times;
-
         </span>
 
 
         <h2 class="edit-modal-title">
-
             ✏️ Edit Data Kendaraan
-
         </h2>
 
 
@@ -1653,9 +2210,7 @@
                     class="btn-cancel"
                     onclick="closeEditModal()"
                 >
-
                     Batal
-
                 </button>
 
 
@@ -1663,9 +2218,7 @@
                     type="submit"
                     class="btn-save"
                 >
-
                     💾 Simpan Perubahan
-
                 </button>
 
 
@@ -1673,6 +2226,128 @@
 
 
         </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     HISTORY MODAL
+========================= -->
+
+<div
+    id="historyModal"
+    class="history-modal"
+>
+
+    <div class="history-modal-content">
+
+
+        <span
+            class="close-history-modal"
+            onclick="closeHistoryModal()"
+        >
+            &times;
+        </span>
+
+
+        <h2
+            id="historyTitle"
+            class="history-title"
+        >
+            📜 Histori Penyewaan
+        </h2>
+
+
+        <p
+            id="historySubtitle"
+            class="history-subtitle"
+        >
+            Histori customer yang pernah menyewa kendaraan
+        </p>
+
+
+        <!-- SUMMARY -->
+
+        <div class="history-summary">
+
+
+            <div class="history-summary-item">
+
+                <span class="history-summary-label">
+                    Plat Nomor
+                </span>
+
+                <div
+                    id="historyPlat"
+                    class="history-summary-value"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="history-summary-item">
+
+                <span class="history-summary-label">
+                    Jumlah Rental
+                </span>
+
+                <div
+                    id="historyCount"
+                    class="history-summary-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="history-summary-item">
+
+                <span class="history-summary-label">
+                    Customer
+                </span>
+
+                <div
+                    id="historyCustomerCount"
+                    class="history-summary-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- SEARCH HISTORY -->
+
+        <input
+            type="text"
+            id="historySearch"
+            class="history-search"
+            placeholder="🔍 Cari customer, NIK, transaksi atau tanggal..."
+        >
+
+
+        <!-- HISTORY LIST -->
+
+        <div
+            id="historyList"
+            class="history-list"
+        >
+
+            <div class="history-loading">
+                Memuat histori...
+            </div>
+
+        </div>
+
 
     </div>
 
@@ -1698,7 +2373,6 @@
     }
 
     from
-
     "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 
@@ -1713,7 +2387,6 @@
     }
 
     from
-
     "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
@@ -1777,6 +2450,15 @@
     let currentPage = 1;
 
     const rowsPerPage = 10;
+
+
+    /* =========================
+       HISTORY VARIABLES
+    ========================= */
+
+    let currentHistoryData = [];
+
+    let currentHistoryPlat = "";
 
 
 
@@ -1875,11 +2557,8 @@
             "searchInput"
         )
         .addEventListener(
-
             "input",
-
             applySearch
-
         );
 
 
@@ -1932,12 +2611,6 @@
             }
 
 
-            /*
-                PENTING:
-                Object.entries digunakan agar Firebase key
-                tetap tersimpan pada setiap kendaraan.
-            */
-
             allData =
                 Object.entries(
                     data
@@ -1949,7 +2622,6 @@
                     ) => ({
 
                         firebaseKey:
-
                             firebaseKey,
 
                         ...item
@@ -2021,9 +2693,7 @@
             `
             <div class="vehicle-card">
 
-                <div
-                    class="empty-data"
-                >
+                <div class="empty-data">
 
                     ${escapeHtml(message)}
 
@@ -2114,7 +2784,7 @@
 
 
         return String(
-            value || ""
+            value ?? ""
         )
 
         .replace(
@@ -2141,6 +2811,61 @@
             /'/g,
             "&#039;"
         );
+
+    }
+
+
+
+    /* =========================
+       GET FIELD HELPER
+    ========================= */
+
+    function getField(
+        item,
+        fields,
+        defaultValue = "-"
+    ) {
+
+
+        if (
+            !item
+        ) {
+
+            return defaultValue;
+
+        }
+
+
+        for (
+            const field of fields
+        ) {
+
+
+            if (
+
+                item[field] !==
+                undefined
+
+                &&
+
+                item[field] !==
+                null
+
+                &&
+
+                item[field] !==
+                ""
+
+            ) {
+
+                return item[field];
+
+            }
+
+        }
+
+
+        return defaultValue;
 
     }
 
@@ -2274,24 +2999,16 @@
 
                 let photoHtml =
                     `
-                    <span
-                        class="no-photo"
-                    >
-
+                    <span class="no-photo">
                         Tidak ada foto
-
                     </span>
                     `;
 
 
                 let mobilePhotoHtml =
                     `
-                    <div
-                        class="no-photo"
-                    >
-
+                    <div class="no-photo">
                         Tidak ada foto kendaraan
-
                     </div>
                     `;
 
@@ -2317,19 +3034,12 @@
                     photoHtml =
                         `
                         <img
-
                             src="${safeUrl}"
-
                             alt="Foto ${escapeHtml(nama)}"
-
                             class="vehicle-photo"
-
                             data-url="${safeUrl}"
-
                             onclick="openPhotoFromElement(this)"
-
                             onerror="photoError(this)"
-
                         >
                         `;
 
@@ -2337,19 +3047,12 @@
                     mobilePhotoHtml =
                         `
                         <img
-
                             src="${safeUrl}"
-
                             alt="Foto ${escapeHtml(nama)}"
-
                             class="mobile-photo"
-
                             data-url="${safeUrl}"
-
                             onclick="openPhotoFromElement(this)"
-
                             onerror="photoError(this)"
-
                         >
                         `;
 
@@ -2366,39 +3069,30 @@
 
                     <tr>
 
-
                         <td>
-
                             ${no}
-
                         </td>
 
 
                         <td>
-
-                            ${escapeHtml(plat)}
-
+                            <strong>
+                                ${escapeHtml(plat)}
+                            </strong>
                         </td>
 
 
                         <td>
-
                             ${escapeHtml(nama)}
-
                         </td>
 
 
                         <td>
-
                             ${escapeHtml(stnk)}
-
                         </td>
 
 
                         <td>
-
                             ${escapeHtml(bpkb)}
-
                         </td>
 
 
@@ -2407,9 +3101,7 @@
                             <span
                                 class="badge ${statusClass}"
                             >
-
                                 ${escapeHtml(status)}
-
                             </span>
 
                         </td>
@@ -2420,54 +3112,50 @@
                             <span
                                 class="badge ${keteranganClass}"
                             >
-
                                 ${escapeHtml(keterangan)}
-
                             </span>
 
                         </td>
 
 
                         <td>
-
                             ${formatRupiah(value)}
-
                         </td>
 
 
-                        <td
-                            class="photo-cell"
-                        >
-
+                        <td class="photo-cell">
                             ${photoHtml}
-
                         </td>
 
 
                         <td>
 
-                            <div
-                                class="action-area"
-                            >
+                            <div class="action-area">
+
+
+                                <button
+                                    class="btn-history"
+                                    onclick="showHistory('${escapeJs(firebaseKey)}', '${escapeJs(plat)}', '${escapeJs(nama)}')"
+                                >
+                                    📜 Histori
+                                </button>
+
 
                                 <button
                                     class="btn-edit"
-                                    onclick="editVehicle('${firebaseKey}')"
+                                    onclick="editVehicle('${escapeJs(firebaseKey)}')"
                                 >
-
                                     ✏️ Edit
-
                                 </button>
 
 
                                 <button
                                     class="btn-delete"
-                                    onclick="deleteVehicle('${firebaseKey}', '${escapeHtml(plat)}')"
+                                    onclick="deleteVehicle('${escapeJs(firebaseKey)}', '${escapeJs(plat)}')"
                                 >
-
                                     🗑️ Hapus
-
                                 </button>
+
 
                             </div>
 
@@ -2487,36 +3175,26 @@
                 mobileHtml +=
                     `
 
-                    <div
-                        class="vehicle-card"
-                    >
+                    <div class="vehicle-card">
 
 
-                        <div
-                            class="vehicle-card-header"
-                        >
+                        <div class="vehicle-card-header">
 
 
                             <div>
 
-
-                                <div
-                                    class="vehicle-number"
-                                >
+                                <div class="vehicle-number">
 
                                     UNIT #${no}
 
                                 </div>
 
 
-                                <div
-                                    class="vehicle-name"
-                                >
+                                <div class="vehicle-name">
 
                                     ${escapeHtml(nama)}
 
                                 </div>
-
 
                             </div>
 
@@ -2538,84 +3216,55 @@
                         ${mobilePhotoHtml}
 
 
-                        <div
-                            class="card-grid"
-                        >
+                        <div class="card-grid">
 
 
-                            <div
-                                class="card-item"
-                            >
+                            <div class="card-item">
 
-                                <span
-                                    class="card-label"
-                                >
-
+                                <span class="card-label">
                                     Pajak STNK
-
                                 </span>
 
 
-                                <div
-                                    class="card-value"
-                                >
+                                <div class="card-value">
 
                                     ${escapeHtml(stnk)}
 
                                 </div>
 
-
                             </div>
 
 
 
-                            <div
-                                class="card-item"
-                            >
+                            <div class="card-item">
 
-                                <span
-                                    class="card-label"
-                                >
-
+                                <span class="card-label">
                                     BPKB
-
                                 </span>
 
 
-                                <div
-                                    class="card-value"
-                                >
+                                <div class="card-value">
 
                                     ${escapeHtml(bpkb)}
 
                                 </div>
 
-
                             </div>
 
 
 
-                            <div
-                                class="card-item full"
-                            >
+                            <div class="card-item full">
 
-                                <span
-                                    class="card-label"
-                                >
-
+                                <span class="card-label">
                                     Value Kendaraan
-
                                 </span>
 
 
-                                <div
-                                    class="card-value"
-                                >
+                                <div class="card-value">
 
                                     ${formatRupiah(value)}
 
                                 </div>
-
 
                             </div>
 
@@ -2624,9 +3273,7 @@
 
 
 
-                        <div
-                            class="card-badge-area"
-                        >
+                        <div class="card-badge-area">
 
 
                             <span
@@ -2651,28 +3298,32 @@
 
 
 
-                        <div
-                            class="card-action-area"
-                        >
+                        <div class="card-action-area">
+
+
+                            <button
+                                class="btn-history"
+                                onclick="showHistory('${escapeJs(firebaseKey)}', '${escapeJs(plat)}', '${escapeJs(nama)}')"
+                            >
+                                📜 Lihat Histori Penyewaan
+                            </button>
+
 
                             <button
                                 class="btn-edit"
-                                onclick="editVehicle('${firebaseKey}')"
+                                onclick="editVehicle('${escapeJs(firebaseKey)}')"
                             >
-
                                 ✏️ Edit
-
                             </button>
 
 
                             <button
                                 class="btn-delete"
-                                onclick="deleteVehicle('${firebaseKey}', '${escapeHtml(plat)}')"
+                                onclick="deleteVehicle('${escapeJs(firebaseKey)}', '${escapeJs(plat)}')"
                             >
-
                                 🗑️ Hapus
-
                             </button>
+
 
                         </div>
 
@@ -2706,6 +3357,42 @@
 
 
         renderPagination();
+
+    }
+
+
+
+    /* =========================
+       ESCAPE JAVASCRIPT
+    ========================= */
+
+    function escapeJs(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /\r/g,
+            "\\r"
+        )
+        .replace(
+            /\n/g,
+            "\\n"
+        );
 
     }
 
@@ -2896,8 +3583,7 @@
 
 
                 const button =
-                    event
-                    .submitter;
+                    event.submitter;
 
 
                 const originalText =
@@ -3143,12 +3829,8 @@
 
             image.outerHTML =
                 `
-                <span
-                    class="no-photo"
-                >
-
+                <span class="no-photo">
                     Foto gagal dimuat
-
                 </span>
                 `;
 
@@ -3489,6 +4171,1193 @@
 
 
 
+    /* =====================================================
+       HISTORY
+       SUMBER:
+       histori/{PLAT NOMOR}/{ID TRANSAKSI}
+       ===================================================== */
+
+    window.showHistory =
+        function (
+            firebaseKey,
+            plat,
+            nama
+        ) {
+
+
+            currentHistoryPlat =
+                plat;
+
+
+            currentHistoryData =
+                [];
+
+
+            document
+                .getElementById(
+                    "historyModal"
+                )
+                .style.display =
+                "flex";
+
+
+            document
+                .getElementById(
+                    "historyPlat"
+                )
+                .textContent =
+                plat;
+
+
+            document
+                .getElementById(
+                    "historyTitle"
+                )
+                .textContent =
+                "📜 Histori Penyewaan";
+
+
+            document
+                .getElementById(
+                    "historySubtitle"
+                )
+                .textContent =
+                nama +
+                " • Customer yang pernah menyewa unit ini";
+
+
+            document
+                .getElementById(
+                    "historyCount"
+                )
+                .textContent =
+                "0";
+
+
+            document
+                .getElementById(
+                    "historyCustomerCount"
+                )
+                .textContent =
+                "0";
+
+
+            document
+                .getElementById(
+                    "historySearch"
+                )
+                .value =
+                "";
+
+
+            document
+                .getElementById(
+                    "historyList"
+                )
+                .innerHTML =
+                `
+                <div class="history-loading">
+
+                    ⏳ Memuat histori penyewaan...
+
+                </div>
+                `;
+
+
+            /*
+                Mengambil:
+                histori/{plat}
+            */
+
+            const historyRef =
+                ref(
+                    db,
+                    "histori/" + plat
+                );
+
+
+            onValue(
+
+                historyRef,
+
+                (
+                    snapshot
+                ) => {
+
+
+                    if (
+                        currentHistoryPlat !==
+                        plat
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const data =
+                        snapshot.val();
+
+
+                    console.log(
+                        "Histori kendaraan:",
+                        plat,
+                        data
+                    );
+
+
+                    if (
+                        !data
+                    ) {
+
+
+                        currentHistoryData =
+                            [];
+
+
+                        updateHistorySummary();
+
+
+                        renderHistory();
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                        Struktur normal:
+
+                        histori/
+                          AB 1256 SV/
+                            RENT_123/
+                              customer: ...
+                              idcustomer: ...
+                              namaUnit: ...
+                              plat: ...
+                              tanggalsewa: ...
+                              ...
+                    */
+
+
+                    currentHistoryData =
+                        Object.entries(
+                            data
+                        )
+                        .map(
+
+                            (
+                                [
+                                    historyKey,
+                                    historyItem
+                                ]
+                            ) => ({
+
+                                historyKey:
+                                    historyKey,
+
+                                ...(historyItem || {})
+
+                            })
+
+                        )
+                        .sort(
+                            sortHistory
+                        );
+
+
+                    updateHistorySummary();
+
+
+                    renderHistory();
+
+                },
+
+
+                (
+                    error
+                ) => {
+
+
+                    console.error(
+                        "Gagal mengambil histori:",
+                        error
+                    );
+
+
+                    document
+                        .getElementById(
+                            "historyList"
+                        )
+                        .innerHTML =
+                        `
+                        <div class="history-error">
+
+                            ❌ Gagal mengambil histori kendaraan.
+
+                            <br><br>
+
+                            ${escapeHtml(
+                                error.message
+                            )}
+
+                        </div>
+                        `;
+
+                }
+
+            );
+
+        };
+
+
+
+    /* =========================
+       SORT HISTORY
+    ========================= */
+
+    function sortHistory(
+        a,
+        b
+    ) {
+
+
+        const dateA =
+            getField(
+                a,
+                [
+                    "tanggalsewa",
+                    "tanggalSewa",
+                    "tanggal",
+                    "createdAt"
+                ],
+                ""
+            );
+
+
+        const dateB =
+            getField(
+                b,
+                [
+                    "tanggalsewa",
+                    "tanggalSewa",
+                    "tanggal",
+                    "createdAt"
+                ],
+                ""
+            );
+
+
+        const timeA =
+            Date.parse(
+                dateA
+            );
+
+
+        const timeB =
+            Date.parse(
+                dateB
+            );
+
+
+        if (
+
+            !isNaN(timeA)
+
+            &&
+
+            !isNaN(timeB)
+
+        ) {
+
+            return timeB - timeA;
+
+        }
+
+
+        return String(
+            dateB
+        ).localeCompare(
+            String(dateA)
+        );
+
+    }
+
+
+
+    /* =========================
+       HISTORY SUMMARY
+    ========================= */
+
+    function updateHistorySummary() {
+
+
+        const total =
+            currentHistoryData.length;
+
+
+        const customerSet =
+            new Set();
+
+
+        currentHistoryData.forEach(
+
+            item => {
+
+
+                const customer =
+                    getField(
+                        item,
+                        [
+                            "idcustomer",
+                            "idCustomer",
+                            "customerId",
+                            "nik",
+                            "NIK",
+                            "customer"
+                        ],
+                        ""
+                    );
+
+
+                if (
+                    customer
+                ) {
+
+                    customerSet.add(
+                        String(
+                            customer
+                        )
+                        .toLowerCase()
+                        .trim()
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        document
+            .getElementById(
+                "historyCount"
+            )
+            .textContent =
+            total;
+
+
+        document
+            .getElementById(
+                "historyCustomerCount"
+            )
+            .textContent =
+            customerSet.size;
+
+    }
+
+
+
+    /* =========================
+       RENDER HISTORY
+    ========================= */
+
+    function renderHistory() {
+
+
+        const keyword =
+            document
+            .getElementById(
+                "historySearch"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+        const filteredHistory =
+            currentHistoryData.filter(
+
+                item => {
+
+
+                    if (
+                        !keyword
+                    ) {
+
+                        return true;
+
+                    }
+
+
+                    const searchable =
+                        [
+
+                            getField(
+                                item,
+                                [
+                                    "customer",
+                                    "namaCustomer",
+                                    "nama_customer"
+                                ],
+                                ""
+                            ),
+
+                            getField(
+                                item,
+                                [
+                                    "idcustomer",
+                                    "idCustomer",
+                                    "customerId",
+                                    "nik",
+                                    "NIK"
+                                ],
+                                ""
+                            ),
+
+                            getField(
+                                item,
+                                [
+                                    "idTransaksi",
+                                    "idtransaksi",
+                                    "transactionId"
+                                ],
+                                ""
+                            ),
+
+                            getField(
+                                item,
+                                [
+                                    "tanggalsewa",
+                                    "tanggalSewa",
+                                    "tanggal"
+                                ],
+                                ""
+                            ),
+
+                            getField(
+                                item,
+                                [
+                                    "estimasiTanggalSelesai",
+                                    "selesaisewa",
+                                    "tanggalSelesai"
+                                ],
+                                ""
+                            ),
+
+                            getField(
+                                item,
+                                [
+                                    "rentaltype",
+                                    "rentalType",
+                                    "jenisRental"
+                                ],
+                                ""
+                            )
+
+                        ]
+                        .join(" ")
+                        .toLowerCase();
+
+
+                    return searchable.includes(
+                        keyword
+                    );
+
+                }
+
+            );
+
+
+        if (
+            filteredHistory.length === 0
+        ) {
+
+
+            document
+                .getElementById(
+                    "historyList"
+                )
+                .innerHTML =
+                `
+                <div class="history-empty">
+
+                    ${
+                        currentHistoryData.length === 0
+                        ?
+                        "📭 Belum ada histori penyewaan untuk kendaraan ini."
+                        :
+                        "🔍 Histori yang dicari tidak ditemukan."
+                    }
+
+                </div>
+                `;
+
+
+            return;
+
+        }
+
+
+        let html = "";
+
+
+        filteredHistory.forEach(
+
+            item => {
+
+
+                const transaction =
+                    getField(
+                        item,
+                        [
+                            "idTransaksi",
+                            "idtransaksi",
+                            "transactionId"
+                        ],
+                        item.historyKey || "-"
+                    );
+
+
+                const customer =
+                    getField(
+                        item,
+                        [
+                            "customer",
+                            "namaCustomer",
+                            "nama_customer",
+                            "nama"
+                        ],
+                        "-"
+                    );
+
+
+                const idCustomer =
+                    getField(
+                        item,
+                        [
+                            "idcustomer",
+                            "idCustomer",
+                            "customerId",
+                            "nik",
+                            "NIK"
+                        ],
+                        "-"
+                    );
+
+
+                const namaUnit =
+                    getField(
+                        item,
+                        [
+                            "namaUnit",
+                            "unit",
+                            "namaKendaraan"
+                        ],
+                        currentHistoryPlat
+                    );
+
+
+                const plat =
+                    getField(
+                        item,
+                        [
+                            "plat",
+                            "platNomor",
+                            "nopol"
+                        ],
+                        currentHistoryPlat
+                    );
+
+
+                const rentalType =
+                    getField(
+                        item,
+                        [
+                            "rentaltype",
+                            "rentalType",
+                            "jenisRental"
+                        ],
+                        "-"
+                    );
+
+
+                const tanggalSewa =
+                    getField(
+                        item,
+                        [
+                            "tanggalsewa",
+                            "tanggalSewa",
+                            "tanggal"
+                        ],
+                        "-"
+                    );
+
+
+                const tanggalSelesai =
+                    getField(
+                        item,
+                        [
+                            "estimasiTanggalSelesai",
+                            "selesaisewa",
+                            "tanggalSelesai"
+                        ],
+                        "-"
+                    );
+
+
+                const jumlahHari =
+                    getField(
+                        item,
+                        [
+                            "jumlahHari",
+                            "durasi",
+                            "jumlahHariSelesai"
+                        ],
+                        "-"
+                    );
+
+
+                const harga =
+                    getField(
+                        item,
+                        [
+                            "harga",
+                            "hargaSewa"
+                        ],
+                        ""
+                    );
+
+
+                const biayaSewa =
+                    getField(
+                        item,
+                        [
+                            "biayaSewa",
+                            "total",
+                            "totalBiaya"
+                        ],
+                        ""
+                    );
+
+
+                const bayar =
+                    getField(
+                        item,
+                        [
+                            "bayar",
+                            "dibayar",
+                            "payment"
+                        ],
+                        ""
+                    );
+
+
+                const omset =
+                    getField(
+                        item,
+                        [
+                            "omset",
+                            "total"
+                        ],
+                        ""
+                    );
+
+
+                const sisa =
+                    getField(
+                        item,
+                        [
+                            "sisa",
+                            "sisaPembayaran",
+                            "kekuranganBayar"
+                        ],
+                        ""
+                    );
+
+
+                const jaminan =
+                    getField(
+                        item,
+                        [
+                            "jaminan",
+                            "guarantee"
+                        ],
+                        "-"
+                    );
+
+
+                const alamatKtp =
+                    getField(
+                        item,
+                        [
+                            "alamatktp",
+                            "alamatKtp",
+                            "alamat"
+                        ],
+                        "-"
+                    );
+
+
+                const user =
+                    getField(
+                        item,
+                        [
+                            "username",
+                            "user",
+                            "userName",
+                            "namaUser",
+                            "createdBy",
+                            "updatedBy",
+                            "operator",
+                            "petugas",
+                            "admin",
+                            "oleh"
+                        ],
+                        "-"
+                    );
+
+
+                html +=
+                    `
+
+                    <div class="history-card">
+
+
+                        <div class="history-card-header">
+
+
+                            <div>
+
+
+                                <div class="history-customer-name">
+
+                                    👤 ${escapeHtml(customer)}
+
+                                </div>
+
+
+                                <div class="history-customer-id">
+
+                                    ID/NIK:
+                                    ${escapeHtml(idCustomer)}
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="history-transaction">
+
+                                ${escapeHtml(transaction)}
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="history-grid">
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Tanggal Sewa
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        formatDateDisplay(
+                                            tanggalSewa
+                                        )
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Tanggal Selesai
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        formatDateDisplay(
+                                            tanggalSelesai
+                                        )
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Durasi
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        jumlahHari
+                                    )}
+                                    ${
+                                        jumlahHari !== "-"
+                                        ?
+                                        " hari"
+                                        :
+                                        ""
+                                    }
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Jenis Rental
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        rentalType
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Harga Sewa
+                                </span>
+
+                                <div class="history-value">
+                                    ${formatRupiah(
+                                        harga
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Biaya Sewa
+                                </span>
+
+                                <div class="history-value">
+                                    ${formatRupiah(
+                                        biayaSewa
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Sudah Dibayar
+                                </span>
+
+                                <div class="history-value">
+                                    ${formatRupiah(
+                                        bayar
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Omset
+                                </span>
+
+                                <div class="history-value">
+                                    ${formatRupiah(
+                                        omset
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Sisa Pembayaran
+                                </span>
+
+                                <div class="history-value">
+                                    ${formatRupiah(
+                                        sisa
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Jaminan
+                                </span>
+
+                                <div class="history-value history-guarantee">
+                                    ${escapeHtml(
+                                        jaminan
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Petugas
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        user
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item">
+
+                                <span class="history-label">
+                                    Plat Nomor
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        plat
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item full">
+
+                                <span class="history-label">
+                                    Nama Kendaraan
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        namaUnit
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-item full">
+
+                                <span class="history-label">
+                                    Alamat KTP
+                                </span>
+
+                                <div class="history-value">
+                                    ${escapeHtml(
+                                        alamatKtp
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                    `;
+
+            }
+
+        );
+
+
+        document
+            .getElementById(
+                "historyList"
+            )
+            .innerHTML =
+            html;
+
+    }
+
+
+
+    /* =========================
+       HISTORY SEARCH
+    ========================= */
+
+    document
+        .getElementById(
+            "historySearch"
+        )
+        .addEventListener(
+
+            "input",
+
+            function () {
+
+                renderHistory();
+
+            }
+
+        );
+
+
+
+    /* =========================
+       CLOSE HISTORY MODAL
+    ========================= */
+
+    window.closeHistoryModal =
+        function () {
+
+
+            currentHistoryPlat =
+                "";
+
+
+            currentHistoryData =
+                [];
+
+
+            document
+                .getElementById(
+                    "historyModal"
+                )
+                .style.display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "historyList"
+                )
+                .innerHTML =
+                "";
+
+
+        };
+
+
+
+    /* =========================
+       CLOSE OUTSIDE HISTORY
+    ========================= */
+
+    document
+        .getElementById(
+            "historyModal"
+        )
+        .addEventListener(
+
+            "click",
+
+            function (
+                event
+            ) {
+
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeHistoryModal();
+
+                }
+
+            }
+
+        );
+
+
+
+    /* =========================
+       FORMAT DATE
+    ========================= */
+
+    function formatDateDisplay(
+        value
+    ) {
+
+
+        if (
+            !value
+        ) {
+
+            return "-";
+
+        }
+
+
+        const stringValue =
+            String(
+                value
+            );
+
+
+        /*
+            Jika format YYYY-MM-DD
+        */
+
+        const match =
+            stringValue.match(
+                /^(\d{4})-(\d{2})-(\d{2})$/
+            );
+
+
+        if (
+            match
+        ) {
+
+
+            return (
+
+                match[3]
+                +
+                "-"
+                +
+                match[2]
+                +
+                "-"
+                +
+                match[1]
+
+            );
+
+        }
+
+
+        return stringValue;
+
+    }
+
+
+
     /* =========================
        OPEN PHOTO
     ========================= */
@@ -3584,7 +5453,7 @@
 
 
     /* =========================
-       CLOSE CLICK OUTSIDE PHOTO
+       CLOSE OUTSIDE PHOTO
     ========================= */
 
     document
@@ -3601,8 +5470,7 @@
 
 
                 if (
-                    event.target ===
-                    this
+                    event.target === this
                 ) {
 
                     closePhoto();
@@ -3616,7 +5484,7 @@
 
 
     /* =========================
-       CLOSE CLICK OUTSIDE EDIT
+       CLOSE OUTSIDE EDIT
     ========================= */
 
     document
@@ -3633,8 +5501,7 @@
 
 
                 if (
-                    event.target ===
-                    this
+                    event.target === this
                 ) {
 
                     closeEditModal();
@@ -3661,14 +5528,15 @@
 
 
             if (
-                event.key ===
-                "Escape"
+                event.key === "Escape"
             ) {
 
 
                 closePhoto();
 
                 closeEditModal();
+
+                closeHistoryModal();
 
             }
 
@@ -3766,41 +5634,51 @@
 
             worksheet["!cols"] = [
 
+
                 {
                     wch: 8
                 },
 
+
                 {
                     wch: 18
                 },
+
 
                 {
                     wch: 25
                 },
 
-                {
-                    wch: 18
-                },
 
                 {
                     wch: 18
                 },
 
-                {
-                    wch: 18
-                },
 
                 {
                     wch: 18
                 },
+
+
+                {
+                    wch: 18
+                },
+
+
+                {
+                    wch: 18
+                },
+
 
                 {
                     wch: 20
                 },
 
+
                 {
                     wch: 50
                 }
+
 
             ];
 
@@ -3834,7 +5712,7 @@
 
 
 </script>
-```
+
 
 </body>
 
