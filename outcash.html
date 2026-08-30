@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<title>ARC TRANS - Form Pengeluaran</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+:root {
+    --primary: #1976d2;
+    --primary-dark: #125ca8;
+    --danger: #dc2626;
+    --success: #16a34a;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #dbe3ee;
+    --bg: #f4f7fb;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e3f2fd,
+            #f8fafc
+        );
+
+    color: var(--text);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.topbar {
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    padding: 13px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 3px 15px
+        rgba(15, 23, 42, 0.08);
+}
+
+.brand {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-icon {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1976d2,
+            #42a5f5
+        );
+
+    color: white;
+
+    font-size: 21px;
+}
+
+.brand-title {
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.brand-subtitle {
+
+    margin-top: 2px;
+
+    font-size: 11px;
+
+    color: var(--muted);
+}
+
+.home-btn {
+
+    text-decoration: none;
+
+    padding: 10px 15px;
+
+    border-radius: 11px;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.home-btn:hover {
+
+    background: var(--primary);
+    color: white;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+
+    width: 100%;
+    max-width: 820px;
+
+    margin: auto;
+
+    padding: 30px 20px;
+}
+
+.page-title {
+
+    margin-bottom: 20px;
+}
+
+.page-title h1 {
+
+    margin: 0 0 6px;
+
+    font-size: 26px;
+}
+
+.page-title p {
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(15, 23, 42, 0.10);
+}
+
+.grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.field {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.full {
+
+    grid-column: 1 / -1;
+}
+
+label {
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    padding: 12px 14px;
+
+    min-height: 48px;
+
+    background: white;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s;
+}
+
+textarea {
+
+    min-height: 105px;
+
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(25, 118, 210, 0.10);
+}
+
+/* =========================
+   VEHICLE
+========================= */
+
+.vehicle-box {
+
+    display: none;
+
+    grid-column: 1 / -1;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        #bfdbfe;
+
+    background: #f8fbff;
+
+    border-radius: 16px;
+}
+
+.vehicle-box.active {
+
+    display: block;
+}
+
+.search-container {
+
+    position: relative;
+}
+
+.search-icon {
+
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+#searchPlat {
+
+    padding-left: 42px;
+}
+
+.vehicle-dropdown {
+
+    position: absolute;
+
+    top: calc(100% + 5px);
+
+    left: 0;
+    right: 0;
+
+    max-height: 280px;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(15, 23, 42, 0.15);
+
+    z-index: 500;
+
+    display: none;
+}
+
+.vehicle-dropdown.active {
+
+    display: block;
+}
+
+.vehicle-item {
+
+    padding: 12px 14px;
+
+    border-bottom:
+        1px solid
+        #eef2f7;
+
+    cursor: pointer;
+}
+
+.vehicle-item:last-child {
+
+    border-bottom: none;
+}
+
+.vehicle-item:hover {
+
+    background: #eff6ff;
+}
+
+.vehicle-plat {
+
+    font-weight: 800;
+
+    font-size: 14px;
+}
+
+.vehicle-detail {
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    color: var(--muted);
+}
+
+/* =========================
+   SELECTED INFO
+========================= */
+
+.selected-info {
+
+    display: none;
+
+    margin-top: 15px;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.selected-info.active {
+
+    display: grid;
+}
+
+.info-card {
+
+    padding: 13px;
+
+    border-radius: 11px;
+
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+}
+
+.info-label {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: var(--muted);
+
+    margin-bottom: 5px;
+}
+
+.info-value {
+
+    font-weight: 800;
+
+    font-size: 13px;
+
+    word-break: break-word;
+}
+
+/* =========================
+   CURRENCY
+========================= */
+
+.currency-wrapper {
+
+    position: relative;
+}
+
+.currency {
+
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-weight: 800;
+
+    z-index: 2;
+}
+
+#biaya {
+
+    padding-left: 46px;
+
+    font-weight: 700;
+
+    font-size: 16px;
+}
+
+.help-text {
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: var(--muted);
+}
+
+/* =========================
+   KETERANGAN INFO
+========================= */
+
+.vehicle-note {
+
+    display: none;
+
+    margin-top: 6px;
+
+    padding: 10px 12px;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+    color: #1e40af;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.vehicle-note.active {
+
+    display: block;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.buttons {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+button {
+
+    min-height: 48px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 12px 20px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+button:hover {
+
+    transform:
+        translateY(-1px);
+}
+
+button:disabled {
+
+    opacity: .65;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+.btn-reset {
+
+    background: #64748b;
+
+    color: white;
+}
+
+.btn-save {
+
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #ef4444
+        );
+
+    color: white;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+#status {
+
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+#status.success {
+
+    display: block;
+
+    background: #f0fdf4;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    color: #166534;
+}
+
+#status.error {
+
+    display: block;
+
+    background: #fef2f2;
+
+    border:
+        1px solid
+        #fecaca;
+
+    color: #b91c1c;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .topbar {
+
+        padding: 11px 14px;
+    }
+
+    .brand-icon {
+
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand-title {
+
+        font-size: 16px;
+    }
+
+    .brand-subtitle {
+
+        font-size: 10px;
+    }
+
+    .home-btn {
+
+        padding: 8px 11px;
+
+        font-size: 12px;
+    }
+
+    .container {
+
+        padding: 20px 14px;
+    }
+
+    .card {
+
+        padding: 18px;
+
+        border-radius: 18px;
+    }
+
+    .grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+
+        grid-column: auto;
+    }
+
+    .vehicle-box {
+
+        grid-column: auto;
+    }
+
+    .selected-info {
+
+        grid-template-columns: 1fr;
+    }
+
+    .buttons {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+    }
+
+    .buttons button {
+
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ======================================================
+     HEADER
+====================================================== -->
+
+<header class="topbar">
+
+```
+<div class="brand">
+
+    <div class="brand-icon">
+        💸
+    </div>
+
+    <div>
+
+        <div class="brand-title">
+            ARC TRANS
+        </div>
+
+        <div class="brand-subtitle">
+            Vehicle Rental Management
+        </div>
+
+    </div>
+
+</div>
+
+<a
+    href="index.html"
+    class="home-btn"
+>
+    🏠 Home
+</a>
+```
+
+</header>
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
+
+<main class="container">
+
+```
+<div class="page-title">
+
+    <h1>
+        💸 Form Pengeluaran
+    </h1>
+
+    <p>
+        Input biaya operasional kendaraan
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <form
+        id="expenseForm"
+        autocomplete="off"
+    >
+
+        <div class="grid">
+
+            <!-- ===============================
+                 TANGGAL
+            ================================ -->
+
+            <div class="field">
+
+                <label for="tanggal">
+                    Tanggal
+                </label>
+
+                <input
+                    type="date"
+                    id="tanggal"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ===============================
+                 KATEGORI
+            ================================ -->
+
+            <div class="field">
+
+                <label for="kategori">
+                    Kategori Pengeluaran
+                </label>
+
+                <select
+                    id="kategori"
+                    required
+                >
+
+                    <option value="">
+                        -- Pilih Kategori --
+                    </option>
+
+                    <option value="Perawatan Kendaraan">
+                        Perawatan Kendaraan
+                    </option>
+
+                    <option value="BBM">
+                        BBM
+                    </option>
+
+                    <option value="Lainnya">
+                        Lainnya
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ===============================
+                 PLAT MOBIL
+            ================================ -->
+
+            <section
+                id="vehicleBox"
+                class="vehicle-box"
+            >
+
+                <div class="field">
+
+                    <label>
+                        Plat Mobil
+                    </label>
+
+                    <div class="search-container">
+
+                        <span class="search-icon">
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchPlat"
+                            placeholder="Cari plat nomor atau nama kendaraan..."
+                        >
+
+                        <div
+                            id="vehicleDropdown"
+                            class="vehicle-dropdown"
+                        ></div>
+
+                    </div>
+
+                    <input
+                        type="hidden"
+                        id="platMobil"
+                    >
+
+                </div>
+
+
+                <!-- INFORMASI UNIT -->
+
+                <div
+                    id="selectedInfo"
+                    class="selected-info"
+                >
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Plat Nomor
+                        </span>
+
+                        <div
+                            id="infoPlat"
+                            class="info-value"
+                        >
+                            -
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Nama Kendaraan
+                        </span>
+
+                        <div
+                            id="infoNama"
+                            class="info-value"
+                        >
+                            -
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Keterangan Unit
+                        </span>
+
+                        <div
+                            id="infoKeterangan"
+                            class="info-value"
+                        >
+                            -
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Type Kendaraan
+                        </span>
+
+                        <div
+                            id="infoType"
+                            class="info-value"
+                        >
+                            -
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ===============================
+                 KETERANGAN
+            ================================ -->
+
+            <div
+                class="field full"
+                id="keteranganBox"
+                style="display:none;"
+            >
+
+                <label for="keterangan">
+                    Keterangan
+                </label>
+
+                <textarea
+                    id="keterangan"
+                    placeholder="Masukkan keterangan pengeluaran..."
+                ></textarea>
+
+                <div
+                    id="vehicleNote"
+                    class="vehicle-note"
+                >
+                    Untuk kategori
+                    <strong>Perawatan Kendaraan</strong>
+                    dan
+                    <strong>BBM</strong>,
+                    format keterangan otomatis:
+                    <strong>B 1234 ABC | Toyota Avanza | Ganti oli mesin</strong>
+                </div>
+
+            </div>
+
+
+            <!-- ===============================
+                 BIAYA
+            ================================ -->
+
+            <div class="field full">
+
+                <label for="biaya">
+                    Biaya Pengeluaran
+                </label>
+
+                <div class="currency-wrapper">
+
+                    <span class="currency">
+                        Rp
+                    </span>
+
+                    <input
+                        type="text"
+                        id="biaya"
+                        inputmode="numeric"
+                        placeholder="0"
+                        required
+                    >
+
+                </div>
+
+                <div class="help-text">
+
+                    Contoh input:
+                    <strong>Rp 250.000</strong>
+
+                    <br>
+
+                    Revenue akan menyimpan:
+                    <strong>bayar: -250000</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div id="status"></div>
+
+
+        <!-- BUTTON -->
+
+        <div class="buttons">
+
+            <button
+                type="reset"
+                class="btn-reset"
+            >
+                🔄 Reset
+            </button>
+
+            <button
+                type="submit"
+                class="btn-save"
+                id="btnSave"
+            >
+                💾 Simpan Pengeluaran
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</main>
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+    getDatabase,
+    ref,
+    onValue,
+    push,
+    set
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+    authDomain:
+        "arctrans.firebaseapp.com",
+
+    databaseURL:
+        "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+    projectId:
+        "arctrans",
+
+    storageBucket:
+        "arctrans.firebasestorage.app",
+
+    messagingSenderId:
+        "60781918601",
+
+    appId:
+        "1:60781918601:web:c85d6131207f8a8958"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const db =
+    getDatabase(
+        app
+    );
+
+
+/* =========================================================
+   ELEMENT
+========================================================= */
+
+const form =
+    document.getElementById(
+        "expenseForm"
+    );
+
+const tanggal =
+    document.getElementById(
+        "tanggal"
+    );
+
+const kategori =
+    document.getElementById(
+        "kategori"
+    );
+
+const vehicleBox =
+    document.getElementById(
+        "vehicleBox"
+    );
+
+const searchPlat =
+    document.getElementById(
+        "searchPlat"
+    );
+
+const vehicleDropdown =
+    document.getElementById(
+        "vehicleDropdown"
+    );
+
+const selectedInfo =
+    document.getElementById(
+        "selectedInfo"
+    );
+
+const platMobil =
+    document.getElementById(
+        "platMobil"
+    );
+
+const keteranganBox =
+    document.getElementById(
+        "keteranganBox"
+    );
+
+const keterangan =
+    document.getElementById(
+        "keterangan"
+    );
+
+const vehicleNote =
+    document.getElementById(
+        "vehicleNote"
+    );
+
+const biaya =
+    document.getElementById(
+        "biaya"
+    );
+
+const status =
+    document.getElementById(
+        "status"
+    );
+
+const btnSave =
+    document.getElementById(
+        "btnSave"
+    );
+
+
+let vehicles = [];
+
+let selectedVehicle = null;
+
+
+/* =========================================================
+   TANGGAL HARI INI
+========================================================= */
+
+function getToday() {
+
+    const d =
+        new Date();
+
+    return [
+
+        d.getFullYear(),
+
+        String(
+            d.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        ),
+
+        String(
+            d.getDate()
+        ).padStart(
+            2,
+            "0"
+        )
+
+    ].join("-");
+
+}
+
+
+tanggal.value =
+    getToday();
+
+
+/* =========================================================
+   BACA DATA UNIT
+   SUMBER:
+   unit/
+========================================================= */
+
+const unitRef =
+    ref(
+        db,
+        "unit"
+    );
+
+
+onValue(
+
+    unitRef,
+
+    snapshot => {
+
+        vehicles = [];
+
+        const data =
+            snapshot.val();
+
+        if (
+            data &&
+            typeof data === "object"
+        ) {
+
+            Object.entries(
+                data
+            ).forEach(
+                ([key, item]) => {
+
+                    if (
+                        item &&
+                        typeof item === "object"
+                    ) {
+
+                        vehicles.push({
+
+                            firebaseKey:
+                                key,
+
+                            ...item
+
+                        });
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        if (
+            kategori.value ===
+            "Perawatan Kendaraan"
+            ||
+            kategori.value ===
+            "BBM"
+        ) {
+
+            renderVehicles(
+                vehicles
+            );
+
+        }
+
+    },
+
+    error => {
+
+        console.error(
+            error
+        );
+
+        showStatus(
+
+            "Gagal membaca data unit: " +
+            error.message,
+
+            "error"
+
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   AMBIL FIELD DATA UNIT
+========================================================= */
+
+function fieldValue(
+    item,
+    names
+) {
+
+    for (
+        const name of names
+    ) {
+
+        if (
+
+            item[name] !==
+            undefined
+
+            &&
+
+            item[name] !==
+            null
+
+            &&
+
+            String(
+                item[name]
+            ).trim() !== ""
+
+        ) {
+
+            return item[name];
+
+        }
+
+    }
+
+    return "-";
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   CEK KATEGORI KENDARAAN
+========================================================= */
+
+function isVehicleCategory() {
+
+    return (
+
+        kategori.value ===
+        "Perawatan Kendaraan"
+
+        ||
+
+        kategori.value ===
+        "BBM"
+
+    );
+
+}
+
+
+/* =========================================================
+   BUILD KETERANGAN
+=========================================================
+
+   HASIL:
+
+   B 1234 ABC | Toyota Avanza | Ganti oli mesin
+
+========================================================= */
+
+function buildKeterangan() {
+
+    const manualText =
+        keterangan.value
+            .trim();
+
+
+    /*
+       Untuk kategori Lainnya,
+       simpan keterangan apa adanya.
+    */
+
+    if (
+        !isVehicleCategory()
+        ||
+        !selectedVehicle
+    ) {
+
+        return manualText;
+
+    }
+
+
+    const plat =
+        fieldValue(
+            selectedVehicle,
+            [
+                "plat",
+                "platNomor",
+                "nopol",
+                "noPolisi"
+            ]
+        );
+
+
+    const nama =
+        fieldValue(
+            selectedVehicle,
+            [
+                "nama",
+                "namaUnit",
+                "namaKendaraan",
+                "kendaraan"
+            ]
+        );
+
+
+    /*
+       Jika user tidak mengisi
+       keterangan manual.
+    */
+
+    if (
+        !manualText
+    ) {
+
+        return (
+
+            String(plat) +
+            " | " +
+            String(nama)
+
+        );
+
+    }
+
+
+    /*
+       FORMAT FINAL:
+       
+       B 1234 ABC |
+       Toyota Avanza |
+       Ganti oli mesin
+    */
+
+    return (
+
+        String(plat) +
+        " | " +
+        String(nama) +
+        " | " +
+        manualText
+
+    );
+
+}
+
+
+/* =========================================================
+   PREVIEW KETERANGAN
+========================================================= */
+
+function updateKeteranganPreview() {
+
+    if (
+        !isVehicleCategory()
+        ||
+        !selectedVehicle
+    ) {
+
+        vehicleNote.innerHTML =
+
+            "Untuk kategori " +
+            "<strong>Perawatan Kendaraan</strong> " +
+            "dan <strong>BBM</strong>, " +
+            "format keterangan otomatis akan menjadi: " +
+            "<strong>B 1234 ABC | Toyota Avanza | Ganti oli mesin</strong>";
+
+        return;
+
+    }
+
+
+    const plat =
+        fieldValue(
+            selectedVehicle,
+            [
+                "plat",
+                "platNomor",
+                "nopol",
+                "noPolisi"
+            ]
+        );
+
+
+    const nama =
+        fieldValue(
+            selectedVehicle,
+            [
+                "nama",
+                "namaUnit",
+                "namaKendaraan",
+                "kendaraan"
+            ]
+        );
+
+
+    const manualText =
+        keterangan.value.trim();
+
+
+    let preview =
+
+        String(plat) +
+        " | " +
+        String(nama);
+
+
+    if (
+        manualText
+    ) {
+
+        preview +=
+            " | " +
+            manualText;
+
+    }
+
+
+    vehicleNote.innerHTML =
+
+        "Keterangan tersimpan: " +
+
+        "<strong>" +
+        escapeHtml(
+            preview
+        ) +
+        "</strong>";
+
+}
+
+
+/* =========================================================
+   UPDATE PREVIEW SAAT USER MENGETIK
+========================================================= */
+
+keterangan.addEventListener(
+
+    "input",
+
+    () => {
+
+        updateKeteranganPreview();
+
+    }
+
+);
+
+
+/* =========================================================
+   PERUBAHAN KATEGORI
+========================================================= */
+
+kategori.addEventListener(
+
+    "change",
+
+    () => {
+
+        resetVehicle();
+
+        keterangan.value =
+            "";
+
+        hideStatus();
+
+
+        const value =
+            kategori.value;
+
+
+        /* ===============================
+           PERAWATAN
+        ================================ */
+
+        if (
+            value ===
+            "Perawatan Kendaraan"
+        ) {
+
+            vehicleBox
+                .classList
+                .add(
+                    "active"
+                );
+
+
+            keteranganBox
+                .style
+                .display =
+                "flex";
+
+
+            keterangan.required =
+                true;
+
+
+            vehicleNote
+                .classList
+                .add(
+                    "active"
+                );
+
+
+            updateKeteranganPreview();
+
+
+            renderVehicles(
+                vehicles
+            );
+
+        }
+
+
+        /* ===============================
+           BBM
+        ================================ */
+
+        else if (
+            value ===
+            "BBM"
+        ) {
+
+            vehicleBox
+                .classList
+                .add(
+                    "active"
+                );
+
+
+            keteranganBox
+                .style
+                .display =
+                "flex";
+
+
+            keterangan.required =
+                true;
+
+
+            vehicleNote
+                .classList
+                .add(
+                    "active"
+                );
+
+
+            updateKeteranganPreview();
+
+
+            renderVehicles(
+                vehicles
+            );
+
+        }
+
+
+        /* ===============================
+           LAINNYA
+        ================================ */
+
+        else if (
+            value ===
+            "Lainnya"
+        ) {
+
+            vehicleBox
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            keteranganBox
+                .style
+                .display =
+                "flex";
+
+
+            keterangan.required =
+                true;
+
+
+            vehicleNote
+                .classList
+                .remove(
+                    "active"
+                );
+
+        }
+
+
+        /* ===============================
+           KOSONG
+        ================================ */
+
+        else {
+
+            vehicleBox
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            keteranganBox
+                .style
+                .display =
+                "none";
+
+
+            keterangan.required =
+                false;
+
+
+            vehicleNote
+                .classList
+                .remove(
+                    "active"
+                );
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   SEARCH PLAT
+========================================================= */
+
+searchPlat.addEventListener(
+
+    "input",
+
+    () => {
+
+        const keyword =
+            searchPlat.value
+                .toLowerCase()
+                .trim();
+
+
+        const filtered =
+            vehicles.filter(
+                item => {
+
+                    const plat =
+                        String(
+                            fieldValue(
+                                item,
+                                [
+                                    "plat",
+                                    "platNomor",
+                                    "nopol",
+                                    "noPolisi"
+                                ]
+                            )
+                        )
+                        .toLowerCase();
+
+
+                    const nama =
+                        String(
+                            fieldValue(
+                                item,
+                                [
+                                    "nama",
+                                    "namaUnit",
+                                    "namaKendaraan",
+                                    "kendaraan"
+                                ]
+                            )
+                        )
+                        .toLowerCase();
+
+
+                    const type =
+                        String(
+                            fieldValue(
+                                item,
+                                [
+                                    "type",
+                                    "tipe",
+                                    "jenis"
+                                ]
+                            )
+                        )
+                        .toLowerCase();
+
+
+                    return (
+
+                        plat.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        nama.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        type.includes(
+                            keyword
+                        )
+
+                    );
+
+                }
+            );
+
+
+        renderVehicles(
+            filtered
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   FOCUS SEARCH
+========================================================= */
+
+searchPlat.addEventListener(
+
+    "focus",
+
+    () => {
+
+        renderVehicles(
+            vehicles
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   RENDER KENDARAAN
+========================================================= */
+
+function renderVehicles(
+    list
+) {
+
+    vehicleDropdown.innerHTML =
+        "";
+
+
+    if (
+        !list ||
+        list.length === 0
+    ) {
+
+        vehicleDropdown.innerHTML = `
+
+            <div
+                class="vehicle-item"
+                style="cursor:default;"
+            >
+                Kendaraan tidak ditemukan
+            </div>
+
+        `;
+
+
+        vehicleDropdown
+            .classList
+            .add(
+                "active"
+            );
+
+
+        return;
+
+    }
+
+
+    list.forEach(
+        item => {
+
+            const plat =
+                fieldValue(
+                    item,
+                    [
+                        "plat",
+                        "platNomor",
+                        "nopol",
+                        "noPolisi"
+                    ]
+                );
+
+
+            const nama =
+                fieldValue(
+                    item,
+                    [
+                        "nama",
+                        "namaUnit",
+                        "namaKendaraan",
+                        "kendaraan"
+                    ]
+                );
+
+
+            const type =
+                fieldValue(
+                    item,
+                    [
+                        "type",
+                        "tipe",
+                        "jenis"
+                    ]
+                );
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "vehicle-item";
+
+
+            div.innerHTML = `
+
+                <div class="vehicle-plat">
+
+                    ${escapeHtml(
+                        plat
+                    )}
+
+                </div>
+
+                <div class="vehicle-detail">
+
+                    ${escapeHtml(
+                        nama
+                    )}
+
+                    &nbsp; • &nbsp;
+
+                    Type:
+
+                    ${escapeHtml(
+                        type
+                    )}
+
+                </div>
+
+            `;
+
+
+            div.addEventListener(
+
+                "click",
+
+                () => {
+
+                    selectVehicle(
+                        item
+                    );
+
+                }
+
+            );
+
+
+            vehicleDropdown.appendChild(
+                div
+            );
+
+        }
+    );
+
+
+    vehicleDropdown
+        .classList
+        .add(
+            "active"
+        );
+
+}
+
+
+/* =========================================================
+   PILIH KENDARAAN
+========================================================= */
+
+function selectVehicle(
+    item
+) {
+
+    selectedVehicle =
+        item;
+
+
+    const plat =
+        fieldValue(
+            item,
+            [
+                "plat",
+                "platNomor",
+                "nopol",
+                "noPolisi"
+            ]
+        );
+
+
+    const nama =
+        fieldValue(
+            item,
+            [
+                "nama",
+                "namaUnit",
+                "namaKendaraan",
+                "kendaraan"
+            ]
+        );
+
+
+    const ket =
+        fieldValue(
+            item,
+            [
+                "keterangan",
+                "ket"
+            ]
+        );
+
+
+    const type =
+        fieldValue(
+            item,
+            [
+                "type",
+                "tipe",
+                "jenis"
+            ]
+        );
+
+
+    platMobil.value =
+        String(
+            plat
+        );
+
+
+    searchPlat.value =
+        String(
+            plat
+        );
+
+
+    document.getElementById(
+        "infoPlat"
+    ).textContent =
+        plat;
+
+
+    document.getElementById(
+        "infoNama"
+    ).textContent =
+        nama;
+
+
+    document.getElementById(
+        "infoKeterangan"
+    ).textContent =
+        ket;
+
+
+    document.getElementById(
+        "infoType"
+    ).textContent =
+        type;
+
+
+    selectedInfo
+        .classList
+        .add(
+            "active"
+        );
+
+
+    vehicleDropdown
+        .classList
+        .remove(
+            "active"
+        );
+
+
+    updateKeteranganPreview();
+
+}
+
+
+/* =========================================================
+   CLOSE DROPDOWN
+========================================================= */
+
+document.addEventListener(
+
+    "click",
+
+    event => {
+
+        if (
+            !event.target.closest(
+                ".search-container"
+            )
+        ) {
+
+            vehicleDropdown
+                .classList
+                .remove(
+                    "active"
+                );
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   RESET VEHICLE
+========================================================= */
+
+function resetVehicle() {
+
+    selectedVehicle =
+        null;
+
+
+    searchPlat.value =
+        "";
+
+
+    platMobil.value =
+        "";
+
+
+    selectedInfo
+        .classList
+        .remove(
+            "active"
+        );
+
+
+    vehicleDropdown
+        .classList
+        .remove(
+            "active"
+        );
+
+
+    document.getElementById(
+        "infoPlat"
+    ).textContent =
+        "-";
+
+
+    document.getElementById(
+        "infoNama"
+    ).textContent =
+        "-";
+
+
+    document.getElementById(
+        "infoKeterangan"
+    ).textContent =
+        "-";
+
+
+    document.getElementById(
+        "infoType"
+    ).textContent =
+        "-";
+
+
+    updateKeteranganPreview();
+
+}
+
+
+/* =========================================================
+   FORMAT RUPIAH
+========================================================= */
+
+biaya.addEventListener(
+
+    "input",
+
+    () => {
+
+        let angka =
+            biaya.value.replace(
+                /\D/g,
+                ""
+            );
+
+
+        if (
+            angka === ""
+        ) {
+
+            biaya.value =
+                "";
+
+            return;
+
+        }
+
+
+        biaya.value =
+            Number(
+                angka
+            ).toLocaleString(
+                "id-ID"
+            );
+
+    }
+
+);
+
+
+/* =========================================================
+   AMBIL NILAI ANGKA
+========================================================= */
+
+function getBiaya() {
+
+    const angka =
+        biaya.value.replace(
+            /\D/g,
+            ""
+        );
+
+
+    return Number(
+        angka || 0
+    );
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function showStatus(
+    message,
+    type
+) {
+
+    status.textContent =
+        message;
+
+
+    status.className =
+        type;
+
+}
+
+
+function hideStatus() {
+
+    status.textContent =
+        "";
+
+
+    status.className =
+        "";
+
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+form.addEventListener(
+
+    "submit",
+
+    async event => {
+
+        event.preventDefault();
+
+        hideStatus();
+
+
+        const tanggalValue =
+            tanggal.value;
+
+
+        const kategoriValue =
+            kategori.value;
+
+
+        const keteranganManual =
+            keterangan.value.trim();
+
+
+        const biayaValue =
+            getBiaya();
+
+
+        const platValue =
+            platMobil.value.trim();
+
+
+        /* ===============================
+           VALIDASI
+        ================================ */
+
+        if (
+            !tanggalValue
+        ) {
+
+            showStatus(
+                "Tanggal wajib diisi.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !kategoriValue
+        ) {
+
+            showStatus(
+                "Kategori pengeluaran wajib dipilih.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            biayaValue <= 0
+        ) {
+
+            showStatus(
+                "Biaya harus lebih dari Rp 0.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !keteranganManual
+        ) {
+
+            showStatus(
+                "Keterangan wajib diisi.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (
+
+            kategoriValue ===
+            "Perawatan Kendaraan"
+
+            ||
+
+            kategoriValue ===
+            "BBM"
+
+        ) {
+
+            if (
+                !platValue
+                ||
+                !selectedVehicle
+            ) {
+
+                showStatus(
+                    "Silakan pilih plat mobil terlebih dahulu.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        /* ===============================
+           KETERANGAN FINAL
+        ================================ */
+
+        const keteranganFinal =
+            buildKeterangan();
+
+
+        /*
+
+           HASIL:
+
+           B 1234 ABC | Toyota Avanza | Ganti oli mesin
+
+        */
+
+
+        /* ===============================
+           LOCK BUTTON
+        ================================ */
+
+        const originalText =
+            btnSave.innerHTML;
+
+
+        btnSave.disabled =
+            true;
+
+
+        btnSave.innerHTML =
+            "⏳ Menyimpan...";
+
+
+        try {
+
+            /* =================================================
+               REVENUE
+            ================================================= */
+
+            const revenueDateRef =
+                ref(
+                    db,
+                    "revenue/" +
+                    tanggalValue
+                );
+
+
+            const transactionRef =
+                push(
+                    revenueDateRef
+                );
+
+
+            const transactionId =
+                transactionRef.key;
+
+
+            const revenueData = {
+
+                type:
+                    kategoriValue,
+
+                keterangan:
+                    keteranganFinal,
+
+                bayar:
+                    -Math.abs(
+                        biayaValue
+                    )
+
+            };
+
+
+            await set(
+
+                transactionRef,
+
+                revenueData
+
+            );
+
+
+            /* =================================================
+               PERAWATAN KENDARAAN
+            ================================================= */
+
+            if (
+                kategoriValue ===
+                "Perawatan Kendaraan"
+            ) {
+
+                const maintenanceRef =
+                    ref(
+
+                        db,
+
+                        "Perawatan Kendaraan/" +
+                        platValue +
+                        "/" +
+                        tanggalValue
+
+                    );
+
+
+                const maintenanceData = {
+
+                    type:
+                        "Perawatan Kendaraan",
+
+                    keterangan:
+                        keteranganFinal,
+
+                    bayar:
+                        Math.abs(
+                            biayaValue
+                        )
+
+                };
+
+
+                await set(
+
+                    maintenanceRef,
+
+                    maintenanceData
+
+                );
+
+            }
+
+
+            /* =================================================
+               BBM
+            ================================================= */
+
+            if (
+                kategoriValue ===
+                "BBM"
+            ) {
+
+                const fuelRef =
+                    ref(
+
+                        db,
+
+                        "BBM/" +
+                        platValue +
+                        "/" +
+                        tanggalValue
+
+                    );
+
+
+                const fuelData = {
+
+                    type:
+                        "BBM",
+
+                    keterangan:
+                        keteranganFinal,
+
+                    bayar:
+                        Math.abs(
+                            biayaValue
+                        )
+
+                };
+
+
+                await set(
+
+                    fuelRef,
+
+                    fuelData
+
+                );
+
+            }
+
+
+            /* =================================================
+               BERHASIL
+            ================================================= */
+
+            showStatus(
+
+                "✓ Pengeluaran berhasil disimpan. " +
+                "ID Transaksi: " +
+                transactionId,
+
+                "success"
+
+            );
+
+
+            /* ===============================
+               RESET FORM
+            ================================ */
+
+            form.reset();
+
+
+            tanggal.value =
+                getToday();
+
+
+            vehicleBox
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            keteranganBox
+                .style
+                .display =
+                "none";
+
+
+            keterangan.required =
+                false;
+
+
+            vehicleNote
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            resetVehicle();
+
+
+            biaya.value =
+                "";
+
+        }
+
+        catch (
+            error
+        ) {
+
+            console.error(
+                "Firebase Error:",
+                error
+            );
+
+
+            showStatus(
+
+                "Gagal menyimpan data: " +
+                error.message,
+
+                "error"
+
+            );
+
+        }
+
+
+        finally {
+
+            btnSave.disabled =
+                false;
+
+
+            btnSave.innerHTML =
+                originalText;
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   RESET FORM
+========================================================= */
+
+form.addEventListener(
+
+    "reset",
+
+    () => {
+
+        setTimeout(
+
+            () => {
+
+                tanggal.value =
+                    getToday();
+
+
+                vehicleBox
+                    .classList
+                    .remove(
+                        "active"
+                    );
+
+
+                keteranganBox
+                    .style
+                    .display =
+                    "none";
+
+
+                keterangan.required =
+                    false;
+
+
+                vehicleNote
+                    .classList
+                    .remove(
+                        "active"
+                    );
+
+
+                resetVehicle();
+
+
+                biaya.value =
+                    "";
+
+
+                hideStatus();
+
+            },
+
+            0
+
+        );
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>
