@@ -1,10 +1,9 @@
+```html
 <!DOCTYPE html>
-
 <html lang="id">
 
 <head>
 
-```
 <meta charset="UTF-8">
 
 <meta
@@ -14,26 +13,22 @@
 
 <title>ARC TRANS</title>
 
-
 <!-- =====================================================
      FAVICON / ICON WEBSITE ARC TRANS
      ===================================================== -->
 
-<!-- Icon utama browser -->
 <link
     rel="icon"
     type="image/png"
     href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
 >
 
-<!-- Shortcut icon -->
 <link
     rel="shortcut icon"
     type="image/png"
     href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
 >
 
-<!-- Icon untuk iPhone / iPad -->
 <link
     rel="apple-touch-icon"
     href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
@@ -71,915 +66,1033 @@
 
 <style>
 
-    /* =====================================================
-       GLOBAL
-       ===================================================== */
+/* =====================================================
+   GLOBAL
+   ===================================================== */
 
-    * {
-        box-sizing: border-box;
+* {
 
-        font-family:
-            "Segoe UI",
-            Arial,
-            sans-serif;
-    }
+    box-sizing: border-box;
 
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    html {
-        min-height: 100%;
-    }
+}
 
 
-    body {
-        margin: 0;
+html {
 
-        min-height: 100vh;
+    min-height: 100%;
 
-        padding: 20px;
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        background:
-            linear-gradient(
-                135deg,
-                #0f4c81 0%,
-                #2196F3 45%,
-                #21CBF3 100%
-            );
-
-        overflow-x: hidden;
-
-        position: relative;
-    }
+}
 
 
-    /* =====================================================
-       BACKGROUND DECORATION
-       ===================================================== */
+body {
 
-    body::before {
-        content: "";
+    margin: 0;
 
-        position: fixed;
+    min-height: 100vh;
 
-        width: 300px;
+    padding: 20px;
 
-        height: 300px;
+    display: flex;
 
-        border-radius: 50%;
+    justify-content: center;
 
-        background:
-            rgba(
-                255,
-                255,
-                255,
-                0.12
-            );
+    align-items: center;
 
-        top: -100px;
+    background:
+        linear-gradient(
+            135deg,
+            #0f4c81 0%,
+            #2196F3 45%,
+            #21CBF3 100%
+        );
 
-        left: -100px;
+    overflow-x: hidden;
 
-        filter: blur(2px);
-    }
+    position: relative;
+
+}
 
 
-    body::after {
-        content: "";
+/* =====================================================
+   BACKGROUND DECORATION
+   ===================================================== */
 
-        position: fixed;
+body::before {
 
-        width: 350px;
+    content: "";
 
-        height: 350px;
+    position: fixed;
 
-        border-radius: 50%;
+    width: 300px;
 
-        background:
-            rgba(
-                255,
-                255,
-                255,
-                0.10
-            );
+    height: 300px;
 
-        bottom: -150px;
+    border-radius: 50%;
 
-        right: -100px;
-    }
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    top: -100px;
+
+    left: -100px;
+
+    filter: blur(2px);
+
+}
 
 
-    /* =====================================================
-       CONTAINER
-       ===================================================== */
+body::after {
 
-    .container {
-        position: relative;
+    content: "";
 
-        z-index: 2;
+    position: fixed;
 
-        width: 100%;
+    width: 350px;
 
-        max-width: 980px;
+    height: 350px;
 
-        padding: 40px;
+    border-radius: 50%;
 
-        background:
-            rgba(
-                255,
-                255,
-                255,
-                0.96
-            );
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.10
+        );
 
-        border-radius: 28px;
+    bottom: -150px;
 
-        box-shadow:
-            0 25px 60px
-            rgba(
+    right: -100px;
+
+}
+
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.container {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 980px;
+
+    padding: 40px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+    animation:
+        fadeIn
+        0.6s
+        ease;
+
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.header {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    margin-bottom: 35px;
+
+}
+
+
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+.logo {
+
+    width: 100px;
+
+    height: 100px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2196F3,
+            #21CBF3
+        );
+
+    box-shadow:
+        0 12px 25px
+        rgba(
+            33,
+            150,
+            243,
+            0.35
+        );
+
+    animation:
+        floatLogo
+        3s
+        ease-in-out
+        infinite;
+
+}
+
+
+.logo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   TITLE
+   ===================================================== */
+
+h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            26px,
+            5vw,
+            38px
+        );
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #1565C0;
+
+}
+
+
+.subtitle {
+
+    margin-top: 8px;
+
+    color: #78909C;
+
+    font-size:
+        clamp(
+            13px,
+            3vw,
+            16px
+        );
+
+}
+
+
+/* =====================================================
+   MENU GRID
+   ===================================================== */
+
+.menu {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(
                 0,
-                0,
-                0,
-                0.25
-            );
+                1fr
+            )
+        );
 
-        animation:
-            fadeIn
-            0.6s
-            ease;
+    gap: 18px;
+
+}
+
+
+/* =====================================================
+   MENU ITEM
+   ===================================================== */
+
+.menu-item {
+
+    position: relative;
+
+    min-height: 185px;
+
+    padding:
+        22px
+        15px;
+
+    text-decoration: none;
+
+    color: #263238;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        #e6edf3;
+
+    border-radius: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+/* =====================================================
+   HOVER
+   ===================================================== */
+
+.menu-item:hover {
+
+    transform:
+        translateY(-7px);
+
+    border-color:
+        #2196F3;
+
+    background:
+        #f7fbff;
+
+    box-shadow:
+        0 15px 30px
+        rgba(
+            33,
+            150,
+            243,
+            0.20
+        );
+
+}
+
+
+.menu-item:active {
+
+    transform:
+        scale(0.98);
+
+}
+
+
+/* =====================================================
+   TOP ACCENT
+   ===================================================== */
+
+.menu-item::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2196F3,
+            #21CBF3
+        );
+
+    transform:
+        scaleX(0);
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.menu-item:hover::before {
+
+    transform:
+        scaleX(1);
+
+}
+
+
+/* =====================================================
+   MENU ICON
+   ===================================================== */
+
+.menu-icon {
+
+    width: 78px;
+
+    height: 78px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 24px;
+
+    font-size: 38px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e3f2fd,
+            #f1fbff
+        );
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+.menu-item:hover .menu-icon {
+
+    transform:
+        scale(1.12)
+        rotate(3deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #d7efff,
+            #e8faff
+        );
+
+}
+
+
+/* =====================================================
+   MENU TEXT
+   ===================================================== */
+
+.menu-text {
+
+    font-size:
+        clamp(
+            13px,
+            2vw,
+            16px
+        );
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.footer {
+
+    margin-top: 32px;
+
+    padding-top: 22px;
+
+    border-top:
+        1px solid
+        #edf0f2;
+
+    text-align: center;
+
+    color: #90A4AE;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   ANIMATION
+   ===================================================== */
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+
     }
 
+    to {
 
-    /* =====================================================
-       HEADER
-       ===================================================== */
+        opacity: 1;
 
-    .header {
-        display: flex;
+        transform:
+            translateY(0);
 
-        flex-direction: column;
-
-        align-items: center;
-
-        justify-content: center;
-
-        text-align: center;
-
-        margin-bottom: 35px;
     }
 
+}
 
-    /* =====================================================
-       LOGO
-       ===================================================== */
 
-    .logo {
-        width: 100px;
+@keyframes floatLogo {
 
-        height: 100px;
+    0%,
+    100% {
 
-        display: flex;
+        transform:
+            translateY(0);
 
-        justify-content: center;
-
-        align-items: center;
-
-        margin-bottom: 16px;
-
-        border-radius: 30px;
-
-        overflow: hidden;
-
-        background:
-            linear-gradient(
-                135deg,
-                #2196F3,
-                #21CBF3
-            );
-
-        box-shadow:
-            0 12px 25px
-            rgba(
-                33,
-                150,
-                243,
-                0.35
-            );
-
-        animation:
-            floatLogo
-            3s
-            ease-in-out
-            infinite;
     }
 
+    50% {
 
-    /* Gambar logo utama */
-
-    .logo img {
-        width: 100%;
-
-        height: 100%;
-
-        object-fit: cover;
-
-        display: block;
-    }
-
-
-    /* =====================================================
-       TITLE
-       ===================================================== */
-
-    h1 {
-        margin: 0;
-
-        font-size:
-            clamp(
-                26px,
-                5vw,
-                38px
-            );
-
-        font-weight: 800;
-
-        letter-spacing: 2px;
-
-        color: #1565C0;
-    }
-
-
-    .subtitle {
-        margin-top: 8px;
-
-        color: #78909C;
-
-        font-size:
-            clamp(
-                13px,
-                3vw,
-                16px
-            );
-    }
-
-
-    /* =====================================================
-       MENU GRID
-       ===================================================== */
-
-    .menu {
-        display: grid;
-
-        grid-template-columns:
-            repeat(
-                3,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
-
-        gap: 18px;
-    }
-
-
-    /* =====================================================
-       MENU ITEM
-       ===================================================== */
-
-    .menu-item {
-        position: relative;
-
-        min-height: 185px;
-
-        padding:
-            22px
-            15px;
-
-        text-decoration: none;
-
-        color: #263238;
-
-        background: #ffffff;
-
-        border:
-            1px solid
-            #e6edf3;
-
-        border-radius: 22px;
-
-        display: flex;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        align-items: center;
-
-        text-align: center;
-
-        overflow: hidden;
-
-        transition:
-            transform 0.25s ease,
-            box-shadow 0.25s ease,
-            border-color 0.25s ease,
-            background 0.25s ease;
-    }
-
-
-    /* =====================================================
-       HOVER
-       ===================================================== */
-
-    .menu-item:hover {
         transform:
             translateY(-7px);
 
-        border-color:
-            #2196F3;
+    }
 
-        background:
-            #f7fbff;
+}
 
-        box-shadow:
-            0 15px 30px
-            rgba(
-                33,
-                150,
-                243,
-                0.20
-            );
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 850px) {
+
+    .container {
+
+        max-width: 700px;
+
     }
 
 
-    .menu-item:active {
-        transform:
-            scale(0.98);
-    }
+    .menu {
 
-
-    /* =====================================================
-       TOP ACCENT
-       ===================================================== */
-
-    .menu-item::before {
-        content: "";
-
-        position: absolute;
-
-        top: 0;
-
-        left: 0;
-
-        width: 100%;
-
-        height: 4px;
-
-        background:
-            linear-gradient(
-                90deg,
-                #2196F3,
-                #21CBF3
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
             );
 
-        transform:
-            scaleX(0);
+    }
 
-        transition:
-            0.25s ease;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 14px;
+
+        align-items:
+            flex-start;
+
     }
 
 
-    .menu-item:hover::before {
-        transform:
-            scaleX(1);
+    .container {
+
+        margin-top: 10px;
+
+        padding:
+            28px
+            16px
+            20px;
+
+        border-radius:
+            24px;
+
     }
 
 
-    /* =====================================================
-       MENU ICON
-       ===================================================== */
+    .header {
+
+        margin-bottom:
+            25px;
+
+    }
+
+
+    .logo {
+
+        width: 82px;
+
+        height: 82px;
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .menu {
+
+        gap: 12px;
+
+    }
+
+
+    .menu-item {
+
+        min-height:
+            155px;
+
+        padding:
+            16px
+            10px;
+
+        border-radius:
+            18px;
+
+    }
+
 
     .menu-icon {
-        width: 78px;
 
-        height: 78px;
+        width: 65px;
 
-        display: flex;
+        height: 65px;
 
-        justify-content: center;
+        border-radius:
+            20px;
 
-        align-items: center;
-
-        margin-bottom: 16px;
-
-        border-radius: 24px;
-
-        font-size: 38px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #e3f2fd,
-                #f1fbff
-            );
-
-        transition:
-            transform 0.25s ease,
-            background 0.25s ease;
-    }
-
-
-    .menu-item:hover .menu-icon {
-        transform:
-            scale(1.12)
-            rotate(3deg);
-
-        background:
-            linear-gradient(
-                135deg,
-                #d7efff,
-                #e8faff
-            );
-    }
-
-
-    /* =====================================================
-       MENU TEXT
-       ===================================================== */
-
-    .menu-text {
         font-size:
-            clamp(
-                13px,
-                2vw,
-                16px
-            );
+            32px;
 
-        font-weight: 700;
+        margin-bottom:
+            10px;
 
-        line-height: 1.5;
     }
 
-
-    /* =====================================================
-       FOOTER
-       ===================================================== */
 
     .footer {
-        margin-top: 32px;
 
-        padding-top: 22px;
+        margin-top:
+            24px;
 
-        border-top:
-            1px solid
-            #edf0f2;
+        padding-top:
+            18px;
 
-        text-align: center;
+    }
 
-        color: #90A4AE;
+}
 
-        font-size: 13px;
+
+/* =====================================================
+   SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 380px) {
+
+    body {
+
+        padding: 10px;
+
     }
 
 
-    /* =====================================================
-       ANIMATION
-       ===================================================== */
+    .container {
 
-    @keyframes fadeIn {
+        padding:
+            22px
+            12px
+            18px;
 
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(30px);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
     }
 
 
-    @keyframes floatLogo {
+    .menu {
 
-        0%,
-        100% {
-            transform:
-                translateY(0);
-        }
+        gap: 10px;
 
-        50% {
-            transform:
-                translateY(-7px);
-        }
     }
 
 
-    /* =====================================================
-       TABLET
-       ===================================================== */
+    .menu-item {
 
-    @media (max-width: 850px) {
+        min-height:
+            140px;
 
-        .container {
-            max-width: 700px;
-        }
+        padding:
+            12px
+            6px;
 
-        .menu {
-            grid-template-columns:
-                repeat(
-                    2,
-                    1fr
-                );
-        }
     }
 
 
-    /* =====================================================
-       MOBILE
-       ===================================================== */
+    .menu-icon {
 
-    @media (max-width: 600px) {
+        width: 58px;
 
-        body {
-            padding: 14px;
+        height: 58px;
 
-            align-items:
-                flex-start;
-        }
+        font-size:
+            28px;
 
-
-        .container {
-            margin-top: 10px;
-
-            padding:
-                28px
-                16px
-                20px;
-
-            border-radius:
-                24px;
-        }
-
-
-        .header {
-            margin-bottom:
-                25px;
-        }
-
-
-        .logo {
-            width: 82px;
-
-            height: 82px;
-
-            border-radius:
-                24px;
-        }
-
-
-        .menu {
-            gap: 12px;
-        }
-
-
-        .menu-item {
-            min-height:
-                155px;
-
-            padding:
-                16px
-                10px;
-
-            border-radius:
-                18px;
-        }
-
-
-        .menu-icon {
-            width: 65px;
-
-            height: 65px;
-
-            border-radius:
-                20px;
-
-            font-size:
-                32px;
-
-            margin-bottom:
-                10px;
-        }
-
-
-        .footer {
-            margin-top:
-                24px;
-
-            padding-top:
-                18px;
-        }
     }
 
 
-    /* =====================================================
-       SMALL MOBILE
-       ===================================================== */
+    .menu-text {
 
-    @media (max-width: 380px) {
+        font-size:
+            12px;
 
-        body {
-            padding: 10px;
-        }
-
-
-        .container {
-            padding:
-                22px
-                12px
-                18px;
-        }
-
-
-        .menu {
-            gap: 10px;
-        }
-
-
-        .menu-item {
-            min-height:
-                140px;
-
-            padding:
-                12px
-                6px;
-        }
-
-
-        .menu-icon {
-            width: 58px;
-
-            height: 58px;
-
-            font-size:
-                28px;
-        }
-
-
-        .menu-text {
-            font-size:
-                12px;
-        }
     }
+
+}
 
 </style>
-```
 
 </head>
 
+
 <body>
 
-```
+
 <main class="container">
 
 
-    <!-- =====================================================
-         HEADER
-         ===================================================== -->
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
-    <div class="header">
+<div class="header">
 
 
-        <!-- LOGO ARC TRANS -->
+    <!-- LOGO ARC TRANS -->
 
-        <div class="logo">
+    <div class="logo">
 
-            <img
-                src="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
-                alt="ARC TRANS Logo"
-            >
+        <img
+            src="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
+            alt="ARC TRANS Logo"
+        >
 
+    </div>
+
+
+    <h1>
+        ARC TRANS
+    </h1>
+
+
+    <div class="subtitle">
+        Sistem Manajemen Unit & Customer
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     MENU
+     ===================================================== -->
+
+<div class="menu">
+
+
+    <!-- INPUT UNIT -->
+
+    <a
+        href="unit.html"
+        class="menu-item"
+    >
+
+        <div class="menu-icon">
+            🚗
         </div>
 
-
-        <h1>
-            ARC TRANS
-        </h1>
-
-
-        <div class="subtitle">
-            Sistem Manajemen Unit & Customer
+        <div class="menu-text">
+            Input Unit
         </div>
 
-    </div>
+    </a>
 
 
+    <!-- DATA UNIT -->
 
-    <!-- =====================================================
-         MENU
-         ===================================================== -->
+    <a
+        href="tabelunit.html"
+        class="menu-item"
+    >
 
-    <div class="menu">
+        <div class="menu-icon">
+            📋
+        </div>
 
+        <div class="menu-text">
+            Data Unit Kendaraan
+        </div>
 
-        <!-- INPUT UNIT -->
+    </a>
 
-        <a
-            href="unit.html"
-            class="menu-item"
-        >
 
-            <div class="menu-icon">
-                🚗
-            </div>
+    <!-- INPUT CUSTOMER -->
 
-            <div class="menu-text">
-                Input Unit
-            </div>
+    <a
+        href="customer.html"
+        class="menu-item"
+    >
 
-        </a>
+        <div class="menu-icon">
+            👤
+        </div>
 
+        <div class="menu-text">
+            Input Customer
+        </div>
 
+    </a>
 
-        <!-- DATA UNIT -->
 
-        <a
-            href="tabelunit.html"
-            class="menu-item"
-        >
+    <!-- DATA CUSTOMER -->
 
-            <div class="menu-icon">
-                📋
-            </div>
+    <a
+        href="tabelcustomer.html"
+        class="menu-item"
+    >
 
-            <div class="menu-text">
-                Data Unit Kendaraan
-            </div>
+        <div class="menu-icon">
+            👥
+        </div>
 
-        </a>
+        <div class="menu-text">
+            Data Customer
+        </div>
 
+    </a>
 
 
-        <!-- INPUT CUSTOMER -->
+    <!-- RENT OUT -->
 
-        <a
-            href="customer.html"
-            class="menu-item"
-        >
+    <a
+        href="outrent.html"
+        class="menu-item"
+    >
 
-            <div class="menu-icon">
-                👤
-            </div>
+        <div class="menu-icon">
+            📝
+        </div>
 
-            <div class="menu-text">
-                Input Customer
-            </div>
+        <div class="menu-text">
+            RENT OUT
+        </div>
 
-        </a>
+    </a>
 
 
+    <!-- BOOKING UNIT -->
 
-        <!-- DATA CUSTOMER -->
+    <a
+        href="booking.html"
+        class="menu-item"
+    >
 
-        <a
-            href="tabelcustomer.html"
-            class="menu-item"
-        >
+        <div class="menu-icon">
+            📅
+        </div>
 
-            <div class="menu-icon">
-                👥
-            </div>
+        <div class="menu-text">
+            Booking Unit
+        </div>
 
-            <div class="menu-text">
-                Data Customer
-            </div>
+    </a>
 
-        </a>
 
+    <!-- LIST BOOKING UNIT -->
 
+    <a
+        href="tabelbooking.html"
+        class="menu-item"
+    >
 
-        <!-- RENT OUT -->
+        <div class="menu-icon">
+            📑
+        </div>
 
-        <a
-            href="outrent.html"
-            class="menu-item"
-        >
+        <div class="menu-text">
+            List Booking Unit
+        </div>
 
-            <div class="menu-icon">
-                📝
-            </div>
+    </a>
 
-            <div class="menu-text">
-                RENT OUT
-            </div>
 
-        </a>
+    <!-- UPDATE UNIT OUT -->
 
+    <a
+        href="tabeloutrent.html"
+        class="menu-item"
+    >
 
+        <div class="menu-icon">
+            📊
+        </div>
 
-        <!-- BOOKING UNIT -->
+        <div class="menu-text">
+            UPDATE Unit OUT
+        </div>
 
-        <a
-            href="booking.html"
-            class="menu-item"
-        >
+    </a>
 
-            <div class="menu-icon">
-                📅
-            </div>
 
-            <div class="menu-text">
-                Booking Unit
-            </div>
+    <!-- REVENUE -->
 
-        </a>
+    <a
+        href="tabelrevenue.html"
+        class="menu-item"
+    >
 
+        <div class="menu-icon">
+            💰
+        </div>
 
+        <div class="menu-text">
+            Revenue
+        </div>
 
-        <!-- LIST BOOKING UNIT -->
+    </a>
 
-        <a
-            href="tabelbooking.html"
-            class="menu-item"
-        >
 
-            <div class="menu-icon">
-                📑
-            </div>
+    <!-- =================================================
+         REVENUE UNIT
+         ================================================= -->
 
-            <div class="menu-text">
-                List Booking Unit
-            </div>
+    <a
+        href="tabelomsetunit.html"
+        class="menu-item"
+    >
 
-        </a>
+        <div class="menu-icon">
+            🚘💰
+        </div>
 
+        <div class="menu-text">
+            Revenue Unit
+        </div>
 
+    </a>
 
-        <!-- UPDATE UNIT OUT -->
 
-        <a
-            href="tabeloutrent.html"
-            class="menu-item"
-        >
+    <!-- =================================================
+         CASH OUT
+         ================================================= -->
 
-            <div class="menu-icon">
-                📊
-            </div>
+    <a
+        href="outcash.html"
+        class="menu-item"
+    >
 
-            <div class="menu-text">
-                UPDATE Unit OUT
-            </div>
+        <div class="menu-icon">
+            💸
+        </div>
 
-        </a>
+        <div class="menu-text">
+            CASH OUT
+        </div>
 
+    </a>
 
 
-        <!-- REVENUE -->
+</div>
 
-        <a
-            href="tabelrevenue.html"
-            class="menu-item"
-        >
 
-            <div class="menu-icon">
-                💰
-            </div>
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
 
-            <div class="menu-text">
-                Revenue
-            </div>
+<div class="footer">
 
-        </a>
+    © 2026 ARC TRANS
 
-
-    </div>
-
-
-
-    <!-- =====================================================
-         FOOTER
-         ===================================================== -->
-
-    <div class="footer">
-
-        © 2026 ARC TRANS
-
-    </div>
+</div>
 
 
 </main>
-```
+
 
 </body>
 
 </html>
+```
