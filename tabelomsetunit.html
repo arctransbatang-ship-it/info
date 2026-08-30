@@ -1,0 +1,4073 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>ARC TRANS - Omset Sewa Mobil</title>
+
+<!-- LIBRARY EXCEL -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eef6ff, #f7f9fc);
+    color: #263238;
+}
+
+/* =========================
+   HOME
+========================= */
+
+.home-btn {
+    position: fixed;
+    top: 14px;
+    left: 16px;
+    z-index: 2000;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    background: rgba(255,255,255,0.95);
+    color: #1565C0;
+
+    padding: 9px 16px;
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.12);
+
+    transition: 0.2s ease;
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: relative;
+
+    min-height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 35px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d47a1,
+            #2196F3,
+            #21c6f3
+        );
+
+    color: white;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 20px rgba(33,150,243,0.25);
+}
+
+.navbar::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.10);
+
+    top: -180px;
+    right: -80px;
+}
+
+.navbar::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    bottom: -150px;
+    left: 10%;
+}
+
+.logo {
+    position: relative;
+    z-index: 2;
+
+    font-size: clamp(22px, 4vw, 32px);
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-align: center;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 1500px;
+
+    margin: auto;
+
+    padding:
+        25px
+        clamp(15px, 4vw, 40px)
+        40px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+
+    flex-wrap: wrap;
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 14px 18px;
+
+    border:
+        1px solid #dce6f0;
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: white;
+
+    font-size: 14px;
+}
+
+#searchInput:focus {
+    border-color: #2196F3;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(33,150,243,0.12);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background: #cfd8dc !important;
+    cursor: not-allowed;
+}
+
+/* DOWNLOAD */
+
+#btnDownload {
+    background:
+        linear-gradient(
+            135deg,
+            #2e7d32,
+            #4CAF50
+        );
+}
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+.summary-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(0,0,0,0.07);
+
+    border:
+        1px solid #edf1f5;
+}
+
+.summary-title {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #607D8B;
+
+    margin-bottom: 8px;
+}
+
+.summary-value {
+    font-size: 24px;
+
+    font-weight: 800;
+
+    color: #1565C0;
+}
+
+.summary-value.total-positive {
+    color: #2e7d32;
+}
+
+.summary-value.total-negative {
+    color: #d32f2f;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+
+    min-width: 1000px;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+}
+
+th {
+    background:
+        linear-gradient(
+            135deg,
+            #1976D2,
+            #2196F3
+        );
+
+    color: white;
+
+    padding: 16px 14px;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    font-size: 13px;
+}
+
+td {
+    padding: 14px;
+
+    border-bottom:
+        1px solid #edf1f5;
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    font-size: 13px;
+}
+
+tbody tr {
+    transition:
+        background 0.2s ease;
+}
+
+tbody tr.data-row {
+    cursor: pointer;
+}
+
+tbody tr.data-row:hover {
+    background: #f5faff;
+}
+
+.id-transaksi {
+    font-weight: 800;
+    color: #1565C0;
+}
+
+/* =========================
+   MONEY
+========================= */
+
+.amount {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 10px;
+
+    font-weight: 800;
+}
+
+.amount-positive {
+    color: #2E7D32;
+    background: #E8F5E9;
+}
+
+.amount-negative {
+    color: #d32f2f;
+    background: #ffebee;
+}
+
+.amount-zero {
+    color: #607D8B;
+    background: #f1f3f4;
+}
+
+/* =========================
+   ACTION
+========================= */
+
+.action-buttons {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 7px;
+}
+
+.btn-edit {
+    background:
+        linear-gradient(
+            135deg,
+            #1976D2,
+            #42A5F5
+        );
+}
+
+.btn-delete {
+    background:
+        linear-gradient(
+            135deg,
+            #c62828,
+            #ef5350
+        );
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-data {
+    padding: 50px;
+
+    text-align: center;
+
+    color: #78909C;
+
+    font-size: 15px;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+#pagination {
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.btn-prev {
+    background: #fb8c00;
+}
+
+.btn-next {
+    background: #2e7d32;
+}
+
+.page-info {
+    padding: 10px 16px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #546E7A;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    z-index: 9999;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.65);
+
+    overflow-y: auto;
+
+    padding: 30px 15px;
+}
+
+.modal.show {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+.modal-content {
+    width: 100%;
+
+    max-width: 950px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.35);
+
+    animation:
+        modalShow 0.25s ease;
+}
+
+@keyframes modalShow {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =========================
+   MODAL HEADER
+========================= */
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d47a1,
+            #2196F3
+        );
+
+    color: white;
+}
+
+.modal-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.close-modal {
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.2);
+
+    font-size: 22px;
+}
+
+/* =========================
+   DETAIL
+========================= */
+
+.modal-body {
+    padding: 25px;
+}
+
+.detail-section {
+    margin-bottom: 25px;
+}
+
+.detail-section h3 {
+    margin:
+        0 0 15px;
+
+    color: #1565C0;
+
+    font-size: 16px;
+
+    border-bottom:
+        1px solid #e8eef5;
+
+    padding-bottom: 10px;
+}
+
+.detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+.detail-item {
+    background: #f7faff;
+
+    border:
+        1px solid #e4eef8;
+
+    border-radius: 12px;
+
+    padding: 13px;
+}
+
+.detail-label {
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color: #78909C;
+
+    text-transform: uppercase;
+
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #263238;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+.detail-value.negative {
+    color: #d32f2f;
+    font-weight: 800;
+}
+
+.detail-value.positive {
+    color: #2e7d32;
+    font-weight: 800;
+}
+
+/* =========================
+   EDIT FORM
+========================= */
+
+.edit-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 12px;
+
+    font-weight: 800;
+
+    color: #546E7A;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    border:
+        1px solid #dce6f0;
+
+    border-radius: 10px;
+
+    padding: 12px 13px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #263238;
+
+    background: white;
+}
+
+.form-group textarea {
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2196F3;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(33,150,243,0.10);
+}
+
+.readonly-field {
+    background: #f1f3f4 !important;
+
+    color: #607D8B !important;
+
+    cursor: not-allowed;
+}
+
+/* =========================
+   EDIT FOOTER
+========================= */
+
+.edit-footer {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid #e8eef5;
+}
+
+.btn-cancel {
+    background: #78909C;
+}
+
+.btn-save {
+    background:
+        linear-gradient(
+            135deg,
+            #2e7d32,
+            #4CAF50
+        );
+}
+
+/* =========================
+   DELETE
+========================= */
+
+.confirm-box {
+    max-width: 450px;
+
+    margin-top: 100px;
+}
+
+.confirm-body {
+    padding: 25px;
+
+    text-align: center;
+}
+
+.confirm-icon {
+    font-size: 45px;
+
+    margin-bottom: 10px;
+}
+
+.confirm-body h3 {
+    margin:
+        0 0 10px;
+
+    color: #263238;
+}
+
+.confirm-body p {
+    margin: 0;
+
+    color: #607D8B;
+
+    line-height: 1.6;
+}
+
+.confirm-footer {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.btn-confirm-delete {
+    background:
+        linear-gradient(
+            135deg,
+            #c62828,
+            #ef5350
+        );
+}
+
+.btn-confirm-cancel {
+    background: #78909C;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+    position: fixed;
+
+    z-index: 20000;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,0.75);
+
+    backdrop-filter:
+        blur(3px);
+}
+
+.loading.show {
+    display: flex;
+}
+
+.loading-box {
+    background: white;
+
+    padding: 25px 35px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 40px
+        rgba(0,0,0,0.15);
+
+    text-align: center;
+
+    font-weight: 700;
+
+    color: #1565C0;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        min-height: 120px;
+        padding-top: 55px;
+    }
+
+    .container {
+        padding:
+            15px
+            10px
+            30px;
+    }
+
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #searchInput {
+        max-width: none;
+    }
+
+    #btnDownload {
+        width: 100%;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .table-container {
+        background: transparent;
+        box-shadow: none;
+        overflow: visible;
+    }
+
+    table {
+        min-width: 0;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody {
+        display: block;
+    }
+
+    tbody tr.data-row {
+        display: block;
+
+        width: 100%;
+
+        background: white;
+
+        border-radius: 18px;
+
+        margin-bottom: 15px;
+
+        padding: 10px 14px;
+
+        box-shadow:
+            0 6px 20px
+            rgba(0,0,0,0.07);
+    }
+
+    td {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        gap: 15px;
+
+        padding: 12px 5px;
+
+        text-align: right;
+
+        white-space: normal;
+    }
+
+    td::before {
+        content: attr(data-label);
+
+        text-align: left;
+
+        font-weight: 700;
+
+        color: #607D8B;
+
+        flex:
+            0 0 40%;
+    }
+
+    td.action-cell {
+        display: block;
+
+        text-align: right;
+    }
+
+    td.action-cell::before {
+        display: block;
+
+        margin-bottom: 8px;
+    }
+
+    .action-buttons {
+        justify-content: flex-end;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edit-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-body {
+        padding: 18px;
+    }
+
+    .edit-footer {
+        flex-direction: column;
+    }
+
+    .edit-footer button {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     HOME
+========================= -->
+
+<a
+    href="index.html"
+    class="home-btn"
+>
+    🏠 Home
+</a>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        💰 DATA OMSET SEWA MOBIL
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- =========================
+     TOOLBAR
+========================= -->
+
+<div class="toolbar">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Cari tanggal, nama unit, plat nomor, jumlah..."
+    >
+
+    <button
+        id="btnDownload"
+        onclick="downloadExcel()"
+    >
+        📥 Download Excel
+    </button>
+
+</div>
+
+
+<!-- =========================
+     SUMMARY
+========================= -->
+
+<div class="summary">
+
+    <div class="summary-card">
+
+        <div class="summary-title">
+            TOTAL TRANSAKSI
+        </div>
+
+        <div
+            class="summary-value"
+            id="totalTransaksi"
+        >
+            0 Transaksi
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-title">
+            TOTAL PENDAPATAN
+        </div>
+
+        <div
+            class="summary-value"
+            id="totalPendapatan"
+        >
+            Rp 0
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TABLE
+========================= -->
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>No.</th>
+
+    <th>Tanggal</th>
+
+    <th>Nama Unit</th>
+
+    <th>Plat Nomor</th>
+
+    <th>Tanggal Sewa</th>
+
+    <th>Jumlah</th>
+
+    <th>Aksi</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="isiData">
+
+<tr>
+
+<td
+    colspan="7"
+    class="empty-data"
+>
+    Memuat data omset...
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- =========================
+     PAGINATION
+========================= -->
+
+<div id="pagination"></div>
+
+
+</div>
+
+
+<!-- =========================
+     MODAL DETAIL
+========================= -->
+
+<div
+    class="modal"
+    id="detailModal"
+>
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+    📋 Detail Omset
+</h2>
+
+<button
+    class="close-modal"
+    onclick="closeDetail()"
+    type="button"
+>
+    ×
+</button>
+
+</div>
+
+
+<div
+    class="modal-body"
+    id="detailContent"
+>
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     MODAL EDIT
+========================= -->
+
+<div
+    class="modal"
+    id="editModal"
+>
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+    ✏️ Edit Omset
+</h2>
+
+<button
+    class="close-modal"
+    onclick="closeEdit()"
+    type="button"
+>
+    ×
+</button>
+
+</div>
+
+
+<div class="modal-body">
+
+<div class="edit-form">
+
+
+<!-- ID -->
+
+<div class="form-group">
+
+<label>
+    ID Transaksi
+</label>
+
+<input
+    type="text"
+    id="editTransaksiId"
+    class="readonly-field"
+    readonly
+>
+
+</div>
+
+
+<!-- TANGGAL DATABASE -->
+
+<div class="form-group">
+
+<label>
+    Tanggal
+</label>
+
+<input
+    type="text"
+    id="editTanggal"
+    class="readonly-field"
+    readonly
+>
+
+</div>
+
+
+<!-- NAMA UNIT -->
+
+<div class="form-group">
+
+<label>
+    Nama Unit
+</label>
+
+<input
+    type="text"
+    id="editNamaUnit"
+    placeholder="Nama unit kendaraan..."
+>
+
+</div>
+
+
+<!-- PLAT -->
+
+<div class="form-group">
+
+<label>
+    Plat Nomor
+</label>
+
+<input
+    type="text"
+    id="editPlatNomor"
+    placeholder="Plat nomor..."
+>
+
+</div>
+
+
+<!-- TANGGAL SEWA -->
+
+<div class="form-group">
+
+<label>
+    Tanggal Sewa
+</label>
+
+<input
+    type="date"
+    id="editTanggalSewa"
+>
+
+</div>
+
+
+<!-- JUMLAH -->
+
+<div class="form-group">
+
+<label>
+    Jumlah Pendapatan
+</label>
+
+<input
+    type="text"
+    id="editJumlah"
+    placeholder="Contoh: 500000"
+>
+
+</div>
+
+
+</div>
+
+
+<div class="edit-footer">
+
+<button
+    type="button"
+    class="btn-cancel"
+    onclick="closeEdit()"
+>
+    Batal
+</button>
+
+
+<button
+    type="button"
+    class="btn-save"
+    id="btnSaveEdit"
+    onclick="saveEdit()"
+>
+    💾 Simpan Perubahan
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     MODAL DELETE
+========================= -->
+
+<div
+    class="modal"
+    id="deleteModal"
+>
+
+<div class="modal-content confirm-box">
+
+<div class="modal-header">
+
+<h2>
+    🗑️ Hapus Omset
+</h2>
+
+<button
+    class="close-modal"
+    onclick="closeDelete()"
+    type="button"
+>
+    ×
+</button>
+
+</div>
+
+
+<div class="confirm-body">
+
+<div class="confirm-icon">
+    ⚠️
+</div>
+
+<h3>
+    Yakin ingin menghapus?
+</h3>
+
+<p id="deleteMessage">
+    Data omset akan dihapus.
+</p>
+
+
+<div class="confirm-footer">
+
+<button
+    type="button"
+    class="btn-confirm-cancel"
+    onclick="closeDelete()"
+>
+    Batal
+</button>
+
+
+<button
+    type="button"
+    class="btn-confirm-delete"
+    id="btnConfirmDelete"
+    onclick="confirmDelete()"
+>
+    🗑️ Ya, Hapus
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     LOADING
+========================= -->
+
+<div
+    class="loading"
+    id="loading"
+>
+
+<div class="loading-box">
+
+    ⏳ Memproses data...
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+    getDatabase,
+    ref,
+    onValue,
+    update,
+    remove
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+
+    authDomain:
+        "arctrans.firebaseapp.com",
+
+    databaseURL:
+        "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+    projectId:
+        "arctrans",
+
+    storageBucket:
+        "arctrans.firebasestorage.app",
+
+    messagingSenderId:
+        "60781918601",
+
+    appId:
+        "1:60781918601:web:c85d6131207f8a8958"
+
+};
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getDatabase(app);
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let allData = [];
+
+let filteredData = [];
+
+let currentPage = 1;
+
+const rowsPerPage = 10;
+
+let selectedEditItem = null;
+
+let selectedDeleteItem = null;
+
+
+/* =========================
+   PARSE NUMBER
+========================= */
+
+function parseNumber(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+        return 0;
+    }
+
+
+    if (
+        typeof value === "number"
+    ) {
+
+        return isNaN(value)
+            ? 0
+            : value;
+
+    }
+
+
+    let text =
+        String(value)
+            .trim()
+            .replace(/Rp/gi, "")
+            .replace(/\s/g, "");
+
+
+    /*
+        Format Indonesia:
+
+        Rp 500.000
+        500.000
+        500000
+        500.000,50
+    */
+
+    if (
+        text.includes(".") &&
+        text.includes(",")
+    ) {
+
+        text =
+            text
+                .replace(/\./g, "")
+                .replace(/,/g, ".");
+
+    }
+
+    else if (
+        text.includes(".")
+    ) {
+
+        text =
+            text.replace(/\./g, "");
+
+    }
+
+    else if (
+        text.includes(",")
+    ) {
+
+        /*
+            Jika hanya koma,
+            tetap dianggap desimal.
+        */
+
+        const parts =
+            text.split(",");
+
+        if (
+            parts.length === 2 &&
+            parts[1].length <= 2
+        ) {
+
+            text =
+                parts[0] +
+                "." +
+                parts[1];
+
+        }
+        else {
+
+            text =
+                text.replace(/,/g, "");
+
+        }
+
+    }
+
+
+    const numberValue =
+        Number(text);
+
+
+    return isNaN(numberValue)
+        ? 0
+        : numberValue;
+
+}
+
+
+/* =========================
+   FORMAT RUPIAH
+========================= */
+
+function formatRupiah(value) {
+
+    const numberValue =
+        Number(value || 0);
+
+    return (
+        "Rp " +
+        numberValue.toLocaleString("id-ID")
+    );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================
+   FORMAT TANGGAL
+========================= */
+
+function formatTanggal(value) {
+
+    if (!value) {
+        return "-";
+    }
+
+
+    const text =
+        String(value).trim();
+
+
+    /*
+        YYYY-MM-DD
+    */
+
+    const match =
+        text.match(
+            /^(\d{4})-(\d{2})-(\d{2})$/
+        );
+
+
+    if (match) {
+
+        const tahun =
+            Number(match[1]);
+
+        const bulan =
+            Number(match[2]);
+
+        const hari =
+            Number(match[3]);
+
+
+        const namaBulan = [
+
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+
+        ];
+
+
+        return (
+            hari +
+            " " +
+            namaBulan[bulan - 1] +
+            " " +
+            tahun
+        );
+
+    }
+
+
+    const date =
+        new Date(text);
+
+
+    if (
+        !isNaN(date.getTime())
+    ) {
+
+        return date.toLocaleDateString(
+            "id-ID",
+            {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    return text;
+
+}
+
+
+/* =========================
+   FORMAT INPUT DATE
+========================= */
+
+function normalizeDateInput(value) {
+
+    if (!value) {
+        return "";
+    }
+
+
+    const text =
+        String(value).trim();
+
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/.test(text)
+    ) {
+
+        return text;
+
+    }
+
+
+    const date =
+        new Date(text);
+
+
+    if (
+        isNaN(date.getTime())
+    ) {
+
+        return "";
+
+    }
+
+
+    const tahun =
+        date.getFullYear();
+
+    const bulan =
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0");
+
+    const hari =
+        String(
+            date.getDate()
+        ).padStart(2, "0");
+
+
+    return (
+        tahun +
+        "-" +
+        bulan +
+        "-" +
+        hari
+    );
+
+}
+
+
+/* =========================
+   SORT TIME
+========================= */
+
+function getSortTime(item) {
+
+    const value =
+
+        item.tanggalInput ||
+
+        item.tanggal ||
+
+        item.tanggalTransaksi ||
+
+        item.tanggalSewa ||
+
+        item.tanggalsewa ||
+
+        item.firebaseDate ||
+
+        "";
+
+
+    if (
+        typeof value === "number"
+    ) {
+
+        return value;
+
+    }
+
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            String(value)
+        )
+    ) {
+
+        return new Date(
+            String(value) +
+            "T00:00:00"
+        ).getTime();
+
+    }
+
+
+    const parsed =
+        Date.parse(value);
+
+
+    if (
+        !isNaN(parsed)
+    ) {
+
+        return parsed;
+
+    }
+
+
+    return 0;
+
+}
+
+
+/* =========================
+   GET FIELD
+========================= */
+
+function getFirstValue(item, fields) {
+
+    for (
+        const field of fields
+    ) {
+
+        if (
+            item[field] !== undefined &&
+            item[field] !== null &&
+            item[field] !== ""
+        ) {
+
+            return item[field];
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+/* =========================
+   GET JUMLAH
+========================= */
+
+function getJumlah(item) {
+
+    const value =
+        getFirstValue(
+            item,
+            [
+                "jumlah",
+                "bayar",
+                "total",
+                "totalBayar",
+                "harga",
+                "nominal",
+                "amount"
+            ]
+        );
+
+
+    return parseNumber(value);
+
+}
+
+
+/* =========================
+   GET NAMA UNIT
+========================= */
+
+function getNamaUnit(item) {
+
+    return getFirstValue(
+        item,
+        [
+            "namaUnit",
+            "namaKendaraan",
+            "namaUnitKendaraan",
+            "unit",
+            "namaMobil"
+        ]
+    );
+
+}
+
+
+/* =========================
+   GET PLAT
+========================= */
+
+function getPlat(item) {
+
+    return getFirstValue(
+        item,
+        [
+            "platNomor",
+            "plat",
+            "noPlat",
+            "nomorPlat",
+            "platMobil"
+        ]
+    );
+
+}
+
+
+/* =========================
+   GET TANGGAL SEWA
+========================= */
+
+function getTanggalSewa(item) {
+
+    return getFirstValue(
+        item,
+        [
+            "tanggalSewa",
+            "tanggalsewa",
+            "tanggal",
+            "tanggalInput",
+            "tanggalTransaksi",
+            "tanggalBooking"
+        ]
+    );
+
+}
+
+
+/* =========================
+   AMBIL DATA OMSET
+========================= */
+
+const omsetRef =
+    ref(
+        db,
+        "omset"
+    );
+
+
+onValue(
+
+    omsetRef,
+
+    (snapshot) => {
+
+        const data =
+            snapshot.val();
+
+
+        if (!data) {
+
+            allData = [];
+
+            filteredData = [];
+
+            updateSummary();
+
+            showEmptyData(
+                "Data omset belum tersedia"
+            );
+
+            return;
+
+        }
+
+
+        let result = [];
+
+
+        /*
+            STRUKTUR YANG DIDUKUNG:
+
+            omset/
+                TANGGAL/
+                    ID_TRANSAKSI/
+                        namaUnit
+                        platNomor
+                        tanggal
+                        jumlah
+
+
+            DAN:
+
+            omset/
+                TANGGAL/
+                    namaUnit
+                    platNomor
+                    tanggal
+                    jumlah
+        */
+
+
+        Object.entries(data)
+
+            .forEach(
+                ([tanggalKey, transaksiData]) => {
+
+
+                    if (
+                        !transaksiData ||
+                        typeof transaksiData !== "object"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /*
+                        CEK APAKAH DATA LANGSUNG
+                    */
+
+                    const directJumlah =
+                        getJumlah(
+                            transaksiData
+                        );
+
+
+                    const hasDirectData =
+
+                        directJumlah !== 0 ||
+
+                        transaksiData.namaUnit !== undefined ||
+
+                        transaksiData.namaKendaraan !== undefined ||
+
+                        transaksiData.platNomor !== undefined ||
+
+                        transaksiData.plat !== undefined;
+
+
+                    if (hasDirectData) {
+
+                        result.push({
+
+                            firebaseDate:
+                                tanggalKey,
+
+                            firebaseId:
+                                tanggalKey,
+
+                            ...transaksiData,
+
+                            jumlah:
+                                directJumlah
+
+                        });
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                        STRUKTUR:
+
+                        omset/
+                            tanggal/
+                                ID_TRANSAKSI/
+                    */
+
+                    Object.entries(
+                        transaksiData
+                    )
+
+                    .forEach(
+                        ([transaksiKey, item]) => {
+
+
+                            if (
+                                !item ||
+                                typeof item !== "object"
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            const jumlah =
+                                getJumlah(item);
+
+
+                            /*
+                                Data tanpa jumlah
+                                tetap tidak ditampilkan
+                            */
+
+                            if (
+                                jumlah === 0
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            result.push({
+
+                                firebaseDate:
+                                    tanggalKey,
+
+                                firebaseId:
+                                    transaksiKey,
+
+                                ...item,
+
+                                jumlah:
+                                    jumlah
+
+                            });
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /*
+            URUTKAN TERBARU
+        */
+
+        result.sort(
+            (a, b) =>
+                getSortTime(b) -
+                getSortTime(a)
+        );
+
+
+        /*
+            NORMALISASI
+        */
+
+        allData =
+            result.map(item => {
+
+
+                const transaksiId =
+
+                    item.transaksiId ||
+
+                    item.idTransaksi ||
+
+                    item.firebaseId ||
+
+                    "-";
+
+
+                const tanggal =
+
+                    item.tanggalInput ||
+
+                    item.firebaseDate ||
+
+                    item.tanggal ||
+
+                    item.tanggalTransaksi ||
+
+                    "-";
+
+
+                const namaUnit =
+                    getNamaUnit(item);
+
+
+                const platNomor =
+                    getPlat(item);
+
+
+                const tanggalSewa =
+                    getTanggalSewa(item);
+
+
+                const jumlah =
+                    getJumlah(item);
+
+
+                return {
+
+                    ...item,
+
+                    transaksiId:
+                        transaksiId,
+
+                    tanggal:
+                        tanggal,
+
+                    namaUnit:
+                        namaUnit,
+
+                    platNomor:
+                        platNomor,
+
+                    tanggalSewa:
+                        tanggalSewa,
+
+                    jumlah:
+                        jumlah
+
+                };
+
+            });
+
+
+        applySearch();
+
+        updateSummary();
+
+    },
+
+    (error) => {
+
+        console.error(
+            "Firebase Error:",
+            error
+        );
+
+
+        showEmptyData(
+            "Gagal mengambil data: " +
+            error.message
+        );
+
+    }
+
+);
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function applySearch() {
+
+    const keyword =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    filteredData =
+        allData.filter(
+            item => {
+
+
+                const values = [
+
+                    item.transaksiId,
+
+                    item.tanggal,
+
+                    item.namaUnit,
+
+                    item.platNomor,
+
+                    item.tanggalSewa,
+
+                    item.jumlah,
+
+                    item.type,
+
+                    item.keterangan
+
+                ];
+
+
+                return values.some(
+                    value =>
+                        String(
+                            value ?? ""
+                        )
+                        .toLowerCase()
+                        .includes(keyword)
+                );
+
+            }
+        );
+
+
+    currentPage = 1;
+
+    renderTable();
+
+    updateSummary();
+
+}
+
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        applySearch
+    );
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+function updateSummary() {
+
+    const jumlahTransaksi =
+        filteredData.length;
+
+
+    const totalPendapatan =
+        filteredData.reduce(
+            (sum, item) => {
+
+                return (
+                    sum +
+                    Number(
+                        item.jumlah || 0
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    document
+        .getElementById(
+            "totalTransaksi"
+        )
+        .textContent =
+            jumlahTransaksi +
+            " Transaksi";
+
+
+    const totalElement =
+        document.getElementById(
+            "totalPendapatan"
+        );
+
+
+    totalElement.textContent =
+        formatRupiah(
+            totalPendapatan
+        );
+
+
+    totalElement.classList.remove(
+        "total-negative",
+        "total-positive"
+    );
+
+
+    if (
+        totalPendapatan < 0
+    ) {
+
+        totalElement.classList.add(
+            "total-negative"
+        );
+
+    }
+
+    else if (
+        totalPendapatan > 0
+    ) {
+
+        totalElement.classList.add(
+            "total-positive"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   EMPTY DATA
+========================= */
+
+function showEmptyData(message) {
+
+    document
+        .getElementById(
+            "isiData"
+        )
+        .innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="7"
+                class="empty-data"
+            >
+
+                ${escapeHtml(message)}
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    document
+        .getElementById(
+            "pagination"
+        )
+        .innerHTML = "";
+
+}
+
+
+/* =========================
+   RENDER TABLE
+========================= */
+
+function renderTable() {
+
+    if (
+        filteredData.length === 0
+    ) {
+
+        showEmptyData(
+            "Data tidak ditemukan"
+        );
+
+        return;
+
+    }
+
+
+    const totalPages =
+        Math.ceil(
+            filteredData.length /
+            rowsPerPage
+        );
+
+
+    if (
+        currentPage > totalPages
+    ) {
+
+        currentPage =
+            totalPages;
+
+    }
+
+
+    const start =
+        (
+            currentPage - 1
+        ) *
+        rowsPerPage;
+
+
+    const end =
+        start +
+        rowsPerPage;
+
+
+    const paginatedData =
+        filteredData.slice(
+            start,
+            end
+        );
+
+
+    let html = "";
+
+    let no =
+        start + 1;
+
+
+    paginatedData.forEach(
+        item => {
+
+
+            const dataIndex =
+                allData.indexOf(item);
+
+
+            let amountClass =
+                "amount-zero";
+
+
+            if (
+                item.jumlah > 0
+            ) {
+
+                amountClass =
+                    "amount-positive";
+
+            }
+
+            else if (
+                item.jumlah < 0
+            ) {
+
+                amountClass =
+                    "amount-negative";
+
+            }
+
+
+            html += `
+
+            <tr
+                class="data-row"
+                onclick="showDetail(${dataIndex})"
+            >
+
+
+                <td
+                    data-label="No."
+                >
+                    ${no}
+                </td>
+
+
+                <td
+                    data-label="Tanggal"
+                >
+                    ${escapeHtml(
+                        formatTanggal(
+                            item.tanggal
+                        )
+                    )}
+                </td>
+
+
+                <td
+                    data-label="Nama Unit"
+                >
+                    ${escapeHtml(
+                        item.namaUnit || "-"
+                    )}
+                </td>
+
+
+                <td
+                    data-label="Plat Nomor"
+                >
+                    ${escapeHtml(
+                        item.platNomor || "-"
+                    )}
+                </td>
+
+
+                <td
+                    data-label="Tanggal Sewa"
+                >
+                    ${escapeHtml(
+                        formatTanggal(
+                            item.tanggalSewa
+                        )
+                    )}
+                </td>
+
+
+                <td
+                    data-label="Jumlah"
+                >
+
+                    <span
+                        class="amount ${amountClass}"
+                    >
+
+                        ${formatRupiah(
+                            item.jumlah
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td
+                    data-label="Aksi"
+                    class="action-cell"
+                    onclick="event.stopPropagation()"
+                >
+
+                    <div
+                        class="action-buttons"
+                    >
+
+                        <button
+                            type="button"
+                            class="btn-edit"
+                            onclick="openEdit(${dataIndex})"
+                        >
+                            ✏️ Edit
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="btn-delete"
+                            onclick="openDelete(${dataIndex})"
+                        >
+                            🗑️ Hapus
+                        </button>
+
+                    </div>
+
+                </td>
+
+
+            </tr>
+
+            `;
+
+
+            no++;
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "isiData"
+        )
+        .innerHTML =
+            html;
+
+
+    renderPagination();
+
+}
+
+
+/* =========================
+   PAGINATION
+========================= */
+
+function renderPagination() {
+
+    const totalPages =
+        Math.ceil(
+            filteredData.length /
+            rowsPerPage
+        );
+
+
+    if (
+        totalPages <= 1
+    ) {
+
+        document
+            .getElementById(
+                "pagination"
+            )
+            .innerHTML = "";
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "pagination"
+        )
+        .innerHTML = `
+
+        <button
+            class="btn-prev"
+            onclick="prevPage()"
+            ${
+                currentPage === 1
+                    ? "disabled"
+                    : ""
+            }
+        >
+            ← Sebelumnya
+        </button>
+
+
+        <span
+            class="page-info"
+        >
+
+            Halaman
+            ${currentPage}
+            dari
+            ${totalPages}
+
+        </span>
+
+
+        <button
+            class="btn-next"
+            onclick="nextPage()"
+            ${
+                currentPage === totalPages
+                    ? "disabled"
+                    : ""
+            }
+        >
+            Selanjutnya →
+        </button>
+
+    `;
+
+}
+
+
+/* =========================
+   NEXT PAGE
+========================= */
+
+window.nextPage =
+    function() {
+
+        const totalPages =
+            Math.ceil(
+                filteredData.length /
+                rowsPerPage
+            );
+
+
+        if (
+            currentPage <
+            totalPages
+        ) {
+
+            currentPage++;
+
+            renderTable();
+
+        }
+
+    };
+
+
+/* =========================
+   PREVIOUS PAGE
+========================= */
+
+window.prevPage =
+    function() {
+
+        if (
+            currentPage > 1
+        ) {
+
+            currentPage--;
+
+            renderTable();
+
+        }
+
+    };
+
+
+/* =========================
+   SHOW DETAIL
+========================= */
+
+window.showDetail =
+    function(index) {
+
+
+        const item =
+            allData[index];
+
+
+        if (!item) {
+            return;
+        }
+
+
+        const excludedFields = [
+
+            "firebaseDate",
+
+            "firebaseId",
+
+            "jumlah"
+
+        ];
+
+
+        let detailHtml = "";
+
+
+        Object.entries(item)
+
+            .forEach(
+                ([key, value]) => {
+
+
+                    if (
+                        excludedFields.includes(
+                            key
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        value === null ||
+                        value === undefined ||
+                        value === ""
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    let displayValue =
+                        value;
+
+
+                    if (
+                        typeof value ===
+                        "object"
+                    ) {
+
+                        displayValue =
+                            JSON.stringify(
+                                value,
+                                null,
+                                2
+                            );
+
+                    }
+
+
+                    if (
+                        key.toLowerCase()
+                            .includes("tanggal")
+                    ) {
+
+                        displayValue =
+                            formatTanggal(
+                                value
+                            );
+
+                    }
+
+
+                    if (
+                        [
+                            "bayar",
+                            "jumlah",
+                            "total",
+                            "totalBayar",
+                            "harga",
+                            "nominal",
+                            "amount"
+                        ].includes(
+                            key
+                        )
+                    ) {
+
+                        displayValue =
+                            formatRupiah(
+                                parseNumber(
+                                    value
+                                )
+                            );
+
+                    }
+
+
+                    let valueClass = "";
+
+
+                    const numericValue =
+                        parseNumber(
+                            value
+                        );
+
+
+                    if (
+                        [
+                            "bayar",
+                            "jumlah",
+                            "total",
+                            "totalBayar",
+                            "harga",
+                            "nominal",
+                            "amount"
+                        ].includes(
+                            key
+                        )
+                    ) {
+
+                        if (
+                            numericValue < 0
+                        ) {
+
+                            valueClass =
+                                "negative";
+
+                        }
+
+                        else if (
+                            numericValue > 0
+                        ) {
+
+                            valueClass =
+                                "positive";
+
+                        }
+
+                    }
+
+
+                    detailHtml += `
+
+                    <div
+                        class="detail-item"
+                    >
+
+                        <div
+                            class="detail-label"
+                        >
+
+                            ${escapeHtml(
+                                formatFieldName(
+                                    key
+                                )
+                            )}
+
+                        </div>
+
+
+                        <div
+                            class="detail-value ${valueClass}"
+                        >
+
+                            ${escapeHtml(
+                                displayValue
+                            )}
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                }
+            );
+
+
+        /*
+            Tambahkan jumlah utama
+        */
+
+        detailHtml += `
+
+        <div
+            class="detail-item"
+        >
+
+            <div
+                class="detail-label"
+            >
+                Jumlah Pendapatan
+            </div>
+
+
+            <div
+                class="detail-value ${
+                    item.jumlah < 0
+                        ? "negative"
+                        : item.jumlah > 0
+                            ? "positive"
+                            : ""
+                }"
+            >
+
+                ${escapeHtml(
+                    formatRupiah(
+                        item.jumlah
+                    )
+                )}
+
+            </div>
+
+        </div>
+
+        `;
+
+
+        document
+            .getElementById(
+                "detailContent"
+            )
+            .innerHTML = `
+
+            <div
+                class="detail-section"
+            >
+
+                <h3>
+                    Informasi Omset
+                </h3>
+
+
+                <div
+                    class="detail-grid"
+                >
+
+                    ${detailHtml}
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        document
+            .getElementById(
+                "detailModal"
+            )
+            .classList.add(
+                "show"
+            );
+
+    };
+
+
+/* =========================
+   FORMAT FIELD NAME
+========================= */
+
+function formatFieldName(key) {
+
+    const labels = {
+
+        transaksiId:
+            "ID Transaksi",
+
+        tanggal:
+            "Tanggal",
+
+        tanggalInput:
+            "Tanggal Transaksi",
+
+        tanggalTransaksi:
+            "Tanggal Transaksi",
+
+        tanggalSewa:
+            "Tanggal Sewa",
+
+        tanggalsewa:
+            "Tanggal Sewa",
+
+        firebaseDate:
+            "Tanggal",
+
+        firebaseId:
+            "ID Firebase",
+
+        namaUnit:
+            "Nama Unit",
+
+        namaKendaraan:
+            "Nama Kendaraan",
+
+        namaUnitKendaraan:
+            "Nama Unit Kendaraan",
+
+        platNomor:
+            "Plat Nomor",
+
+        plat:
+            "Plat Nomor",
+
+        noPlat:
+            "Plat Nomor",
+
+        nomorPlat:
+            "Plat Nomor",
+
+        bayar:
+            "Jumlah / Bayar",
+
+        jumlah:
+            "Jumlah",
+
+        total:
+            "Total",
+
+        totalBayar:
+            "Total Bayar",
+
+        harga:
+            "Harga",
+
+        nominal:
+            "Nominal",
+
+        amount:
+            "Jumlah"
+
+    };
+
+
+    return (
+
+        labels[key] ||
+
+        String(key)
+
+            .replace(
+                /([A-Z])/g,
+                " $1"
+            )
+
+            .replace(
+                /^./,
+                char =>
+                    char.toUpperCase()
+            )
+
+    );
+
+}
+
+
+/* =========================
+   CLOSE DETAIL
+========================= */
+
+window.closeDetail =
+    function() {
+
+        document
+            .getElementById(
+                "detailModal"
+            )
+            .classList.remove(
+                "show"
+            );
+
+    };
+
+
+/* =========================
+   OPEN EDIT
+========================= */
+
+window.openEdit =
+    function(index) {
+
+
+        const item =
+            allData[index];
+
+
+        if (!item) {
+            return;
+        }
+
+
+        selectedEditItem =
+            item;
+
+
+        document
+            .getElementById(
+                "editTransaksiId"
+            )
+            .value =
+                item.transaksiId || "";
+
+
+        document
+            .getElementById(
+                "editTanggal"
+            )
+            .value =
+                formatTanggal(
+                    item.tanggal
+                );
+
+
+        document
+            .getElementById(
+                "editNamaUnit"
+            )
+            .value =
+                item.namaUnit || "";
+
+
+        document
+            .getElementById(
+                "editPlatNomor"
+            )
+            .value =
+                item.platNomor || "";
+
+
+        document
+            .getElementById(
+                "editTanggalSewa"
+            )
+            .value =
+                normalizeDateInput(
+                    item.tanggalSewa
+                );
+
+
+        document
+            .getElementById(
+                "editJumlah"
+            )
+            .value =
+                item.jumlah || 0;
+
+
+        document
+            .getElementById(
+                "editModal"
+            )
+            .classList.add(
+                "show"
+            );
+
+    };
+
+
+/* =========================
+   SAVE EDIT
+========================= */
+
+window.saveEdit =
+    async function() {
+
+
+        if (!selectedEditItem) {
+
+            alert(
+                "Data omset tidak ditemukan."
+            );
+
+            return;
+
+        }
+
+
+        const namaUnit =
+            document
+                .getElementById(
+                    "editNamaUnit"
+                )
+                .value
+                .trim();
+
+
+        const platNomor =
+            document
+                .getElementById(
+                    "editPlatNomor"
+                )
+                .value
+                .trim();
+
+
+        const tanggalSewa =
+            document
+                .getElementById(
+                    "editTanggalSewa"
+                )
+                .value
+                .trim();
+
+
+        const jumlahText =
+            document
+                .getElementById(
+                    "editJumlah"
+                )
+                .value
+                .trim();
+
+
+        if (!namaUnit) {
+
+            alert(
+                "Nama unit wajib diisi."
+            );
+
+            return;
+
+        }
+
+
+        if (!jumlahText) {
+
+            alert(
+                "Jumlah wajib diisi."
+            );
+
+            return;
+
+        }
+
+
+        const jumlah =
+            parseNumber(
+                jumlahText
+            );
+
+
+        const tanggalKey =
+            selectedEditItem.firebaseDate;
+
+
+        const transaksiKey =
+            selectedEditItem.firebaseId;
+
+
+        if (
+            !tanggalKey ||
+            !transaksiKey
+        ) {
+
+            alert(
+                "Path transaksi tidak ditemukan."
+            );
+
+            return;
+
+        }
+
+
+        /*
+            Path:
+
+            omset/
+                tanggal/
+                    ID_TRANSAKSI/
+        */
+
+        const transaksiRef =
+            ref(
+                db,
+                "omset/" +
+                tanggalKey +
+                "/" +
+                transaksiKey
+            );
+
+
+        /*
+            Field utama diperbarui.
+        */
+
+        const updates = {
+
+            namaUnit:
+                namaUnit,
+
+            platNomor:
+                platNomor,
+
+            tanggalSewa:
+                tanggalSewa,
+
+            jumlah:
+                jumlah,
+
+            /*
+                Jika data lama menggunakan
+                bayar sebagai jumlah,
+                ikut diperbarui.
+            */
+
+            bayar:
+                jumlah
+
+        };
+
+
+        try {
+
+            showLoading(true);
+
+
+            await update(
+                transaksiRef,
+                updates
+            );
+
+
+            showLoading(false);
+
+
+            closeEdit();
+
+
+            alert(
+                "Data omset berhasil diperbarui."
+            );
+
+        }
+
+        catch (error) {
+
+            showLoading(false);
+
+
+            console.error(
+                "Gagal update:",
+                error
+            );
+
+
+            alert(
+                "Gagal memperbarui data:\n" +
+                error.message
+            );
+
+        }
+
+    };
+
+
+/* =========================
+   OPEN DELETE
+========================= */
+
+window.openDelete =
+    function(index) {
+
+
+        const item =
+            allData[index];
+
+
+        if (!item) {
+            return;
+        }
+
+
+        selectedDeleteItem =
+            item;
+
+
+        document
+            .getElementById(
+                "deleteMessage"
+            )
+            .innerHTML = `
+
+            Omset
+
+            <strong>
+                ${escapeHtml(
+                    item.transaksiId
+                )}
+            </strong>
+
+            dengan pendapatan
+
+            <strong>
+                ${escapeHtml(
+                    formatRupiah(
+                        item.jumlah
+                    )
+                )}
+            </strong>
+
+            akan dihapus secara permanen.
+
+        `;
+
+
+        document
+            .getElementById(
+                "deleteModal"
+            )
+            .classList.add(
+                "show"
+            );
+
+    };
+
+
+/* =========================
+   CONFIRM DELETE
+========================= */
+
+window.confirmDelete =
+    async function() {
+
+
+        if (!selectedDeleteItem) {
+
+            alert(
+                "Data omset tidak ditemukan."
+            );
+
+            return;
+
+        }
+
+
+        const tanggalKey =
+            selectedDeleteItem.firebaseDate;
+
+
+        const transaksiKey =
+            selectedDeleteItem.firebaseId;
+
+
+        if (
+            !tanggalKey ||
+            !transaksiKey
+        ) {
+
+            alert(
+                "Path transaksi tidak ditemukan."
+            );
+
+            return;
+
+        }
+
+
+        const transaksiRef =
+            ref(
+                db,
+                "omset/" +
+                tanggalKey +
+                "/" +
+                transaksiKey
+            );
+
+
+        try {
+
+            showLoading(true);
+
+
+            await remove(
+                transaksiRef
+            );
+
+
+            showLoading(false);
+
+
+            closeDelete();
+
+
+            alert(
+                "Data omset berhasil dihapus."
+            );
+
+        }
+
+        catch (error) {
+
+            showLoading(false);
+
+
+            console.error(
+                "Gagal hapus:",
+                error
+            );
+
+
+            alert(
+                "Gagal menghapus data:\n" +
+                error.message
+            );
+
+        }
+
+    };
+
+
+/* =========================
+   CLOSE EDIT
+========================= */
+
+window.closeEdit =
+    function() {
+
+        document
+            .getElementById(
+                "editModal"
+            )
+            .classList.remove(
+                "show"
+            );
+
+
+        selectedEditItem =
+            null;
+
+    };
+
+
+/* =========================
+   CLOSE DELETE
+========================= */
+
+window.closeDelete =
+    function() {
+
+        document
+            .getElementById(
+                "deleteModal"
+            )
+            .classList.remove(
+                "show"
+            );
+
+
+        selectedDeleteItem =
+            null;
+
+    };
+
+
+/* =========================
+   CLOSE MODAL OUTSIDE
+========================= */
+
+document
+    .getElementById(
+        "detailModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeDetail();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "editModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeEdit();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "deleteModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeDelete();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   ESC
+========================= */
+
+document
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeDetail();
+
+                closeEdit();
+
+                closeDelete();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   LOADING
+========================= */
+
+function showLoading(show) {
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    if (show) {
+
+        loading.classList.add(
+            "show"
+        );
+
+    }
+
+    else {
+
+        loading.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   DOWNLOAD EXCEL
+========================= */
+
+window.downloadExcel =
+    function() {
+
+
+        if (
+            filteredData.length === 0
+        ) {
+
+            alert(
+                "Tidak ada data untuk di-download!"
+            );
+
+            return;
+
+        }
+
+
+        const dataExcel =
+            filteredData.map(
+                (item, index) => {
+
+                    return {
+
+                        "No":
+                            index + 1,
+
+                        "Tanggal":
+                            formatTanggal(
+                                item.tanggal
+                            ),
+
+                        "Nama Unit":
+                            item.namaUnit || "",
+
+                        "Plat Nomor":
+                            item.platNomor || "",
+
+                        "Tanggal Sewa":
+                            formatTanggal(
+                                item.tanggalSewa
+                            ),
+
+                        "Jumlah":
+                            Number(
+                                item.jumlah || 0
+                            )
+
+                    };
+
+                }
+            );
+
+
+        /*
+            TOTAL
+        */
+
+        const total =
+            dataExcel.reduce(
+                (sum, item) => {
+
+                    return (
+                        sum +
+                        Number(
+                            item["Jumlah"] || 0
+                        )
+                    );
+
+                },
+                0
+            );
+
+
+        dataExcel.push({
+
+            "No":
+                "",
+
+            "Tanggal":
+                "",
+
+            "Nama Unit":
+                "",
+
+            "Plat Nomor":
+                "",
+
+            "Tanggal Sewa":
+                "TOTAL PENDAPATAN",
+
+            "Jumlah":
+                total
+
+        });
+
+
+        const worksheet =
+            XLSX.utils.json_to_sheet(
+                dataExcel
+            );
+
+
+        worksheet["!cols"] = [
+
+            {
+                wch: 8
+            },
+
+            {
+                wch: 22
+            },
+
+            {
+                wch: 30
+            },
+
+            {
+                wch: 20
+            },
+
+            {
+                wch: 22
+            },
+
+            {
+                wch: 20
+            }
+
+        ];
+
+
+        /*
+            Format Rupiah
+        */
+
+        const range =
+            XLSX.utils.decode_range(
+                worksheet["!ref"]
+            );
+
+
+        /*
+            Kolom F = index 5
+        */
+
+        for (
+            let row = 1;
+            row <= range.e.r;
+            row++
+        ) {
+
+            const cell =
+                worksheet[
+                    XLSX.utils.encode_cell({
+                        r: row,
+                        c: 5
+                    })
+                ];
+
+
+            if (cell) {
+
+                cell.z =
+                    '"Rp" #,##0';
+
+            }
+
+        }
+
+
+        const workbook =
+            XLSX.utils.book_new();
+
+
+        XLSX.utils.book_append_sheet(
+            workbook,
+            worksheet,
+            "Omset"
+        );
+
+
+        XLSX.writeFile(
+            workbook,
+            "Data_Omset_Sewa_Mobil.xlsx"
+        );
+
+    };
+
+
+</script>
+
+</body>
+
+</html>
+```
