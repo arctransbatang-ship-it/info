@@ -1,1098 +1,473 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
->
-
-<title>ARC TRANS</title>
-
-<!-- =====================================================
-     FAVICON / ICON WEBSITE ARC TRANS
-     ===================================================== -->
-
-<link
-    rel="icon"
-    type="image/png"
-    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
->
-
-<link
-    rel="shortcut icon"
-    type="image/png"
-    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
->
-
-<link
-    rel="apple-touch-icon"
-    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
->
-
-<!-- =====================================================
-     PWA / ANDROID THEME
-     ===================================================== -->
-
-<meta
-    name="theme-color"
-    content="#2196F3"
->
-
-<meta
-    name="mobile-web-app-capable"
-    content="yes"
->
-
-<meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
->
-
-<meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="default"
->
-
-<meta
-    name="apple-mobile-web-app-title"
-    content="ARC TRANS"
->
-
-
-<style>
-
-/* =====================================================
-   GLOBAL
-   ===================================================== */
-
-* {
-
-    box-sizing: border-box;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-}
-
-
-html {
-
-    min-height: 100%;
-
-}
-
-
-body {
-
-    margin: 0;
-
-    min-height: 100vh;
-
-    padding: 20px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0f4c81 0%,
-            #2196F3 45%,
-            #21CBF3 100%
-        );
-
-    overflow-x: hidden;
-
-    position: relative;
-
-}
-
-
-/* =====================================================
-   BACKGROUND DECORATION
-   ===================================================== */
-
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    width: 300px;
-
-    height: 300px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
-
-    top: -100px;
-
-    left: -100px;
-
-    filter: blur(2px);
-
-}
-
-
-body::after {
-
-    content: "";
-
-    position: fixed;
-
-    width: 350px;
-
-    height: 350px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.10
-        );
-
-    bottom: -150px;
-
-    right: -100px;
-
-}
-
-
-/* =====================================================
-   CONTAINER
-   ===================================================== */
-
-.container {
-
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-
-    max-width: 980px;
-
-    padding: 40px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.96
-        );
-
-    border-radius: 28px;
-
-    box-shadow:
-        0 25px 60px
-        rgba(
-            0,
-            0,
-            0,
-            0.25
-        );
-
-    animation:
-        fadeIn
-        0.6s
-        ease;
-
-}
-
-
-/* =====================================================
-   HEADER
-   ===================================================== */
-
-.header {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    margin-bottom: 35px;
-
-}
-
-
-/* =====================================================
-   LOGO
-   ===================================================== */
-
-.logo {
-
-    width: 100px;
-
-    height: 100px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    margin-bottom: 16px;
-
-    border-radius: 30px;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2196F3,
-            #21CBF3
-        );
-
-    box-shadow:
-        0 12px 25px
-        rgba(
-            33,
-            150,
-            243,
-            0.35
-        );
-
-    animation:
-        floatLogo
-        3s
-        ease-in-out
-        infinite;
-
-}
-
-
-.logo img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-
-}
-
-
-/* =====================================================
-   TITLE
-   ===================================================== */
-
-h1 {
-
-    margin: 0;
-
-    font-size:
-        clamp(
-            26px,
-            5vw,
-            38px
-        );
-
-    font-weight: 800;
-
-    letter-spacing: 2px;
-
-    color: #1565C0;
-
-}
-
-
-.subtitle {
-
-    margin-top: 8px;
-
-    color: #78909C;
-
-    font-size:
-        clamp(
-            13px,
-            3vw,
-            16px
-        );
-
-}
-
-
-/* =====================================================
-   MENU GRID
-   ===================================================== */
-
-.menu {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            3,
-            minmax(
-                0,
-                1fr
-            )
-        );
-
-    gap: 18px;
-
-}
-
-
-/* =====================================================
-   MENU ITEM
-   ===================================================== */
-
-.menu-item {
-
-    position: relative;
-
-    min-height: 185px;
-
-    padding:
-        22px
-        15px;
-
-    text-decoration: none;
-
-    color: #263238;
-
-    background: #ffffff;
-
-    border:
-        1px solid
-        #e6edf3;
-
-    border-radius: 22px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    text-align: center;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease;
-
-}
-
-
-/* =====================================================
-   HOVER
-   ===================================================== */
-
-.menu-item:hover {
-
-    transform:
-        translateY(-7px);
-
-    border-color:
-        #2196F3;
-
-    background:
-        #f7fbff;
-
-    box-shadow:
-        0 15px 30px
-        rgba(
-            33,
-            150,
-            243,
-            0.20
-        );
-
-}
-
-
-.menu-item:active {
-
-    transform:
-        scale(0.98);
-
-}
-
-
-/* =====================================================
-   TOP ACCENT
-   ===================================================== */
-
-.menu-item::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 4px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #2196F3,
-            #21CBF3
-        );
-
-    transform:
-        scaleX(0);
-
-    transition:
-        0.25s ease;
-
-}
-
-
-.menu-item:hover::before {
-
-    transform:
-        scaleX(1);
-
-}
-
-
-/* =====================================================
-   MENU ICON
-   ===================================================== */
-
-.menu-icon {
-
-    width: 78px;
-
-    height: 78px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    margin-bottom: 16px;
-
-    border-radius: 24px;
-
-    font-size: 38px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e3f2fd,
-            #f1fbff
-        );
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease;
-
-}
-
-
-.menu-item:hover .menu-icon {
-
-    transform:
-        scale(1.12)
-        rotate(3deg);
-
-    background:
-        linear-gradient(
-            135deg,
-            #d7efff,
-            #e8faff
-        );
-
-}
-
-
-/* =====================================================
-   MENU TEXT
-   ===================================================== */
-
-.menu-text {
-
-    font-size:
-        clamp(
-            13px,
-            2vw,
-            16px
-        );
-
-    font-weight: 700;
-
-    line-height: 1.5;
-
-}
-
-
-/* =====================================================
-   FOOTER
-   ===================================================== */
-
-.footer {
-
-    margin-top: 32px;
-
-    padding-top: 22px;
-
-    border-top:
-        1px solid
-        #edf0f2;
-
-    text-align: center;
-
-    color: #90A4AE;
-
-    font-size: 13px;
-
-}
-
-
-/* =====================================================
-   ANIMATION
-   ===================================================== */
-
-@keyframes fadeIn {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(30px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-@keyframes floatLogo {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0);
-
-    }
-
-    50% {
-
-        transform:
-            translateY(-7px);
-
-    }
-
-}
-
-
-/* =====================================================
-   TABLET
-   ===================================================== */
-
-@media (max-width: 850px) {
-
-    .container {
-
-        max-width: 700px;
-
-    }
-
-
-    .menu {
-
-        grid-template-columns:
-            repeat(
-                2,
-                1fr
-            );
-
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-   ===================================================== */
-
-@media (max-width: 600px) {
-
-    body {
-
-        padding: 14px;
-
-        align-items:
-            flex-start;
-
-    }
-
-
-    .container {
-
-        margin-top: 10px;
-
-        padding:
-            28px
-            16px
-            20px;
-
-        border-radius:
-            24px;
-
-    }
-
-
-    .header {
-
-        margin-bottom:
-            25px;
-
-    }
-
-
-    .logo {
-
-        width: 82px;
-
-        height: 82px;
-
-        border-radius:
-            24px;
-
-    }
-
-
-    .menu {
-
-        gap: 12px;
-
-    }
-
-
-    .menu-item {
-
-        min-height:
-            155px;
-
-        padding:
-            16px
-            10px;
-
-        border-radius:
-            18px;
-
-    }
-
-
-    .menu-icon {
-
-        width: 65px;
-
-        height: 65px;
-
-        border-radius:
-            20px;
-
-        font-size:
-            32px;
-
-        margin-bottom:
-            10px;
-
-    }
-
-
-    .footer {
-
-        margin-top:
-            24px;
-
-        padding-top:
-            18px;
-
-    }
-
-}
-
-
-/* =====================================================
-   SMALL MOBILE
-   ===================================================== */
-
-@media (max-width: 380px) {
-
-    body {
-
-        padding: 10px;
-
-    }
-
-
-    .container {
-
-        padding:
-            22px
-            12px
-            18px;
-
-    }
-
-
-    .menu {
-
-        gap: 10px;
-
-    }
-
-
-    .menu-item {
-
-        min-height:
-            140px;
-
-        padding:
-            12px
-            6px;
-
-    }
-
-
-    .menu-icon {
-
-        width: 58px;
-
-        height: 58px;
-
-        font-size:
-            28px;
-
-    }
-
-
-    .menu-text {
-
-        font-size:
-            12px;
-
-    }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>ARC TRANS</title>
+
+    <!-- =========================================================
+         ARC TRANS LOGO & CHROME FAVICON
+         ========================================================= -->
+
+    <!-- Favicon utama Chrome / browser -->
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788170295/logo_arc.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788170295/logo_arc.png"
+    >
+
+    <!-- Fallback favicon -->
+    <link
+        rel="shortcut icon"
+        type="image/png"
+        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788170295/logo_arc.png"
+    >
+
+    <!-- Icon saat ditambahkan ke Home Screen -->
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788170295/logo_arc.png"
+    >
+
+    <!-- PWA / Android / Chrome theme -->
+    <meta name="theme-color" content="#2196F3">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ARC TRANS">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #2196F3;
+            --primary-dark: #1565C0;
+            --cyan: #21CBF3;
+            --text: #263238;
+            --muted: #78909C;
+            --border: #e6edf3;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f4c81 0%,
+                    #2196F3 45%,
+                    #21CBF3 100%
+                );
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            top: -100px;
+            left: -100px;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.10);
+            bottom: -150px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 980px;
+            padding: 40px;
+            background: rgba(255,255,255,0.97);
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+            animation: fadeIn .6s ease;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        /* =========================================================
+           LOGO ARC TRANS
+           Menggunakan logo_arc.png baru
+           ========================================================= */
+        .logo {
+            width: 110px;
+            height: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 16px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 12px 25px rgba(33,150,243,0.35);
+            border: 1px solid rgba(33,150,243,0.12);
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #fff;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(26px, 5vw, 38px);
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--primary-dark);
+        }
+
+        .subtitle {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: clamp(13px, 3vw, 16px);
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .menu-item {
+            position: relative;
+            min-height: 185px;
+            padding: 22px 15px;
+            text-decoration: none;
+            color: var(--text);
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease,
+                background .25s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-7px);
+            border-color: var(--primary);
+            background: #f7fbff;
+            box-shadow: 0 15px 30px rgba(33,150,243,0.20);
+        }
+
+        .menu-item:active {
+            transform: scale(.98);
+        }
+
+        .menu-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--cyan));
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: .25s ease;
+        }
+
+        .menu-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-icon {
+            width: 78px;
+            height: 78px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 16px;
+            border-radius: 24px;
+            font-size: 38px;
+            background: linear-gradient(135deg, #e3f2fd, #f1fbff);
+            transition: transform .25s ease, background .25s ease;
+        }
+
+        .menu-item:hover .menu-icon {
+            transform: scale(1.12) rotate(3deg);
+            background: linear-gradient(135deg, #d7efff, #e8faff);
+        }
+
+        .menu-text {
+            font-size: clamp(13px, 2vw, 16px);
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 22px;
+            border-top: 1px solid #edf0f2;
+            text-align: center;
+            color: #90A4AE;
+            font-size: 13px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatLogo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                max-width: 700px;
+            }
+
+            .menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 14px;
+                align-items: flex-start;
+            }
+
+            .container {
+                margin-top: 10px;
+                padding: 28px 16px 20px;
+                border-radius: 24px;
+            }
+
+            .header {
+                margin-bottom: 25px;
+            }
+
+            .logo {
+                width: 88px;
+                height: 88px;
+                border-radius: 23px;
+            }
+
+            .menu {
+                gap: 12px;
+            }
+
+            .menu-item {
+                min-height: 155px;
+                padding: 16px 10px;
+                border-radius: 18px;
+            }
+
+            .menu-icon {
+                width: 65px;
+                height: 65px;
+                border-radius: 20px;
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+
+            .footer {
+                margin-top: 24px;
+                padding-top: 18px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 22px 12px 18px;
+            }
+
+            .menu {
+                gap: 10px;
+            }
+
+            .menu-item {
+                min-height: 140px;
+                padding: 12px 6px;
+            }
+
+            .menu-icon {
+                width: 58px;
+                height: 58px;
+                font-size: 28px;
+            }
+
+            .menu-text {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<main class="container">
-
-
-<!-- =====================================================
-     HEADER
-     ===================================================== -->
-
-<div class="header">
-
-
-    <!-- LOGO ARC TRANS -->
-
-    <div class="logo">
-
-        <img
-            src="https://res.cloudinary.com/cesiolzm/image/upload/v1788025029/ChatGPT_Image_Aug_30_2026_12_35_56_AM.png"
-            alt="ARC TRANS Logo"
-        >
-
-    </div>
-
-
-    <h1>
-        ARC TRANS
-    </h1>
-
-
-    <div class="subtitle">
-        Sistem Manajemen Unit & Customer
-    </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     MENU
-     ===================================================== -->
-
-<div class="menu">
-
-
-    <!-- INPUT UNIT -->
-
-    <a
-        href="unit.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            🚗
-        </div>
-
-        <div class="menu-text">
-            Input Unit
-        </div>
-
-    </a>
-
-
-    <!-- DATA UNIT -->
-
-    <a
-        href="tabelunit.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            📋
-        </div>
-
-        <div class="menu-text">
-            Data Unit Kendaraan
-        </div>
-
-    </a>
-
-
-    <!-- INPUT CUSTOMER -->
-
-    <a
-        href="customer.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            👤
-        </div>
-
-        <div class="menu-text">
-            Input Customer
-        </div>
-
-    </a>
-
-
-    <!-- DATA CUSTOMER -->
-
-    <a
-        href="tabelcustomer.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            👥
-        </div>
-
-        <div class="menu-text">
-            Data Customer
-        </div>
-
-    </a>
-
-
-    <!-- RENT OUT -->
-
-    <a
-        href="outrent.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            📝
-        </div>
-
-        <div class="menu-text">
-            RENT OUT
-        </div>
-
-    </a>
-
-
-    <!-- BOOKING UNIT -->
-
-    <a
-        href="booking.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            📅
-        </div>
-
-        <div class="menu-text">
-            Booking Unit
-        </div>
-
-    </a>
-
-
-    <!-- LIST BOOKING UNIT -->
-
-    <a
-        href="tabelbooking.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            📑
-        </div>
-
-        <div class="menu-text">
-            List Booking Unit
-        </div>
-
-    </a>
-
-
-    <!-- UPDATE UNIT OUT -->
-
-    <a
-        href="tabeloutrent.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            📊
-        </div>
-
-        <div class="menu-text">
-            UPDATE Unit OUT
-        </div>
-
-    </a>
-
-
-    <!-- REVENUE -->
-
-    <a
-        href="tabelrevenue.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            💰
-        </div>
-
-        <div class="menu-text">
-            Revenue
-        </div>
-
-    </a>
-
-
-    <!-- =================================================
-         REVENUE UNIT
-         ================================================= -->
-
-    <a
-        href="tabelomsetunit.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            🚘💰
-        </div>
-
-        <div class="menu-text">
-            Revenue Unit
-        </div>
-
-    </a>
-
-
-    <!-- =================================================
-         CASH OUT
-         ================================================= -->
-
-    <a
-        href="outcash.html"
-        class="menu-item"
-    >
-
-        <div class="menu-icon">
-            💸
-        </div>
-
-        <div class="menu-text">
-            CASH OUT
-        </div>
-
-    </a>
-
-
-</div>
-
-
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
-
-<div class="footer">
-
-    © 2026 ARC TRANS
-
-</div>
-
-
-</main>
-
+    <main class="container">
+
+        <header class="header">
+
+            <!-- LOGO ARC TRANS -->
+            <div class="logo">
+                <img
+                    src="https://res.cloudinary.com/cesiolzm/image/upload/v1788170295/logo_arc.png"
+                    alt="ARC TRANS Logo"
+                    width="110"
+                    height="110"
+                    loading="eager"
+                    decoding="async"
+                    onerror="this.onerror=null; this.src='https://res.cloudinary.com/cesiolzm/image/upload/v1788170295/logo_arc.png';"
+                >
+            </div>
+
+            <h1>ARC TRANS</h1>
+
+            <div class="subtitle">
+                Sistem Manajemen Unit &amp; Customer
+            </div>
+
+        </header>
+
+        <section class="menu">
+
+            <!-- INPUT UNIT -->
+            <a href="unit.html" class="menu-item">
+                <div class="menu-icon">🚗</div>
+                <div class="menu-text">Input Unit</div>
+            </a>
+
+            <!-- DATA UNIT -->
+            <a href="tabelunit.html" class="menu-item">
+                <div class="menu-icon">📋</div>
+                <div class="menu-text">Data Unit Kendaraan</div>
+            </a>
+
+            <!-- INPUT CUSTOMER -->
+            <a href="customer.html" class="menu-item">
+                <div class="menu-icon">👤</div>
+                <div class="menu-text">Input Customer</div>
+            </a>
+
+            <!-- DATA CUSTOMER -->
+            <a href="tabelcustomer.html" class="menu-item">
+                <div class="menu-icon">👥</div>
+                <div class="menu-text">Data Customer</div>
+            </a>
+
+            <!-- RENT OUT -->
+            <a href="outrent.html" class="menu-item">
+                <div class="menu-icon">📝</div>
+                <div class="menu-text">RENT OUT</div>
+            </a>
+
+            <!-- BOOKING UNIT -->
+            <a href="booking.html" class="menu-item">
+                <div class="menu-icon">📅</div>
+                <div class="menu-text">Booking Unit</div>
+            </a>
+
+            <!-- LIST BOOKING UNIT -->
+            <a href="tabelbooking.html" class="menu-item">
+                <div class="menu-icon">📑</div>
+                <div class="menu-text">List Booking Unit</div>
+            </a>
+
+            <!-- UPDATE UNIT OUT -->
+            <a href="tabeloutrent.html" class="menu-item">
+                <div class="menu-icon">📊</div>
+                <div class="menu-text">UPDATE Unit OUT</div>
+            </a>
+
+            <!-- REVENUE -->
+            <a href="tabelrevenue.html" class="menu-item">
+                <div class="menu-icon">💰</div>
+                <div class="menu-text">Revenue</div>
+            </a>
+
+            <!-- REVENUE UNIT -->
+            <a href="tabelomsetunit.html" class="menu-item">
+                <div class="menu-icon">🚘💰</div>
+                <div class="menu-text">Revenue Unit</div>
+            </a>
+
+            <!-- CASH OUT -->
+            <a href="outcash.html" class="menu-item">
+                <div class="menu-icon">💸</div>
+                <div class="menu-text">CASH OUT</div>
+            </a>
+
+        </section>
+
+        <footer class="footer">
+            © 2026 ARC TRANS
+        </footer>
+
+    </main>
 
 </body>
-
 </html>
-```
