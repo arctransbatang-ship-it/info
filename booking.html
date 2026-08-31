@@ -1,369 +1,1068 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 <title>ARC TRANS - Booking Unit Mobil</title>
 
+
 <style>
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
 * {
     box-sizing: border-box;
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
+
 :root {
+
     --primary: #2196F3;
     --primary-dark: #1976D2;
     --secondary: #21CBF3;
+
     --success: #16a34a;
     --danger: #dc2626;
     --warning: #f59e0b;
+
     --text: #1e293b;
     --muted: #64748b;
     --border: #dbe3ee;
+
     --background: #f1f5f9;
 }
 
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
 body {
+
     margin: 0;
+
     min-height: 100vh;
-    background: linear-gradient(135deg, #e0f2fe, #f8fafc);
-    color: var(--text);
-    padding: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e0f2fe,
+            #f8fafc
+        );
+
+    color:
+        var(--text);
+
+    padding:
+        20px;
 }
 
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
 .topbar {
+
     width: 100%;
+
     max-width: 850px;
-    margin: 0 auto 20px;
+
+    margin:
+        0 auto 20px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 }
 
+
 .brand {
+
     display: flex;
+
     align-items: center;
+
     gap: 12px;
 }
 
+
 .brand-icon {
+
     width: 45px;
+
     height: 45px;
+
     border-radius: 14px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
     color: white;
+
     font-size: 22px;
-    box-shadow: 0 8px 20px rgba(33,150,243,.25);
+
+    box-shadow:
+        0 8px 20px
+        rgba(33,150,243,.25);
 }
 
+
 .brand-text h1 {
+
     margin: 0;
+
     font-size: 20px;
 }
 
+
 .brand-text p {
-    margin: 3px 0 0;
+
+    margin:
+        3px 0 0;
+
     font-size: 12px;
-    color: var(--muted);
+
+    color:
+        var(--muted);
 }
+
 
 .home-btn {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
+
     gap: 7px;
-    padding: 10px 16px;
+
+    padding:
+        10px 16px;
+
     border-radius: 12px;
+
     text-decoration: none;
+
     background: white;
-    color: var(--primary);
+
+    color:
+        var(--primary);
+
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    transition: .2s;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,.08);
+
+    transition:
+        .2s;
 }
 
+
 .home-btn:hover {
-    transform: translateY(-2px);
-    background: var(--primary);
+
+    transform:
+        translateY(-2px);
+
+    background:
+        var(--primary);
+
     color: white;
 }
 
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
 .container {
+
     width: 100%;
+
     max-width: 850px;
+
     margin: auto;
+
     background: white;
+
     border-radius: 24px;
+
     padding: 32px;
-    box-shadow: 0 15px 45px rgba(15,23,42,.12);
-    animation: fadeIn .4s ease;
+
+    box-shadow:
+        0 15px 45px
+        rgba(15,23,42,.12);
+
+    animation:
+        fadeIn .4s ease;
 }
+
 
 @keyframes fadeIn {
+
     from {
+
         opacity: 0;
-        transform: translateY(15px);
+
+        transform:
+            translateY(15px);
     }
+
     to {
+
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
 .form-title {
+
     margin-bottom: 30px;
 }
 
+
 .form-title h2 {
-    margin: 0 0 6px;
+
+    margin:
+        0 0 6px;
+
     font-size: 25px;
 }
 
+
 .form-title p {
+
     margin: 0;
-    color: var(--muted);
+
+    color:
+        var(--muted);
+
     font-size: 14px;
 }
 
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
 .form-grid {
+
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
     gap: 20px;
 }
 
+
 .form-group {
+
     width: 100%;
+
+    position: relative;
 }
+
 
 .full-width {
-    grid-column: 1 / -1;
+
+    grid-column:
+        1 / -1;
 }
 
+
 label {
+
     display: block;
+
     margin-bottom: 8px;
+
     font-size: 13px;
+
     font-weight: 700;
-    color: #334155;
+
+    color:
+        #334155;
 }
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
 
 input,
 select {
+
     width: 100%;
+
     min-height: 48px;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
+
+    padding:
+        12px 14px;
+
+    border:
+        1px solid
+        var(--border);
+
     border-radius: 12px;
+
     background: white;
+
     font-size: 14px;
+
     outline: none;
-    transition: .2s;
+
+    transition:
+        .2s;
 }
+
 
 input:focus,
 select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(33,150,243,.12);
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(33,150,243,.12);
 }
 
+
 input[readonly] {
-    background: #f8fafc;
-    color: #475569;
+
+    background:
+        #f8fafc;
+
+    color:
+        #475569;
 }
+
+
+/* =========================================================
+   SEARCH DROPDOWN
+   ========================================================= */
+
+.search-wrapper {
+
+    position: relative;
+
+    width: 100%;
+}
+
+
+.search-input {
+
+    padding-right: 42px;
+
+    cursor: text;
+}
+
+
+.search-icon {
+
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        #64748b;
+
+    font-size: 18px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SEARCH RESULT
+   ========================================================= */
+
+.search-results {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: calc(100% + 6px);
+
+    z-index: 9999;
+
+    display: none;
+
+    max-height: 280px;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border:
+        1px solid
+        #dbe3ee;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(15,23,42,.18);
+
+    padding: 6px;
+}
+
+
+.search-results.active {
+
+    display: block;
+}
+
+
+/* scrollbar */
+
+.search-results::-webkit-scrollbar {
+
+    width: 7px;
+}
+
+
+.search-results::-webkit-scrollbar-track {
+
+    background:
+        #f1f5f9;
+
+    border-radius: 10px;
+}
+
+
+.search-results::-webkit-scrollbar-thumb {
+
+    background:
+        #cbd5e1;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   RESULT ITEM
+   ========================================================= */
+
+.search-item {
+
+    width: 100%;
+
+    padding:
+        11px 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        transparent;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background .15s;
+}
+
+
+.search-item:hover {
+
+    background:
+        #eff6ff;
+}
+
+
+.search-item-main {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-weight: 700;
+
+    color:
+        #1e293b;
+
+    font-size: 14px;
+}
+
+
+.search-item-icon {
+
+    width: 32px;
+
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        #e0f2fe;
+
+    font-size: 17px;
+}
+
+
+.search-item-detail {
+
+    margin-top: 3px;
+
+    margin-left: 41px;
+
+    font-size: 12px;
+
+    color:
+        #64748b;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.search-empty {
+
+    padding:
+        20px 12px;
+
+    text-align: center;
+
+    color:
+        #64748b;
+
+    font-size: 13px;
+}
+
+
+.search-count {
+
+    padding:
+        8px 12px 6px;
+
+    color:
+        #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    border-bottom:
+        1px solid
+        #eef2f7;
+
+    margin-bottom: 4px;
+}
+
+
+/* =========================================================
+   SELECTED INDICATOR
+   ========================================================= */
+
+.selected-info {
+
+    display: none;
+
+    margin-top: 7px;
+
+    font-size: 11px;
+
+    color:
+        var(--success);
+
+    font-weight: 600;
+}
+
+
+.selected-info.active {
+
+    display: block;
+}
+
+
+/* =========================================================
+   DURASI
+   ========================================================= */
 
 .durasi-info,
 .sisa-info {
+
     display: none;
+
     margin-top: 10px;
-    padding: 12px 15px;
+
+    padding:
+        12px 15px;
+
     border-radius: 10px;
+
     font-size: 13px;
+
     font-weight: 600;
 }
+
 
 .durasi-info.active,
 .sisa-info.active {
+
     display: block;
 }
 
+
 .durasi-info {
-    background: #eff6ff;
-    color: #1d4ed8;
+
+    background:
+        #eff6ff;
+
+    color:
+        #1d4ed8;
 }
+
 
 .durasi-info.error {
-    background: #fef2f2;
-    color: #dc2626;
+
+    background:
+        #fef2f2;
+
+    color:
+        #dc2626;
 }
+
 
 .sisa-lunas {
-    background: #dcfce7;
-    color: #15803d;
+
+    background:
+        #dcfce7;
+
+    color:
+        #15803d;
 }
+
 
 .sisa-kurang {
-    background: #fef3c7;
-    color: #92400e;
+
+    background:
+        #fef3c7;
+
+    color:
+        #92400e;
 }
+
 
 .sisa-lebih {
-    background: #dbeafe;
-    color: #1d4ed8;
+
+    background:
+        #dbeafe;
+
+    color:
+        #1d4ed8;
 }
 
+
+/* =========================================================
+   INFO BOOKING
+   ========================================================= */
+
 .booking-info {
-    padding: 14px 16px;
+
+    padding:
+        14px 16px;
+
     border-radius: 12px;
-    background: #eff6ff;
-    color: #1d4ed8;
+
+    background:
+        #eff6ff;
+
+    color:
+        #1d4ed8;
+
     font-size: 13px;
+
     line-height: 1.6;
 }
 
+
+/* =========================================================
+   ACTION
+   ========================================================= */
+
 .action-area {
+
     margin-top: 30px;
 }
 
+
 #btnProses {
+
     width: 100%;
+
     min-height: 52px;
+
     border: none;
+
     border-radius: 14px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
     color: white;
+
     font-size: 16px;
+
     font-weight: 700;
+
     cursor: pointer;
-    transition: .2s;
-    box-shadow: 0 8px 20px rgba(33,150,243,.25);
+
+    transition:
+        .2s;
+
+    box-shadow:
+        0 8px 20px
+        rgba(33,150,243,.25);
 }
+
 
 #btnProses:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(33,150,243,.35);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(33,150,243,.35);
 }
 
+
 #btnProses:disabled {
+
     opacity: .7;
-    cursor: not-allowed;
+
+    cursor:
+        not-allowed;
+
     transform: none;
 }
 
+
 #statusSimpan {
+
     min-height: 22px;
+
     margin-top: 12px;
+
     text-align: center;
-    color: var(--muted);
+
+    color:
+        var(--muted);
+
     font-size: 13px;
 }
 
+
 .link-kembali {
+
     display: block;
+
     text-align: center;
+
     margin-top: 20px;
+
     text-decoration: none;
-    color: var(--muted);
+
+    color:
+        var(--muted);
+
     font-size: 14px;
+
     font-weight: 600;
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 700px) {
+
     body {
+
         padding: 12px;
     }
 
+
     .topbar {
+
         margin-bottom: 12px;
     }
 
+
     .brand-text h1 {
+
         font-size: 17px;
     }
 
+
     .brand-text p {
+
         display: none;
     }
 
+
     .home-btn {
-        padding: 9px 12px;
+
+        padding:
+            9px 12px;
     }
+
 
     .container {
-        padding: 22px 16px;
-        border-radius: 20px;
+
+        padding:
+            22px 16px;
+
+        border-radius:
+            20px;
     }
 
+
     .form-title h2 {
+
         font-size: 21px;
     }
 
+
     .form-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
+
         gap: 16px;
     }
 
+
     .full-width {
+
         grid-column: auto;
     }
 
+
     input,
     select {
+
         min-height: 50px;
+
         font-size: 16px;
     }
+
+
+    .search-results {
+
+        max-height:
+            250px;
+    }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================================================
+     TOP BAR
+     ========================================================= -->
+
 <div class="topbar">
+
     <div class="brand">
-        <div class="brand-icon">🚐</div>
+
+        <div class="brand-icon">
+            🚐
+        </div>
 
         <div class="brand-text">
-            <h1>ARC TRANS</h1>
-            <p>Vehicle Rental Management</p>
+
+            <h1>
+                ARC TRANS
+            </h1>
+
+            <p>
+                Vehicle Rental Management
+            </p>
+
         </div>
+
     </div>
 
-    <a href="index.html" class="home-btn">
-        <span>⌂</span>
+
+    <a
+        href="index.html"
+        class="home-btn"
+    >
+
+        <span>
+            ⌂
+        </span>
+
         Home
+
     </a>
+
 </div>
+
+
+
+<!-- =========================================================
+     CONTAINER
+     ========================================================= -->
 
 <div class="container">
 
+
     <div class="form-title">
-        <h2>Form Booking</h2>
-        <p>Input data booking unit kendaraan</p>
+
+        <h2>
+            Form Booking
+        </h2>
+
+        <p>
+            Input data booking unit kendaraan
+        </p>
+
     </div>
+
+
 
     <div class="form-grid">
 
-        <!-- UNIT -->
+
+        <!-- =====================================================
+             UNIT
+             ===================================================== -->
+
         <div class="form-group">
-            <label for="plat">
+
+            <label>
                 ID Unit / Plat Nomor
             </label>
 
-            <select id="plat">
-                <option value="">
-                    Memuat data unit...
-                </option>
-            </select>
+
+            <div class="search-wrapper">
+
+
+                <input
+                    type="text"
+                    id="searchUnit"
+                    class="search-input"
+                    autocomplete="off"
+                    placeholder="Cari ID, plat, atau nama unit..."
+                >
+
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+
+                <div
+                    id="unitResults"
+                    class="search-results"
+                ></div>
+
+
+            </div>
+
+
+            <div
+                id="unitSelectedInfo"
+                class="selected-info"
+            ></div>
+
+
+            <!-- hidden value untuk ID unit -->
+
+            <input
+                type="hidden"
+                id="plat"
+            >
+
         </div>
 
-        <!-- NAMA UNIT -->
+
+
+        <!-- =====================================================
+             NAMA UNIT
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="nama">
                 Nama Unit Kendaraan
             </label>
+
 
             <input
                 type="text"
@@ -371,26 +1070,75 @@ input[readonly] {
                 readonly
                 placeholder="Nama unit otomatis"
             >
+
         </div>
 
-        <!-- CUSTOMER -->
+
+
+        <!-- =====================================================
+             CUSTOMER
+             ===================================================== -->
+
         <div class="form-group">
-            <label for="idcustomer">
+
+            <label>
                 ID Customer
             </label>
 
-            <select id="idcustomer">
-                <option value="">
-                    Memuat data customer...
-                </option>
-            </select>
+
+            <div class="search-wrapper">
+
+
+                <input
+                    type="text"
+                    id="searchCustomer"
+                    class="search-input"
+                    autocomplete="off"
+                    placeholder="Cari ID, NIK, atau nama customer..."
+                >
+
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+
+                <div
+                    id="customerResults"
+                    class="search-results"
+                ></div>
+
+
+            </div>
+
+
+            <div
+                id="customerSelectedInfo"
+                class="selected-info"
+            ></div>
+
+
+            <!-- hidden ID -->
+
+            <input
+                type="hidden"
+                id="idcustomer"
+            >
+
         </div>
 
-        <!-- NAMA CUSTOMER -->
+
+
+        <!-- =====================================================
+             NAMA CUSTOMER
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="customer">
                 Nama Customer
             </label>
+
 
             <input
                 type="text"
@@ -398,15 +1146,24 @@ input[readonly] {
                 readonly
                 placeholder="Nama customer otomatis"
             >
+
         </div>
 
-        <!-- RENTAL TYPE -->
+
+
+        <!-- =====================================================
+             RENTAL TYPE
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="rentaltype">
                 Rental Type
             </label>
 
+
             <select id="rentaltype">
+
                 <option value="">
                     -- Pilih Rental Type --
                 </option>
@@ -426,14 +1183,23 @@ input[readonly] {
                 <option value="bulanan">
                     Bulanan
                 </option>
+
             </select>
+
         </div>
 
-        <!-- HARGA -->
+
+
+        <!-- =====================================================
+             HARGA
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="harga">
                 Harga
             </label>
+
 
             <input
                 type="text"
@@ -441,42 +1207,67 @@ input[readonly] {
                 inputmode="numeric"
                 placeholder="Rp 0"
             >
+
         </div>
 
-        <!-- TANGGAL SEWA -->
+
+
+        <!-- =====================================================
+             TANGGAL SEWA
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="tanggalsewa">
                 Tanggal Booking / Sewa
             </label>
+
 
             <input
                 type="date"
                 id="tanggalsewa"
             >
+
         </div>
 
-        <!-- TANGGAL SELESAI -->
+
+
+        <!-- =====================================================
+             TANGGAL SELESAI
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="selesaisewa">
                 Estimasi Tanggal Selesai
             </label>
+
 
             <input
                 type="date"
                 id="selesaisewa"
             >
 
+
             <div
                 id="durasiInfo"
                 class="durasi-info"
             ></div>
+
         </div>
 
-        <!-- TOTAL -->
+
+
+        <!-- =====================================================
+             TOTAL
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="total">
                 Total Biaya Booking
             </label>
+
 
             <input
                 type="text"
@@ -484,13 +1275,21 @@ input[readonly] {
                 readonly
                 placeholder="Total akan dihitung otomatis"
             >
+
         </div>
 
-        <!-- DP -->
+
+
+        <!-- =====================================================
+             BAYAR / DP
+             ===================================================== -->
+
         <div class="form-group">
+
             <label for="bayar">
                 Bayar / DP Booking
             </label>
+
 
             <input
                 type="text"
@@ -498,13 +1297,21 @@ input[readonly] {
                 inputmode="numeric"
                 placeholder="Rp 0"
             >
+
         </div>
 
-        <!-- SISA -->
+
+
+        <!-- =====================================================
+             SISA
+             ===================================================== -->
+
         <div class="form-group full-width">
+
             <label for="sisa">
                 Sisa Pembayaran
             </label>
+
 
             <input
                 type="text"
@@ -513,26 +1320,53 @@ input[readonly] {
                 placeholder="Rp 0"
             >
 
+
             <div
                 id="sisaInfo"
                 class="sisa-info"
             ></div>
+
         </div>
 
-        <!-- INFO -->
+
+
+        <!-- =====================================================
+             INFO
+             ===================================================== -->
+
         <div class="form-group full-width">
+
             <div class="booking-info">
-                <strong>ℹ Informasi Booking</strong><br>
-                Data ini akan disimpan sebagai <strong>BOOKING</strong>
-                dan tidak akan menghapus unit dari node <strong>unit</strong>,
-                tidak memindahkan unit ke <strong>ready</strong>,
+
+                <strong>
+                    ℹ Informasi Booking
+                </strong>
+
+                <br>
+
+                Data ini akan disimpan sebagai
+                <strong>BOOKING</strong>
+                dan tidak akan menghapus unit dari node
+                <strong>unit</strong>,
+                tidak memindahkan unit ke
+                <strong>ready</strong>,
                 serta tidak membuat data revenue.
+
             </div>
+
         </div>
+
 
     </div>
 
+
+
+    <!-- =====================================================
+         ACTION
+         ===================================================== -->
+
     <div class="action-area">
+
         <button
             id="btnProses"
             type="button"
@@ -540,8 +1374,13 @@ input[readonly] {
             Simpan Booking
         </button>
 
-        <div id="statusSimpan"></div>
+
+        <div
+            id="statusSimpan"
+        ></div>
+
     </div>
+
 
     <a
         href="home.html"
@@ -550,19 +1389,24 @@ input[readonly] {
         ← Kembali
     </a>
 
+
 </div>
+
+
 
 <script type="module">
 
-/* =================================
+
+/* =========================================================
    FIREBASE IMPORT
-================================= */
+   ========================================================= */
 
 import {
     initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
 
 import {
     getDatabase,
@@ -574,9 +1418,10 @@ from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-/* =================================
+
+/* =========================================================
    FIREBASE CONFIG
-================================= */
+   ========================================================= */
 
 const firebaseConfig = {
 
@@ -600,17 +1445,20 @@ const firebaseConfig = {
 
     appId:
         "1:60781918601:web:c85d6131207f8a8958"
+
 };
 
 
-/* =================================
+
+/* =========================================================
    INIT FIREBASE
-================================= */
+   ========================================================= */
 
 const app =
     initializeApp(
         firebaseConfig
     );
+
 
 const db =
     getDatabase(
@@ -618,68 +1466,201 @@ const db =
     );
 
 
-/* =================================
-   ELEMEN HTML
-================================= */
+
+/* =========================================================
+   ELEMENT
+   ========================================================= */
+
+const searchUnit =
+    document.getElementById(
+        "searchUnit"
+    );
+
+
+const unitResults =
+    document.getElementById(
+        "unitResults"
+    );
+
+
+const unitSelectedInfo =
+    document.getElementById(
+        "unitSelectedInfo"
+    );
+
 
 const platInput =
-    document.getElementById("plat");
+    document.getElementById(
+        "plat"
+    );
+
 
 const namaInput =
-    document.getElementById("nama");
+    document.getElementById(
+        "nama"
+    );
+
+
+const searchCustomer =
+    document.getElementById(
+        "searchCustomer"
+    );
+
+
+const customerResults =
+    document.getElementById(
+        "customerResults"
+    );
+
+
+const customerSelectedInfo =
+    document.getElementById(
+        "customerSelectedInfo"
+    );
+
 
 const idCustomerInput =
-    document.getElementById("idcustomer");
+    document.getElementById(
+        "idcustomer"
+    );
+
 
 const customerInput =
-    document.getElementById("customer");
+    document.getElementById(
+        "customer"
+    );
+
 
 const rentalTypeInput =
-    document.getElementById("rentaltype");
+    document.getElementById(
+        "rentaltype"
+    );
+
 
 const hargaInput =
-    document.getElementById("harga");
+    document.getElementById(
+        "harga"
+    );
+
 
 const tanggalSewaInput =
-    document.getElementById("tanggalsewa");
+    document.getElementById(
+        "tanggalsewa"
+    );
+
 
 const selesaiSewaInput =
-    document.getElementById("selesaisewa");
+    document.getElementById(
+        "selesaisewa"
+    );
+
 
 const durasiInfo =
-    document.getElementById("durasiInfo");
+    document.getElementById(
+        "durasiInfo"
+    );
+
 
 const totalInput =
-    document.getElementById("total");
+    document.getElementById(
+        "total"
+    );
+
 
 const bayarInput =
-    document.getElementById("bayar");
+    document.getElementById(
+        "bayar"
+    );
+
 
 const sisaInput =
-    document.getElementById("sisa");
+    document.getElementById(
+        "sisa"
+    );
+
 
 const sisaInfo =
-    document.getElementById("sisaInfo");
+    document.getElementById(
+        "sisaInfo"
+    );
+
 
 const btnProses =
-    document.getElementById("btnProses");
+    document.getElementById(
+        "btnProses"
+    );
+
 
 const statusSimpan =
-    document.getElementById("statusSimpan");
+    document.getElementById(
+        "statusSimpan"
+    );
 
 
-/* =================================
+
+/* =========================================================
    DATA
-================================= */
+   ========================================================= */
 
 let daftarUnit = {};
+
 let daftarCustomer = {};
 
 
-/* =================================
+
+/* =========================================================
+   HELPER ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+
+/* =========================================================
+   NORMALISASI PENCARIAN
+   ========================================================= */
+
+function normalisasi(value) {
+
+    return String(
+        value ?? ""
+    )
+    .toLowerCase()
+    .trim();
+
+}
+
+
+
+/* =========================================================
    TANGGAL HARI INI
-   FORMAT YYYY-MM-DD
-================================= */
+   ========================================================= */
 
 function getTanggalHariIni() {
 
@@ -712,13 +1693,14 @@ function getTanggalHariIni() {
         "-" +
         hari
     );
+
 }
 
 
-/* =================================
-   TANGGAL INPUT
-   DD/MM/YYYY HH:MM:SS
-================================= */
+
+/* =========================================================
+   FORMAT TANGGAL INPUT
+   ========================================================= */
 
 function formatTanggalInput() {
 
@@ -781,33 +1763,23 @@ function formatTanggalInput() {
         ":" +
         detik
     );
+
 }
 
 
-/* =================================
-   SET MINIMUM TANGGAL
-================================= */
 
-const tanggalHariIni =
-    getTanggalHariIni();
-
-tanggalSewaInput.min =
-    tanggalHariIni;
-
-selesaiSewaInput.min =
-    tanggalHariIni;
-
-
-/* =================================
+/* =========================================================
    FORMAT RUPIAH
-================================= */
+   ========================================================= */
 
 function formatRupiah(
     angka
 ) {
 
     const nilai =
-        Number(angka) || 0;
+        Number(
+            angka
+        ) || 0;
 
     return (
         "Rp " +
@@ -815,12 +1787,14 @@ function formatRupiah(
             "id-ID"
         )
     );
+
 }
 
 
-/* =================================
-   AMBIL ANGKA DARI RUPIAH
-================================= */
+
+/* =========================================================
+   ANGKA DARI RUPIAH
+   ========================================================= */
 
 function angkaDariRupiah(
     nilai
@@ -835,46 +1809,33 @@ function angkaDariRupiah(
             ""
         )
     ) || 0;
+
 }
 
 
-/* =================================
-   FORMAT SISA
-================================= */
 
-function formatSisaPembayaran(
-    nilai
-) {
+/* =========================================================
+   MINIMUM TANGGAL
+   ========================================================= */
 
-    if (nilai === 0) {
-        return "0";
-    }
-
-    if (nilai > 0) {
-        return (
-            "+ " +
-            formatRupiah(
-                nilai
-            )
-        );
-    }
-
-    return (
-        "- " +
-        formatRupiah(
-            Math.abs(
-                nilai
-            )
-        )
-    );
-}
+const tanggalHariIni =
+    getTanggalHariIni();
 
 
-/* =================================
-   AMBIL DATA UNIT
+tanggalSewaInput.min =
+    tanggalHariIni;
+
+
+selesaiSewaInput.min =
+    tanggalHariIni;
+
+
+
+/* =========================================================
+   LOAD DATA UNIT
    NODE:
-   unit/{ID PLAT MOBIL}
-================================= */
+   unit/{ID UNIT}
+   ========================================================= */
 
 const unitRef =
     ref(
@@ -882,7 +1843,9 @@ const unitRef =
         "unit"
     );
 
+
 onValue(
+
     unitRef,
 
     function(snapshot) {
@@ -893,69 +1856,10 @@ onValue(
         daftarUnit =
             data || {};
 
-        platInput.innerHTML =
-            `
-            <option value="">
-                -- Pilih ID Unit / Plat Mobil --
-            </option>
-            `;
-
-        if (!data) {
-
-            platInput.innerHTML +=
-                `
-                <option
-                    value=""
-                    disabled
-                >
-                    Data unit belum tersedia
-                </option>
-                `;
-
-            return;
-        }
-
-        Object.entries(
-            data
-        )
-        .forEach(
-            function([
-                id,
-                unit
-            ]) {
-
-                /*
-                 * KEY FIREBASE DIANGGAP
-                 * SEBAGAI ID PLAT MOBIL.
-                 *
-                 * Contoh:
-                 * unit/B1234XYZ
-                 */
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-                option.value =
-                    id;
-
-                option.textContent =
-                    (
-                        unit?.plat ||
-                        id
-                    ) +
-                    " - " +
-                    (
-                        unit?.nama ||
-                        "Tanpa Nama"
-                    );
-
-                platInput.appendChild(
-                    option
-                );
-            }
+        renderUnitResults(
+            searchUnit.value
         );
+
     },
 
     function(error) {
@@ -965,78 +1869,23 @@ onValue(
             error
         );
 
-        platInput.innerHTML =
-            `
-            <option value="">
-                Gagal memuat data unit
-            </option>
-            `;
+        unitResults.innerHTML = `
+            <div class="search-empty">
+                ❌ Gagal memuat data unit
+            </div>
+        `;
+
     }
+
 );
 
 
-/* =================================
-   SAAT UNIT DIPILIH
-================================= */
 
-platInput.addEventListener(
-    "change",
-
-    function() {
-
-        const unitId =
-            this.value;
-
-        if (!unitId) {
-
-            namaInput.value =
-                "";
-
-            return;
-        }
-
-        const unit =
-            daftarUnit[
-                unitId
-            ];
-
-        if (!unit) {
-            return;
-        }
-
-        namaInput.value =
-            unit.nama ||
-            "";
-
-        /*
-         * Reset perhitungan
-         */
-        hargaInput.value =
-            "";
-
-        totalInput.value =
-            "";
-
-        bayarInput.value =
-            "";
-
-        sisaInput.value =
-            "";
-
-        sisaInfo.className =
-            "sisa-info";
-
-        sisaInfo.textContent =
-            "";
-    }
-);
-
-
-/* =================================
-   AMBIL DATA CUSTOMER
+/* =========================================================
+   LOAD DATA CUSTOMER
    NODE:
    customer/{ID CUSTOMER}
-================================= */
+   ========================================================= */
 
 const customerRef =
     ref(
@@ -1044,7 +1893,9 @@ const customerRef =
         "customer"
     );
 
+
 onValue(
+
     customerRef,
 
     function(snapshot) {
@@ -1055,61 +1906,10 @@ onValue(
         daftarCustomer =
             data || {};
 
-        idCustomerInput.innerHTML =
-            `
-            <option value="">
-                -- Pilih ID Customer --
-            </option>
-            `;
-
-        if (!data) {
-
-            idCustomerInput.innerHTML +=
-                `
-                <option
-                    value=""
-                    disabled
-                >
-                    Data customer belum tersedia
-                </option>
-                `;
-
-            return;
-        }
-
-        Object.entries(
-            data
-        )
-        .forEach(
-            function([
-                id,
-                customer
-            ]) {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-                option.value =
-                    id;
-
-                option.textContent =
-                    (
-                        customer?.nik ||
-                        id
-                    ) +
-                    " - " +
-                    (
-                        customer?.nama ||
-                        "Tanpa Nama"
-                    );
-
-                idCustomerInput.appendChild(
-                    option
-                );
-            }
+        renderCustomerResults(
+            searchCustomer.value
         );
+
     },
 
     function(error) {
@@ -1119,49 +1919,725 @@ onValue(
             error
         );
 
-        idCustomerInput.innerHTML =
-            `
-            <option value="">
-                Gagal memuat data customer
-            </option>
-            `;
+        customerResults.innerHTML = `
+            <div class="search-empty">
+                ❌ Gagal memuat data customer
+            </div>
+        `;
+
+    }
+
+);
+
+
+
+/* =========================================================
+   RENDER UNIT
+   ========================================================= */
+
+function renderUnitResults(
+    keyword = ""
+) {
+
+    const search =
+        normalisasi(
+            keyword
+        );
+
+
+    const entries =
+        Object.entries(
+            daftarUnit
+        );
+
+
+    const hasil =
+        entries.filter(
+            function([
+                id,
+                unit
+            ]) {
+
+                const idText =
+                    normalisasi(
+                        id
+                    );
+
+                const plat =
+                    normalisasi(
+                        unit?.plat
+                    );
+
+                const nama =
+                    normalisasi(
+                        unit?.nama
+                    );
+
+                return (
+                    !search ||
+                    idText.includes(search) ||
+                    plat.includes(search) ||
+                    nama.includes(search)
+                );
+
+            }
+        )
+        .slice(
+            0,
+            50
+        );
+
+
+    if (
+        entries.length === 0
+    ) {
+
+        unitResults.innerHTML = `
+            <div class="search-empty">
+                Data unit belum tersedia
+            </div>
+        `;
+
+        return;
+    }
+
+
+    let html = `
+
+        <div class="search-count">
+            ${hasil.length}
+            data ditemukan
+            ${hasil.length >= 50 ? "(maks. 50 ditampilkan)" : ""}
+        </div>
+
+    `;
+
+
+    if (
+        hasil.length === 0
+    ) {
+
+        html += `
+            <div class="search-empty">
+                🔍 Unit tidak ditemukan
+            </div>
+        `;
+
+    }
+    else {
+
+        hasil.forEach(
+            function([
+                id,
+                unit
+            ]) {
+
+                const plat =
+                    unit?.plat ||
+                    id;
+
+                const nama =
+                    unit?.nama ||
+                    "Tanpa Nama";
+
+
+                html += `
+
+                    <button
+                        type="button"
+                        class="search-item"
+                        data-unit-id="${escapeHTML(id)}"
+                    >
+
+                        <div class="search-item-main">
+
+                            <span class="search-item-icon">
+                                🚗
+                            </span>
+
+                            <span>
+                                ${escapeHTML(plat)}
+                            </span>
+
+                        </div>
+
+                        <div class="search-item-detail">
+
+                            ID:
+                            ${escapeHTML(id)}
+
+                            &nbsp; • &nbsp;
+
+                            ${escapeHTML(nama)}
+
+                        </div>
+
+                    </button>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    unitResults.innerHTML =
+        html;
+
+
+    unitResults
+        .querySelectorAll(
+            "[data-unit-id]"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        pilihUnit(
+                            this.dataset.unitId
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+
+/* =========================================================
+   PILIH UNIT
+   ========================================================= */
+
+function pilihUnit(
+    unitId
+) {
+
+    const unit =
+        daftarUnit[
+            unitId
+        ];
+
+
+    if (!unit) {
+
+        return;
+
+    }
+
+
+    const plat =
+        unit?.plat ||
+        unitId;
+
+
+    const nama =
+        unit?.nama ||
+        "";
+
+
+    platInput.value =
+        unitId;
+
+
+    searchUnit.value =
+        plat;
+
+
+    namaInput.value =
+        nama;
+
+
+    unitSelectedInfo.className =
+        "selected-info active";
+
+
+    unitSelectedInfo.textContent =
+        "✓ Unit dipilih: " +
+        plat +
+        " — " +
+        nama;
+
+
+    unitResults.classList.remove(
+        "active"
+    );
+
+
+    /* Reset perhitungan */
+
+    hargaInput.value =
+        "";
+
+    totalInput.value =
+        "";
+
+    bayarInput.value =
+        "";
+
+    sisaInput.value =
+        "";
+
+    sisaInfo.className =
+        "sisa-info";
+
+    sisaInfo.textContent =
+        "";
+
+}
+
+
+
+/* =========================================================
+   RENDER CUSTOMER
+   ========================================================= */
+
+function renderCustomerResults(
+    keyword = ""
+) {
+
+    const search =
+        normalisasi(
+            keyword
+        );
+
+
+    const entries =
+        Object.entries(
+            daftarCustomer
+        );
+
+
+    const hasil =
+        entries.filter(
+            function([
+                id,
+                customer
+            ]) {
+
+                const idText =
+                    normalisasi(
+                        id
+                    );
+
+                const nik =
+                    normalisasi(
+                        customer?.nik
+                    );
+
+                const nama =
+                    normalisasi(
+                        customer?.nama
+                    );
+
+                const hp =
+                    normalisasi(
+                        customer?.hp
+                    );
+
+
+                return (
+                    !search ||
+                    idText.includes(search) ||
+                    nik.includes(search) ||
+                    nama.includes(search) ||
+                    hp.includes(search)
+                );
+
+            }
+        )
+        .slice(
+            0,
+            50
+        );
+
+
+    if (
+        entries.length === 0
+    ) {
+
+        customerResults.innerHTML = `
+            <div class="search-empty">
+                Data customer belum tersedia
+            </div>
+        `;
+
+        return;
+    }
+
+
+    let html = `
+
+        <div class="search-count">
+            ${hasil.length}
+            data ditemukan
+            ${hasil.length >= 50 ? "(maks. 50 ditampilkan)" : ""}
+        </div>
+
+    `;
+
+
+    if (
+        hasil.length === 0
+    ) {
+
+        html += `
+            <div class="search-empty">
+                🔍 Customer tidak ditemukan
+            </div>
+        `;
+
+    }
+    else {
+
+        hasil.forEach(
+            function([
+                id,
+                customer
+            ]) {
+
+                const nik =
+                    customer?.nik ||
+                    id;
+
+                const nama =
+                    customer?.nama ||
+                    "Tanpa Nama";
+
+                const hp =
+                    customer?.hp ||
+                    "";
+
+
+                html += `
+
+                    <button
+                        type="button"
+                        class="search-item"
+                        data-customer-id="${escapeHTML(id)}"
+                    >
+
+                        <div class="search-item-main">
+
+                            <span class="search-item-icon">
+                                👤
+                            </span>
+
+                            <span>
+                                ${escapeHTML(nama)}
+                            </span>
+
+                        </div>
+
+                        <div class="search-item-detail">
+
+                            ID:
+                            ${escapeHTML(id)}
+
+                            &nbsp; • &nbsp;
+
+                            NIK:
+                            ${escapeHTML(nik)}
+
+                            ${
+                                hp
+                                ?
+                                `&nbsp; • &nbsp;${escapeHTML(hp)}`
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                    </button>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    customerResults.innerHTML =
+        html;
+
+
+    customerResults
+        .querySelectorAll(
+            "[data-customer-id]"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        pilihCustomer(
+                            this.dataset.customerId
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+
+/* =========================================================
+   PILIH CUSTOMER
+   ========================================================= */
+
+function pilihCustomer(
+    id
+) {
+
+    const dataCustomer =
+        daftarCustomer[
+            id
+        ];
+
+
+    if (!dataCustomer) {
+
+        return;
+
+    }
+
+
+    const nama =
+        dataCustomer?.nama ||
+        "";
+
+
+    const nik =
+        dataCustomer?.nik ||
+        id;
+
+
+    idCustomerInput.value =
+        id;
+
+
+    searchCustomer.value =
+        id;
+
+
+    customerInput.value =
+        nama;
+
+
+    customerSelectedInfo.className =
+        "selected-info active";
+
+
+    customerSelectedInfo.textContent =
+        "✓ Customer dipilih: " +
+        nama +
+        " — NIK: " +
+        nik;
+
+
+    customerResults.classList.remove(
+        "active"
+    );
+
+}
+
+
+
+/* =========================================================
+   SEARCH UNIT INPUT
+   ========================================================= */
+
+searchUnit.addEventListener(
+    "input",
+    function() {
+
+        const keyword =
+            this.value;
+
+
+        /*
+         * Jika user mengubah
+         * pencarian setelah memilih
+         * unit, hapus pilihan lama.
+         */
+
+        if (
+            normalisasi(keyword) !==
+            normalisasi(
+                daftarUnit[
+                    platInput.value
+                ]?.plat ||
+                ""
+            )
+        ) {
+
+            platInput.value =
+                "";
+
+            namaInput.value =
+                "";
+
+            unitSelectedInfo.className =
+                "selected-info";
+
+            unitSelectedInfo.textContent =
+                "";
+        }
+
+
+        renderUnitResults(
+            keyword
+        );
+
+
+        unitResults.classList.add(
+            "active"
+        );
+
     }
 );
 
 
-/* =================================
-   SAAT CUSTOMER DIPILIH
-================================= */
 
-idCustomerInput.addEventListener(
-    "change",
+/* =========================================================
+   FOCUS UNIT
+   ========================================================= */
 
+searchUnit.addEventListener(
+    "focus",
     function() {
 
-        const id =
+        renderUnitResults(
+            this.value
+        );
+
+        unitResults.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   SEARCH CUSTOMER INPUT
+   ========================================================= */
+
+searchCustomer.addEventListener(
+    "input",
+    function() {
+
+        const keyword =
             this.value;
 
-        if (!id) {
+
+        /*
+         * Hapus pilihan lama jika
+         * pencarian berubah.
+         */
+
+        if (
+            normalisasi(keyword) !==
+            normalisasi(
+                idCustomerInput.value
+            )
+        ) {
+
+            idCustomerInput.value =
+                "";
 
             customerInput.value =
                 "";
 
-            return;
+            customerSelectedInfo.className =
+                "selected-info";
+
+            customerSelectedInfo.textContent =
+                "";
         }
 
-        const dataCustomer =
-            daftarCustomer[id];
 
-        customerInput.value =
-            dataCustomer?.nama ||
-            "";
+        renderCustomerResults(
+            keyword
+        );
+
+
+        customerResults.classList.add(
+            "active"
+        );
+
     }
 );
 
 
-/* =================================
+
+/* =========================================================
+   FOCUS CUSTOMER
+   ========================================================= */
+
+searchCustomer.addEventListener(
+    "focus",
+    function() {
+
+        renderCustomerResults(
+            this.value
+        );
+
+        customerResults.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   KLIK LUAR DROPDOWN
+   ========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".search-wrapper"
+            )
+        ) {
+
+            unitResults.classList.remove(
+                "active"
+            );
+
+            customerResults.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
    HITUNG JUMLAH HARI
-================================= */
+   ========================================================= */
 
 function hitungJumlahHari() {
 
@@ -1171,12 +2647,16 @@ function hitungJumlahHari() {
     const selesaiSewa =
         selesaiSewaInput.value;
 
+
     if (
         !tanggalSewa ||
         !selesaiSewa
     ) {
+
         return 0;
+
     }
+
 
     const mulai =
         new Date(
@@ -1184,15 +2664,18 @@ function hitungJumlahHari() {
             "T00:00:00"
         );
 
+
     const selesai =
         new Date(
             selesaiSewa +
             "T00:00:00"
         );
 
+
     const selisih =
         selesai -
         mulai;
+
 
     return Math.ceil(
         selisih /
@@ -1203,12 +2686,14 @@ function hitungJumlahHari() {
             24
         )
     );
+
 }
 
 
-/* =================================
+
+/* =========================================================
    UPDATE DURASI
-================================= */
+   ========================================================= */
 
 function updateDurasiInfo() {
 
@@ -1217,6 +2702,7 @@ function updateDurasiInfo() {
 
     const selesaiSewa =
         selesaiSewaInput.value;
+
 
     if (
         !tanggalSewa ||
@@ -1230,12 +2716,17 @@ function updateDurasiInfo() {
             "";
 
         return;
+
     }
+
 
     const jumlahHari =
         hitungJumlahHari();
 
-    if (jumlahHari < 0) {
+
+    if (
+        jumlahHari < 0
+    ) {
 
         durasiInfo.className =
             "durasi-info active error";
@@ -1244,7 +2735,9 @@ function updateDurasiInfo() {
             "⚠ Estimasi tanggal selesai tidak boleh sebelum tanggal sewa.";
 
         return;
+
     }
+
 
     if (
         rentalTypeInput.value ===
@@ -1258,25 +2751,29 @@ function updateDurasiInfo() {
             "🕒 Durasi booking: Setengah Hari";
 
         return;
+
     }
+
 
     durasiInfo.className =
         "durasi-info active";
+
 
     durasiInfo.textContent =
         "📅 Durasi booking: " +
         jumlahHari +
         " hari";
+
 }
 
 
-/* =================================
+
+/* =========================================================
    TANGGAL SEWA
-================================= */
+   ========================================================= */
 
 tanggalSewaInput.addEventListener(
     "change",
-
     function() {
 
         const tanggalDipilih =
@@ -1284,6 +2781,7 @@ tanggalSewaInput.addEventListener(
 
         const hariIni =
             getTanggalHariIni();
+
 
         if (
             tanggalDipilih &&
@@ -1301,11 +2799,14 @@ tanggalSewaInput.addEventListener(
                 "";
 
             return;
+
         }
+
 
         selesaiSewaInput.min =
             tanggalDipilih ||
             hariIni;
+
 
         if (
             selesaiSewaInput.value &&
@@ -1315,21 +2816,25 @@ tanggalSewaInput.addEventListener(
 
             selesaiSewaInput.value =
                 "";
+
         }
 
+
         updateDurasiInfo();
+
         hitungTotal();
+
     }
 );
 
 
-/* =================================
+
+/* =========================================================
    TANGGAL SELESAI
-================================= */
+   ========================================================= */
 
 selesaiSewaInput.addEventListener(
     "change",
-
     function() {
 
         const tanggalSelesai =
@@ -1340,6 +2845,7 @@ selesaiSewaInput.addEventListener(
 
         const hariIni =
             getTanggalHariIni();
+
 
         if (
             tanggalSelesai &&
@@ -1354,7 +2860,9 @@ selesaiSewaInput.addEventListener(
                 "";
 
             return;
+
         }
+
 
         if (!tanggalSewa) {
 
@@ -1366,7 +2874,9 @@ selesaiSewaInput.addEventListener(
                 "";
 
             return;
+
         }
+
 
         if (
             tanggalSelesai <
@@ -1381,27 +2891,32 @@ selesaiSewaInput.addEventListener(
                 "";
 
             return;
+
         }
 
+
         updateDurasiInfo();
+
         hitungTotal();
+
     }
 );
 
 
-/* =================================
+
+/* =========================================================
    INPUT HARGA
-================================= */
+   ========================================================= */
 
 hargaInput.addEventListener(
     "input",
-
     function() {
 
         const angka =
             angkaDariRupiah(
                 this.value
             );
+
 
         this.value =
             angka > 0
@@ -1412,24 +2927,27 @@ hargaInput.addEventListener(
             :
             "";
 
+
         hitungTotal();
+
     }
 );
 
 
-/* =================================
-   INPUT BAYAR / DP
-================================= */
+
+/* =========================================================
+   INPUT BAYAR
+   ========================================================= */
 
 bayarInput.addEventListener(
     "input",
-
     function() {
 
         const angka =
             angkaDariRupiah(
                 this.value
             );
+
 
         this.value =
             angka > 0
@@ -1440,19 +2958,20 @@ bayarInput.addEventListener(
             :
             "";
 
+
         hitungSisa();
+
     }
 );
 
 
-/* =================================
-   INPUT TOTAL MANUAL
-   KHUSUS SETENGAH HARI
-================================= */
+
+/* =========================================================
+   TOTAL MANUAL SETENGAH HARI
+   ========================================================= */
 
 totalInput.addEventListener(
     "input",
-
     function() {
 
         if (
@@ -1465,6 +2984,7 @@ totalInput.addEventListener(
                     this.value
                 );
 
+
             this.value =
                 angka > 0
                 ?
@@ -1473,16 +2993,20 @@ totalInput.addEventListener(
                 )
                 :
                 "";
+
         }
 
+
         hitungSisa();
+
     }
 );
 
 
-/* =================================
+
+/* =========================================================
    HITUNG TOTAL
-================================= */
+   ========================================================= */
 
 function hitungTotal() {
 
@@ -1491,11 +3015,14 @@ function hitungTotal() {
             hargaInput.value
         );
 
+
     const rentalType =
         rentalTypeInput.value;
 
+
     const jumlahHari =
         hitungJumlahHari();
+
 
     if (
         rentalType ===
@@ -1511,13 +3038,16 @@ function hitungTotal() {
         hitungSisa();
 
         return;
+
     }
+
 
     totalInput.readOnly =
         true;
 
     totalInput.placeholder =
         "Total dihitung otomatis";
+
 
     if (
         harga <= 0 ||
@@ -1531,10 +3061,13 @@ function hitungTotal() {
         hitungSisa();
 
         return;
+
     }
+
 
     let jumlahPeriode =
         0;
+
 
     if (
         rentalType ===
@@ -1543,6 +3076,7 @@ function hitungTotal() {
 
         jumlahPeriode =
             jumlahHari;
+
     }
 
     else if (
@@ -1552,8 +3086,10 @@ function hitungTotal() {
 
         jumlahPeriode =
             Math.ceil(
-                jumlahHari / 7
+                jumlahHari /
+                7
             );
+
     }
 
     else if (
@@ -1563,26 +3099,33 @@ function hitungTotal() {
 
         jumlahPeriode =
             Math.ceil(
-                jumlahHari / 30
+                jumlahHari /
+                30
             );
+
     }
+
 
     const total =
         harga *
         jumlahPeriode;
+
 
     totalInput.value =
         formatRupiah(
             total
         );
 
+
     hitungSisa();
+
 }
 
 
-/* =================================
-   HITUNG SISA PEMBAYARAN
-================================= */
+
+/* =========================================================
+   HITUNG SISA
+   ========================================================= */
 
 function hitungSisa() {
 
@@ -1591,44 +3134,62 @@ function hitungSisa() {
             totalInput.value
         );
 
+
     const bayar =
         angkaDariRupiah(
             bayarInput.value
         );
 
+
     sisaInfo.className =
         "sisa-info";
+
 
     sisaInfo.textContent =
         "";
 
-    if (total <= 0) {
+
+    if (
+        total <= 0
+    ) {
 
         sisaInput.value =
             "";
 
         return;
+
     }
 
-    if (bayar === total) {
+
+    if (
+        bayar === total
+    ) {
 
         sisaInput.value =
             "0";
 
+
         sisaInfo.className =
             "sisa-info active sisa-lunas";
+
 
         sisaInfo.textContent =
             "✓ Pembayaran LUNAS";
 
+
         return;
+
     }
 
-    if (bayar > total) {
+
+    if (
+        bayar > total
+    ) {
 
         const lebihBayar =
             bayar -
             total;
+
 
         sisaInput.value =
             "+ " +
@@ -1636,8 +3197,10 @@ function hitungSisa() {
                 lebihBayar
             );
 
+
         sisaInfo.className =
             "sisa-info active sisa-lebih";
+
 
         sisaInfo.textContent =
             "＋ Kelebihan pembayaran: " +
@@ -1645,12 +3208,16 @@ function hitungSisa() {
                 lebihBayar
             );
 
+
         return;
+
     }
+
 
     const sisa =
         total -
         bayar;
+
 
     sisaInput.value =
         "- " +
@@ -1658,24 +3225,27 @@ function hitungSisa() {
             sisa
         );
 
+
     sisaInfo.className =
         "sisa-info active sisa-kurang";
+
 
     sisaInfo.textContent =
         "Sisa pembayaran: " +
         formatRupiah(
             sisa
         );
+
 }
 
 
-/* =================================
+
+/* =========================================================
    RENTAL TYPE
-================================= */
+   ========================================================= */
 
 rentalTypeInput.addEventListener(
     "change",
-
     function() {
 
         if (
@@ -1692,11 +3262,14 @@ rentalTypeInput.addEventListener(
             totalInput.placeholder =
                 "Input total biaya manual";
 
+
             durasiInfo.className =
                 "durasi-info active";
 
+
             durasiInfo.textContent =
                 "🕒 Durasi booking: Setengah Hari";
+
         }
 
         else {
@@ -1710,17 +3283,22 @@ rentalTypeInput.addEventListener(
             totalInput.placeholder =
                 "Total dihitung otomatis";
 
+
             updateDurasiInfo();
+
         }
 
+
         hitungTotal();
+
     }
 );
 
 
-/* =================================
-   TOMBOL SIMPAN BOOKING
-================================= */
+
+/* =========================================================
+   SIMPAN BOOKING
+   ========================================================= */
 
 btnProses.addEventListener(
     "click",
@@ -1728,63 +3306,75 @@ btnProses.addEventListener(
 );
 
 
-/* =================================
-   SIMPAN BOOKING
-   NODE:
-   Booking/{ID TRANSAKSI}
-================================= */
 
 async function simpanBooking() {
 
     const unitId =
         platInput.value;
 
+
     const unit =
-        daftarUnit[unitId];
+        daftarUnit[
+            unitId
+        ];
+
 
     const idcustomer =
         idCustomerInput.value;
 
+
     const dataCustomer =
-        daftarCustomer[idcustomer];
+        daftarCustomer[
+            idcustomer
+        ];
+
 
     const nama =
         namaInput.value.trim();
 
+
     const customer =
         customerInput.value.trim();
 
+
     const rentaltype =
         rentalTypeInput.value;
+
 
     const harga =
         angkaDariRupiah(
             hargaInput.value
         );
 
+
     const tanggalsewa =
         tanggalSewaInput.value;
 
+
     const selesaisewa =
         selesaiSewaInput.value;
+
 
     const total =
         angkaDariRupiah(
             totalInput.value
         );
 
+
     const bayar =
         angkaDariRupiah(
             bayarInput.value
         );
 
+
     const hariIni =
         getTanggalHariIni();
 
 
-    /* =================================
-       VALIDASI
-    ================================= */
+
+    /* =====================================================
+       VALIDASI UNIT
+       ===================================================== */
 
     if (!unitId) {
 
@@ -1792,8 +3382,12 @@ async function simpanBooking() {
             "Pilih ID Unit / Plat Mobil!"
         );
 
+        searchUnit.focus();
+
         return;
+
     }
+
 
     if (!unit) {
 
@@ -1802,7 +3396,14 @@ async function simpanBooking() {
         );
 
         return;
+
     }
+
+
+
+    /* =====================================================
+       VALIDASI CUSTOMER
+       ===================================================== */
 
     if (!idcustomer) {
 
@@ -1810,8 +3411,28 @@ async function simpanBooking() {
             "Pilih ID Customer!"
         );
 
+        searchCustomer.focus();
+
         return;
+
     }
+
+
+    if (!dataCustomer) {
+
+        alert(
+            "Data customer tidak ditemukan!"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       VALIDASI LAIN
+       ===================================================== */
 
     if (!rentaltype) {
 
@@ -1820,7 +3441,9 @@ async function simpanBooking() {
         );
 
         return;
+
     }
+
 
     if (harga <= 0) {
 
@@ -1828,8 +3451,12 @@ async function simpanBooking() {
             "Harga harus diisi!"
         );
 
+        hargaInput.focus();
+
         return;
+
     }
+
 
     if (!tanggalsewa) {
 
@@ -1838,7 +3465,9 @@ async function simpanBooking() {
         );
 
         return;
+
     }
+
 
     if (
         tanggalsewa <
@@ -1850,7 +3479,9 @@ async function simpanBooking() {
         );
 
         return;
+
     }
+
 
     if (!selesaisewa) {
 
@@ -1859,7 +3490,9 @@ async function simpanBooking() {
         );
 
         return;
+
     }
+
 
     if (
         rentaltype !==
@@ -1876,8 +3509,11 @@ async function simpanBooking() {
             );
 
             return;
+
         }
+
     }
+
 
     if (total <= 0) {
 
@@ -1886,30 +3522,40 @@ async function simpanBooking() {
         );
 
         return;
+
     }
 
 
-    /* =================================
-       HITUNG PEMBAYARAN
-    ================================= */
+
+    /* =====================================================
+       PEMBAYARAN
+       ===================================================== */
 
     let sisa =
         0;
 
+
     let kelebihanBayar =
         0;
 
-    if (bayar < total) {
+
+    if (
+        bayar < total
+    ) {
 
         sisa =
             total -
             bayar;
+
     }
 
-    else if (bayar === total) {
+    else if (
+        bayar === total
+    ) {
 
         sisa =
             0;
+
     }
 
     else {
@@ -1920,66 +3566,76 @@ async function simpanBooking() {
 
         sisa =
             0;
+
     }
 
 
-    /* =================================
+
+    /* =====================================================
        STATUS PEMBAYARAN
-    ================================= */
+       ===================================================== */
 
     let statusPembayaran =
         "BELUM LUNAS";
 
+
     if (
-        bayar ===
-        total
+        bayar === total
     ) {
 
         statusPembayaran =
             "LUNAS";
+
     }
 
     else if (
-        bayar >
-        total
+        bayar > total
     ) {
 
         statusPembayaran =
             "LEBIH BAYAR";
+
     }
 
 
-    /* =================================
+
+    /* =====================================================
        DISABLE BUTTON
-    ================================= */
+       ===================================================== */
 
     btnProses.disabled =
         true;
 
+
     btnProses.textContent =
         "Menyimpan Booking...";
+
 
     statusSimpan.textContent =
         "Mohon tunggu...";
 
 
+
     try {
 
-        /* =================================
+
+        /* =================================================
            ID TRANSAKSI
-        ================================= */
+           ================================================= */
 
         const transaksiId =
             "BOOKING_" +
             Date.now();
 
 
-        /* =================================
+
+        /* =================================================
            JUMLAH HARI
-        ================================= */
+           ================================================= */
 
         let jumlahHari =
             hitungJumlahHari();
+
 
         if (
             rentaltype ===
@@ -1988,17 +3644,20 @@ async function simpanBooking() {
 
             jumlahHari =
                 0.5;
+
         }
 
 
-        /* =================================
+
+        /* =================================================
            DATA BOOKING
-        ================================= */
+           ================================================= */
 
         const dataBooking = {
 
             transaksiId:
                 transaksiId,
+
 
             /* UNIT */
 
@@ -2012,6 +3671,7 @@ async function simpanBooking() {
             namaUnit:
                 unit?.nama ||
                 nama,
+
 
             /* CUSTOMER */
 
@@ -2032,6 +3692,7 @@ async function simpanBooking() {
             hp:
                 dataCustomer?.hp ||
                 "",
+
 
             /* BOOKING */
 
@@ -2071,6 +3732,7 @@ async function simpanBooking() {
                     bayar
                 ),
 
+
             /* PEMBAYARAN */
 
             sisa:
@@ -2097,6 +3759,7 @@ async function simpanBooking() {
             statusPembayaran:
                 statusPembayaran,
 
+
             /* STATUS BOOKING */
 
             status:
@@ -2105,6 +3768,7 @@ async function simpanBooking() {
             statusBooking:
                 "BOOKING",
 
+
             /* TIMESTAMP */
 
             timestamp:
@@ -2112,70 +3776,111 @@ async function simpanBooking() {
 
             tanggalInput:
                 formatTanggalInput()
+
         };
 
 
-        /* =================================
-           SIMPAN:
+
+        /* =================================================
+           SIMPAN KE FIREBASE
            Booking/{ID TRANSAKSI}
-        ================================= */
+           ================================================= */
 
         await set(
+
             ref(
                 db,
                 "Booking/" +
                 transaksiId
             ),
+
             dataBooking
+
         );
 
 
-        /* =================================
+
+        /* =================================================
            BERHASIL
-        ================================= */
+           ================================================= */
 
         statusSimpan.textContent =
             "✓ Booking berhasil disimpan";
 
+
         alert(
+
             "Booking berhasil disimpan!\n\n" +
+
             "ID Transaksi: " +
             transaksiId +
+
             "\n\n" +
+
             "Unit: " +
             (
                 unit?.plat ||
                 unitId
             ) +
+
             "\n" +
+
             "Customer: " +
             customer +
+
             "\n" +
+
             "Tanggal Booking: " +
             tanggalsewa +
+
             "\n" +
+
             "Tanggal Selesai: " +
             selesaisewa +
+
             "\n\n" +
+
             "Status: BOOKING"
+
         );
 
 
-        /* =================================
+
+        /* =================================================
            RESET FORM
-        ================================= */
+           ================================================= */
 
         platInput.value =
+            "";
+
+        searchUnit.value =
             "";
 
         namaInput.value =
             "";
 
+        unitSelectedInfo.className =
+            "selected-info";
+
+        unitSelectedInfo.textContent =
+            "";
+
+
         idCustomerInput.value =
+            "";
+
+        searchCustomer.value =
             "";
 
         customerInput.value =
             "";
+
+        customerSelectedInfo.className =
+            "selected-info";
+
+        customerSelectedInfo.textContent =
+            "";
+
 
         rentalTypeInput.value =
             "";
@@ -2198,11 +3903,13 @@ async function simpanBooking() {
         sisaInput.value =
             "";
 
+
         durasiInfo.className =
             "durasi-info";
 
         durasiInfo.textContent =
             "";
+
 
         sisaInfo.className =
             "sisa-info";
@@ -2212,6 +3919,7 @@ async function simpanBooking() {
 
     }
 
+
     catch (error) {
 
         console.error(
@@ -2219,15 +3927,21 @@ async function simpanBooking() {
             error
         );
 
+
         statusSimpan.textContent =
             "Gagal menyimpan booking: " +
             error.message;
 
+
         alert(
+
             "Gagal menyimpan booking:\n\n" +
             error.message
+
         );
+
     }
+
 
     finally {
 
@@ -2236,10 +3950,16 @@ async function simpanBooking() {
 
         btnProses.textContent =
             "Simpan Booking";
+
     }
+
 }
+
 
 </script>
 
+
 </body>
+
 </html>
+```
