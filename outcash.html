@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
 
 <head>
@@ -7,9 +6,8 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
 >
 
 <title>ARC TRANS - Form Pengeluaran</title>
@@ -46,9 +44,9 @@ body {
     color: var(--text);
 }
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 .topbar {
 
@@ -139,9 +137,9 @@ body {
     color: white;
 }
 
-/* =========================
+/* =========================================================
    CONTAINER
-========================= */
+========================================================= */
 
 .container {
 
@@ -174,9 +172,9 @@ body {
     font-size: 14px;
 }
 
-/* =========================
+/* =========================================================
    CARD
-========================= */
+========================================================= */
 
 .card {
 
@@ -267,9 +265,9 @@ textarea:focus {
         rgba(25, 118, 210, 0.10);
 }
 
-/* =========================
+/* =========================================================
    VEHICLE
-========================= */
+========================================================= */
 
 .vehicle-box {
 
@@ -390,9 +388,9 @@ textarea:focus {
     color: var(--muted);
 }
 
-/* =========================
+/* =========================================================
    SELECTED INFO
-========================= */
+========================================================= */
 
 .selected-info {
 
@@ -444,9 +442,9 @@ textarea:focus {
     word-break: break-word;
 }
 
-/* =========================
+/* =========================================================
    CURRENCY
-========================= */
+========================================================= */
 
 .currency-wrapper {
 
@@ -486,9 +484,9 @@ textarea:focus {
     color: var(--muted);
 }
 
-/* =========================
+/* =========================================================
    KETERANGAN INFO
-========================= */
+========================================================= */
 
 .vehicle-note {
 
@@ -516,9 +514,9 @@ textarea:focus {
     display: block;
 }
 
-/* =========================
+/* =========================================================
    BUTTON
-========================= */
+========================================================= */
 
 .buttons {
 
@@ -584,9 +582,9 @@ button:disabled {
     color: white;
 }
 
-/* =========================
+/* =========================================================
    STATUS
-========================= */
+========================================================= */
 
 #status {
 
@@ -601,6 +599,8 @@ button:disabled {
     font-size: 13px;
 
     font-weight: 600;
+
+    line-height: 1.6;
 }
 
 #status.success {
@@ -629,9 +629,9 @@ button:disabled {
     color: #b91c1c;
 }
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 650px) {
 
@@ -721,36 +721,35 @@ button:disabled {
 
 <header class="topbar">
 
-```
-<div class="brand">
+    <div class="brand">
 
-    <div class="brand-icon">
-        💸
-    </div>
-
-    <div>
-
-        <div class="brand-title">
-            ARC TRANS
+        <div class="brand-icon">
+            💸
         </div>
 
-        <div class="brand-subtitle">
-            Vehicle Rental Management
+        <div>
+
+            <div class="brand-title">
+                ARC TRANS
+            </div>
+
+            <div class="brand-subtitle">
+                Vehicle Rental Management
+            </div>
+
         </div>
 
     </div>
 
-</div>
-
-<a
-    href="index.html"
-    class="home-btn"
->
-    🏠 Home
-</a>
-```
+    <a
+        href="index.html"
+        class="home-btn"
+    >
+        🏠 Home
+    </a>
 
 </header>
+
 
 <!-- ======================================================
      MAIN
@@ -758,310 +757,325 @@ button:disabled {
 
 <main class="container">
 
-```
-<div class="page-title">
+    <div class="page-title">
 
-    <h1>
-        💸 Form Pengeluaran
-    </h1>
+        <h1>
+            💸 Form Pengeluaran
+        </h1>
 
-    <p>
-        Input biaya operasional kendaraan
-    </p>
+        <p>
+            Input biaya operasional kendaraan
+        </p>
 
-</div>
-
-
-<div class="card">
-
-    <form
-        id="expenseForm"
-        autocomplete="off"
-    >
-
-        <div class="grid">
-
-            <!-- ===============================
-                 TANGGAL
-            ================================ -->
-
-            <div class="field">
-
-                <label for="tanggal">
-                    Tanggal
-                </label>
-
-                <input
-                    type="date"
-                    id="tanggal"
-                    required
-                >
-
-            </div>
+    </div>
 
 
-            <!-- ===============================
-                 KATEGORI
-            ================================ -->
+    <div class="card">
 
-            <div class="field">
+        <form
+            id="expenseForm"
+            autocomplete="off"
+        >
 
-                <label for="kategori">
-                    Kategori Pengeluaran
-                </label>
+            <div class="grid">
 
-                <select
-                    id="kategori"
-                    required
-                >
-
-                    <option value="">
-                        -- Pilih Kategori --
-                    </option>
-
-                    <option value="Perawatan Kendaraan">
-                        Perawatan Kendaraan
-                    </option>
-
-                    <option value="BBM">
-                        BBM
-                    </option>
-
-                    <option value="Lainnya">
-                        Lainnya
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- ===============================
-                 PLAT MOBIL
-            ================================ -->
-
-            <section
-                id="vehicleBox"
-                class="vehicle-box"
-            >
+                <!-- =================================================
+                     TANGGAL
+                ================================================== -->
 
                 <div class="field">
 
-                    <label>
-                        Plat Mobil
+                    <label for="tanggal">
+                        Tanggal
                     </label>
 
-                    <div class="search-container">
-
-                        <span class="search-icon">
-                            🔍
-                        </span>
-
-                        <input
-                            type="text"
-                            id="searchPlat"
-                            placeholder="Cari plat nomor atau nama kendaraan..."
-                        >
-
-                        <div
-                            id="vehicleDropdown"
-                            class="vehicle-dropdown"
-                        ></div>
-
-                    </div>
-
                     <input
-                        type="hidden"
-                        id="platMobil"
-                    >
-
-                </div>
-
-
-                <!-- INFORMASI UNIT -->
-
-                <div
-                    id="selectedInfo"
-                    class="selected-info"
-                >
-
-                    <div class="info-card">
-
-                        <span class="info-label">
-                            Plat Nomor
-                        </span>
-
-                        <div
-                            id="infoPlat"
-                            class="info-value"
-                        >
-                            -
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-card">
-
-                        <span class="info-label">
-                            Nama Kendaraan
-                        </span>
-
-                        <div
-                            id="infoNama"
-                            class="info-value"
-                        >
-                            -
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-card">
-
-                        <span class="info-label">
-                            Keterangan Unit
-                        </span>
-
-                        <div
-                            id="infoKeterangan"
-                            class="info-value"
-                        >
-                            -
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-card">
-
-                        <span class="info-label">
-                            Type Kendaraan
-                        </span>
-
-                        <div
-                            id="infoType"
-                            class="info-value"
-                        >
-                            -
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- ===============================
-                 KETERANGAN
-            ================================ -->
-
-            <div
-                class="field full"
-                id="keteranganBox"
-                style="display:none;"
-            >
-
-                <label for="keterangan">
-                    Keterangan
-                </label>
-
-                <textarea
-                    id="keterangan"
-                    placeholder="Masukkan keterangan pengeluaran..."
-                ></textarea>
-
-                <div
-                    id="vehicleNote"
-                    class="vehicle-note"
-                >
-                    Untuk kategori
-                    <strong>Perawatan Kendaraan</strong>
-                    dan
-                    <strong>BBM</strong>,
-                    format keterangan otomatis:
-                    <strong>B 1234 ABC | Toyota Avanza | Ganti oli mesin</strong>
-                </div>
-
-            </div>
-
-
-            <!-- ===============================
-                 BIAYA
-            ================================ -->
-
-            <div class="field full">
-
-                <label for="biaya">
-                    Biaya Pengeluaran
-                </label>
-
-                <div class="currency-wrapper">
-
-                    <span class="currency">
-                        Rp
-                    </span>
-
-                    <input
-                        type="text"
-                        id="biaya"
-                        inputmode="numeric"
-                        placeholder="0"
+                        type="date"
+                        id="tanggal"
                         required
                     >
 
                 </div>
 
-                <div class="help-text">
 
-                    Contoh input:
-                    <strong>Rp 250.000</strong>
+                <!-- =================================================
+                     KATEGORI
+                ================================================== -->
 
-                    <br>
+                <div class="field">
 
-                    Revenue akan menyimpan:
-                    <strong>bayar: -250000</strong>
+                    <label for="kategori">
+                        Kategori Pengeluaran
+                    </label>
+
+                    <select
+                        id="kategori"
+                        required
+                    >
+
+                        <option value="">
+                            -- Pilih Kategori --
+                        </option>
+
+                        <option value="Perawatan Kendaraan">
+                            Perawatan Kendaraan
+                        </option>
+
+                        <option value="BBM">
+                            BBM
+                        </option>
+
+                        <option value="Lainnya">
+                            Lainnya
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- =================================================
+                     KENDARAAN
+                ================================================== -->
+
+                <section
+                    id="vehicleBox"
+                    class="vehicle-box"
+                >
+
+                    <div class="field">
+
+                        <label for="searchPlat">
+                            ID Unit / Plat Mobil
+                        </label>
+
+                        <div class="search-container">
+
+                            <span class="search-icon">
+                                🔍
+                            </span>
+
+                            <input
+                                type="text"
+                                id="searchPlat"
+                                placeholder="Cari plat nomor atau nama kendaraan..."
+                            >
+
+                            <div
+                                id="vehicleDropdown"
+                                class="vehicle-dropdown"
+                            ></div>
+
+                        </div>
+
+                        <!--
+                            Nilai ini digunakan sebagai
+                            identitas kendaraan yang dipilih.
+                        -->
+
+                        <input
+                            type="hidden"
+                            id="platMobil"
+                        >
+
+                    </div>
+
+
+                    <!-- =================================================
+                         INFORMASI UNIT
+                    ================================================== -->
+
+                    <div
+                        id="selectedInfo"
+                        class="selected-info"
+                    >
+
+                        <div class="info-card">
+
+                            <span class="info-label">
+                                Plat Nomor
+                            </span>
+
+                            <div
+                                id="infoPlat"
+                                class="info-value"
+                            >
+                                -
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-card">
+
+                            <span class="info-label">
+                                Nama Kendaraan
+                            </span>
+
+                            <div
+                                id="infoNama"
+                                class="info-value"
+                            >
+                                -
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-card">
+
+                            <span class="info-label">
+                                Keterangan Unit
+                            </span>
+
+                            <div
+                                id="infoKeterangan"
+                                class="info-value"
+                            >
+                                -
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-card">
+
+                            <span class="info-label">
+                                Type Kendaraan
+                            </span>
+
+                            <div
+                                id="infoType"
+                                class="info-value"
+                            >
+                                -
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     KETERANGAN
+                ================================================== -->
+
+                <div
+                    class="field full"
+                    id="keteranganBox"
+                    style="display:none;"
+                >
+
+                    <label for="keterangan">
+                        Keterangan
+                    </label>
+
+                    <textarea
+                        id="keterangan"
+                        placeholder="Masukkan keterangan pengeluaran..."
+                    ></textarea>
+
+                    <div
+                        id="vehicleNote"
+                        class="vehicle-note"
+                    >
+
+                        Untuk kategori
+                        <strong>Perawatan Kendaraan</strong>
+                        dan
+                        <strong>BBM</strong>,
+                        keterangan akan disimpan dengan format:
+
+                        <strong>
+                            B 1234 ABC | Toyota Avanza | Ganti oli mesin
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BIAYA
+                ================================================== -->
+
+                <div class="field full">
+
+                    <label for="biaya">
+                        Biaya Pengeluaran
+                    </label>
+
+                    <div class="currency-wrapper">
+
+                        <span class="currency">
+                            Rp
+                        </span>
+
+                        <input
+                            type="text"
+                            id="biaya"
+                            inputmode="numeric"
+                            placeholder="0"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="help-text">
+
+                        Contoh input:
+                        <strong>Rp 250.000</strong>
+
+                        <br>
+
+                        Revenue akan menyimpan:
+                        <strong>bayar: -250000</strong>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+
+            <!-- =================================================
+                 STATUS
+            ================================================== -->
+
+            <div id="status"></div>
 
 
-        <!-- STATUS -->
+            <!-- =================================================
+                 BUTTON
+            ================================================== -->
 
-        <div id="status"></div>
+            <div class="buttons">
 
+                <button
+                    type="reset"
+                    class="btn-reset"
+                >
+                    🔄 Reset
+                </button>
 
-        <!-- BUTTON -->
+                <button
+                    type="submit"
+                    class="btn-save"
+                    id="btnSave"
+                >
+                    💾 Simpan Pengeluaran
+                </button>
 
-        <div class="buttons">
+            </div>
 
-            <button
-                type="reset"
-                class="btn-reset"
-            >
-                🔄 Reset
-            </button>
+        </form>
 
-            <button
-                type="submit"
-                class="btn-save"
-                id="btnSave"
-            >
-                💾 Simpan Pengeluaran
-            </button>
-
-        </div>
-
-    </form>
-
-</div>
-```
+    </div>
 
 </main>
+
 
 <script type="module">
 
@@ -1265,6 +1279,7 @@ onValue(
         const data =
             snapshot.val();
 
+
         if (
             data &&
             typeof data === "object"
@@ -1300,7 +1315,9 @@ onValue(
         if (
             kategori.value ===
             "Perawatan Kendaraan"
+
             ||
+
             kategori.value ===
             "BBM"
         ) {
@@ -1316,6 +1333,7 @@ onValue(
     error => {
 
         console.error(
+            "Firebase Unit Error:",
             error
         );
 
@@ -1371,6 +1389,94 @@ function fieldValue(
     }
 
     return "-";
+
+}
+
+
+/* =========================================================
+   AMBIL PLAT
+========================================================= */
+
+function getPlat(item) {
+
+    return fieldValue(
+
+        item,
+
+        [
+            "plat",
+            "platNomor",
+            "nopol",
+            "noPolisi",
+            "idPlat",
+            "idUnit"
+        ]
+
+    );
+
+}
+
+
+/* =========================================================
+   AMBIL NAMA UNIT
+========================================================= */
+
+function getNamaUnit(item) {
+
+    return fieldValue(
+
+        item,
+
+        [
+            "namaUnit",
+            "nama",
+            "namaKendaraan",
+            "kendaraan"
+        ]
+
+    );
+
+}
+
+
+/* =========================================================
+   AMBIL TYPE
+========================================================= */
+
+function getTypeUnit(item) {
+
+    return fieldValue(
+
+        item,
+
+        [
+            "type",
+            "tipe",
+            "jenis",
+            "typeKendaraan"
+        ]
+
+    );
+
+}
+
+
+/* =========================================================
+   AMBIL KETERANGAN UNIT
+========================================================= */
+
+function getKeteranganUnit(item) {
+
+    return fieldValue(
+
+        item,
+
+        [
+            "keterangan",
+            "ket"
+        ]
+
+    );
 
 }
 
@@ -1438,12 +1544,6 @@ function isVehicleCategory() {
 
 /* =========================================================
    BUILD KETERANGAN
-=========================================================
-
-   HASIL:
-
-   B 1234 ABC | Toyota Avanza | Ganti oli mesin
-
 ========================================================= */
 
 function buildKeterangan() {
@@ -1454,8 +1554,8 @@ function buildKeterangan() {
 
 
     /*
-       Untuk kategori Lainnya,
-       simpan keterangan apa adanya.
+       Kategori Lainnya
+       disimpan apa adanya.
     */
 
     if (
@@ -1470,33 +1570,16 @@ function buildKeterangan() {
 
 
     const plat =
-        fieldValue(
-            selectedVehicle,
-            [
-                "plat",
-                "platNomor",
-                "nopol",
-                "noPolisi"
-            ]
+        getPlat(
+            selectedVehicle
         );
 
 
     const nama =
-        fieldValue(
-            selectedVehicle,
-            [
-                "nama",
-                "namaUnit",
-                "namaKendaraan",
-                "kendaraan"
-            ]
+        getNamaUnit(
+            selectedVehicle
         );
 
-
-    /*
-       Jika user tidak mengisi
-       keterangan manual.
-    */
 
     if (
         !manualText
@@ -1512,14 +1595,6 @@ function buildKeterangan() {
 
     }
 
-
-    /*
-       FORMAT FINAL:
-       
-       B 1234 ABC |
-       Toyota Avanza |
-       Ganti oli mesin
-    */
 
     return (
 
@@ -1560,26 +1635,14 @@ function updateKeteranganPreview() {
 
 
     const plat =
-        fieldValue(
-            selectedVehicle,
-            [
-                "plat",
-                "platNomor",
-                "nopol",
-                "noPolisi"
-            ]
+        getPlat(
+            selectedVehicle
         );
 
 
     const nama =
-        fieldValue(
-            selectedVehicle,
-            [
-                "nama",
-                "namaUnit",
-                "namaKendaraan",
-                "kendaraan"
-            ]
+        getNamaUnit(
+            selectedVehicle
         );
 
 
@@ -1610,29 +1673,14 @@ function updateKeteranganPreview() {
         "Keterangan tersimpan: " +
 
         "<strong>" +
+
         escapeHtml(
             preview
         ) +
+
         "</strong>";
 
 }
-
-
-/* =========================================================
-   UPDATE PREVIEW SAAT USER MENGETIK
-========================================================= */
-
-keterangan.addEventListener(
-
-    "input",
-
-    () => {
-
-        updateKeteranganPreview();
-
-    }
-
-);
 
 
 /* =========================================================
@@ -1657,9 +1705,9 @@ kategori.addEventListener(
             kategori.value;
 
 
-        /* ===============================
-           PERAWATAN
-        ================================ */
+        /* =============================================
+           PERAWATAN KENDARAAN
+        ============================================= */
 
         if (
             value ===
@@ -1700,9 +1748,9 @@ kategori.addEventListener(
         }
 
 
-        /* ===============================
+        /* =============================================
            BBM
-        ================================ */
+        ============================================= */
 
         else if (
             value ===
@@ -1743,9 +1791,9 @@ kategori.addEventListener(
         }
 
 
-        /* ===============================
+        /* =============================================
            LAINNYA
-        ================================ */
+        ============================================= */
 
         else if (
             value ===
@@ -1778,9 +1826,9 @@ kategori.addEventListener(
         }
 
 
-        /* ===============================
+        /* =============================================
            KOSONG
-        ================================ */
+        ============================================= */
 
         else {
 
@@ -1815,7 +1863,7 @@ kategori.addEventListener(
 
 
 /* =========================================================
-   SEARCH PLAT
+   SEARCH PLAT / NAMA / TYPE
 ========================================================= */
 
 searchPlat.addEventListener(
@@ -1836,14 +1884,8 @@ searchPlat.addEventListener(
 
                     const plat =
                         String(
-                            fieldValue(
-                                item,
-                                [
-                                    "plat",
-                                    "platNomor",
-                                    "nopol",
-                                    "noPolisi"
-                                ]
+                            getPlat(
+                                item
                             )
                         )
                         .toLowerCase();
@@ -1851,14 +1893,8 @@ searchPlat.addEventListener(
 
                     const nama =
                         String(
-                            fieldValue(
-                                item,
-                                [
-                                    "nama",
-                                    "namaUnit",
-                                    "namaKendaraan",
-                                    "kendaraan"
-                                ]
+                            getNamaUnit(
+                                item
                             )
                         )
                         .toLowerCase();
@@ -1866,14 +1902,16 @@ searchPlat.addEventListener(
 
                     const type =
                         String(
-                            fieldValue(
-                                item,
-                                [
-                                    "type",
-                                    "tipe",
-                                    "jenis"
-                                ]
+                            getTypeUnit(
+                                item
                             )
+                        )
+                        .toLowerCase();
+
+
+                    const firebaseKey =
+                        String(
+                            item.firebaseKey || ""
                         )
                         .toLowerCase();
 
@@ -1893,6 +1931,12 @@ searchPlat.addEventListener(
                         ||
 
                         type.includes(
+                            keyword
+                        )
+
+                        ||
+
+                        firebaseKey.includes(
                             keyword
                         )
 
@@ -1953,7 +1997,9 @@ function renderVehicles(
                 class="vehicle-item"
                 style="cursor:default;"
             >
+
                 Kendaraan tidak ditemukan
+
             </div>
 
         `;
@@ -1975,37 +2021,20 @@ function renderVehicles(
         item => {
 
             const plat =
-                fieldValue(
-                    item,
-                    [
-                        "plat",
-                        "platNomor",
-                        "nopol",
-                        "noPolisi"
-                    ]
+                getPlat(
+                    item
                 );
 
 
             const nama =
-                fieldValue(
-                    item,
-                    [
-                        "nama",
-                        "namaUnit",
-                        "namaKendaraan",
-                        "kendaraan"
-                    ]
+                getNamaUnit(
+                    item
                 );
 
 
             const type =
-                fieldValue(
-                    item,
-                    [
-                        "type",
-                        "tipe",
-                        "jenis"
-                    ]
+                getTypeUnit(
+                    item
                 );
 
 
@@ -2093,49 +2122,32 @@ function selectVehicle(
 
 
     const plat =
-        fieldValue(
-            item,
-            [
-                "plat",
-                "platNomor",
-                "nopol",
-                "noPolisi"
-            ]
+        getPlat(
+            item
         );
 
 
     const nama =
-        fieldValue(
-            item,
-            [
-                "nama",
-                "namaUnit",
-                "namaKendaraan",
-                "kendaraan"
-            ]
+        getNamaUnit(
+            item
         );
 
 
     const ket =
-        fieldValue(
-            item,
-            [
-                "keterangan",
-                "ket"
-            ]
+        getKeteranganUnit(
+            item
         );
 
 
     const type =
-        fieldValue(
-            item,
-            [
-                "type",
-                "tipe",
-                "jenis"
-            ]
+        getTypeUnit(
+            item
         );
 
+
+    /*
+       Simpan plat ke hidden input.
+    */
 
     platMobil.value =
         String(
@@ -2143,11 +2155,19 @@ function selectVehicle(
         );
 
 
+    /*
+       Tampilkan plat di search.
+    */
+
     searchPlat.value =
         String(
             plat
         );
 
+
+    /*
+       Tampilkan informasi unit.
+    */
 
     document.getElementById(
         "infoPlat"
@@ -2324,7 +2344,7 @@ biaya.addEventListener(
 
 
 /* =========================================================
-   AMBIL NILAI ANGKA
+   AMBIL NILAI BIAYA
 ========================================================= */
 
 function getBiaya() {
@@ -2409,9 +2429,9 @@ form.addEventListener(
             platMobil.value.trim();
 
 
-        /* ===============================
-           VALIDASI
-        ================================ */
+        /* =============================================
+           VALIDASI TANGGAL
+        ============================================= */
 
         if (
             !tanggalValue
@@ -2427,6 +2447,10 @@ form.addEventListener(
         }
 
 
+        /* =============================================
+           VALIDASI KATEGORI
+        ============================================= */
+
         if (
             !kategoriValue
         ) {
@@ -2440,6 +2464,10 @@ form.addEventListener(
 
         }
 
+
+        /* =============================================
+           VALIDASI BIAYA
+        ============================================= */
 
         if (
             biayaValue <= 0
@@ -2455,6 +2483,10 @@ form.addEventListener(
         }
 
 
+        /* =============================================
+           VALIDASI KETERANGAN
+        ============================================= */
+
         if (
             !keteranganManual
         ) {
@@ -2468,6 +2500,10 @@ form.addEventListener(
 
         }
 
+
+        /* =============================================
+           VALIDASI KENDARAAN
+        ============================================= */
 
         if (
 
@@ -2499,26 +2535,40 @@ form.addEventListener(
         }
 
 
-        /* ===============================
+        /* =============================================
            KETERANGAN FINAL
-        ================================ */
+        ============================================= */
 
         const keteranganFinal =
             buildKeterangan();
 
 
-        /*
+        /* =============================================
+           NAMA UNIT
+        ============================================= */
 
-           HASIL:
-
-           B 1234 ABC | Toyota Avanza | Ganti oli mesin
-
-        */
+        let namaUnitValue = "";
 
 
-        /* ===============================
+        if (
+            isVehicleCategory()
+            &&
+            selectedVehicle
+        ) {
+
+            namaUnitValue =
+                String(
+                    getNamaUnit(
+                        selectedVehicle
+                    )
+                );
+
+        }
+
+
+        /* =============================================
            LOCK BUTTON
-        ================================ */
+        ============================================= */
 
         const originalText =
             btnSave.innerHTML;
@@ -2546,6 +2596,10 @@ form.addEventListener(
                 );
 
 
+            /*
+               Membuat ID transaksi otomatis.
+            */
+
             const transactionRef =
                 push(
                     revenueDateRef
@@ -2555,6 +2609,10 @@ form.addEventListener(
             const transactionId =
                 transactionRef.key;
 
+
+            /* =================================================
+               DATA REVENUE
+            ================================================= */
 
             const revenueData = {
 
@@ -2571,6 +2629,42 @@ form.addEventListener(
 
             };
 
+
+            /*
+               =================================================
+               TAMBAHKAN namaUnit HANYA UNTUK:
+               - Perawatan Kendaraan
+               - BBM
+               =================================================
+            */
+
+            if (
+
+                (
+                    kategoriValue ===
+                    "Perawatan Kendaraan"
+
+                    ||
+
+                    kategoriValue ===
+                    "BBM"
+                )
+
+                &&
+
+                selectedVehicle
+
+            ) {
+
+                revenueData.namaUnit =
+                    namaUnitValue;
+
+            }
+
+
+            /*
+               Simpan revenue.
+            */
 
             await set(
 
@@ -2683,20 +2777,45 @@ form.addEventListener(
                BERHASIL
             ================================================= */
 
-            showStatus(
+            let successMessage =
 
-                "✓ Pengeluaran berhasil disimpan. " +
-                "ID Transaksi: " +
-                transactionId,
+                "✓ Pengeluaran berhasil disimpan.";
 
-                "success"
+            
+            successMessage +=
 
-            );
+                "<br>ID Transaksi: " +
+                transactionId;
 
 
-            /* ===============================
+            if (
+                isVehicleCategory()
+            ) {
+
+                successMessage +=
+
+                    "<br>Nama Unit: " +
+                    namaUnitValue;
+
+            }
+
+
+            /*
+               Gunakan innerHTML karena
+               successMessage mempunyai <br>.
+            */
+
+            status.innerHTML =
+                successMessage;
+
+
+            status.className =
+                "success";
+
+
+            /* =================================================
                RESET FORM
-            ================================ */
+            ================================================= */
 
             form.reset();
 
@@ -2734,6 +2853,7 @@ form.addEventListener(
 
             biaya.value =
                 "";
+
 
         }
 
@@ -2839,5 +2959,4 @@ form.addEventListener(
 </script>
 
 </body>
-
 </html>
