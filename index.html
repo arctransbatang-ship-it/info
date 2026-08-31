@@ -1,746 +1,1295 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    >
-
-    <title>ARC TRANS</title>
-
-    <!-- =========================================================
-         ARC TRANS LOGO & CHROME FAVICON
-         ========================================================= -->
-
-    <!-- Favicon Chrome / Browser -->
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
-    >
-
-    <!-- Fallback favicon -->
-    <link
-        rel="shortcut icon"
-        type="image/png"
-        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
-    >
-
-    <!-- Icon saat ditambahkan ke Home Screen -->
-    <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
-    >
-
-    <!-- PWA / Android / Chrome -->
-    <meta name="theme-color" content="#2196F3">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default"
-    >
-    <meta
-        name="apple-mobile-web-app-title"
-        content="ARC TRANS"
-    >
-
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
-        }
-
-        :root {
-            --primary: #2196F3;
-            --primary-dark: #1565C0;
-            --cyan: #21CBF3;
-            --text: #263238;
-            --muted: #78909C;
-            --border: #e6edf3;
-        }
-
-        html {
-            min-height: 100%;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            padding: 20px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #0f4c81 0%,
-                    #2196F3 45%,
-                    #21CBF3 100%
-                );
+<meta charset="UTF-8">
 
-            overflow-x: hidden;
-            position: relative;
-        }
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-        body::before {
-            content: "";
-            position: fixed;
+<title>ARC TRANS</title>
 
-            width: 300px;
-            height: 300px;
 
-            border-radius: 50%;
+<!-- =========================================================
+     FAVICON ARC TRANS
+     ========================================================= -->
 
-            background: rgba(255,255,255,0.12);
+<link
+    rel="icon"
+    type="image/png"
+    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
+>
 
-            top: -100px;
-            left: -100px;
+<link
+    rel="shortcut icon"
+    type="image/png"
+    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
+>
 
-            filter: blur(2px);
+<link
+    rel="apple-touch-icon"
+    href="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
+>
 
-            pointer-events: none;
-        }
 
-        body::after {
-            content: "";
-            position: fixed;
+<meta
+    name="theme-color"
+    content="#1565C0"
+>
 
-            width: 350px;
-            height: 350px;
 
-            border-radius: 50%;
+<style>
 
-            background: rgba(255,255,255,0.10);
+/* =========================================================
+   GLOBAL
+   ========================================================= */
 
-            bottom: -150px;
-            right: -100px;
+* {
+    box-sizing: border-box;
 
-            pointer-events: none;
-        }
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
 
-        .container {
-            position: relative;
-            z-index: 2;
 
-            width: 100%;
-            max-width: 980px;
+html,
+body {
+    margin: 0;
 
-            padding: 40px;
+    padding: 0;
 
-            background: rgba(255,255,255,0.97);
+    min-height: 100%;
+}
 
-            border-radius: 28px;
 
-            box-shadow:
-                0 25px 60px rgba(0,0,0,0.25);
+body {
 
-            animation: fadeIn .6s ease;
-        }
+    min-height: 100vh;
 
-        .header {
-            display: flex;
-            flex-direction: column;
+    padding: 20px;
 
-            align-items: center;
-            justify-content: center;
+    display: flex;
 
-            text-align: center;
+    justify-content: center;
 
-            margin-bottom: 35px;
-        }
+    align-items: center;
 
-        /* =========================================================
-           LOGO ARC TRANS
-           ========================================================= */
+    background:
+        linear-gradient(
+            135deg,
+            #0f4c81 0%,
+            #2196F3 50%,
+            #21CBF3 100%
+        );
 
-        .logo {
-            width: 110px;
-            height: 110px;
+    overflow-x: hidden;
+}
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
-            margin-bottom: 16px;
+/* =========================================================
+   BACKGROUND DECORATION
+   ========================================================= */
 
-            border-radius: 28px;
+body::before {
 
-            overflow: hidden;
+    content: "";
 
-            background: #fff;
+    position: fixed;
 
-            box-shadow:
-                0 12px 25px rgba(33,150,243,0.35);
+    width: 320px;
 
-            border:
-                1px solid rgba(33,150,243,0.12);
+    height: 320px;
 
-            animation:
-                floatLogo 3s ease-in-out infinite;
-        }
+    border-radius: 50%;
 
-        .logo img {
-            width: 100%;
-            height: 100%;
+    background:
+        rgba(255,255,255,0.12);
 
-            object-fit: contain;
+    top: -130px;
 
-            display: block;
+    left: -130px;
 
-            background: #fff;
-        }
+    pointer-events: none;
+}
 
-        h1 {
-            margin: 0;
 
-            font-size:
-                clamp(26px, 5vw, 38px);
+body::after {
 
-            font-weight: 800;
+    content: "";
 
-            letter-spacing: 2px;
+    position: fixed;
 
-            color: var(--primary-dark);
-        }
+    width: 380px;
 
-        .subtitle {
-            margin-top: 8px;
+    height: 380px;
 
-            color: var(--muted);
+    border-radius: 50%;
 
-            font-size:
-                clamp(13px, 3vw, 16px);
-        }
+    background:
+        rgba(255,255,255,0.10);
 
-        .menu {
-            display: grid;
+    right: -150px;
 
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
+    bottom: -170px;
 
-            gap: 18px;
-        }
+    pointer-events: none;
+}
 
-        .menu-item {
-            position: relative;
 
-            min-height: 185px;
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
 
-            padding: 22px 15px;
+.container {
 
-            text-decoration: none;
+    position: relative;
 
-            color: var(--text);
+    z-index: 5;
 
-            background: #fff;
+    width: 100%;
 
-            border:
-                1px solid var(--border);
+    max-width: 980px;
 
-            border-radius: 22px;
+    padding: 40px;
 
-            display: flex;
+    background:
+        rgba(255,255,255,0.98);
 
-            flex-direction: column;
+    border-radius: 28px;
 
-            justify-content: center;
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,0.25);
+}
 
-            align-items: center;
 
-            text-align: center;
+/* =========================================================
+   HEADER
+   ========================================================= */
 
-            overflow: hidden;
+.header {
 
-            transition:
-                transform .25s ease,
-                box-shadow .25s ease,
-                border-color .25s ease,
-                background .25s ease;
-        }
+    text-align: center;
 
-        .menu-item:hover {
-            transform: translateY(-7px);
+    margin-bottom: 32px;
+}
 
-            border-color:
-                var(--primary);
 
-            background: #f7fbff;
+/* =========================================================
+   LOGO BUTTON
+   ========================================================= */
 
-            box-shadow:
-                0 15px 30px
-                rgba(33,150,243,0.20);
-        }
+.logo-button {
 
-        .menu-item:active {
-            transform: scale(.98);
-        }
+    display: inline-flex;
 
-        .menu-item::before {
-            content: "";
+    align-items: center;
 
-            position: absolute;
+    justify-content: center;
 
-            top: 0;
-            left: 0;
+    padding: 0;
 
-            width: 100%;
-            height: 4px;
+    margin: 0;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--primary),
-                    var(--cyan)
-                );
+    border: none;
 
-            transform:
-                scaleX(0);
+    background: transparent;
 
-            transform-origin: center;
+    cursor: pointer;
 
-            transition: .25s ease;
-        }
+    outline: none;
+}
 
-        .menu-item:hover::before {
-            transform: scaleX(1);
-        }
 
-        .menu-icon {
-            width: 78px;
-            height: 78px;
+.logo-box {
 
-            display: flex;
+    width: 125px;
 
-            justify-content: center;
-            align-items: center;
+    height: 125px;
 
-            margin-bottom: 16px;
+    background: #ffffff;
 
-            border-radius: 24px;
+    border-radius: 28px;
 
-            font-size: 38px;
+    display: flex;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #e3f2fd,
-                    #f1fbff
-                );
+    justify-content: center;
 
-            transition:
-                transform .25s ease,
-                background .25s ease;
-        }
+    align-items: center;
 
-        .menu-item:hover .menu-icon {
-            transform:
-                scale(1.12)
-                rotate(3deg);
+    overflow: hidden;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #d7efff,
-                    #e8faff
-                );
-        }
+    border:
+        1px solid
+        rgba(33,150,243,0.20);
 
-        .menu-text {
-            font-size:
-                clamp(13px, 2vw, 16px);
+    box-shadow:
+        0 12px 30px
+        rgba(33,150,243,0.30);
 
-            font-weight: 700;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
 
-            line-height: 1.5;
-        }
 
-        .footer {
-            margin-top: 32px;
+.logo-button:hover .logo-box {
 
-            padding-top: 22px;
+    transform:
+        scale(1.07);
 
-            border-top:
-                1px solid #edf0f2;
+    box-shadow:
+        0 18px 38px
+        rgba(33,150,243,0.40);
+}
 
-            text-align: center;
 
-            color: #90A4AE;
+.logo-button:active .logo-box {
 
-            font-size: 13px;
-        }
+    transform:
+        scale(.95);
+}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+/* =========================================================
+   LOGO IMAGE
+   ========================================================= */
 
-        @keyframes floatLogo {
-            0%, 100% {
-                transform: translateY(0);
-            }
+.logo-image {
 
-            50% {
-                transform: translateY(-7px);
-            }
-        }
+    width: 100%;
 
-        /* =========================================================
-           TABLET
-           ========================================================= */
+    height: 100%;
 
-        @media (max-width: 850px) {
+    display: block;
 
-            .container {
-                max-width: 700px;
-            }
+    object-fit: contain;
 
-            .menu {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-        }
+    background: #ffffff;
+}
 
-        /* =========================================================
-           MOBILE
-           ========================================================= */
 
-        @media (max-width: 600px) {
+/* =========================================================
+   TEXT
+   ========================================================= */
 
-            body {
-                padding: 14px;
+.logo-hint {
 
-                align-items: flex-start;
-            }
+    margin-top: 10px;
 
-            .container {
-                margin-top: 10px;
+    color:
+        #90A4AE;
 
-                padding:
-                    28px 16px 20px;
+    font-size: 11px;
+}
 
-                border-radius: 24px;
-            }
 
-            .header {
-                margin-bottom: 25px;
-            }
+h1 {
 
-            .logo {
-                width: 88px;
-                height: 88px;
+    margin:
+        12px 0 0;
 
-                border-radius: 23px;
-            }
+    color:
+        #1565C0;
 
-            .menu {
-                gap: 12px;
-            }
+    font-size:
+        clamp(28px, 5vw, 40px);
 
-            .menu-item {
-                min-height: 155px;
+    font-weight: 800;
 
-                padding:
-                    16px 10px;
+    letter-spacing: 2px;
+}
 
-                border-radius: 18px;
-            }
 
-            .menu-icon {
-                width: 65px;
-                height: 65px;
+.subtitle {
 
-                border-radius: 20px;
+    margin-top: 7px;
 
-                font-size: 32px;
+    color:
+        #78909C;
 
-                margin-bottom: 10px;
-            }
+    font-size:
+        15px;
+}
 
-            .footer {
-                margin-top: 24px;
 
-                padding-top: 18px;
-            }
-        }
+/* =========================================================
+   MENU
+   ========================================================= */
 
-        /* =========================================================
-           SMALL MOBILE
-           ========================================================= */
+.menu {
 
-        @media (max-width: 380px) {
+    display: grid;
 
-            body {
-                padding: 10px;
-            }
+    grid-template-columns:
+        repeat(3, 1fr);
 
-            .container {
-                padding:
-                    22px 12px 18px;
-            }
+    gap: 18px;
+}
 
-            .menu {
-                gap: 10px;
-            }
 
-            .menu-item {
-                min-height: 140px;
+.menu-item {
 
-                padding:
-                    12px 6px;
-            }
+    position: relative;
 
-            .menu-icon {
-                width: 58px;
-                height: 58px;
+    min-height: 175px;
 
-                font-size: 28px;
-            }
+    padding: 20px 12px;
 
-            .menu-text {
-                font-size: 12px;
-            }
-        }
-    </style>
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    color:
+        #263238;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid
+        #e6edf3;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.menu-item::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2196F3,
+            #21CBF3
+        );
+
+    transform:
+        scaleX(0);
+
+    transition:
+        transform .25s ease;
+}
+
+
+.menu-item:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        #2196F3;
+
+    box-shadow:
+        0 15px 30px
+        rgba(33,150,243,0.20);
+
+    background:
+        #f7fbff;
+}
+
+
+.menu-item:hover::before {
+
+    transform:
+        scaleX(1);
+}
+
+
+/* =========================================================
+   MENU ICON
+   ========================================================= */
+
+.menu-icon {
+
+    width: 76px;
+
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    border-radius: 23px;
+
+    font-size: 37px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e3f2fd,
+            #f1fbff
+        );
+
+    transition:
+        transform .25s ease;
+}
+
+
+.menu-item:hover .menu-icon {
+
+    transform:
+        scale(1.10);
+}
+
+
+.menu-text {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid
+        #edf0f2;
+
+    text-align: center;
+
+    color:
+        #90A4AE;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MODAL FOTO LOGO
+   ========================================================= */
+
+.logo-modal {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    z-index: 999999;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,0.82);
+}
+
+
+/*
+   MODAL AKTIF
+*/
+
+.logo-modal.active {
+
+    display: flex;
+}
+
+
+/* =========================================================
+   MODAL CONTENT
+   ========================================================= */
+
+.modal-content {
+
+    position: relative;
+
+    width: 90vw;
+
+    max-width: 700px;
+
+    max-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   FOTO BESAR
+   ========================================================= */
+
+.modal-image {
+
+    display: block;
+
+    width: auto;
+
+    height: auto;
+
+    max-width: 90vw;
+
+    max-height: 78vh;
+
+    object-fit: contain;
+
+    background:
+        #ffffff;
+
+    padding: 15px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,0.55);
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close-button {
+
+    position: absolute;
+
+    top: -18px;
+
+    right: -18px;
+
+    z-index: 10;
+
+    width: 48px;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        #ffffff;
+
+    color:
+        #263238;
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.40);
+}
+
+
+.close-button:hover {
+
+    background:
+        #f1f5f9;
+
+    transform:
+        scale(1.08);
+}
+
+
+.modal-title {
+
+    margin-top: 14px;
+
+    color:
+        #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .container {
+
+        max-width: 700px;
+    }
+
+
+    .menu {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 12px;
+
+        align-items:
+            flex-start;
+    }
+
+
+    .container {
+
+        margin-top: 8px;
+
+        padding:
+            28px 15px 20px;
+
+        border-radius: 24px;
+    }
+
+
+    .logo-box {
+
+        width: 100px;
+
+        height: 100px;
+
+        border-radius: 23px;
+    }
+
+
+    .menu {
+
+        gap: 12px;
+    }
+
+
+    .menu-item {
+
+        min-height: 145px;
+
+        padding:
+            15px 8px;
+
+        border-radius: 18px;
+    }
+
+
+    .menu-icon {
+
+        width: 62px;
+
+        height: 62px;
+
+        border-radius: 19px;
+
+        font-size: 30px;
+
+        margin-bottom: 9px;
+    }
+
+
+    .menu-text {
+
+        font-size: 12px;
+    }
+
+
+    .modal-image {
+
+        max-width: 94vw;
+
+        max-height: 70vh;
+
+        padding: 10px;
+
+        border-radius: 16px;
+    }
+
+
+    .close-button {
+
+        width: 42px;
+
+        height: 42px;
+
+        top: -12px;
+
+        right: -6px;
+
+        font-size: 26px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .container {
+
+        padding:
+            22px 11px 17px;
+    }
+
+
+    .menu {
+
+        gap: 9px;
+    }
+
+
+    .menu-item {
+
+        min-height: 135px;
+    }
+
+
+    .menu-icon {
+
+        width: 56px;
+
+        height: 56px;
+
+        font-size: 27px;
+    }
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <main class="container">
 
-        <header class="header">
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
-            <!-- =================================================
-                 LOGO ARC TRANS
-                 ================================================= -->
+<main class="container">
 
-            <div class="logo">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+
+        <!--
+            LOGO ARC TRANS
+
+            KLIK LOGO INI
+            UNTUK MEMBUKA FOTO BESAR
+        -->
+
+        <button
+            type="button"
+            class="logo-button"
+            id="logoButton"
+            title="Klik untuk melihat logo ARC TRANS"
+        >
+
+            <span class="logo-box">
 
                 <img
+                    class="logo-image"
                     src="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
                     alt="ARC TRANS Logo"
-                    width="110"
-                    height="110"
-                    loading="eager"
-                    decoding="async"
-                    onerror="
-                        this.onerror=null;
-                        this.style.display='none';
-                    "
                 >
 
+            </span>
+
+        </button>
+
+
+        <div class="logo-hint">
+            Klik logo untuk melihat foto
+        </div>
+
+
+        <h1>
+            ARC TRANS
+        </h1>
+
+
+        <div class="subtitle">
+            Sistem Manajemen Unit &amp; Customer
+        </div>
+
+
+    </header>
+
+
+    <!-- =====================================================
+         MENU
+         ===================================================== -->
+
+    <section class="menu">
+
+
+        <a
+            href="unit.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🚗
             </div>
 
-            <h1>ARC TRANS</h1>
-
-            <div class="subtitle">
-                Sistem Manajemen Unit &amp; Customer
+            <div class="menu-text">
+                Input Unit
             </div>
 
-        </header>
+        </a>
 
 
-        <!-- =====================================================
-             MENU
-             ===================================================== -->
+        <a
+            href="tabelunit.html"
+            class="menu-item"
+        >
 
-        <section class="menu">
+            <div class="menu-icon">
+                📋
+            </div>
 
-            <!-- INPUT UNIT -->
-            <a
-                href="unit.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    🚗
-                </div>
+            <div class="menu-text">
+                Data Unit Kendaraan
+            </div>
 
-                <div class="menu-text">
-                    Input Unit
-                </div>
-            </a>
+        </a>
 
 
-            <!-- DATA UNIT -->
-            <a
-                href="tabelunit.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    📋
-                </div>
+        <a
+            href="customer.html"
+            class="menu-item"
+        >
 
-                <div class="menu-text">
-                    Data Unit Kendaraan
-                </div>
-            </a>
+            <div class="menu-icon">
+                👤
+            </div>
 
+            <div class="menu-text">
+                Input Customer
+            </div>
 
-            <!-- INPUT CUSTOMER -->
-            <a
-                href="customer.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    👤
-                </div>
-
-                <div class="menu-text">
-                    Input Customer
-                </div>
-            </a>
+        </a>
 
 
-            <!-- DATA CUSTOMER -->
-            <a
-                href="tabelcustomer.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    👥
-                </div>
+        <a
+            href="tabelcustomer.html"
+            class="menu-item"
+        >
 
-                <div class="menu-text">
-                    Data Customer
-                </div>
-            </a>
+            <div class="menu-icon">
+                👥
+            </div>
 
+            <div class="menu-text">
+                Data Customer
+            </div>
 
-            <!-- RENT OUT -->
-            <a
-                href="outrent.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    📝
-                </div>
-
-                <div class="menu-text">
-                    RENT OUT
-                </div>
-            </a>
+        </a>
 
 
-            <!-- BOOKING UNIT -->
-            <a
-                href="booking.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    📅
-                </div>
+        <a
+            href="outrent.html"
+            class="menu-item"
+        >
 
-                <div class="menu-text">
-                    Booking Unit
-                </div>
-            </a>
+            <div class="menu-icon">
+                📝
+            </div>
 
+            <div class="menu-text">
+                RENT OUT
+            </div>
 
-            <!-- LIST BOOKING UNIT -->
-            <a
-                href="tabelbooking.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    📑
-                </div>
-
-                <div class="menu-text">
-                    List Booking Unit
-                </div>
-            </a>
+        </a>
 
 
-            <!-- UPDATE UNIT OUT -->
-            <a
-                href="tabeloutrent.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    📊
-                </div>
+        <a
+            href="booking.html"
+            class="menu-item"
+        >
 
-                <div class="menu-text">
-                    UPDATE Unit OUT
-                </div>
-            </a>
+            <div class="menu-icon">
+                📅
+            </div>
 
+            <div class="menu-text">
+                Booking Unit
+            </div>
 
-            <!-- REVENUE -->
-            <a
-                href="tabelrevenue.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    💰
-                </div>
-
-                <div class="menu-text">
-                    Revenue
-                </div>
-            </a>
+        </a>
 
 
-            <!-- REVENUE UNIT -->
-            <a
-                href="tabelomsetunit.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    🚘💰
-                </div>
+        <a
+            href="tabelbooking.html"
+            class="menu-item"
+        >
 
-                <div class="menu-text">
-                    Revenue Unit
-                </div>
-            </a>
+            <div class="menu-icon">
+                📑
+            </div>
 
+            <div class="menu-text">
+                List Booking Unit
+            </div>
 
-            <!-- CASH OUT -->
-            <a
-                href="outcash.html"
-                class="menu-item"
-            >
-                <div class="menu-icon">
-                    💸
-                </div>
-
-                <div class="menu-text">
-                    CASH OUT
-                </div>
-            </a>
-
-        </section>
+        </a>
 
 
-        <!-- =====================================================
-             FOOTER
-             ===================================================== -->
+        <a
+            href="tabeloutrent.html"
+            class="menu-item"
+        >
 
-        <footer class="footer">
-            © 2026 ARC TRANS
-        </footer>
+            <div class="menu-icon">
+                📊
+            </div>
 
-    </main>
+            <div class="menu-text">
+                UPDATE Unit OUT
+            </div>
+
+        </a>
+
+
+        <a
+            href="tabelrevenue.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                💰
+            </div>
+
+            <div class="menu-text">
+                Revenue
+            </div>
+
+        </a>
+
+
+        <a
+            href="tabelomsetunit.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🚘💰
+            </div>
+
+            <div class="menu-text">
+                Revenue Unit
+            </div>
+
+        </a>
+
+
+        <a
+            href="outcash.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                💸
+            </div>
+
+            <div class="menu-text">
+                CASH OUT
+            </div>
+
+        </a>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        © 2026 ARC TRANS
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     MODAL LOGO
+     ========================================================= -->
+
+<div
+    id="logoModal"
+    class="logo-modal"
+>
+
+
+    <div class="modal-content">
+
+
+        <!-- CLOSE -->
+
+        <button
+            type="button"
+            class="close-button"
+            id="closeButton"
+            aria-label="Tutup"
+        >
+            ×
+        </button>
+
+
+        <!-- FOTO LOGO -->
+
+        <img
+            id="modalImage"
+            class="modal-image"
+            src="https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png"
+            alt="Foto Logo ARC TRANS"
+        >
+
+
+        <div class="modal-title">
+            ARC TRANS
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+
+/*
+=========================================================
+URL LOGO
+=========================================================
+*/
+
+const LOGO_URL =
+    "https://res.cloudinary.com/cesiolzm/image/upload/v1788186697/arc_logo_2.png";
+
+
+/*
+=========================================================
+ELEMENT
+=========================================================
+*/
+
+const logoButton =
+    document.getElementById("logoButton");
+
+const logoModal =
+    document.getElementById("logoModal");
+
+const closeButton =
+    document.getElementById("closeButton");
+
+const modalImage =
+    document.getElementById("modalImage");
+
+
+/*
+=========================================================
+BUKA FOTO
+=========================================================
+*/
+
+function bukaLogo() {
+
+    modalImage.src =
+        LOGO_URL;
+
+    logoModal.classList.add(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+/*
+=========================================================
+TUTUP FOTO
+=========================================================
+*/
+
+function tutupLogo() {
+
+    logoModal.classList.remove(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "";
+}
+
+
+/*
+=========================================================
+KLIK LOGO
+=========================================================
+*/
+
+logoButton.addEventListener(
+    "click",
+    function () {
+
+        bukaLogo();
+
+    }
+);
+
+
+/*
+=========================================================
+KLIK X
+=========================================================
+*/
+
+closeButton.addEventListener(
+    "click",
+    function () {
+
+        tutupLogo();
+
+    }
+);
+
+
+/*
+=========================================================
+KLIK AREA GELAP
+=========================================================
+*/
+
+logoModal.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target === logoModal
+        ) {
+
+            tutupLogo();
+
+        }
+
+    }
+);
+
+
+/*
+=========================================================
+TOMBOL ESC
+=========================================================
+*/
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            tutupLogo();
+
+        }
+
+    }
+);
+
+
+</script>
+
 
 </body>
+
 </html>
