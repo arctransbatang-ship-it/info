@@ -939,6 +939,36 @@ input[readonly] {
 
 }
 
+
+/* =========================
+   TANDA TANGAN DIGITAL
+========================= */
+.signature-box{width:100%}
+.signature-pad-wrapper{
+    position:relative;width:100%;height:220px;
+    border:2px dashed #93c5fd;border-radius:16px;
+    background:#fff;overflow:hidden;touch-action:none;
+    box-shadow:inset 0 0 0 1px #e0f2fe;
+}
+#signaturePad{display:block;width:100%;height:100%;cursor:crosshair;touch-action:none}
+.signature-placeholder{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    color:#94a3b8;font-size:14px;pointer-events:none;text-align:center;width:90%;
+}
+.signature-line{position:absolute;left:8%;right:8%;bottom:48px;border-bottom:1px solid #cbd5e1;pointer-events:none}
+.signature-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+#btnClearSignature{
+    border:1px solid #fecaca;background:#fef2f2;color:#dc2626;
+    padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;
+}
+#btnClearSignature:hover{background:#fee2e2}
+.signature-status{min-height:20px;margin-top:8px;font-size:13px;color:var(--muted)}
+@media(max-width:700px){
+    .signature-pad-wrapper{height:240px}
+    .signature-actions{justify-content:stretch}
+    #btnClearSignature{width:100%;min-height:46px}
+}
+
 </style>
 
 </head>
@@ -1380,6 +1410,39 @@ input[readonly] {
 
 
     <!-- =========================
+         TANDA TANGAN DIGITAL
+    ========================== -->
+
+    <div class="form-group full-width">
+        <label>Tanda Tangan Konsumen</label>
+
+        <div class="signature-box">
+            <div class="signature-pad-wrapper" id="signatureWrapper">
+                <canvas id="signaturePad"></canvas>
+
+                <div id="signaturePlaceholder" class="signature-placeholder">
+                    ✍️ Silakan tanda tangan di area ini
+                    <br>
+                    <small>Gunakan jari pada layar HP atau mouse di komputer</small>
+                </div>
+
+                <div class="signature-line"></div>
+            </div>
+
+            <div class="signature-actions">
+                <button type="button" id="btnClearSignature">
+                    ↻ Hapus Tanda Tangan
+                </button>
+            </div>
+
+            <div id="signatureStatus" class="signature-status">
+                Tanda tangan wajib diisi.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================
          ACTION
     ========================== -->
 
@@ -1611,6 +1674,21 @@ const btnProses =
     document.getElementById(
         "btnProses"
     );
+const signaturePad =
+    document.getElementById("signaturePad");
+
+const signatureWrapper =
+    document.getElementById("signatureWrapper");
+
+const signaturePlaceholder =
+    document.getElementById("signaturePlaceholder");
+
+const btnClearSignature =
+    document.getElementById("btnClearSignature");
+
+const signatureStatus =
+    document.getElementById("signatureStatus");
+
 
 
 /* =================================
@@ -2390,6 +2468,135 @@ idCustomerInput.addEventListener(
     }
 
 );
+
+
+/* =================================
+   TANDA TANGAN DIGITAL
+================================= */
+
+let signatureCtx = null;
+let signatureDrawing = false;
+let signatureHasInk = false;
+
+function setupSignaturePad() {
+    if (!signaturePad) return;
+
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const rect = signatureWrapper.getBoundingClientRect();
+
+    signaturePad.width = Math.round(rect.width * ratio);
+    signaturePad.height = Math.round(rect.height * ratio);
+
+    signatureCtx = signaturePad.getContext("2d");
+    signatureCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    signatureCtx.lineWidth = 2.5;
+    signatureCtx.lineCap = "round";
+    signatureCtx.lineJoin = "round";
+    signatureCtx.strokeStyle = "#111827";
+    signatureCtx.clearRect(0, 0, rect.width, rect.height);
+
+    signatureHasInk = false;
+    signatureDrawing = false;
+
+    signaturePlaceholder.style.display = "block";
+    signatureStatus.textContent = "Tanda tangan wajib diisi.";
+}
+
+function getSignaturePoint(event) {
+    const rect = signaturePad.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+}
+
+signaturePad.addEventListener("pointerdown", function(event) {
+    event.preventDefault();
+    signatureDrawing = true;
+    signatureHasInk = true;
+    signaturePad.setPointerCapture(event.pointerId);
+
+    const point = getSignaturePoint(event);
+    signatureCtx.beginPath();
+    signatureCtx.moveTo(point.x, point.y);
+
+    signaturePlaceholder.style.display = "none";
+    signatureStatus.textContent = "✓ Tanda tangan sudah diisi.";
+});
+
+signaturePad.addEventListener("pointermove", function(event) {
+    if (!signatureDrawing) return;
+    event.preventDefault();
+
+    const point = getSignaturePoint(event);
+    signatureCtx.lineTo(point.x, point.y);
+    signatureCtx.stroke();
+});
+
+function stopSignatureDrawing() {
+    signatureDrawing = false;
+}
+
+signaturePad.addEventListener("pointerup", stopSignatureDrawing);
+signaturePad.addEventListener("pointercancel", stopSignatureDrawing);
+
+btnClearSignature.addEventListener("click", function() {
+    setupSignaturePad();
+});
+
+window.addEventListener("resize", function() {
+    if (!signatureHasInk) setupSignaturePad();
+});
+
+setupSignaturePad();
+
+async function uploadTandaTangan() {
+    if (!signatureHasInk) {
+        return { url: "", publicId: "" };
+    }
+
+    signatureStatus.textContent = "Mengupload tanda tangan...";
+
+    const blob = await new Promise(function(resolve) {
+        signaturePad.toBlob(resolve, "image/png");
+    });
+
+    if (!blob) {
+        throw new Error("Gagal membuat file tanda tangan.");
+    }
+
+    const formData = new FormData();
+    formData.append("file", blob, "tanda_tangan.png");
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    formData.append("folder", "arctrans/tanda-tangan");
+    formData.append("public_id", "TTD_" + Date.now());
+
+    const response = await fetch(
+        "https://api.cloudinary.com/v1_1/" +
+        CLOUDINARY_CLOUD_NAME +
+        "/image/upload",
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+    const hasil = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            hasil.error?.message || "Gagal upload tanda tangan."
+        );
+    }
+
+    signatureStatus.textContent =
+        "✓ Tanda tangan berhasil diupload.";
+
+    return {
+        url: hasil.secure_url,
+        publicId: hasil.public_id
+    };
+}
 
 
 /* =================================
@@ -3566,6 +3773,9 @@ async function kirimData() {
     const fotoPengambilan =
         fotoPengambilanInput.files;
 
+    const tandaTanganAda =
+        signatureHasInk;
+
 
     const hariIni =
         getTanggalHariIni();
@@ -3761,6 +3971,22 @@ async function kirimData() {
     }
 
 
+    if (!tandaTanganAda) {
+
+        alert(
+            "Tanda tangan konsumen wajib diisi!"
+        );
+
+        signatureWrapper.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        return;
+
+    }
+
+
     /* =================================
        HITUNG SISA
     ================================= */
@@ -3839,6 +4065,17 @@ async function kirimData() {
 
         const hasilUploadPengambilan =
             await uploadFotoPengambilan();
+
+
+        /* =================================
+           UPLOAD TANDA TANGAN
+        ================================= */
+
+        btnProses.textContent =
+            "Mengupload Tanda Tangan...";
+
+        const hasilUploadTandaTangan =
+            await uploadTandaTangan();
 
 
         /* =================================
@@ -4027,6 +4264,15 @@ async function kirimData() {
 
             fotoPengambilan:
                 hasilUploadPengambilan,
+
+
+            /* TANDA TANGAN KONSUMEN */
+
+            tandaTangan:
+                hasilUploadTandaTangan.url,
+
+            tandaTanganPublicId:
+                hasilUploadTandaTangan.publicId,
 
 
             /* STATUS */
