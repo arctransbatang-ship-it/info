@@ -1,73 +1,76 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ARC TRANS - Input Unit Mobil</title>
 
-
     <!-- FONT AWESOME -->
-
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
 
-
     <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
 
         * {
             box-sizing: border-box;
-
-            font-family:
-                "Segoe UI",
-                Arial,
-                sans-serif;
+            font-family: "Segoe UI", Arial, sans-serif;
         }
 
+        :root {
+            --primary: #2196f3;
+            --primary-dark: #1976d2;
+            --secondary: #0ea5e9;
+            --success: #16a34a;
+            --success-bg: #f0fdf4;
+            --danger: #dc2626;
+            --warning: #d97706;
+
+            --text: #1e293b;
+            --text-soft: #64748b;
+            --border: #e2e8f0;
+            --bg: #f8fafc;
+            --white: #ffffff;
+
+            --shadow:
+                0 20px 50px rgba(15, 23, 42, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             margin: 0;
-
             min-height: 100vh;
 
             background:
                 linear-gradient(
                     135deg,
-                    #0ea5e9,
-                    #2563eb,
-                    #4f46e5
+                    #0ea5e9 0%,
+                    #2563eb 50%,
+                    #4f46e5 100%
                 );
 
-            padding:
-                25px
-                15px;
+            padding: 25px 15px;
 
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
+            color: var(--text);
         }
 
-
-        /* =========================
-           BACKGROUND
-        ========================= */
+        /* =========================================================
+           BACKGROUND DECORATION
+        ========================================================= */
 
         .background-decoration {
             position: fixed;
-
-            width: 300px;
-
-            height: 300px;
+            width: 320px;
+            height: 320px;
 
             border-radius: 50%;
 
@@ -76,152 +79,148 @@
                     255,
                     255,
                     255,
-                    0.12
+                    0.10
                 );
 
-            filter:
-                blur(10px);
+            filter: blur(10px);
 
-            z-index: -1;
+            pointer-events: none;
+
+            z-index: 0;
         }
-
 
         .circle-1 {
-            top: -100px;
-
-            left: -100px;
+            top: -140px;
+            left: -140px;
         }
-
 
         .circle-2 {
-            bottom: -100px;
-
-            right: -100px;
+            bottom: -140px;
+            right: -140px;
         }
 
+        /* =========================================================
+           MAIN WRAPPER
+        ========================================================= */
 
-        /* =========================
-           HOME BUTTON
-        ========================= */
+        .page-wrapper {
+            width: 100%;
+            max-width: 760px;
 
-        .home-btn {
-            position: fixed;
+            margin: 0 auto;
 
-            top: 18px;
+            position: relative;
+            z-index: 1;
+        }
 
-            left: 18px;
+        /* =========================================================
+           TOP NAVIGATION
+        ========================================================= */
 
-            z-index: 1000;
-
-            width: 46px;
-
-            height: 46px;
-
-            border-radius: 14px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.95
-                );
-
-            color:
-                #2563eb;
-
+        .top-navigation {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
 
+            margin-bottom: 15px;
+
+            gap: 12px;
+        }
+
+        .brand-mini {
+            display: flex;
             align-items: center;
 
+            color: white;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .brand-mini i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* =========================================================
+           HOME BUTTON
+           SERAGAM DENGAN SCRIPT LAIN
+        ========================================================= */
+
+        .home-btn {
+            display: inline-flex;
+
+            align-items: center;
             justify-content: center;
 
             text-decoration: none;
 
-            font-size: 20px;
+            background: #eff6ff;
+            color: var(--primary-dark);
 
-            box-shadow:
-                0 8px 25px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.18
-                );
+            font-weight: 700;
 
-            transition:
-                0.25s;
+            padding: 10px 15px;
+
+            border-radius: 12px;
+
+            transition: 0.2s;
+
+            font-size: 13px;
+
+            white-space: nowrap;
         }
-
 
         .home-btn:hover {
-            transform:
-                translateY(-3px);
+            background: var(--primary);
+            color: white;
 
-            background:
-                white;
-
-            box-shadow:
-                0 12px 30px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.25
-                );
+            transform: translateY(-1px);
         }
 
+        .home-btn i {
+            margin-right: 7px;
+        }
 
-        /* =========================
+        /* =========================================================
            CONTAINER
-        ========================= */
+        ========================================================= */
 
         .container {
             width: 100%;
 
-            max-width: 520px;
-
             background:
                 rgba(
                     255,
                     255,
                     255,
-                    0.97
+                    0.98
                 );
 
-            border-radius: 28px;
+            border-radius: 26px;
 
             overflow: hidden;
 
-            box-shadow:
-                0 25px 60px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.25
-                );
+            box-shadow: var(--shadow);
 
             animation:
                 fadeIn
-                0.5s
+                0.45s
                 ease;
         }
 
-
-        /* =========================
+        /* =========================================================
            HEADER
-        ========================= */
+        ========================================================= */
 
         .form-header {
-            padding:
-                32px
-                25px;
+            position: relative;
 
-            text-align: center;
+            padding: 32px 30px;
 
-            color:
-                white;
+            color: white;
 
             background:
                 linear-gradient(
@@ -229,34 +228,67 @@
                     #0ea5e9,
                     #2563eb
                 );
+
+            overflow: hidden;
         }
 
+        .form-header::after {
+            content: "";
 
-        .header-icon {
-            width: 78px;
+            position: absolute;
 
-            height: 78px;
+            width: 180px;
+            height: 180px;
 
-            margin:
-                0 auto 15px;
+            right: -60px;
+            top: -70px;
 
-            border-radius: 22px;
+            border-radius: 50%;
 
             background:
                 rgba(
                     255,
                     255,
                     255,
-                    0.2
+                    0.10
+                );
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-top {
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+        }
+
+        .header-icon {
+            width: 68px;
+            height: 68px;
+
+            flex-shrink: 0;
+
+            border-radius: 20px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
                 );
 
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
-            font-size: 34px;
+            font-size: 29px;
 
             border:
                 1px solid
@@ -273,52 +305,120 @@
                     0,
                     0,
                     0,
-                    0.15
+                    0.12
                 );
         }
 
-
-        .form-header h1 {
+        .header-title h1 {
             margin: 0;
 
             font-size: 24px;
 
-            font-weight: 700;
+            font-weight: 800;
+
+            letter-spacing: -0.3px;
         }
 
-
-        .form-header p {
+        .header-title p {
             margin:
-                8px
+                6px
                 0
                 0;
 
             font-size: 13px;
 
-            opacity: 0.9;
+            opacity: 0.92;
+
+            line-height: 1.5;
         }
 
-
-        /* =========================
+        /* =========================================================
            FORM CONTENT
-        ========================= */
+        ========================================================= */
 
         .form-content {
-            padding:
-                30px
-                25px
-                25px;
+            padding: 28px;
         }
 
+        /* =========================================================
+           SECTION
+        ========================================================= */
 
-        /* =========================
+        .form-section {
+            margin-bottom: 27px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-heading {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+
+            margin-bottom: 17px;
+        }
+
+        .section-icon {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                #eff6ff;
+
+            color:
+                var(--primary-dark);
+
+            font-size: 15px;
+        }
+
+        .section-title {
+            margin: 0;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            color: #1e293b;
+        }
+
+        .section-description {
+            margin:
+                3px
+                0
+                0;
+
+            color:
+                var(--text-soft);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        /* =========================================================
            FORM GROUP
-        ========================= */
+        ========================================================= */
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 17px;
         }
 
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
 
         label {
             display: flex;
@@ -337,25 +437,45 @@
             margin-bottom: 8px;
         }
 
-
         label i {
             color:
-                #2563eb;
+                var(--primary);
 
-            width: 18px;
+            width: 17px;
+
+            text-align: center;
         }
 
+        .required {
+            color:
+                var(--danger);
+
+            margin-left: 2px;
+        }
+
+        .optional {
+            font-size: 10px;
+
+            font-weight: 500;
+
+            color:
+                #94a3b8;
+
+            margin-left: 3px;
+        }
+
+        /* =========================================================
+           INPUT
+        ========================================================= */
 
         .input-wrapper {
             position: relative;
         }
 
-
         .input-wrapper > i {
             position: absolute;
 
             left: 15px;
-
             top: 50%;
 
             transform:
@@ -365,8 +485,9 @@
                 #94a3b8;
 
             pointer-events: none;
-        }
 
+            font-size: 14px;
+        }
 
         input {
             width: 100%;
@@ -377,38 +498,39 @@
                 0
                 15px
                 0
-                45px;
+                44px;
 
             border:
                 1px solid
-                #e2e8f0;
+                var(--border);
 
-            border-radius: 14px;
+            border-radius: 13px;
 
             outline: none;
 
             font-size: 14px;
 
+            color:
+                var(--text);
+
             background:
-                #f8fafc;
+                var(--bg);
 
             transition:
-                0.25s;
+                0.2s;
         }
-
 
         input:hover {
             border-color:
                 #cbd5e1;
         }
 
-
         input:focus {
             background:
                 white;
 
             border-color:
-                #2563eb;
+                var(--primary);
 
             box-shadow:
                 0 0 0 4px
@@ -416,20 +538,22 @@
                     37,
                     99,
                     235,
-                    0.1
+                    0.09
                 );
         }
-
 
         input::placeholder {
             color:
                 #94a3b8;
         }
 
+        input[type="date"] {
+            padding-left: 15px;
+        }
 
-        /* =========================
+        /* =========================================================
            GRID
-        ========================= */
+        ========================================================= */
 
         .form-grid {
             display: grid;
@@ -440,17 +564,87 @@
             gap: 15px;
         }
 
+        /* =========================================================
+           INFO BOX
+        ========================================================= */
 
-        /* =========================
-           PHOTO
-        ========================= */
+        .info-box {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            margin-top: 12px;
+
+            padding: 12px 14px;
+
+            border-radius: 12px;
+
+            background:
+                #f0f9ff;
+
+            border:
+                1px solid
+                #bae6fd;
+
+            color:
+                #075985;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        .info-box i {
+            margin-top: 2px;
+
+            color:
+                #0284c7;
+        }
+
+        /* =========================================================
+           VALUE INPUT
+        ========================================================= */
+
+        .rupiah-wrapper {
+            position: relative;
+        }
+
+        .rupiah-prefix {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                var(--primary-dark);
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+        #value {
+            padding-left: 47px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           PHOTO UPLOAD
+        ========================================================= */
 
         .upload-box {
-            position: relative;
-
             width: 100%;
 
-            min-height: 180px;
+            min-height: 260px;
 
             border:
                 2px dashed
@@ -467,25 +661,24 @@
                 0.25s;
         }
 
-
         .upload-box:hover {
             border-color:
-                #2563eb;
+                var(--primary);
 
             background:
                 #eff6ff;
         }
 
-
-        /* INPUT FILE DISEMBUNYIKAN */
-
         .file-input {
             display: none;
         }
 
+        /* =========================================================
+           PHOTO PLACEHOLDER
+        ========================================================= */
 
         .upload-placeholder {
-            min-height: 180px;
+            min-height: 260px;
 
             display: flex;
 
@@ -495,44 +688,56 @@
 
             align-items: center;
 
-            gap: 10px;
-
-            color:
-                #64748b;
-
-            padding:
-                20px;
-        }
-
-
-        .upload-placeholder i {
-            font-size: 40px;
-
-            color:
-                #2563eb;
-        }
-
-
-        .upload-placeholder span {
-            font-size: 14px;
-
-            font-weight: 600;
+            padding: 22px;
 
             text-align: center;
         }
 
+        .upload-icon {
+            width: 65px;
+            height: 65px;
 
-        .upload-placeholder small {
-            font-size: 12px;
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                #eff6ff;
 
             color:
-                #94a3b8;
+                var(--primary);
+
+            font-size: 27px;
+
+            margin-bottom: 12px;
         }
 
+        .upload-placeholder strong {
+            color:
+                #334155;
 
-        /* =========================
-           BUTTON CAMERA / GALLERY
-        ========================= */
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+        .upload-placeholder small {
+            color:
+                #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            margin-bottom: 16px;
+        }
+
+        /* =========================================================
+           PHOTO BUTTONS
+        ========================================================= */
 
         .photo-buttons {
             display: grid;
@@ -544,16 +749,15 @@
 
             width: 100%;
 
-            margin-top: 8px;
+            max-width: 400px;
         }
 
-
         .btn-photo {
-            height: 45px;
+            height: 44px;
 
             border: none;
 
-            border-radius: 12px;
+            border-radius: 11px;
 
             cursor: pointer;
 
@@ -562,18 +766,25 @@
             font-weight: 700;
 
             transition:
-                0.25s;
+                0.2s;
         }
-
 
         .btn-camera {
             background:
-                #2563eb;
+                var(--primary);
 
             color:
                 white;
-        }
 
+            box-shadow:
+                0 5px 15px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.18
+                );
+        }
 
         .btn-gallery {
             background:
@@ -583,21 +794,28 @@
                 #3730a3;
         }
 
-
         .btn-photo:hover {
             transform:
                 translateY(-2px);
         }
 
+        .btn-camera:hover {
+            background:
+                var(--primary-dark);
+        }
+
+        .btn-gallery:hover {
+            background:
+                #c7d2fe;
+        }
 
         .btn-photo i {
             margin-right: 6px;
         }
 
-
-        /* =========================
+        /* =========================================================
            PREVIEW
-        ========================= */
+        ========================================================= */
 
         .preview-container {
             display: none;
@@ -606,9 +824,11 @@
 
             width: 100%;
 
-            height: 230px;
-        }
+            height: 300px;
 
+            background:
+                #0f172a;
+        }
 
         #preview {
             width: 100%;
@@ -620,49 +840,127 @@
             display: block;
         }
 
-
         .change-photo {
             position: absolute;
 
-            bottom: 10px;
-
-            right: 10px;
+            bottom: 12px;
+            right: 12px;
 
             background:
                 rgba(
                     15,
                     23,
                     42,
-                    0.8
+                    0.82
                 );
 
             color:
                 white;
 
             padding:
-                8px
-                12px;
+                9px
+                13px;
 
             border-radius: 10px;
 
             font-size: 12px;
 
-            z-index: 2;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            backdrop-filter:
+                blur(5px);
+
+            transition:
+                0.2s;
         }
 
+        .change-photo:hover {
+            background:
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.95
+                );
+        }
 
-        /* =========================
+        /* =========================================================
+           DATA SUMMARY
+        ========================================================= */
+
+        .data-summary {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+            margin-bottom: 22px;
+        }
+
+        .summary-item {
+            padding: 13px;
+
+            border-radius: 13px;
+
+            background:
+                #f8fafc;
+
+            border:
+                1px solid
+                var(--border);
+        }
+
+        .summary-label {
+            font-size: 10px;
+
+            color:
+                #94a3b8;
+
+            font-weight: 700;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.3px;
+
+            margin-bottom: 5px;
+        }
+
+        .summary-value {
+            font-size: 13px;
+
+            font-weight: 800;
+
+            color:
+                #334155;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+
+            white-space:
+                nowrap;
+        }
+
+        /* =========================================================
            BUTTON SIMPAN
-        ========================= */
+        ========================================================= */
 
         .btn-proses {
             width: 100%;
 
-            height: 54px;
+            height: 55px;
 
             border: none;
 
-            border-radius: 15px;
+            border-radius: 14px;
 
             background:
                 linear-gradient(
@@ -676,11 +974,9 @@
 
             font-size: 15px;
 
-            font-weight: 700;
+            font-weight: 800;
 
             cursor: pointer;
-
-            margin-top: 8px;
 
             transition:
                 0.25s;
@@ -691,30 +987,32 @@
                     37,
                     99,
                     235,
-                    0.25
+                    0.22
                 );
         }
-
 
         .btn-proses i {
             margin-right: 8px;
         }
-
 
         .btn-proses:hover {
             transform:
                 translateY(-2px);
 
             box-shadow:
-                0 15px 30px
+                0 14px 30px
                 rgba(
                     37,
                     99,
                     235,
-                    0.35
+                    0.30
                 );
         }
 
+        .btn-proses:active {
+            transform:
+                translateY(0);
+        }
 
         .btn-proses:disabled {
             cursor:
@@ -725,19 +1023,24 @@
 
             transform:
                 none;
+
+            box-shadow:
+                none;
         }
 
-
-        /* =========================
+        /* =========================================================
            BACK LINK
-        ========================= */
+        ========================================================= */
 
         .link-kembali {
-            display: block;
+            display: flex;
 
-            text-align: center;
+            align-items: center;
+            justify-content: center;
 
-            margin-top: 18px;
+            gap: 7px;
+
+            margin-top: 15px;
 
             color:
                 #64748b;
@@ -747,18 +1050,46 @@
             font-size: 13px;
 
             font-weight: 600;
-        }
 
+            transition:
+                0.2s;
+        }
 
         .link-kembali:hover {
             color:
-                #2563eb;
+                var(--primary);
         }
 
+        /* =========================================================
+           FOOTER NOTE
+        ========================================================= */
 
-        /* =========================
+        .security-note {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 17px;
+
+            font-size: 11px;
+
+            color:
+                #94a3b8;
+
+            text-align: center;
+        }
+
+        .security-note i {
+            color:
+                var(--success);
+        }
+
+        /* =========================================================
            ANIMATION
-        ========================= */
+        ========================================================= */
 
         @keyframes fadeIn {
 
@@ -766,7 +1097,7 @@
                 opacity: 0;
 
                 transform:
-                    translateY(30px);
+                    translateY(25px);
             }
 
             to {
@@ -775,46 +1106,79 @@
                 transform:
                     translateY(0);
             }
-
         }
 
-
-        /* =========================
+        /* =========================================================
            MOBILE
-        ========================= */
+        ========================================================= */
 
         @media (max-width: 600px) {
 
             body {
                 padding:
-                    75px
-                    12px
-                    20px;
-
-                align-items:
-                    flex-start;
+                    14px
+                    10px
+                    25px;
             }
 
+            .page-wrapper {
+                max-width:
+                    100%;
+            }
+
+            .top-navigation {
+                margin-bottom: 10px;
+            }
+
+            .brand-mini {
+                font-size: 12px;
+            }
+
+            .home-btn {
+                padding:
+                    9px
+                    12px;
+
+                font-size: 12px;
+            }
 
             .container {
                 border-radius:
-                    22px;
+                    21px;
             }
-
 
             .form-header {
                 padding:
                     25px
-                    20px;
+                    19px;
             }
 
+            .header-top {
+                gap: 12px;
+            }
+
+            .header-icon {
+                width: 58px;
+                height: 58px;
+
+                border-radius: 16px;
+
+                font-size: 24px;
+            }
+
+            .header-title h1 {
+                font-size: 20px;
+            }
+
+            .header-title p {
+                font-size: 11px;
+            }
 
             .form-content {
                 padding:
-                    25px
-                    18px;
+                    23px
+                    16px;
             }
-
 
             .form-grid {
                 grid-template-columns:
@@ -823,470 +1187,815 @@
                 gap: 0;
             }
 
+            .data-summary {
+                grid-template-columns:
+                    1fr;
 
-            .home-btn {
-                top: 15px;
-
-                left: 15px;
+                gap: 8px;
             }
 
+            .summary-item {
+                padding:
+                    11px
+                    12px;
+            }
+
+            .upload-box {
+                min-height:
+                    240px;
+            }
+
+            .upload-placeholder {
+                min-height:
+                    240px;
+
+                padding:
+                    18px;
+            }
+
+            .preview-container {
+                height:
+                    250px;
+            }
+
+            .photo-buttons {
+                max-width:
+                    100%;
+            }
+
+            .btn-photo {
+                font-size:
+                    12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .brand-mini {
+                display: none;
+            }
+
+            .top-navigation {
+                justify-content:
+                    flex-end;
+            }
+
+            .form-content {
+                padding:
+                    20px
+                    13px;
+            }
+
+            .form-header {
+                padding:
+                    22px
+                    16px;
+            }
+
+            .header-title h1 {
+                font-size:
+                    18px;
+            }
+
+            .photo-buttons {
+                grid-template-columns:
+                    1fr;
+            }
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-
-    <!-- BACKGROUND -->
+    <!-- =========================================================
+         BACKGROUND
+    ========================================================== -->
 
     <div
-        class="
-            background-decoration
-            circle-1
-        "
+        class="background-decoration circle-1"
+    ></div>
+
+    <div
+        class="background-decoration circle-2"
     ></div>
 
 
-    <div
-        class="
-            background-decoration
-            circle-2
-        "
-    ></div>
+    <!-- =========================================================
+         PAGE WRAPPER
+    ========================================================== -->
+
+    <div class="page-wrapper">
 
 
-    <!-- HOME -->
+        <!-- =====================================================
+             TOP NAVIGATION
+        ====================================================== -->
 
-    <a
-        href="index.html"
-        class="home-btn"
-        title="Kembali ke Home"
-    >
+        <div class="top-navigation">
 
-        <i
-            class="fa-solid fa-house"
-        ></i>
-
-    </a>
-
-
-    <!-- CONTAINER -->
-
-    <div class="container">
-
-
-        <!-- HEADER -->
-
-        <div class="form-header">
-
-            <div class="header-icon">
-
-                <i
-                    class="fa-solid fa-car-side"
-                ></i>
-
+            <div class="brand-mini">
+                <i class="fa-solid fa-car-side"></i>
+                ARC TRANS
             </div>
 
-
-            <h1>
-                Input Unit Mobil
-            </h1>
-
-
-            <p>
-                Tambahkan data kendaraan ARC TRANS
-            </p>
+            <a
+                href="index.html"
+                class="home-btn"
+                title="Kembali ke Home"
+            >
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
 
         </div>
 
 
-        <!-- FORM -->
+        <!-- =====================================================
+             CONTAINER
+        ====================================================== -->
 
-        <div class="form-content">
-
-
-            <!-- NAMA -->
-
-            <div class="form-group">
-
-                <label for="nama">
-
-                    <i
-                        class="fa-solid fa-car"
-                    ></i>
-
-                    Nama Unit / Kendaraan
-
-                </label>
+        <div class="container">
 
 
-                <div class="input-wrapper">
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
 
-                    <i
-                        class="fa-solid fa-car"
-                    ></i>
+            <div class="form-header">
 
+                <div class="header-content">
 
-                    <input
-                        type="text"
-                        id="nama"
-                        placeholder="Masukkan nama kendaraan"
-                    >
+                    <div class="header-top">
 
-                </div>
+                        <div class="header-icon">
 
-            </div>
+                            <i
+                                class="fa-solid fa-car-side"
+                            ></i>
 
+                        </div>
 
-            <!-- PLAT -->
+                        <div class="header-title">
 
-            <div class="form-group">
+                            <h1>
+                                Input Unit Mobil
+                            </h1>
 
-                <label for="plat">
+                            <p>
+                                Tambahkan data kendaraan baru
+                                ke sistem ARC TRANS
+                            </p>
 
-                    <i
-                        class="fa-solid fa-id-card"
-                    ></i>
-
-                    Plat Nomor
-
-                </label>
-
-
-                <div class="input-wrapper">
-
-                    <i
-                        class="fa-solid fa-car"
-                    ></i>
-
-
-                    <input
-                        type="text"
-                        id="plat"
-                        placeholder="Contoh: B 1234 ABC"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- TANGGAL -->
-
-            <div class="form-grid">
-
-
-                <div class="form-group">
-
-                    <label for="pajakstnk">
-
-                        <i
-                            class="fa-solid fa-calendar"
-                        ></i>
-
-                        Pajak STNK
-
-                    </label>
-
-
-                    <div class="input-wrapper">
-
-                        <input
-                            type="date"
-                            id="pajakstnk"
-                        >
+                        </div>
 
                     </div>
 
                 </div>
 
-
-                <div class="form-group">
-
-                    <label for="pajakbpkb">
-
-                        <i
-                            class="fa-solid fa-calendar-check"
-                        ></i>
-
-                        Pajak BPKB
-
-                    </label>
-
-
-                    <div class="input-wrapper">
-
-                        <input
-                            type="date"
-                            id="pajakbpkb"
-                        >
-
-                    </div>
-
-                </div>
-
-
             </div>
 
 
-            <!-- STATUS -->
+            <!-- =================================================
+                 FORM CONTENT
+            ================================================== -->
 
-            <div class="form-group">
-
-                <label for="status">
-
-                    <i
-                        class="fa-solid fa-circle-check"
-                    ></i>
-
-                    Status
-
-                </label>
+            <div class="form-content">
 
 
-                <div class="input-wrapper">
+                <!-- =================================================
+                     SECTION IDENTITAS
+                ================================================== -->
 
-                    <i
-                        class="fa-solid fa-circle-check"
-                    ></i>
+                <div class="form-section">
 
+                    <div class="section-heading">
 
-                    <input
-                        type="text"
-                        id="status"
-                        placeholder="Contoh: Aktif"
-                    >
+                        <div class="section-icon">
 
-                </div>
+                            <i
+                                class="fa-solid fa-car"
+                            ></i>
 
-            </div>
+                        </div>
 
+                        <div>
 
-            <!-- VALUE -->
+                            <h2 class="section-title">
+                                Identitas Kendaraan
+                            </h2>
 
-            <div class="form-group">
-
-                <label for="value">
-
-                    <i
-                        class="fa-solid fa-money-bill-wave"
-                    ></i>
-
-                    Value Kendaraan
-
-                </label>
-
-
-                <div class="input-wrapper">
-
-                    <i
-                        class="fa-solid fa-rupiah-sign"
-                    ></i>
-
-
-                    <input
-                        type="text"
-                        id="value"
-                        inputmode="numeric"
-                        placeholder="Rp 0"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- FOTO -->
-
-            <div class="form-group">
-
-                <label>
-
-                    <i
-                        class="fa-solid fa-camera"
-                    ></i>
-
-                    Foto Kendaraan
-
-                </label>
-
-
-                <div
-                    class="upload-box"
-                    id="uploadBox"
-                >
-
-
-                    <!-- GALERI -->
-
-                    <input
-                        type="file"
-                        id="galleryInput"
-                        class="file-input"
-                        accept="image/*"
-                    >
-
-
-                    <!-- KAMERA -->
-
-                    <input
-                        type="file"
-                        id="cameraInput"
-                        class="file-input"
-                        accept="image/*"
-                        capture="environment"
-                    >
-
-
-                    <!-- PLACEHOLDER -->
-
-                    <div
-                        class="upload-placeholder"
-                        id="uploadPlaceholder"
-                    >
-
-                        <i
-                            class="fa-solid fa-camera"
-                        ></i>
-
-
-                        <span>
-                            Ambil atau pilih foto kendaraan
-                        </span>
-
-
-                        <small>
-                            JPG, PNG atau WEBP
-                        </small>
-
-
-                        <div class="photo-buttons">
-
-
-                            <button
-                                type="button"
-                                class="
-                                    btn-photo
-                                    btn-camera
-                                "
-                                id="btnCamera"
-                            >
-
-                                <i
-                                    class="fa-solid fa-camera"
-                                ></i>
-
-                                Kamera
-
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="
-                                    btn-photo
-                                    btn-gallery
-                                "
-                                id="btnGallery"
-                            >
-
-                                <i
-                                    class="fa-solid fa-images"
-                                ></i>
-
-                                Galeri
-
-                            </button>
-
+                            <p class="section-description">
+                                Masukkan informasi dasar kendaraan
+                                yang akan didaftarkan.
+                            </p>
 
                         </div>
 
                     </div>
 
 
-                    <!-- PREVIEW -->
+                    <!-- NAMA -->
 
-                    <div
-                        class="preview-container"
-                        id="previewContainer"
-                    >
+                    <div class="form-group">
 
-                        <img
-                            id="preview"
-                            alt="Preview Foto"
-                        >
+                        <label for="nama">
+
+                            <i
+                                class="fa-solid fa-car"
+                            ></i>
+
+                            Nama Unit / Kendaraan
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-solid fa-car"
+                            ></i>
+
+                            <input
+                                type="text"
+                                id="nama"
+                                placeholder="Contoh: Toyota Avanza"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
 
 
-                        <div
-                            class="change-photo"
-                        >
+                    <!-- PLAT -->
+
+                    <div class="form-group">
+
+                        <label for="plat">
+
+                            <i
+                                class="fa-solid fa-id-card"
+                            ></i>
+
+                            Plat Nomor
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-solid fa-car"
+                            ></i>
+
+                            <input
+                                type="text"
+                                id="plat"
+                                placeholder="Contoh: B 1234 ABC"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <i
+                                class="fa-solid fa-circle-info"
+                            ></i>
+
+                            <span>
+                                Plat nomor akan otomatis
+                                diubah menjadi huruf kapital
+                                dan digunakan sebagai ID unit
+                                di database.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SECTION DOKUMEN
+                ================================================== -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-icon">
+
+                            <i
+                                class="fa-solid fa-file-lines"
+                            ></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="section-title">
+                                Dokumen & Status
+                            </h2>
+
+                            <p class="section-description">
+                                Lengkapi tanggal pajak dan informasi
+                                status kendaraan.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TANGGAL -->
+
+                    <div class="form-grid">
+
+                        <!-- STNK -->
+
+                        <div class="form-group">
+
+                            <label for="pajakstnk">
+
+                                <i
+                                    class="fa-solid fa-calendar"
+                                ></i>
+
+                                Pajak STNK
+
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <input
+                                    type="date"
+                                    id="pajakstnk"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BPKB -->
+
+                        <div class="form-group">
+
+                            <label for="pajakbpkb">
+
+                                <i
+                                    class="fa-solid fa-calendar-check"
+                                ></i>
+
+                                Pajak BPKB
+
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <input
+                                    type="date"
+                                    id="pajakbpkb"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="status">
+
+                            <i
+                                class="fa-solid fa-circle-check"
+                            ></i>
+
+                            Status Kendaraan
+
+                            <span class="optional">
+                                (opsional)
+                            </span>
+
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-solid fa-circle-check"
+                            ></i>
+
+                            <input
+                                type="text"
+                                id="status"
+                                placeholder="Contoh: Aktif"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SECTION NILAI
+                ================================================== -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-icon">
+
+                            <i
+                                class="fa-solid fa-money-bill-wave"
+                            ></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="section-title">
+                                Nilai Kendaraan
+                            </h2>
+
+                            <p class="section-description">
+                                Masukkan nilai kendaraan dalam
+                                mata uang Rupiah.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="value">
+
+                            <i
+                                class="fa-solid fa-rupiah-sign"
+                            ></i>
+
+                            Value Kendaraan
+
+                            <span class="optional">
+                                (opsional)
+                            </span>
+
+                        </label>
+
+                        <div class="rupiah-wrapper">
+
+                            <span class="rupiah-prefix">
+                                Rp
+                            </span>
+
+                            <input
+                                type="text"
+                                id="value"
+                                inputmode="numeric"
+                                placeholder="0"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SECTION FOTO
+                ================================================== -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-icon">
 
                             <i
                                 class="fa-solid fa-camera"
                             ></i>
 
-                            Pilih Foto Lagi
+                        </div>
+
+                        <div>
+
+                            <h2 class="section-title">
+                                Foto Kendaraan
+                            </h2>
+
+                            <p class="section-description">
+                                Ambil foto menggunakan kamera atau
+                                pilih foto dari galeri.
+                            </p>
 
                         </div>
 
                     </div>
 
 
+                    <div class="form-group">
+
+                        <div
+                            class="upload-box"
+                            id="uploadBox"
+                        >
+
+
+                            <!-- INPUT GALERI -->
+
+                            <input
+                                type="file"
+                                id="galleryInput"
+                                class="file-input"
+                                accept="image/*"
+                            >
+
+
+                            <!-- INPUT KAMERA -->
+
+                            <input
+                                type="file"
+                                id="cameraInput"
+                                class="file-input"
+                                accept="image/*"
+                                capture="environment"
+                            >
+
+
+                            <!-- PLACEHOLDER -->
+
+                            <div
+                                class="upload-placeholder"
+                                id="uploadPlaceholder"
+                            >
+
+                                <div class="upload-icon">
+
+                                    <i
+                                        class="fa-solid fa-camera"
+                                    ></i>
+
+                                </div>
+
+                                <strong>
+                                    Foto kendaraan wajib diisi
+                                </strong>
+
+                                <small>
+                                    Gunakan foto kendaraan yang
+                                    jelas dan mudah dikenali.<br>
+                                    Format JPG, PNG atau WEBP.
+                                </small>
+
+
+                                <!-- BUTTONS -->
+
+                                <div class="photo-buttons">
+
+                                    <button
+                                        type="button"
+                                        class="btn-photo btn-camera"
+                                        id="btnCamera"
+                                    >
+
+                                        <i
+                                            class="fa-solid fa-camera"
+                                        ></i>
+
+                                        Kamera
+
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="btn-photo btn-gallery"
+                                        id="btnGallery"
+                                    >
+
+                                        <i
+                                            class="fa-solid fa-images"
+                                        ></i>
+
+                                        Galeri
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PREVIEW -->
+
+                            <div
+                                class="preview-container"
+                                id="previewContainer"
+                            >
+
+                                <img
+                                    id="preview"
+                                    alt="Preview Foto Kendaraan"
+                                >
+
+                                <div
+                                    class="change-photo"
+                                    id="changePhoto"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-camera"
+                                    ></i>
+
+                                    Pilih Foto Lagi
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
+
+                <!-- =================================================
+                     RINGKASAN
+                ================================================== -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-icon">
+
+                            <i
+                                class="fa-solid fa-clipboard-check"
+                            ></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="section-title">
+                                Ringkasan Data
+                            </h2>
+
+                            <p class="section-description">
+                                Periksa kembali informasi sebelum
+                                menyimpan data.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="data-summary">
+
+
+                        <div class="summary-item">
+
+                            <div class="summary-label">
+                                Unit
+                            </div>
+
+                            <div
+                                class="summary-value"
+                                id="summaryNama"
+                            >
+                                -
+                            </div>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <div class="summary-label">
+                                Plat
+                            </div>
+
+                            <div
+                                class="summary-value"
+                                id="summaryPlat"
+                            >
+                                -
+                            </div>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <div class="summary-label">
+                                Keterangan
+                            </div>
+
+                            <div
+                                class="summary-value"
+                            >
+                                Ready
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         BUTTON SIMPAN
+                    ================================================== -->
+
+                    <button
+                        id="btnProses"
+                        type="button"
+                        class="btn-proses"
+                    >
+
+                        <i
+                            class="fa-solid fa-floppy-disk"
+                        ></i>
+
+                        Simpan Data Unit
+
+                    </button>
+
+
+                    <!-- BACK -->
+
+                    <a
+                        href="index.html"
+                        class="link-kembali"
+                    >
+
+                        <i
+                            class="fa-solid fa-arrow-left"
+                        ></i>
+
+                        Kembali ke Home
+
+                    </a>
+
+
+                    <!-- SECURITY -->
+
+                    <div class="security-note">
+
+                        <i
+                            class="fa-solid fa-cloud-arrow-up"
+                        ></i>
+
+                        Data akan disimpan ke database
+                        ARC TRANS
+
+                    </div>
+
+                </div>
+
+
             </div>
-
-
-            <!-- BUTTON -->
-
-            <button
-                id="btnProses"
-                type="button"
-                class="btn-proses"
-            >
-
-                <i
-                    class="fa-solid fa-floppy-disk"
-                ></i>
-
-                Simpan Data Unit
-
-            </button>
-
-
-            <a
-                href="index.html"
-                class="link-kembali"
-            >
-
-                <i
-                    class="fa-solid fa-arrow-left"
-                ></i>
-
-                Kembali ke Home
-
-            </a>
-
 
         </div>
 
     </div>
 
 
+    <!-- =========================================================
+         FIREBASE SCRIPT
+    ========================================================== -->
+
     <script type="module">
 
 
-        /* =========================
+        /* =========================================================
            FIREBASE IMPORT
-        ========================= */
+        ========================================================= */
 
         import {
             initializeApp
         }
-
         from
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
@@ -1296,14 +2005,13 @@
             ref,
             update
         }
-
         from
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-        /* =========================
+        /* =========================================================
            FIREBASE CONFIG
-        ========================= */
+        ========================================================= */
 
         const firebaseConfig = {
 
@@ -1331,15 +2039,14 @@
         };
 
 
-        /* =========================
+        /* =========================================================
            INITIALIZE FIREBASE
-        ========================= */
+        ========================================================== */
 
         const app =
             initializeApp(
                 firebaseConfig
             );
-
 
         const db =
             getDatabase(
@@ -1347,97 +2054,39 @@
             );
 
 
-        /* =========================
+        /* =========================================================
            ELEMENT FORM
-        ========================= */
+        ========================================================== */
 
         const namaInput =
             document.getElementById(
                 "nama"
             );
 
-
         const platInput =
             document.getElementById(
                 "plat"
             );
-
 
         const stnkInput =
             document.getElementById(
                 "pajakstnk"
             );
 
-
         const bpkbInput =
             document.getElementById(
                 "pajakbpkb"
             );
-
 
         const statusInput =
             document.getElementById(
                 "status"
             );
 
-
         const valueInput =
             document.getElementById(
                 "value"
             );
-
-
-        /* =========================
-           ELEMENT FOTO
-        ========================= */
-
-        const galleryInput =
-            document.getElementById(
-                "galleryInput"
-            );
-
-
-        const cameraInput =
-            document.getElementById(
-                "cameraInput"
-            );
-
-
-        const btnCamera =
-            document.getElementById(
-                "btnCamera"
-            );
-
-
-        const btnGallery =
-            document.getElementById(
-                "btnGallery"
-            );
-
-
-        const preview =
-            document.getElementById(
-                "preview"
-            );
-
-
-        const previewContainer =
-            document.getElementById(
-                "previewContainer"
-            );
-
-
-        const uploadPlaceholder =
-            document.getElementById(
-                "uploadPlaceholder"
-            );
-
-
-        const uploadBox =
-            document.getElementById(
-                "uploadBox"
-            );
-
 
         const btnProses =
             document.getElementById(
@@ -1445,37 +2094,122 @@
             );
 
 
-        /* =========================
-           VARIABEL FILE TERPILIH
-        ========================= */
+        /* =========================================================
+           ELEMENT FOTO
+        ========================================================== */
+
+        const galleryInput =
+            document.getElementById(
+                "galleryInput"
+            );
+
+        const cameraInput =
+            document.getElementById(
+                "cameraInput"
+            );
+
+        const btnCamera =
+            document.getElementById(
+                "btnCamera"
+            );
+
+        const btnGallery =
+            document.getElementById(
+                "btnGallery"
+            );
+
+        const preview =
+            document.getElementById(
+                "preview"
+            );
+
+        const previewContainer =
+            document.getElementById(
+                "previewContainer"
+            );
+
+        const uploadPlaceholder =
+            document.getElementById(
+                "uploadPlaceholder"
+            );
+
+        const changePhoto =
+            document.getElementById(
+                "changePhoto"
+            );
+
+
+        /* =========================================================
+           SUMMARY
+        ========================================================== */
+
+        const summaryNama =
+            document.getElementById(
+                "summaryNama"
+            );
+
+        const summaryPlat =
+            document.getElementById(
+                "summaryPlat"
+            );
+
+
+        /* =========================================================
+           FILE TERPILIH
+        ========================================================== */
 
         let selectedFile = null;
 
 
-        /* =========================
-           FORMAT PLAT
-        ========================= */
+        /* =========================================================
+           FORMAT PLAT NOMOR
+        ========================================================== */
 
         platInput.addEventListener(
             "input",
-
             function () {
 
                 this.value =
-                    this.value.toUpperCase();
+                    this.value
+                    .toUpperCase();
+
+                updateSummary();
 
             }
-
         );
 
 
-        /* =========================
+        /* =========================================================
+           UPDATE SUMMARY
+        ========================================================== */
+
+        function updateSummary() {
+
+            summaryNama.textContent =
+                namaInput.value.trim()
+                ||
+                "-";
+
+            summaryPlat.textContent =
+                platInput.value.trim()
+                ||
+                "-";
+
+        }
+
+
+        namaInput.addEventListener(
+            "input",
+            updateSummary
+        );
+
+
+        /* =========================================================
            FORMAT RUPIAH
-        ========================= */
+        ========================================================== */
 
         valueInput.addEventListener(
             "input",
-
             function () {
 
                 const angka =
@@ -1491,86 +2225,101 @@
                         "";
 
                     return;
+
                 }
 
 
                 this.value =
-                    "Rp " +
                     Number(
                         angka
-                    )
-                    .toLocaleString(
+                    ).toLocaleString(
                         "id-ID"
                     );
 
             }
-
         );
 
 
-        /* =========================
+        /* =========================================================
            TOMBOL KAMERA
-        ========================= */
+        ========================================================== */
 
         btnCamera.addEventListener(
             "click",
-
             function () {
 
                 cameraInput.click();
 
             }
-
         );
 
 
-        /* =========================
+        /* =========================================================
            TOMBOL GALERI
-        ========================= */
+        ========================================================== */
 
         btnGallery.addEventListener(
             "click",
-
             function () {
 
                 galleryInput.click();
 
             }
-
         );
 
 
-        /* =========================
-           KLIK PREVIEW
-           PILIH FOTO LAGI
-        ========================= */
+        /* =========================================================
+           GANTI FOTO
+        ========================================================== */
+
+        changePhoto.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                galleryInput.click();
+
+            }
+        );
+
+
+        /* =========================================================
+           PREVIEW CLICK
+        ========================================================== */
 
         previewContainer.addEventListener(
             "click",
+            function (event) {
 
-            function () {
+                if (
+                    event.target ===
+                    previewContainer
+                    ||
+                    event.target ===
+                    preview
+                ) {
 
-                galleryInput.click();
+                    galleryInput.click();
+
+                }
 
             }
-
         );
 
 
-        /* =========================
-           PROSES FILE FOTO
-        ========================= */
+        /* =========================================================
+           PROSES FOTO
+        ========================================================== */
 
-        function prosesFoto(
-            file
-        ) {
+        function prosesFoto(file) {
 
             if (!file) {
-
                 return;
-
             }
 
+
+            /* VALIDASI TYPE */
 
             if (
                 !file.type.startsWith(
@@ -1587,6 +2336,26 @@
             }
 
 
+            /* VALIDASI UKURAN */
+
+            const maxSize =
+                10 * 1024 * 1024;
+
+
+            if (
+                file.size >
+                maxSize
+            ) {
+
+                alert(
+                    "Ukuran foto maksimal 10 MB!"
+                );
+
+                return;
+
+            }
+
+
             selectedFile =
                 file;
 
@@ -1596,9 +2365,7 @@
 
 
             reader.onload =
-                function (
-                    event
-                ) {
+                function (event) {
 
                     preview.src =
                         event.target.result;
@@ -1621,53 +2388,47 @@
         }
 
 
-        /* =========================
+        /* =========================================================
            INPUT GALERI
-        ========================= */
+        ========================================================== */
 
         galleryInput.addEventListener(
             "change",
-
             function () {
 
                 const file =
                     this.files[0];
-
 
                 prosesFoto(
                     file
                 );
 
             }
-
         );
 
 
-        /* =========================
+        /* =========================================================
            INPUT KAMERA
-        ========================= */
+        ========================================================== */
 
         cameraInput.addEventListener(
             "change",
-
             function () {
 
                 const file =
                     this.files[0];
-
 
                 prosesFoto(
                     file
                 );
 
             }
-
         );
 
 
-        /* =========================
+        /* =========================================================
            BUTTON SIMPAN
-        ========================= */
+        ========================================================== */
 
         btnProses.addEventListener(
             "click",
@@ -1675,36 +2436,31 @@
         );
 
 
-        /* =========================
+        /* =========================================================
            KIRIM DATA
-        ========================= */
+        ========================================================== */
 
         async function kirimData() {
 
 
-            /* =========================
-               AMBIL DATA FORM
-            ========================= */
+            /* =====================================================
+               AMBIL DATA
+            ====================================================== */
 
             const nama =
                 namaInput.value.trim();
 
-
             const plat =
                 platInput.value.trim();
-
 
             const stnk =
                 stnkInput.value;
 
-
             const bpkb =
                 bpkbInput.value;
 
-
             const status =
                 statusInput.value.trim();
-
 
             const value =
                 Number(
@@ -1717,21 +2473,19 @@
                 ||
                 0;
 
-
             const file =
                 selectedFile;
 
 
-            /* =========================
-               VALIDASI
-            ========================= */
+            /* =====================================================
+               VALIDASI NAMA
+            ====================================================== */
 
             if (!nama) {
 
                 alert(
                     "Nama kendaraan wajib diisi!"
                 );
-
 
                 namaInput.focus();
 
@@ -1740,12 +2494,15 @@
             }
 
 
+            /* =====================================================
+               VALIDASI PLAT
+            ====================================================== */
+
             if (!plat) {
 
                 alert(
                     "Plat nomor wajib diisi!"
                 );
-
 
                 platInput.focus();
 
@@ -1753,6 +2510,10 @@
 
             }
 
+
+            /* =====================================================
+               VALIDASI FOTO
+            ====================================================== */
 
             if (!file) {
 
@@ -1765,30 +2526,29 @@
             }
 
 
-            /* =========================
-               LOADING BUTTON
-            ========================= */
+            /* =====================================================
+               LOADING
+            ====================================================== */
 
             btnProses.disabled =
                 true;
 
-
             btnProses.innerHTML =
                 `
-                <i
-                    class="fa-solid fa-spinner fa-spin"
-                ></i>
+                    <i
+                        class="fa-solid fa-spinner fa-spin"
+                    ></i>
 
-                Sedang Menyimpan...
+                    Sedang Menyimpan...
                 `;
 
 
             try {
 
 
-                /* =========================
+                /* =================================================
                    UPLOAD CLOUDINARY
-                ========================= */
+                ================================================== */
 
                 const formData =
                     new FormData();
@@ -1806,9 +2566,9 @@
                 );
 
 
-                /* =========================
-                   ID FOTO UNIK
-                ========================= */
+                /* =================================================
+                   UNIQUE PHOTO ID
+                ================================================== */
 
                 const uniqueId =
                     "unit_" +
@@ -1826,11 +2586,13 @@
                 );
 
 
+                /* =================================================
+                   CLOUDINARY
+                ================================================== */
+
                 const response =
                     await fetch(
-
                         "https://api.cloudinary.com/v1_1/cesiolzm/image/upload",
-
                         {
                             method:
                                 "POST",
@@ -1838,7 +2600,6 @@
                             body:
                                 formData
                         }
-
                     );
 
 
@@ -1851,11 +2612,9 @@
                 ) {
 
                     throw new Error(
-
                         uploadData.error?.message
                         ||
                         "Upload foto gagal"
-
                     );
 
                 }
@@ -1865,130 +2624,109 @@
                     uploadData.secure_url;
 
 
-                /* =========================
-                   BUAT ID FIREBASE
-                ========================= */
+                /* =================================================
+                   FIREBASE ID
+                ================================================== */
 
                 const id =
                     plat
+
                     .replace(
                         /[.#$[\]]/g,
                         "_"
                     )
+
                     .replace(
                         /\s+/g,
                         "_"
                     )
+
                     .toUpperCase();
 
 
-                /* =========================
+                /* =================================================
                    DATA UNIT
-                ========================= */
+                ================================================== */
 
                 const dataUnit = {
 
                     nama:
                         nama,
 
-
                     plat:
                         plat,
-
 
                     stnk:
                         stnk,
 
-
                     bpkb:
                         bpkb,
-
 
                     status:
                         status,
 
-
-                    /* KETERANGAN */
-
                     keterangan:
                         "Ready",
-
 
                     value:
                         value,
 
-
                     valueFormat:
-
                         "Rp " +
-
                         value.toLocaleString(
                             "id-ID"
                         ),
 
-
                     photo:
                         imageUrl,
-
 
                     timestamp:
                         Date.now(),
 
-
                     tanggalInput:
-
                         new Date()
                         .toISOString()
 
                 };
 
 
-                /* =========================
+                /* =================================================
                    DATA READY
-                ========================= */
+                ================================================== */
 
                 const dataReady = {
 
                     nama:
                         nama,
 
-
                     plat:
                         plat,
-
 
                     status:
                         status,
 
-
                     keterangan:
                         "Ready",
-
 
                     photo:
                         imageUrl,
 
-
                     timestamp:
                         Date.now(),
 
-
                     tanggalInput:
-
                         new Date()
                         .toISOString()
 
                 };
 
 
-                /* =========================
-                   SIMPAN SEKALIGUS
-                ========================= */
+                /* =================================================
+                   UPDATE FIREBASE
+                ================================================== */
 
                 const updates = {};
 
-
-                /* UNIT */
 
                 updates[
                     "unit/" +
@@ -1997,8 +2735,6 @@
                     dataUnit;
 
 
-                /* READY */
-
                 updates[
                     "ready/" +
                     id
@@ -2006,115 +2742,53 @@
                     dataReady;
 
 
-                /* =========================
-                   UPDATE FIREBASE
-                ========================= */
-
                 await update(
-                    ref(
-                        db
-                    ),
+                    ref(db),
                     updates
                 );
 
 
-                /* =========================
+                /* =================================================
                    SUCCESS
-                ========================= */
+                ================================================== */
 
                 alert(
-
                     "✓ Data kendaraan berhasil disimpan!\n\n" +
 
                     "Unit: " +
-
                     plat +
 
                     "\n\n" +
 
-                    "Status Keterangan: Ready"
-
+                    "Keterangan: Ready"
                 );
 
 
-                /* =========================
+                /* =================================================
                    RESET FORM
-                ========================= */
+                ================================================== */
 
-                namaInput.value =
-                    "";
-
-
-                platInput.value =
-                    "";
-
-
-                stnkInput.value =
-                    "";
-
-
-                bpkbInput.value =
-                    "";
-
-
-                statusInput.value =
-                    "";
-
-
-                valueInput.value =
-                    "";
-
-
-                galleryInput.value =
-                    "";
-
-
-                cameraInput.value =
-                    "";
-
-
-                selectedFile =
-                    null;
-
-
-                preview.src =
-                    "";
-
-
-                previewContainer.style.display =
-                    "none";
-
-
-                uploadPlaceholder.style.display =
-                    "flex";
+                resetForm();
 
 
             }
 
-
-            catch (
-                error
-            ) {
-
+            catch (error) {
 
                 console.error(
+                    "ERROR:",
                     error
                 );
 
 
                 alert(
-
                     "Gagal menyimpan data!\n\n" +
-
                     error.message
-
                 );
 
             }
 
-
             finally {
-
 
                 btnProses.disabled =
                     false;
@@ -2122,11 +2796,11 @@
 
                 btnProses.innerHTML =
                     `
-                    <i
-                        class="fa-solid fa-floppy-disk"
-                    ></i>
+                        <i
+                            class="fa-solid fa-floppy-disk"
+                        ></i>
 
-                    Simpan Data Unit
+                        Simpan Data Unit
                     `;
 
             }
@@ -2134,9 +2808,72 @@
         }
 
 
+        /* =========================================================
+           RESET FORM
+        ========================================================== */
+
+        function resetForm() {
+
+            namaInput.value =
+                "";
+
+            platInput.value =
+                "";
+
+            stnkInput.value =
+                "";
+
+            bpkbInput.value =
+                "";
+
+            statusInput.value =
+                "";
+
+            valueInput.value =
+                "";
+
+            galleryInput.value =
+                "";
+
+            cameraInput.value =
+                "";
+
+            selectedFile =
+                null;
+
+
+            preview.src =
+                "";
+
+
+            previewContainer.style.display =
+                "none";
+
+
+            uploadPlaceholder.style.display =
+                "flex";
+
+
+            updateSummary();
+
+        }
+
+
+        /* =========================================================
+           SET DEFAULT FOCUS
+        ========================================================== */
+
+        window.addEventListener(
+            "load",
+            function () {
+
+                namaInput.focus();
+
+            }
+        );
+
+
     </script>
 
-
 </body>
-
 </html>
