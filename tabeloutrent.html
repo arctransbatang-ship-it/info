@@ -1,2801 +1,468 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>ARC TRANS - Data Rental</title>
-
-
-    <!-- LIBRARY EXCEL -->
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"
-    ></script>
-
-
-    <style>
-
-        /* =========================
-           GLOBAL
-        ========================= */
-
-        * {
-
-            box-sizing: border-box;
-
-            font-family:
-                "Segoe UI",
-                Arial,
-                sans-serif;
-
-        }
-
-
-        body {
-
-            margin: 0;
-
-            min-height: 100vh;
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #eef6ff,
-                    #f7f9fc
-                );
-
-            color: #263238;
-
-        }
-
-
-        /* =========================
-           HOME BUTTON
-        ========================= */
-
-        .home-btn {
-
-            position: fixed;
-
-            top: 14px;
-
-            left: 16px;
-
-            z-index: 2000;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 7px;
-
-            background:
-
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.95
-                );
-
-            color: #1565C0;
-
-            padding:
-                9px
-                16px;
-
-            border-radius: 30px;
-
-            text-decoration: none;
-
-            font-size: 14px;
-
-            font-weight: 700;
-
-            box-shadow:
-
-                0 5px 20px
-
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.12
-                );
-
-            transition:
-
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-
-        }
-
-
-        .home-btn:hover {
-
-            transform:
-                translateY(
-                    -2px
-                );
-
-            box-shadow:
-
-                0 8px 25px
-
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.18
-                );
-
-        }
-
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        .navbar {
-
-            position: relative;
-
-            min-height: 150px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            padding:
-                35px
-                20px;
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #0d47a1,
-                    #2196F3,
-                    #21c6f3
-                );
-
-            color: white;
-
-            overflow: hidden;
-
-            box-shadow:
-
-                0 4px 20px
-
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.25
-                );
-
-        }
-
-
-        .navbar::before {
-
-            content: "";
-
-            position: absolute;
-
-            width: 300px;
-
-            height: 300px;
-
-            border-radius: 50%;
-
-            background:
-
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.10
-                );
-
-            top: -180px;
-
-            right: -80px;
-
-        }
-
-
-        .navbar::after {
-
-            content: "";
-
-            position: absolute;
-
-            width: 220px;
-
-            height: 220px;
-
-            border-radius: 50%;
-
-            background:
-
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-            bottom: -150px;
-
-            left: 10%;
-
-        }
-
-
-        .logo {
-
-            position: relative;
-
-            z-index: 2;
-
-            font-size:
-
-                clamp(
-                    22px,
-                    4vw,
-                    32px
-                );
-
-            font-weight: 800;
-
-            letter-spacing: 1px;
-
-            text-align: center;
-
-            text-shadow:
-
-                0 2px 10px
-
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.15
-                );
-
-        }
-
-
-        /* =========================
-           CONTAINER
-        ========================= */
-
-        .container {
-
-            width: 100%;
-
-            max-width: 1800px;
-
-            margin: auto;
-
-            padding:
-
-                25px
-
-                clamp(
-                    15px,
-                    4vw,
-                    40px
-                )
-
-                40px;
-
-        }
-
-
-        /* =========================
-           TOOLBAR
-        ========================= */
-
-        .toolbar {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            gap: 15px;
-
-            margin-bottom: 22px;
-
-            flex-wrap: wrap;
-
-        }
-
-
-        /* =========================
-           SEARCH
-        ========================= */
-
-        #searchInput {
-
-            width: 100%;
-
-            max-width: 420px;
-
-            padding:
-
-                14px
-                18px;
-
-            border:
-
-                1px
-                solid
-                #dce6f0;
-
-            border-radius: 14px;
-
-            outline: none;
-
-            background: white;
-
-            font-size: 14px;
-
-            box-shadow:
-
-                0 4px 15px
-
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.04
-                );
-
-            transition:
-
-                border-color 0.2s ease,
-                box-shadow 0.2s ease;
-
-        }
-
-
-        #searchInput:focus {
-
-            border-color: #2196F3;
-
-            box-shadow:
-
-                0 0 0 4px
-
-                rgba(
-                    33,
-                    150,
-                    243,
-                    0.12
-                );
-
-        }
-
-
-        /* =========================
-           BUTTON
-        ========================= */
-
-        button {
-
-            border: none;
-
-            padding:
-
-                12px
-                20px;
-
-            border-radius: 12px;
-
-            cursor: pointer;
-
-            color: white;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            transition:
-
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                opacity 0.2s;
-
-        }
-
-
-        button:hover {
-
-            transform:
-                translateY(
-                    -2px
-                );
-
-            box-shadow:
-
-                0 7px 18px
-
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.15
-                );
-
-        }
-
-
-        button:disabled {
-
-            background: #cfd8dc !important;
-
-            cursor: not-allowed;
-
-            transform: none;
-
-            box-shadow: none;
-
-        }
-
-
-        #btnDownload {
-
-            display: none;
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #2e7d32,
-                    #4CAF50
-                );
-
-        }
-
-
-        /* =========================
-           TOMBOL SELESAI
-        ========================= */
-
-        .btn-selesai {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding:
-
-                9px
-                16px;
-
-            border-radius: 10px;
-
-            text-decoration: none;
-
-            color: white;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            white-space: nowrap;
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #2e7d32,
-                    #4CAF50
-                );
-
-            transition:
-
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-
-        }
-
-
-        .btn-selesai:hover {
-
-            transform:
-                translateY(
-                    -2px
-                );
-
-            box-shadow:
-
-                0 6px 15px
-
-                rgba(
-                    46,
-                    125,
-                    50,
-                    0.25
-                );
-
-        }
-
-
-        /* =========================
-           TABLE CONTAINER
-        ========================= */
-
-        .table-container {
-
-            width: 100%;
-
-            overflow-x: auto;
-
-            background: white;
-
-            border-radius: 20px;
-
-            box-shadow:
-
-                0 10px 35px
-
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.08
-                );
-
-            border:
-
-                1px
-                solid
-                #edf1f5;
-
-        }
-
-
-        table {
-
-            width: 100%;
-
-            min-width: 2050px;
-
-            border-collapse: separate;
-
-            border-spacing: 0;
-
-        }
-
-
-        /* =========================
-           TABLE HEADER
-        ========================= */
-
-        th {
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #1976D2,
-                    #2196F3
-                );
-
-            color: white;
-
-            padding:
-
-                16px
-                14px;
-
-            text-align: center;
-
-            white-space: nowrap;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            letter-spacing: 0.2px;
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 5;
-
-        }
-
-
-        th:first-child {
-
-            border-top-left-radius: 18px;
-
-        }
-
-
-        th:last-child {
-
-            border-top-right-radius: 18px;
-
-        }
-
-
-        /* =========================
-           TABLE BODY
-        ========================= */
-
-        td {
-
-            padding:
-
-                15px
-                14px;
-
-            border-bottom:
-
-                1px
-                solid
-                #edf1f5;
-
-            text-align: center;
-
-            vertical-align: middle;
-
-            white-space: nowrap;
-
-            font-size: 13px;
-
-        }
-
-
-        tbody tr {
-
-            transition:
-
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-
-        }
-
-
-        tbody tr:hover {
-
-            background: #f5faff;
-
-        }
-
-
-        tbody tr:last-child td {
-
-            border-bottom: none;
-
-        }
-
-
-        /* =========================
-           MONEY STYLE
-        ========================= */
-
-        td:nth-child(10),
-        td:nth-child(11),
-        td:nth-child(13),
-        td:nth-child(14),
-        td:nth-child(15) {
-
-            font-weight: 700;
-
-            color: #1565C0;
-
-        }
-
-
-        /* =========================
-           STATUS PEMBAYARAN
-        ========================= */
-
-        .payment-status {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding:
-
-                7px
-                14px;
-
-            border-radius: 20px;
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            white-space: nowrap;
-
-            border:
-
-                1px
-                solid
-                transparent;
-
-        }
-
-
-        .status-lunas {
-
-            color: #1B5E20;
-
-            background: #E8F5E9;
-
-            border-color: #A5D6A7;
-
-        }
-
-
-        .status-belum-lunas {
-
-            color: #B71C1C;
-
-            background: #FFEBEE;
-
-            border-color: #EF9A9A;
-
-        }
-
-
-        .status-lebih-bayar {
-
-            color: #6A1B9A;
-
-            background: #F3E5F5;
-
-            border-color: #CE93D8;
-
-        }
-
-
-        .status-default {
-
-            color: #546E7A;
-
-            background: #ECEFF1;
-
-            border-color: #CFD8DC;
-
-        }
-
-
-        /* =========================
-           SUDAH DIBAYAR
-        ========================= */
-
-        .amount-paid {
-
-            display: inline-block;
-
-            padding:
-
-                7px
-                12px;
-
-            border-radius: 10px;
-
-            font-weight: 800;
-
-            color: #1565C0;
-
-            background: #E3F2FD;
-
-            border:
-
-                1px
-                solid
-                #BBDEFB;
-
-        }
-
-
-        /* =========================
-           KEKURANGAN BAYAR
-        ========================= */
-
-        .amount-shortage {
-
-            display: inline-block;
-
-            padding:
-
-                7px
-                12px;
-
-            border-radius: 10px;
-
-            font-weight: 800;
-
-            color: #C62828;
-
-            background: #FFEBEE;
-
-            border:
-
-                1px
-                solid
-                #FFCDD2;
-
-        }
-
-
-        /* =========================
-           KELEBIHAN BAYAR
-        ========================= */
-
-        .amount-overpaid {
-
-            display: inline-block;
-
-            padding:
-
-                7px
-                12px;
-
-            border-radius: 10px;
-
-            font-weight: 800;
-
-            color: #6A1B9A;
-
-            background: #F3E5F5;
-
-            border:
-
-                1px
-                solid
-                #E1BEE7;
-
-        }
-
-
-        /* =========================
-           NILAI NOL
-        ========================= */
-
-        .amount-zero {
-
-            display: inline-block;
-
-            padding:
-
-                7px
-                12px;
-
-            border-radius: 10px;
-
-            font-weight: 700;
-
-            color: #78909C;
-
-            background: #F5F7F8;
-
-            border:
-
-                1px
-                solid
-                #ECEFF1;
-
-        }
-
-
-        /* =========================
-           EMPTY DATA
-        ========================= */
-
-        .empty-data {
-
-            padding: 50px;
-
-            text-align: center;
-
-            color: #78909C;
-
-            font-size: 15px;
-
-        }
-
-
-        /* =========================
-           PAGINATION
-        ========================= */
-
-        #pagination {
-
-            margin-top: 25px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 12px;
-
-            flex-wrap: wrap;
-
-        }
-
-
-        .btn-prev {
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #fb8c00,
-                    #ff9800
-                );
-
-        }
-
-
-        .btn-next {
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #2e7d32,
-                    #4CAF50
-                );
-
-        }
-
-
-        .page-info {
-
-            padding:
-
-                10px
-                16px;
-
-            background: white;
-
-            border-radius: 12px;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            color: #546E7A;
-
-            box-shadow:
-
-                0 4px 15px
-
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.06
-                );
-
-        }
-
-
-        /* =========================
-           TABLET
-        ========================= */
-
-        @media (max-width: 900px) {
-
-            .navbar {
-
-                min-height: 130px;
-
-            }
-
-
-            .container {
-
-                padding:
-
-                    20px
-                    15px
-                    30px;
-
-            }
-
-        }
-
-
-        /* =========================
-           MOBILE CARD MODE
-        ========================= */
-
-        @media (max-width: 700px) {
-
-            body {
-
-                background: #f4f7fb;
-
-            }
-
-
-            .home-btn {
-
-                top: 10px;
-
-                left: 10px;
-
-                font-size: 12px;
-
-                padding:
-
-                    8px
-                    12px;
-
-            }
-
-
-            .navbar {
-
-                min-height: 120px;
-
-                padding-top: 55px;
-
-            }
-
-
-            .logo {
-
-                font-size: 20px;
-
-            }
-
-
-            .container {
-
-                padding:
-
-                    15px
-                    10px
-                    30px;
-
-            }
-
-
-            .toolbar {
-
-                display: flex;
-
-                flex-direction: column;
-
-                align-items: stretch;
-
-            }
-
-
-            #searchInput {
-
-                max-width: none;
-
-                width: 100%;
-
-            }
-
-
-            #btnDownload {
-
-                width: 100%;
-
-            }
-
-
-            .table-container {
-
-                background: transparent;
-
-                box-shadow: none;
-
-                border: none;
-
-                overflow: visible;
-
-            }
-
-
-            table {
-
-                min-width: 0;
-
-                width: 100%;
-
-            }
-
-
-            thead {
-
-                display: none;
-
-            }
-
-
-            tbody {
-
-                display: block;
-
-            }
-
-
-            tbody tr {
-
-                display: block;
-
-                width: 100%;
-
-                background: white;
-
-                border-radius: 18px;
-
-                margin-bottom: 15px;
-
-                padding:
-
-                    10px
-                    14px;
-
-                box-shadow:
-
-                    0 6px 20px
-
-                    rgba(
-                        0,
-                        0,
-                        0,
-                        0.07
-                    );
-
-                border:
-
-                    1px
-                    solid
-                    #edf1f5;
-
-            }
-
-
-            tbody tr:hover {
-
-                background: white;
-
-                transform:
-                    translateY(
-                        -2px
-                    );
-
-            }
-
-
-            td {
-
-                display: flex;
-
-                justify-content: space-between;
-
-                align-items: center;
-
-                gap: 15px;
-
-                padding:
-
-                    12px
-                    5px;
-
-                text-align: right;
-
-                white-space: normal;
-
-                border-bottom:
-
-                    1px
-                    solid
-                    #eef2f5;
-
-                font-size: 13px;
-
-            }
-
-
-            td::before {
-
-                content:
-                    attr(
-                        data-label
-                    );
-
-                text-align: left;
-
-                font-weight: 700;
-
-                color: #607D8B;
-
-                flex:
-                    0 0 45%;
-
-            }
-
-
-            td:last-child {
-
-                border-bottom: none;
-
-            }
-
-
-            .empty-data {
-
-                display: block;
-
-                text-align: center;
-
-                padding: 40px 10px;
-
-            }
-
-
-            .empty-data::before {
-
-                display: none;
-
-            }
-
-
-            #pagination {
-
-                gap: 8px;
-
-            }
-
-
-            #pagination button {
-
-                flex: 1;
-
-                min-width: 100px;
-
-            }
-
-
-            .page-info {
-
-                width: 100%;
-
-                text-align: center;
-
-            }
-
-        }
-
-
-        /* =========================
-           SMALL MOBILE
-        ========================= */
-
-        @media (max-width: 380px) {
-
-            td {
-
-                font-size: 12px;
-
-            }
-
-
-            td::before {
-
-                flex-basis: 48%;
-
-                font-size: 11px;
-
-            }
-
-
-            .logo {
-
-                font-size: 18px;
-
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARC TRANS - Data Rental</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+*{box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
+body{margin:0;min-height:100vh;background:linear-gradient(135deg,#eef6ff,#f7f9fc);color:#263238}
+.home-btn{position:fixed;top:14px;left:16px;z-index:2000;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.95);color:#1565c0;padding:9px 16px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:700;box-shadow:0 5px 20px rgba(0,0,0,.12);transition:.2s}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.18)}
+.navbar{position:relative;min-height:150px;display:flex;justify-content:center;align-items:center;padding:35px 20px;background:linear-gradient(135deg,#0d47a1,#2196f3,#21c6f3);color:white;overflow:hidden;box-shadow:0 4px 20px rgba(33,150,243,.25)}
+.navbar:before,.navbar:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.1)}
+.navbar:before{width:300px;height:300px;top:-180px;right:-80px}
+.navbar:after{width:220px;height:220px;bottom:-150px;left:10%}
+.logo{position:relative;z-index:2;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:1px;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.15)}
+.container{width:100%;max-width:1800px;margin:auto;padding:25px clamp(15px,4vw,40px) 40px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px;flex-wrap:wrap}
+#searchInput{width:100%;max-width:420px;padding:14px 18px;border:1px solid #dce6f0;border-radius:14px;outline:none;background:white;font-size:14px;box-shadow:0 4px 15px rgba(0,0,0,.04)}
+#searchInput:focus{border-color:#2196f3;box-shadow:0 0 0 4px rgba(33,150,243,.12)}
+button{border:none;padding:12px 20px;border-radius:12px;cursor:pointer;color:white;font-size:13px;font-weight:700;transition:.2s}
+button:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(0,0,0,.15)}
+button:disabled{background:#cfd8dc!important;cursor:not-allowed;transform:none;box-shadow:none}
+#btnDownload{display:none;background:linear-gradient(135deg,#2e7d32,#4caf50)}
+.btn-selesai{display:inline-flex;align-items:center;justify-content:center;padding:9px 16px;border-radius:10px;text-decoration:none;color:white;font-size:12px;font-weight:700;white-space:nowrap;background:linear-gradient(135deg,#2e7d32,#4caf50);transition:.2s;cursor:pointer;border:0}
+.btn-selesai:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(46,125,50,.25)}
+.table-container{width:100%;overflow-x:auto;background:white;border-radius:20px;box-shadow:0 10px 35px rgba(0,0,0,.08);border:1px solid #edf1f5}
+table{width:100%;min-width:2050px;border-collapse:separate;border-spacing:0}
+th{background:linear-gradient(135deg,#1976d2,#2196f3);color:white;padding:16px 14px;text-align:center;white-space:nowrap;font-size:13px;font-weight:700;position:sticky;top:0;z-index:5}
+th:first-child{border-top-left-radius:18px}th:last-child{border-top-right-radius:18px}
+td{padding:15px 14px;border-bottom:1px solid #edf1f5;text-align:center;vertical-align:middle;white-space:nowrap;font-size:13px}
+tbody tr:hover{background:#f5faff}
+tbody tr:last-child td{border-bottom:none}
+.payment-status{display:inline-flex;align-items:center;justify-content:center;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap;border:1px solid transparent}
+.status-lunas{color:#1b5e20;background:#e8f5e9;border-color:#a5d6a7}
+.status-belum-lunas{color:#b71c1c;background:#ffebee;border-color:#ef9a9a}
+.status-lebih-bayar{color:#6a1b9a;background:#f3e5f5;border-color:#ce93d8}
+.status-default{color:#546e7a;background:#eceff1;border-color:#cfd8dc}
+.amount-paid,.amount-shortage,.amount-overpaid,.amount-zero{display:inline-block;padding:7px 12px;border-radius:10px;font-weight:800}
+.amount-paid{color:#1565c0;background:#e3f2fd;border:1px solid #bbdefb}
+.amount-shortage{color:#c62828;background:#ffebee;border:1px solid #ffcdd2}
+.amount-overpaid{color:#6a1b9a;background:#f3e5f5;border:1px solid #e1bee7}
+.amount-zero{color:#78909c;background:#f5f7f8;border:1px solid #eceff1}
+.empty-data{padding:50px;text-align:center;color:#78909c;font-size:15px}
+#pagination{margin-top:25px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+.btn-prev{background:linear-gradient(135deg,#fb8c00,#ff9800)}
+.btn-next{background:linear-gradient(135deg,#2e7d32,#4caf50)}
+.page-info{padding:10px 16px;background:white;border-radius:12px;font-size:13px;font-weight:700;color:#546e7a;box-shadow:0 4px 15px rgba(0,0,0,.06)}
+
+/* MODAL KONFIRMASI */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.58);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;z-index:5000}
+.modal-overlay.show{display:flex}
+.confirm-modal{width:100%;max-width:440px;background:white;border-radius:22px;box-shadow:0 25px 70px rgba(0,0,0,.25);overflow:hidden;animation:modalIn .2s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(15px) scale(.97)}to{opacity:1;transform:none}}
+.modal-head{padding:22px 24px 15px;display:flex;gap:14px;align-items:center}
+.modal-icon{width:46px;height:46px;border-radius:14px;background:#e8f5e9;color:#2e7d32;display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.modal-head h3{margin:0;color:#0f172a;font-size:19px}
+.modal-body{padding:0 24px 22px;color:#546e7a;font-size:14px;line-height:1.6}
+.modal-body strong{color:#263238}
+.modal-actions{display:flex;gap:10px;padding:16px 24px 22px;background:#f8fafc;border-top:1px solid #edf1f5}
+.btn-cancel{flex:1;background:#eceff1;color:#455a64}
+.btn-confirm{flex:1;background:linear-gradient(135deg,#2e7d32,#4caf50)}
+.btn-cancel:hover{background:#cfd8dc}
+.btn-confirm:hover{box-shadow:0 7px 18px rgba(46,125,50,.25)}
+
+@media(max-width:700px){
+body{background:#f4f7fb}.home-btn{top:10px;left:10px;font-size:12px;padding:8px 12px}
+.navbar{min-height:120px;padding-top:55px}.logo{font-size:20px}
+.container{padding:15px 10px 30px}.toolbar{flex-direction:column;align-items:stretch}
+#searchInput,#btnDownload{max-width:none;width:100%}
+.table-container{background:transparent;box-shadow:none;border:none;overflow:visible}
+table{min-width:0;width:100%}thead{display:none}tbody{display:block}
+tbody tr{display:block;width:100%;background:white;border-radius:18px;margin-bottom:15px;padding:10px 14px;box-shadow:0 6px 20px rgba(0,0,0,.07);border:1px solid #edf1f5}
+td{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:12px 5px;text-align:right;white-space:normal;border-bottom:1px solid #eef2f5;font-size:13px}
+td:before{content:attr(data-label);text-align:left;font-weight:700;color:#607d8b;flex:0 0 45%}
+td:last-child{border-bottom:none}.empty-data{display:block;text-align:center;padding:40px 10px}
+.empty-data:before{display:none}#pagination{gap:8px}#pagination button{flex:1;min-width:100px}.page-info{width:100%;text-align:center}
+.modal-actions{flex-direction:column}.confirm-modal{max-width:390px}
+}
+</style>
 </head>
 
-
 <body>
+<a href="index.html" class="home-btn">🏠 Home</a>
 
+<nav class="navbar">
+    <div class="logo">🚐 DATA RENTAL KENDARAAN</div>
+</nav>
 
-    <!-- HOME -->
-
-    <a
-        href="index.html"
-        class="home-btn"
-    >
-        🏠 Home
-    </a>
-
-
-    <!-- NAVBAR -->
-
-    <nav class="navbar">
-
-        <div class="logo">
-
-            🚐 DATA RENTAL KENDARAAN
-
-        </div>
-
-    </nav>
-
-
-    <!-- CONTAINER -->
-
-    <div class="container">
-
-
-        <!-- TOOLBAR -->
-
-        <div class="toolbar">
-
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="🔍 Cari ID, nama, unit atau plat..."
-            >
-
-
-            <button
-                id="btnDownload"
-                onclick="downloadExcel()"
-            >
-                📥 Download Excel
-            </button>
-
-
-        </div>
-
-
-        <!-- TABLE -->
-
-        <div class="table-container">
-
-
-            <table>
-
-
-                <thead>
-
-                    <tr>
-
-                        <th>No.</th>
-
-                        <th>ID</th>
-
-                        <th>Nama</th>
-
-                        <th>Kontak</th>
-
-                        <th>Nama Unit</th>
-
-                        <th>Plat Kendaraan</th>
-
-                        <th>Tanggal Sewa</th>
-
-                        <th>Estimasi Kembali</th>
-
-                        <th>Durasi Sewa</th>
-
-                        <th>Harga Sewa</th>
-
-                        <th>Total Harga</th>
-
-                        <th>Status Payment</th>
-
-                        <th>Sudah Dibayar</th>
-
-                        <th>Kekurangan Bayar</th>
-
-                        <th>Kelebihan Bayar</th>
-
-                        <th>Aksi</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="isiData">
-
-                    <tr>
-
-                        <td
-                            colspan="16"
-                            class="empty-data"
-                        >
-                            Memuat data rental...
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-
-            </table>
-
-
-        </div>
-
-
-        <!-- PAGINATION -->
-
-        <div id="pagination"></div>
-
-
+<div class="container">
+    <div class="toolbar">
+        <input type="text" id="searchInput" placeholder="🔍 Cari ID, nama, unit atau plat...">
+        <button id="btnDownload" onclick="downloadExcel()">📥 Download Excel</button>
     </div>
 
-
-    <!-- FIREBASE -->
-
-    <script type="module">
-
-
-        /* =========================
-           FIREBASE IMPORT
-        ========================= */
-
-        import {
-            initializeApp
-        }
-        from
-        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-
-        import {
-            getDatabase,
-            ref,
-            onValue
-        }
-        from
-        "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-
-        /* =========================
-           FIREBASE CONFIG
-        ========================= */
-
-        const firebaseConfig = {
-
-            apiKey:
-                "AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
-
-            authDomain:
-                "arctrans.firebaseapp.com",
-
-            databaseURL:
-                "https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
-
-            projectId:
-                "arctrans",
-
-            storageBucket:
-                "arctrans.firebasestorage.app",
-
-            messagingSenderId:
-                "60781918601",
-
-            appId:
-                "1:60781918601:web:c85d6131207f8a8958"
-
-        };
-
-
-        const app =
-            initializeApp(
-                firebaseConfig
-            );
-
-
-        const db =
-            getDatabase(
-                app
-            );
-
-
-        /* =========================
-           VARIABLES
-        ========================= */
-
-        let allData = [];
-
-        let filteredData = [];
-
-        let currentPage = 1;
-
-        const rowsPerPage = 10;
-
-
-        /* =========================
-           USERNAME
-        ========================= */
-
-        const username =
-            localStorage.getItem(
-                "username"
-            );
-
-
-        const allowedUsers = [
-
-            "Nurhakiki",
-
-            "Henri Yuliansyah",
-
-            "Sultan"
-
-        ];
-
-
-        if (
-            allowedUsers.includes(
-                username
-            )
-        ) {
-
-            document
-                .getElementById(
-                    "btnDownload"
-                )
-                .style
-                .display =
-                "inline-block";
-
-        }
-
-
-        /* =========================
-           SEARCH
-        ========================= */
-
-        function applySearch() {
-
-            const keyword =
-
-                document
-                .getElementById(
-                    "searchInput"
-                )
-                .value
-                .toLowerCase()
-                .trim();
-
-
-            filteredData =
-
-                allData.filter(
-                    item => {
-
-                        const id =
-
-                            String(
-                                item.id || ""
-                            )
-                            .toLowerCase();
-
-
-                        const customer =
-
-                            String(
-                                item.customer || ""
-                            )
-                            .toLowerCase();
-
-
-                        const namaUnit =
-
-                            String(
-                                item.namaUnit || ""
-                            )
-                            .toLowerCase();
-
-
-                        const plat =
-
-                            String(
-                                item.plat || ""
-                            )
-                            .toLowerCase();
-
-
-                        const hp =
-
-                            String(
-                                item.hp || ""
-                            )
-                            .toLowerCase();
-
-
-                        return (
-
-                            id.includes(keyword)
-
-                            ||
-
-                            customer.includes(keyword)
-
-                            ||
-
-                            namaUnit.includes(keyword)
-
-                            ||
-
-                            plat.includes(keyword)
-
-                            ||
-
-                            hp.includes(keyword)
-
-                        );
-
-                    }
-
-                );
-
-
-            currentPage = 1;
-
-            renderTable();
-
-        }
-
-
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .addEventListener(
-                "input",
-                applySearch
-            );
-
-
-        /* =========================
-           FIREBASE DATA
-        ========================= */
-
-        const dbRef =
-
-            ref(
-                db,
-                "rentout"
-            );
-
-
-        onValue(
-
-            dbRef,
-
-
-            (snapshot) => {
-
-                const data =
-                    snapshot.val();
-
-
-                if (!data) {
-
-                    allData = [];
-
-                    filteredData = [];
-
-
-                    showEmptyData(
-                        "Data rental belum tersedia"
-                    );
-
-
-                    return;
-
-                }
-
-
-                allData =
-
-                    Object.entries(
-                        data
-                    )
-                    .map(
-                        (
-                            [
-                                rentId,
-                                item
-                            ]
-                        ) => {
-
-                            return {
-
-                                ...item,
-
-                                id:
-                                    rentId
-
-                            };
-
-                        }
-
-                    );
-
-
-                applySearch();
-
-            },
-
-
-            (error) => {
-
-                console.error(
-                    "Firebase Error:",
-                    error
-                );
-
-
-                showEmptyData(
-                    "Gagal mengambil data rental"
-                );
-
-            }
-
-        );
-
-
-        /* =========================
-           EMPTY DATA
-        ========================= */
-
-        function showEmptyData(
-            message
-        ) {
-
-            document
-                .getElementById(
-                    "isiData"
-                )
-                .innerHTML =
-
-                `
+    <div class="table-container">
+        <table>
+            <thead>
                 <tr>
-
-                    <td
-                        colspan="16"
-                        class="empty-data"
-                    >
-
-                        ${escapeHtml(message)}
-
-                    </td>
-
+                    <th>No.</th><th>ID</th><th>Nama</th><th>Kontak</th>
+                    <th>Nama Unit</th><th>Plat Kendaraan</th>
+                    <th>Tanggal Sewa</th><th>Estimasi Kembali</th>
+                    <th>Durasi Sewa</th><th>Harga Sewa</th><th>Total Harga</th>
+                    <th>Status Payment</th><th>Sudah Dibayar</th>
+                    <th>Kekurangan Bayar</th><th>Kelebihan Bayar</th><th>Aksi</th>
                 </tr>
-                `;
-
-
-            document
-                .getElementById(
-                    "pagination"
-                )
-                .innerHTML =
-                "";
-
-        }
-
-
-        /* =========================
-           ESCAPE HTML
-        ========================= */
-
-        function escapeHtml(
-            value
-        ) {
-
-            return String(
-                value ?? ""
-            )
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-            .replace(
-                /</g,
-                "&lt;"
-            )
-            .replace(
-                />/g,
-                "&gt;"
-            )
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-
-        }
-
-
-        /* =========================
-           FORMAT RUPIAH
-        ========================= */
-
-        function formatRupiah(
-            value
-        ) {
-
-            if (
-
-                value === null
-
-                ||
-
-                value === undefined
-
-                ||
-
-                value === ""
-
-            ) {
-
-                return "-";
-
-            }
-
-
-            const numberValue =
-
-                Number(
-                    value
-                );
-
-
-            if (
-                isNaN(
-                    numberValue
-                )
-            ) {
-
-                return escapeHtml(
-                    value
-                );
-
-            }
-
-
-            return (
-
-                "Rp " +
-
-                numberValue
-                .toLocaleString(
-                    "id-ID"
-                )
-
-            );
-
-        }
-
-
-        /* =========================
-           FORMAT STATUS PEMBAYARAN
-        ========================= */
-
-        function formatStatusPembayaran(
-            status
-        ) {
-
-            const value =
-
-                String(
-                    status || ""
-                )
-                .toLowerCase()
-                .trim();
-
-
-            let className =
-                "status-default";
-
-
-            let icon =
-                "ℹ️";
-
-
-            if (
-                value === "lunas"
-            ) {
-
-                className =
-                    "status-lunas";
-
-                icon =
-                    "✓";
-
-            }
-
-
-            else if (
-
-                value === "belum lunas"
-
-                ||
-
-                value === "belum"
-
-            ) {
-
-                className =
-                    "status-belum-lunas";
-
-                icon =
-                    "⚠";
-
-            }
-
-
-            else if (
-
-                value === "lebih bayar"
-
-                ||
-
-                value === "kelebihan bayar"
-
-            ) {
-
-                className =
-                    "status-lebih-bayar";
-
-                icon =
-                    "+";
-
-            }
-
-
-            return `
-
-                <span
-                    class="
-                        payment-status
-                        ${className}
-                    "
-                >
-
-                    ${icon}
-
-                    &nbsp;
-
-                    ${escapeHtml(
-                        status || "-"
-                    )}
-
-                </span>
-
-            `;
-
-        }
-
-
-        /* =========================
-           FORMAT SUDAH DIBAYAR
-        ========================= */
-
-        function formatSudahDibayar(
-            value
-        ) {
-
-            const numberValue =
-
-                Number(
-                    value || 0
-                );
-
-
-            if (
-                numberValue > 0
-            ) {
-
-                return `
-
-                    <span
-                        class="amount-paid"
-                    >
-
-                        ${formatRupiah(
-                            numberValue
-                        )}
-
-                    </span>
-
-                `;
-
-            }
-
-
-            return `
-
-                <span
-                    class="amount-zero"
-                >
-
-                    Rp 0
-
-                </span>
-
-            `;
-
-        }
-
-
-        /* =========================
-           FORMAT KEKURANGAN BAYAR
-        ========================= */
-
-        function formatKekuranganBayar(
-            value
-        ) {
-
-            const numberValue =
-
-                Number(
-                    value || 0
-                );
-
-
-            /*
-               SISA PADA DATABASE:
-               NEGATIF = KURANG BAYAR
-            */
-
-            if (
-                numberValue < 0
-            ) {
-
-                return `
-
-                    <span
-                        class="amount-shortage"
-                    >
-
-                        ${formatRupiah(
-                            Math.abs(
-                                numberValue
-                            )
-                        )}
-
-                    </span>
-
-                `;
-
-            }
-
-
-            return `
-
-                <span
-                    class="amount-zero"
-                >
-
-                    Rp 0
-
-                </span>
-
-            `;
-
-        }
-
-
-        /* =========================
-           FORMAT KELEBIHAN BAYAR
-        ========================= */
-
-        function formatKelebihanBayar(
-            value
-        ) {
-
-            const numberValue =
-
-                Number(
-                    value || 0
-                );
-
-
-            if (
-                numberValue > 0
-            ) {
-
-                return `
-
-                    <span
-                        class="amount-overpaid"
-                    >
-
-                        ${formatRupiah(
-                            numberValue
-                        )}
-
-                    </span>
-
-                `;
-
-            }
-
-
-            return `
-
-                <span
-                    class="amount-zero"
-                >
-
-                    Rp 0
-
-                </span>
-
-            `;
-
-        }
-
-
-        /* =========================
-           RENDER TABLE
-        ========================= */
-
-        function renderTable() {
-
-            if (
-                filteredData.length === 0
-            ) {
-
-                showEmptyData(
-                    "Data tidak ditemukan"
-                );
-
-                return;
-
-            }
-
-
-            const totalPages =
-
-                Math.ceil(
-                    filteredData.length
-                    /
-                    rowsPerPage
-                );
-
-
-            if (
-                currentPage > totalPages
-            ) {
-
-                currentPage =
-                    totalPages;
-
-            }
-
-
-            const start =
-
-                (
-                    currentPage - 1
-                )
-                *
-                rowsPerPage;
-
-
-            const end =
-
-                start
-                +
-                rowsPerPage;
-
-
-            const paginatedData =
-
-                filteredData.slice(
-                    start,
-                    end
-                );
-
-
-            let html =
-                "";
-
-
-            let no =
-                start + 1;
-
-
-            paginatedData.forEach(
-                item => {
-
-                    const id =
-                        item.id || "-";
-
-
-                    const customer =
-                        item.customer || "-";
-
-
-                    const namaUnit =
-                        item.namaUnit || "-";
-
-
-                    const plat =
-                        item.plat || "-";
-
-
-                    const tanggalsewa =
-                        item.tanggalsewa || "-";
-
-
-                    const selesaisewa =
-                        item.selesaisewa || "-";
-
-
-                    const jumlahHari =
-                        item.jumlahHari ?? "-";
-
-
-                    const harga =
-                        item.harga;
-
-
-                    const total =
-                        item.total;
-
-
-                    const statusPembayaran =
-                        item.statusPembayaran || "-";
-
-
-                    const bayar =
-                        item.bayar;
-
-
-                    const sisa =
-                        item.sisa;
-
-
-                    const kelebihanBayar =
-                        item.kelebihanBayar;
-
-
-                    const hp =
-                        item.hp || "-";
-
-
-                    html +=
-
-                        `
-                        <tr>
-
-
-                            <td data-label="No.">
-
-                                ${no}
-
-                            </td>
-
-
-                            <td data-label="ID">
-
-                                ${escapeHtml(id)}
-
-                            </td>
-
-
-                            <td data-label="Nama">
-
-                                ${escapeHtml(customer)}
-
-                            </td>
-
-
-                            <td data-label="Kontak">
-
-                                ${escapeHtml(hp)}
-
-                            </td>
-
-
-                            <td data-label="Nama Unit">
-
-                                ${escapeHtml(namaUnit)}
-
-                            </td>
-
-
-                            <td data-label="Plat Kendaraan">
-
-                                ${escapeHtml(plat)}
-
-                            </td>
-
-
-                            <td data-label="Tanggal Sewa">
-
-                                ${escapeHtml(tanggalsewa)}
-
-                            </td>
-
-
-                            <td data-label="Estimasi Kembali">
-
-                                ${escapeHtml(selesaisewa)}
-
-                            </td>
-
-
-                            <td data-label="Durasi Sewa">
-
-                                ${escapeHtml(jumlahHari)}
-
-                                Hari
-
-                            </td>
-
-
-                            <td data-label="Harga Sewa">
-
-                                ${formatRupiah(harga)}
-
-                            </td>
-
-
-                            <td data-label="Total Harga">
-
-                                ${formatRupiah(total)}
-
-                            </td>
-
-
-                            <td data-label="Status Payment">
-
-                                ${formatStatusPembayaran(
-                                    statusPembayaran
-                                )}
-
-                            </td>
-
-
-                            <td data-label="Sudah Dibayar">
-
-                                ${formatSudahDibayar(
-                                    bayar
-                                )}
-
-                            </td>
-
-
-                            <td data-label="Kekurangan Bayar">
-
-                                ${formatKekuranganBayar(
-                                    sisa
-                                )}
-
-                            </td>
-
-
-                            <td data-label="Kelebihan Bayar">
-
-                                ${formatKelebihanBayar(
-                                    kelebihanBayar
-                                )}
-
-                            </td>
-
-
-                            <!-- =========================
-                                 TOMBOL SELESAI
-                            ========================== -->
-
-                            <td data-label="Aksi">
-
-                                <a
-                                    href="selesai.html?id=${encodeURIComponent(id)}"
-                                    class="btn-selesai"
-                                >
-
-                                    Selesai
-
-                                </a>
-
-                            </td>
-
-
-                        </tr>
-                        `;
-
-
-                    no++;
-
-                }
-            );
-
-
-            document
-                .getElementById(
-                    "isiData"
-                )
-                .innerHTML =
-                html;
-
-
-            renderPagination();
-
-        }
-
-
-        /* =========================
-           PAGINATION
-        ========================= */
-
-        function renderPagination() {
-
-            const totalPages =
-
-                Math.ceil(
-                    filteredData.length
-                    /
-                    rowsPerPage
-                );
-
-
-            if (
-                totalPages <= 1
-            ) {
-
-                document
-                    .getElementById(
-                        "pagination"
-                    )
-                    .innerHTML =
-                    "";
-
-                return;
-
-            }
-
-
-            document
-                .getElementById(
-                    "pagination"
-                )
-                .innerHTML =
-
-                `
-                <button
-
-                    class="btn-prev"
-
-                    onclick="prevPage()"
-
-                    ${
-                        currentPage === 1
-                        ?
-                        "disabled"
-                        :
-                        ""
-                    }
-
-                >
-
-                    ← Sebelumnya
-
+            </thead>
+            <tbody id="isiData">
+                <tr><td colspan="16" class="empty-data">Memuat data rental...</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="pagination"></div>
+</div>
+
+<!-- POPUP KONFIRMASI SELESAI -->
+<div id="confirmOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="confirm-modal">
+        <div class="modal-head">
+            <div class="modal-icon">✓</div>
+            <div><h3 id="confirmTitle">Konfirmasi Selesai</h3></div>
+        </div>
+        <div class="modal-body" id="confirmMessage">
+            Apakah Anda yakin ingin membuka detail penyelesaian rental ini?
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-cancel" id="btnCancel">✕ Cancel</button>
+            <button type="button" class="btn-confirm" id="btnConfirm">✓ Lanjutkan</button>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {getDatabase,ref,onValue} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig={
+    apiKey:"AIzaSyCOL9UC3tZOEX9ZwvY076O0yI5yqmYfb44",
+    authDomain:"arctrans.firebaseapp.com",
+    databaseURL:"https://arctrans-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId:"arctrans",
+    storageBucket:"arctrans.firebasestorage.app",
+    messagingSenderId:"60781918601",
+    appId:"1:60781918601:web:c85d6131207f8a8958"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
+
+let allData=[];
+let filteredData=[];
+let currentPage=1;
+const rowsPerPage=10;
+let pendingUrl="";
+
+const username=localStorage.getItem("username");
+const allowedUsers=["Nurhakiki","Henri Yuliansyah","Sultan"];
+if(allowedUsers.includes(username)){
+    document.getElementById("btnDownload").style.display="inline-block";
+}
+
+/* =========================
+   POPUP KONFIRMASI
+   ========================= */
+function openConfirm(url,item){
+    pendingUrl=url;
+    const overlay=document.getElementById("confirmOverlay");
+    const customer=item?.customer||"-";
+    const plat=item?.plat||"-";
+    const id=item?.id||"-";
+
+    document.getElementById("confirmMessage").innerHTML=
+        `Anda akan membuka proses <strong>Selesai Rental</strong>.<br><br>
+         ID Rental: <strong>${escapeHtml(id)}</strong><br>
+         Nama: <strong>${escapeHtml(customer)}</strong><br>
+         Plat Kendaraan: <strong>${escapeHtml(plat)}</strong><br><br>
+         Apakah Anda yakin ingin melanjutkan?`;
+
+    overlay.classList.add("show");
+    document.getElementById("btnConfirm").focus();
+}
+
+function closeConfirm(){
+    pendingUrl="";
+    document.getElementById("confirmOverlay").classList.remove("show");
+}
+
+document.getElementById("btnCancel").addEventListener("click",closeConfirm);
+
+document.getElementById("btnConfirm").addEventListener("click",()=>{
+    if(pendingUrl){
+        const url=pendingUrl;
+        closeConfirm();
+        window.location.href=url;
+    }
+});
+
+document.getElementById("confirmOverlay").addEventListener("click",(e)=>{
+    if(e.target.id==="confirmOverlay") closeConfirm();
+});
+
+document.addEventListener("keydown",(e)=>{
+    if(e.key==="Escape"){
+        closeConfirm();
+    }
+});
+
+/* =========================
+   SEARCH
+   ========================= */
+function applySearch(){
+    const keyword=document.getElementById("searchInput").value.toLowerCase().trim();
+
+    filteredData=allData.filter(item=>{
+        const id=String(item.id||"").toLowerCase();
+        const customer=String(item.customer||"").toLowerCase();
+        const namaUnit=String(item.namaUnit||"").toLowerCase();
+        const plat=String(item.plat||"").toLowerCase();
+        const hp=String(item.hp||"").toLowerCase();
+
+        return id.includes(keyword)||customer.includes(keyword)||
+               namaUnit.includes(keyword)||plat.includes(keyword)||
+               hp.includes(keyword);
+    });
+
+    currentPage=1;
+    renderTable();
+}
+
+document.getElementById("searchInput").addEventListener("input",applySearch);
+
+/* =========================
+   FIREBASE
+   ========================= */
+onValue(ref(db,"rentout"),snapshot=>{
+    const data=snapshot.val();
+
+    if(!data){
+        allData=[];
+        filteredData=[];
+        showEmptyData("Data rental belum tersedia");
+        return;
+    }
+
+    allData=Object.entries(data).map(([rentId,item])=>({
+        ...(item||{}),
+        id:rentId
+    }));
+
+    applySearch();
+},error=>{
+    console.error("Firebase Error:",error);
+    showEmptyData("Gagal mengambil data rental");
+});
+
+/* =========================
+   HELPERS
+   ========================= */
+function showEmptyData(message){
+    document.getElementById("isiData").innerHTML=
+        `<tr><td colspan="16" class="empty-data">${escapeHtml(message)}</td></tr>`;
+    document.getElementById("pagination").innerHTML="";
+}
+
+function escapeHtml(value){
+    return String(value??"")
+        .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function formatRupiah(value){
+    if(value===null||value===undefined||value==="") return "-";
+    const n=Number(value);
+    if(isNaN(n)) return escapeHtml(value);
+    return "Rp "+n.toLocaleString("id-ID");
+}
+
+function formatStatusPembayaran(status){
+    const value=String(status||"").toLowerCase().trim();
+    let cls="status-default",icon="ℹ️";
+
+    if(value==="lunas"){cls="status-lunas";icon="✓";}
+    else if(value==="belum lunas"||value==="belum"){cls="status-belum-lunas";icon="⚠";}
+    else if(value==="lebih bayar"||value==="kelebihan bayar"){cls="status-lebih-bayar";icon="+";}
+
+    return `<span class="payment-status ${cls}">${icon}&nbsp;${escapeHtml(status||"-")}</span>`;
+}
+
+function formatSudahDibayar(value){
+    const n=Number(value||0);
+    return n>0
+        ? `<span class="amount-paid">${formatRupiah(n)}</span>`
+        : `<span class="amount-zero">Rp 0</span>`;
+}
+
+function formatKekuranganBayar(value){
+    const n=Number(value||0);
+    return n<0
+        ? `<span class="amount-shortage">${formatRupiah(Math.abs(n))}</span>`
+        : `<span class="amount-zero">Rp 0</span>`;
+}
+
+function formatKelebihanBayar(value){
+    const n=Number(value||0);
+    return n>0
+        ? `<span class="amount-overpaid">${formatRupiah(n)}</span>`
+        : `<span class="amount-zero">Rp 0</span>`;
+}
+
+/* =========================
+   RENDER TABLE
+   ========================= */
+function renderTable(){
+    if(filteredData.length===0){
+        showEmptyData("Data tidak ditemukan");
+        return;
+    }
+
+    const totalPages=Math.ceil(filteredData.length/rowsPerPage);
+    if(currentPage>totalPages) currentPage=totalPages;
+
+    const start=(currentPage-1)*rowsPerPage;
+    const paginatedData=filteredData.slice(start,start+rowsPerPage);
+
+    let html="";
+    let no=start+1;
+
+    paginatedData.forEach(item=>{
+        const id=item.id||"-";
+        const customer=item.customer||"-";
+        const namaUnit=item.namaUnit||"-";
+        const plat=item.plat||"-";
+        const tanggalsewa=item.tanggalsewa||"-";
+        const selesaisewa=item.selesaisewa||"-";
+        const jumlahHari=item.jumlahHari??"-";
+        const harga=item.harga;
+        const total=item.total;
+        const statusPembayaran=item.statusPembayaran||"-";
+        const bayar=item.bayar;
+        const sisa=item.sisa;
+        const kelebihanBayar=item.kelebihanBayar;
+        const hp=item.hp||"-";
+
+        const detailUrl=`selesai.html?id=${encodeURIComponent(id)}`;
+
+        html+=`
+        <tr>
+            <td data-label="No.">${no}</td>
+            <td data-label="ID">${escapeHtml(id)}</td>
+            <td data-label="Nama">${escapeHtml(customer)}</td>
+            <td data-label="Kontak">${escapeHtml(hp)}</td>
+            <td data-label="Nama Unit">${escapeHtml(namaUnit)}</td>
+            <td data-label="Plat Kendaraan">${escapeHtml(plat)}</td>
+            <td data-label="Tanggal Sewa">${escapeHtml(tanggalsewa)}</td>
+            <td data-label="Estimasi Kembali">${escapeHtml(selesaisewa)}</td>
+            <td data-label="Durasi Sewa">${escapeHtml(jumlahHari)} Hari</td>
+            <td data-label="Harga Sewa">${formatRupiah(harga)}</td>
+            <td data-label="Total Harga">${formatRupiah(total)}</td>
+            <td data-label="Status Payment">${formatStatusPembayaran(statusPembayaran)}</td>
+            <td data-label="Sudah Dibayar">${formatSudahDibayar(bayar)}</td>
+            <td data-label="Kekurangan Bayar">${formatKekuranganBayar(sisa)}</td>
+            <td data-label="Kelebihan Bayar">${formatKelebihanBayar(kelebihanBayar)}</td>
+            <td data-label="Aksi">
+                <button type="button" class="btn-selesai"
+                    data-url="${escapeHtml(detailUrl)}"
+                    data-id="${escapeHtml(id)}"
+                    data-customer="${escapeHtml(customer)}"
+                    data-plat="${escapeHtml(plat)}">
+                    ✓ Selesai
                 </button>
+            </td>
+        </tr>`;
 
+        no++;
+    });
 
-                <span
-                    class="page-info"
-                >
+    document.getElementById("isiData").innerHTML=html;
 
-                    Halaman
-                    ${currentPage}
-                    dari
-                    ${totalPages}
-
-                </span>
-
-
-                <button
-
-                    class="btn-next"
-
-                    onclick="nextPage()"
-
-                    ${
-                        currentPage === totalPages
-                        ?
-                        "disabled"
-                        :
-                        ""
-                    }
-
-                >
-
-                    Selanjutnya →
-
-                </button>
-                `;
-
-        }
-
-
-        /* =========================
-           NEXT PAGE
-        ========================= */
-
-        window.nextPage =
-            function () {
-
-                const totalPages =
-
-                    Math.ceil(
-                        filteredData.length
-                        /
-                        rowsPerPage
-                    );
-
-
-                if (
-                    currentPage
-                    <
-                    totalPages
-                ) {
-
-                    currentPage++;
-
-                    renderTable();
-
-                }
-
+    /* Event tombol dibuat setelah tabel dirender */
+    document.querySelectorAll(".btn-selesai").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            const item={
+                id:btn.dataset.id,
+                customer:btn.dataset.customer,
+                plat:btn.dataset.plat
             };
-
-
-        /* =========================
-           PREVIOUS PAGE
-        ========================= */
-
-        window.prevPage =
-            function () {
-
-                if (
-                    currentPage > 1
-                ) {
-
-                    currentPage--;
-
-                    renderTable();
-
-                }
-
-            };
-
-
-        /* =========================
-           DOWNLOAD EXCEL
-        ========================= */
-
-        window.downloadExcel =
-            function () {
-
-                if (
-                    filteredData.length === 0
-                ) {
-
-                    alert(
-                        "Tidak ada data untuk di-download!"
-                    );
-
-                    return;
-
-                }
-
-
-                const dataExcel =
-
-                    filteredData.map(
-                        (
-                            item,
-                            index
-                        ) => {
-
-                            return {
-
-                                "No":
-                                    index + 1,
-
-                                "ID":
-                                    item.id || "-",
-
-                                "Nama":
-                                    item.customer || "-",
-
-                                "Kontak":
-                                    item.hp || "-",
-
-                                "Nama Unit":
-                                    item.namaUnit || "-",
-
-                                "Plat Kendaraan":
-                                    item.plat || "-",
-
-                                "Tanggal Sewa":
-                                    item.tanggalsewa || "-",
-
-                                "Estimasi Kembali":
-                                    item.selesaisewa || "-",
-
-                                "Durasi Sewa":
-
-                                    (
-                                        item.jumlahHari
-                                        ??
-                                        "-"
-                                    )
-
-                                    +
-                                    " Hari",
-
-                                "Harga Sewa":
-
-                                    formatRupiah(
-                                        item.harga
-                                    ),
-
-                                "Total Harga":
-
-                                    formatRupiah(
-                                        item.total
-                                    ),
-
-                                "Status Payment":
-                                    item.statusPembayaran || "-",
-
-                                "Sudah Dibayar":
-
-                                    formatRupiah(
-                                        item.bayar
-                                    ),
-
-                                "Kekurangan Bayar":
-
-                                    item.sisa < 0
-                                    ?
-                                    formatRupiah(
-                                        Math.abs(
-                                            item.sisa
-                                        )
-                                    )
-                                    :
-                                    "Rp 0",
-
-                                "Kelebihan Bayar":
-
-                                    formatRupiah(
-                                        item.kelebihanBayar
-                                    )
-
-                            };
-
-                        }
-
-                    );
-
-
-                const worksheet =
-
-                    XLSX.utils
-                    .json_to_sheet(
-                        dataExcel
-                    );
-
-
-                worksheet["!cols"] = [
-
-                    { wch: 8 },
-
-                    { wch: 25 },
-
-                    { wch: 25 },
-
-                    { wch: 20 },
-
-                    { wch: 25 },
-
-                    { wch: 20 },
-
-                    { wch: 18 },
-
-                    { wch: 20 },
-
-                    { wch: 15 },
-
-                    { wch: 20 },
-
-                    { wch: 20 },
-
-                    { wch: 20 },
-
-                    { wch: 20 },
-
-                    { wch: 20 },
-
-                    { wch: 20 }
-
-                ];
-
-
-                const workbook =
-
-                    XLSX.utils
-                    .book_new();
-
-
-                XLSX.utils
-                .book_append_sheet(
-
-                    workbook,
-
-                    worksheet,
-
-                    "Data Rental"
-
-                );
-
-
-                XLSX.writeFile(
-
-                    workbook,
-
-                    "Data_Rental.xlsx"
-
-                );
-
-            };
-
-
-    </script>
-
-
+            openConfirm(btn.dataset.url,item);
+        });
+    });
+
+    renderPagination();
+}
+
+/* =========================
+   PAGINATION
+   ========================= */
+function renderPagination(){
+    const totalPages=Math.ceil(filteredData.length/rowsPerPage);
+
+    if(totalPages<=1){
+        document.getElementById("pagination").innerHTML="";
+        return;
+    }
+
+    document.getElementById("pagination").innerHTML=`
+        <button class="btn-prev" onclick="prevPage()" ${currentPage===1?"disabled":""}>
+            ← Sebelumnya
+        </button>
+        <span class="page-info">Halaman ${currentPage} dari ${totalPages}</span>
+        <button class="btn-next" onclick="nextPage()" ${currentPage===totalPages?"disabled":""}>
+            Selanjutnya →
+        </button>`;
+}
+
+window.nextPage=function(){
+    const totalPages=Math.ceil(filteredData.length/rowsPerPage);
+    if(currentPage<totalPages){currentPage++;renderTable();}
+};
+
+window.prevPage=function(){
+    if(currentPage>1){currentPage--;renderTable();}
+};
+
+/* =========================
+   DOWNLOAD EXCEL
+   ========================= */
+window.downloadExcel=function(){
+    if(filteredData.length===0){
+        alert("Tidak ada data untuk di-download!");
+        return;
+    }
+
+    const dataExcel=filteredData.map((item,index)=>({
+        "No":index+1,
+        "ID":item.id||"-",
+        "Nama":item.customer||"-",
+        "Kontak":item.hp||"-",
+        "Nama Unit":item.namaUnit||"-",
+        "Plat Kendaraan":item.plat||"-",
+        "Tanggal Sewa":item.tanggalsewa||"-",
+        "Estimasi Kembali":item.selesaisewa||"-",
+        "Durasi Sewa":(item.jumlahHari??"-")+" Hari",
+        "Harga Sewa":formatRupiah(item.harga),
+        "Total Harga":formatRupiah(item.total),
+        "Status Payment":item.statusPembayaran||"-",
+        "Sudah Dibayar":formatRupiah(item.bayar),
+        "Kekurangan Bayar":item.sisa<0?formatRupiah(Math.abs(item.sisa)):"Rp 0",
+        "Kelebihan Bayar":formatRupiah(item.kelebihanBayar)
+    }));
+
+    const worksheet=XLSX.utils.json_to_sheet(dataExcel);
+    worksheet["!cols"]=[
+        {wch:8},{wch:25},{wch:25},{wch:20},{wch:25},{wch:20},
+        {wch:18},{wch:20},{wch:15},{wch:20},{wch:20},{wch:20},
+        {wch:20},{wch:20},{wch:20}
+    ];
+
+    const workbook=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook,worksheet,"Data Rental");
+    XLSX.writeFile(workbook,"Data_Rental.xlsx");
+};
+</script>
 </body>
-
 </html>
