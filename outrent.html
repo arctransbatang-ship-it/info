@@ -2729,6 +2729,26 @@ function escapeHTML(value){
 
 
 /* =========================================================
+   NORMALISASI ID / PLAT NOMOR FIREBASE
+   Contoh:
+   "AB 1234 CD" -> "AB_1234_CD"
+   "AB   1234   CD" -> "AB_1234_CD"
+   "AB_1234_CD" -> "AB_1234_CD"
+========================================================= */
+function normalisasiPlat(value){
+
+    return String(value ?? "")
+        .trim()
+        .replace(/\s+/g, "_")
+        .replace(/_+/g, "_");
+}
+
+function platUntukTampilan(value){
+    return normalisasiPlat(value);
+}
+
+
+/* =========================================================
    DROPDOWN UNIT
 ========================================================= */
 
@@ -2736,9 +2756,15 @@ function tampilkanUnit(keyword=""){
 
     unitDropdown.innerHTML="";
 
-    const teks =
+    const teksAsli =
         keyword
         .trim()
+        .toLowerCase();
+
+    /* Pencarian menerima kedua format:
+       AB 1234 CD maupun AB_1234_CD */
+    const teks =
+        normalisasiPlat(keyword)
         .toLowerCase();
 
     const entries =
@@ -2751,11 +2777,11 @@ function tampilkanUnit(keyword=""){
             function([id,unit]){
 
                 const idText =
-                    String(id || "")
+                    normalisasiPlat(id)
                     .toLowerCase();
 
                 const platText =
-                    String(unit?.plat || "")
+                    normalisasiPlat(unit?.plat || "")
                     .toLowerCase();
 
                 const namaText =
@@ -2763,10 +2789,10 @@ function tampilkanUnit(keyword=""){
                     .toLowerCase();
 
                 return (
-                    !teks ||
+                    !teksAsli ||
                     idText.includes(teks) ||
                     platText.includes(teks) ||
-                    namaText.includes(teks)
+                    namaText.includes(teksAsli)
                 );
             }
         );
@@ -2798,8 +2824,9 @@ function tampilkanUnit(keyword=""){
                 "unit-option";
 
 
+            /* Seluruh tampilan Plat Nomor menggunakan underscore */
             const plat =
-                unit?.plat || id;
+                platUntukTampilan(id);
 
             const nama =
                 unit?.nama ||
@@ -2860,18 +2887,28 @@ function pilihUnit(id){
     }
 
 
+    /*
+     * ID yang dipakai untuk seluruh proses Firebase HARUS
+     * menggunakan underscore.
+     * Contoh: AB 1234 CD -> AB_1234_CD
+     */
+    const unitId =
+        normalisasiPlat(id);
+
     const plat =
-        unit.plat || id;
+        platUntukTampilan(unit?.plat || unitId);
 
     const nama =
         unit.nama || "";
 
-
     platInput.value =
-        id;
+        unitId;
+
+    /* Nilai field Plat Nomor mengikuti KEY Firebase. */
+    const platNomorFirebase = unitId;
 
     searchUnit.value =
-        plat +
+        platNomorFirebase +
         " - " +
         nama;
 
@@ -3004,8 +3041,25 @@ onValue(
         const data =
             snapshot.val();
 
-        daftarUnit =
-            data || {};
+        /*
+         * Buat index unit dengan ID yang sudah dinormalisasi.
+         * Jadi input "AB 1234 CD" selalu diarahkan ke
+         * Firebase key "AB_1234_CD".
+         */
+        daftarUnit = {};
+
+        Object.entries(data || {}).forEach(
+            function([firebaseId, unit]){
+
+                const normalizedId =
+                    normalisasiPlat(firebaseId);
+
+                daftarUnit[normalizedId] = {
+                    ...(unit || {}),
+                    _firebaseId: normalizedId
+                };
+            }
+        );
 
 
         searchUnit.placeholder =
@@ -4499,7 +4553,10 @@ btnProses.addEventListener(
 async function kirimData(){
 
     const unitId =
-        platInput.value;
+        normalisasiPlat(platInput.value);
+
+    /* Pastikan hidden field selalu menyimpan format Firebase key. */
+    platInput.value = unitId;
 
     const unit =
         daftarUnit[unitId];
@@ -4895,8 +4952,9 @@ async function kirimData(){
             unitId:
                 unitId,
 
+            /* Gunakan KEY Firebase sebagai nilai Plat Nomor.
+               Contoh: B_2683_UKL */
             plat:
-                unit?.plat ||
                 unitId,
 
             namaUnit:
@@ -5076,10 +5134,7 @@ async function kirimData(){
 
             keterangan:
                 "DP Mobil - " +
-                (
-                    unit?.plat ||
-                    unitId
-                ) +
+                unitId +
                 " - " +
                 (
                     nama ||
@@ -5120,34 +5175,17 @@ async function kirimData(){
 
 
         /* =================================================
-           HAPUS READY
+           UPDATE STATUS UNIT + HAPUS READY
         ================================================= */
 
         loadingTitle.textContent =
             "Update Status Unit";
 
         loadingText.textContent =
-            "Menghapus unit dari READY...";
+            "Mengubah unit/{ID_PLAT}/keterangan: Ready -> Out...";
 
 
-        await remove(
-
-            ref(
-
-                db,
-
-                "ready/" +
-                unitId
-
-            )
-
-        );
-
-
-        /* =================================================
-           UPDATE UNIT OUT
-        ================================================= */
-
+        /* UPDATE HANYA FIELD keterangan PADA UNIT */
         await update(
 
             ref(
@@ -5165,6 +5203,21 @@ async function kirimData(){
                     "Out"
 
             }
+
+        );
+
+
+        /* TETAP HAPUS ready/{ID_PLAT} */
+        await remove(
+
+            ref(
+
+                db,
+
+                "ready/" +
+                unitId
+
+            )
 
         );
 
@@ -5201,9 +5254,9 @@ async function kirimData(){
 
             "\n\n" +
 
-            "Unit telah dihapus dari READY\n" +
+            "Status unit: Ready -> Out\n" +
 
-            "Status unit diubah menjadi OUT\n" +
+            "Unit telah dihapus dari READY\n" +
 
             "Data revenue berhasil dibuat."
 
@@ -5263,4 +5316,3 @@ async function kirimData(){
 
 </body>
 </html>
-
